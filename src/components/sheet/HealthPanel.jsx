@@ -54,14 +54,21 @@ function PowerArmorGrid({ powerArmor, updateField }) {
   );
 }
 
+const BODY_PARTS = ['head', 'torso', 'left_arm', 'right_arm', 'left_leg', 'right_leg'];
+
+function countInjuries(character) {
+  let count = 0;
+  for (const part of BODY_PARTS) {
+    try {
+      const boxes = JSON.parse(character[`boxes_${part}`] || '[]');
+      count += boxes.filter(b => b === 'injured').length;
+    } catch {}
+  }
+  return count;
+}
+
 export default function HealthPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
-  const maxHp = derived.hp;
-  const currentHp = character.hp_current ?? maxHp;
-  const radiation = character.radiation ?? 0;
-  const injuries = parseJson(character.injuries, []);
-  const powerArmor = parseJson(character.power_armor_health, {});
-
   const adj = (field, val, min = 0, max = 9999) => updateField({ [field]: Math.max(min, Math.min(max, val)) });
 
   return (
@@ -110,20 +117,8 @@ export default function HealthPanel({ character, updateField }) {
         <div className="flex items-center gap-1.5">
           <span>💀</span>
           <span className="text-xs font-bold tracking-wider" style={{ color: '#cc4444' }}>
-            INJURIES: {injuries.length}
+            INJURIES: {injuryCount}
           </span>
-        </div>
-        <div className="flex gap-1">
-          <button
-            onClick={() => updateField({ injuries: JSON.stringify([...injuries, 'Injury']) })}
-            className="text-xs px-1.5 py-0.5 font-bold"
-            style={{ background: '#1e3a5f', color: '#f5c518' }}>+</button>
-          {injuries.length > 0 && (
-            <button
-              onClick={() => updateField({ injuries: JSON.stringify(injuries.slice(0, -1)) })}
-              className="text-xs px-1.5 py-0.5 font-bold"
-              style={{ background: '#2a1a1a', color: '#cc4444' }}>−</button>
-          )}
         </div>
       </div>
 
