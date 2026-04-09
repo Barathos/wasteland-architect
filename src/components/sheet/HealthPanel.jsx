@@ -71,6 +71,12 @@ export default function HealthPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
   const adj = (field, val, min = 0, max = 9999) => updateField({ [field]: Math.max(min, Math.min(max, val)) });
 
+  const currentHp = character.hp_current ?? derived.hp;
+  const maxHp = character.hp_max ?? derived.hp;
+  const radiation = character.radiation ?? 0;
+  const powerArmor = parseJson(character.power_armor_health, {});
+  const injuryCount = countInjuries(character);
+
   return (
     <div>
       {/* Health */}
