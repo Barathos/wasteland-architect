@@ -39,9 +39,9 @@ const AuthenticatedApp = () => {
       <Route element={<Layout />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/builder" element={<CharacterBuilder />} />
-        <Route path="/character/:id" element={<CharacterSheet />} />
-        <Route path="*" element={<PageNotFound />} />
       </Route>
+      <Route path="/character/:id" element={<CharacterSheet />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

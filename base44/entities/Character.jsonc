@@ -126,7 +126,7 @@
     },
     "equipment": {
       "type": "string",
-      "title": "Equipment JSON"
+      "title": "Favorite Weapons"
     },
     "background": {
       "type": "string",
@@ -135,6 +135,104 @@
     "portrait_url": {
       "type": "string",
       "title": "Portrait URL"
+    },
+    "radiation": {
+      "type": "number",
+      "title": "Radiation Level",
+      "default": 0
+    },
+    "hp_head": {
+      "type": "number",
+      "title": "Head HP"
+    },
+    "hp_torso": {
+      "type": "number",
+      "title": "Torso HP"
+    },
+    "hp_left_arm": {
+      "type": "number",
+      "title": "Left Arm HP"
+    },
+    "hp_right_arm": {
+      "type": "number",
+      "title": "Right Arm HP"
+    },
+    "hp_left_leg": {
+      "type": "number",
+      "title": "Left Leg HP"
+    },
+    "hp_right_leg": {
+      "type": "number",
+      "title": "Right Leg HP"
+    },
+    "resistance_physical": {
+      "type": "number",
+      "title": "Physical Resistance",
+      "default": 0
+    },
+    "resistance_energy": {
+      "type": "number",
+      "title": "Energy Resistance",
+      "default": 0
+    },
+    "resistance_radiation": {
+      "type": "number",
+      "title": "Radiation Resistance",
+      "default": 0
+    },
+    "resistance_poison": {
+      "type": "number",
+      "title": "Poison Resistance",
+      "default": 0
+    },
+    "fatigue": {
+      "type": "number",
+      "title": "Fatigue",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5
+    },
+    "intoxication": {
+      "type": "number",
+      "title": "Intoxication",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5
+    },
+    "is_alcoholic": {
+      "type": "boolean",
+      "title": "Alcoholic",
+      "default": false
+    },
+    "is_well_rested": {
+      "type": "boolean",
+      "title": "Well Rested",
+      "default": false
+    },
+    "addictions": {
+      "type": "string",
+      "title": "Addictions JSON"
+    },
+    "diseases": {
+      "type": "string",
+      "title": "Diseases JSON"
+    },
+    "power_armor_health": {
+      "type": "string",
+      "title": "Power Armor Health JSON"
+    },
+    "conditions": {
+      "type": "string",
+      "title": "Conditions JSON"
+    },
+    "encumbrance": {
+      "type": "number",
+      "title": "Current Encumbrance",
+      "default": 0
+    },
+    "injuries": {
+      "type": "string",
+      "title": "Injuries JSON"
     }
   },
   "required": [

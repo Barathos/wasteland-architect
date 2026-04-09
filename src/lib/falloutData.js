@@ -129,12 +129,36 @@ export function calculateDerivedStats(character) {
   const per = character.perception || 5;
 
   return {
-    hp: end + lck, // Base HP formula
+    hp: end + lck,
     initiative: per + agi,
-    defense: 1, // Base defense
+    defense: 1,
     melee_bonus: Math.max(0, Math.floor((str - 5) / 2)),
     carry_weight: str * 10 + 150,
     luck_points: lck,
-    action_points: 2, // Base AP
+    action_points: 2,
   };
+}
+
+export function calculateBodyPartHP(character) {
+  const end = character.endurance || 5;
+  return {
+    head:      { max: 2,       label: 'Head',      range: '1-2'   },
+    torso:     { max: end + 2, label: 'Torso',     range: '3-8'   },
+    left_arm:  { max: end,     label: 'Left Arm',  range: '9-11'  },
+    right_arm: { max: end,     label: 'Right Arm', range: '12-14' },
+    left_leg:  { max: end + 1, label: 'Left Leg',  range: '15-17' },
+    right_leg: { max: end + 1, label: 'Right Leg', range: '18-20' },
+  };
+}
+
+export const XP_TABLE = [
+  0, 100, 250, 450, 700, 1000, 1350, 1750, 2200, 2700,
+  3250, 3850, 4500, 5200, 5950, 6750, 7600, 8500, 9450, 10450,
+  11500, 12600, 13750, 14950, 16200, 17500, 18850, 20250, 21700, 23200,
+  24750, 26350, 28000, 29700, 31450, 33250, 35100, 37000, 38950, 40950,
+  43000, 45100, 47250, 49450, 51700, 54000, 56350, 58750, 61200, 63700,
+];
+
+export function getNextLevelXP(level) {
+  return XP_TABLE[Math.min(level, XP_TABLE.length - 1)] || 0;
 }
