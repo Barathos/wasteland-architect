@@ -1,0 +1,144 @@
+{
+  "name": "Character",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Character Name"
+    },
+    "origin": {
+      "type": "string",
+      "title": "Origin",
+      "enum": [
+        "Vault Dweller",
+        "Brotherhood Outcast",
+        "Ghoul",
+        "Super Mutant",
+        "Wastelander",
+        "Mister Handy",
+        "Survivor"
+      ]
+    },
+    "level": {
+      "type": "number",
+      "title": "Level",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 50
+    },
+    "xp": {
+      "type": "number",
+      "title": "Experience Points",
+      "default": 0
+    },
+    "strength": {
+      "type": "number",
+      "title": "Strength",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "perception": {
+      "type": "number",
+      "title": "Perception",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "endurance": {
+      "type": "number",
+      "title": "Endurance",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "charisma": {
+      "type": "number",
+      "title": "Charisma",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "intelligence": {
+      "type": "number",
+      "title": "Intelligence",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "agility": {
+      "type": "number",
+      "title": "Agility",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "luck": {
+      "type": "number",
+      "title": "Luck",
+      "minimum": 4,
+      "maximum": 12,
+      "default": 5
+    },
+    "skills": {
+      "type": "string",
+      "title": "Skills JSON"
+    },
+    "tag_skills": {
+      "type": "string",
+      "title": "Tag Skills JSON"
+    },
+    "perks": {
+      "type": "string",
+      "title": "Perks JSON"
+    },
+    "hp_current": {
+      "type": "number",
+      "title": "Current HP"
+    },
+    "hp_max": {
+      "type": "number",
+      "title": "Max HP"
+    },
+    "defense": {
+      "type": "number",
+      "title": "Defense"
+    },
+    "initiative": {
+      "type": "number",
+      "title": "Initiative"
+    },
+    "melee_bonus": {
+      "type": "number",
+      "title": "Melee Bonus"
+    },
+    "carry_weight": {
+      "type": "number",
+      "title": "Carry Weight"
+    },
+    "luck_points": {
+      "type": "number",
+      "title": "Luck Points"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "equipment": {
+      "type": "string",
+      "title": "Equipment JSON"
+    },
+    "background": {
+      "type": "string",
+      "title": "Background Story"
+    },
+    "portrait_url": {
+      "type": "string",
+      "title": "Portrait URL"
+    }
+  },
+  "required": [
+    "name",
+    "origin"
+  ]
+}
