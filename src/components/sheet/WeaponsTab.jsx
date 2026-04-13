@@ -69,10 +69,15 @@ function WeaponReferenceModal({ onSelect, onClose }) {
                   <span className="text-xs font-mono" style={{ color: '#22cc22', minWidth: '50px' }}>{w.damage}</span>
                   <span className="text-[10px] font-mono" style={{ color: '#6a8a9a', minWidth: '60px' }}>{w.damageType}</span>
                   <span className="text-[10px] font-mono" style={{ color: '#4a6a8a', minWidth: '50px' }}>{w.range}</span>
-                  {w.source && (
+                  {w.source ? (
                     <span className="text-[9px] px-1.5 py-0.5 font-bold"
                       style={{ background: 'rgba(245,197,24,0.1)', border: '1px solid rgba(245,197,24,0.3)', color: '#f5c518' }}>
                       {w.source}
+                    </span>
+                  ) : (
+                    <span className="text-[9px] px-1.5 py-0.5 font-bold"
+                      style={{ background: 'rgba(168,200,216,0.08)', border: '1px solid rgba(168,200,216,0.2)', color: '#6a9aba' }}>
+                      Core
                     </span>
                   )}
                   {w.rarity != null && (
