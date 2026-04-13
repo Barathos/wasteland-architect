@@ -1,4 +1,4 @@
-import { PERKS, WANDERERS_PERKS } from "../../lib/falloutData";
+import { PERKS, WANDERERS_PERKS, RARE_BOOKS } from "../../lib/falloutData";
 import { Check, Lock } from "lucide-react";
 
 // Map SPECIAL abbr to character key
@@ -21,6 +21,22 @@ const ALL_PERKS = [
   }))
 ];
 
+function buildRareBookPerks(character) {
+  const foundRolls = (() => { try { return JSON.parse(character.rare_books_found || '[]'); } catch { return []; } })();
+  return RARE_BOOKS
+    .filter(b => foundRolls.includes(b.roll))
+    .map(b => ({
+      key: `rare_book_${b.roll}`,
+      label: b.perk,
+      description: b.perkDescription,
+      source: 'Rare Book',
+      maxRanks: 1,
+      rank: 1,
+      requirement: { level: 1 },
+      bookTitle: b.title,
+    }));
+}
+
 export default function PerksPanel({ character, selectedPerks, onPerksChange }) {
   const level = character.level || 1;
 
@@ -42,6 +58,8 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
     }
   };
 
+  const rareBookPerks = buildRareBookPerks(character);
+
   const perksByLevel = ALL_PERKS.reduce((acc, perk) => {
     const lvl = perk.requirement.level;
     if (!acc[lvl]) acc[lvl] = [];
@@ -49,7 +67,7 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
     return acc;
   }, {});
 
-  const maxPerks = 1 + Math.floor((level - 1) / 2);
+  const maxPerks = 1 + Math.floor((level - 1) / 2) + rareBookPerks.length;
 
   return (
     <div className="space-y-5">
@@ -65,6 +83,37 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
       <p className="text-xs text-muted-foreground font-mono">
         Select perks your character has earned. Locked perks require higher level or attributes.
       </p>
+
+      {/* Rare Book Perks */}
+      {rareBookPerks.length > 0 && (
+        <div>
+          <h4 className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
+            <span className="w-5 h-5 rounded bg-muted flex items-center justify-center text-xs">📚</span>
+            Rare Perks (Books Found)
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+            {rareBookPerks.map((perk) => {
+              const isSelected = selectedPerks.includes(perk.key);
+              return (
+                <button key={perk.key}
+                  onClick={() => isSelected ? onPerksChange(selectedPerks.filter(p => p !== perk.key)) : onPerksChange([...selectedPerks, perk.key])}
+                  className={`text-left p-3 rounded-lg border transition-all duration-200 ${
+                    isSelected ? 'border-primary/50 bg-primary/10' : 'border-border bg-card hover:border-primary/30'
+                  }`}>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <h5 className={`font-heading font-semibold text-sm ${isSelected ? 'text-primary' : 'text-foreground'}`}>{perk.label}</h5>
+                      <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(34,204,34,0.1)', color: '#22cc22', border: '1px solid rgba(34,204,34,0.3)' }}>📚 {perk.bookTitle}</span>
+                    </div>
+                    {isSelected && <span className="text-primary text-sm">✓</span>}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">{perk.description}</p>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {Object.entries(perksByLevel)
         .sort(([a], [b]) => Number(a) - Number(b))

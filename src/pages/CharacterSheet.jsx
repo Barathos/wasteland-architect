@@ -10,6 +10,7 @@ import ApparelTab from "../components/sheet/ApparelTab";
 import GearTab from "../components/sheet/GearTab";
 import DataTab from "../components/sheet/DataTab";
 import EffectsTab from "../components/sheet/EffectsTab";
+import LegendaryTab from "../components/sheet/LegendaryTab";
 import DiceRoller from "../components/sheet/DiceRoller";
 import CompanionsTab from "../components/sheet/CompanionsTab";
 import ReputationTab from "../components/sheet/ReputationTab";
@@ -23,7 +24,7 @@ import {
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const TABS = ['STATUS', 'COMPANIONS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'REPUTATION', 'EFFECTS'];
+const TABS = ['STATUS', 'COMPANIONS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'REPUTATION', 'EFFECTS', 'LEGENDARY'];
 
 export default function CharacterSheet() {
   const { id } = useParams();
@@ -145,6 +146,7 @@ export default function CharacterSheet() {
       {activeTab === 'DATA'      && <DataTab character={character} updateField={updateField} />}
       {activeTab === 'REPUTATION'  && <ReputationTab character={character} updateField={updateField} />}
       {activeTab === 'EFFECTS'     && <EffectsTab character={character} updateField={updateField} />}
+      {activeTab === 'LEGENDARY'   && <LegendaryTab character={character} updateField={updateField} />}
       {activeTab === 'COMPANIONS'  && <CompanionsTab character={character} updateField={updateField} />}
 
       <DiceRoller character={character} />
