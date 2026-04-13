@@ -250,6 +250,14 @@
     "injuries": {
       "type": "string",
       "title": "Injuries JSON"
+    },
+    "companions": {
+      "type": "string",
+      "title": "Companions JSON"
+    },
+    "session_log": {
+      "type": "string",
+      "title": "Session Log JSON"
     }
   },
   "required": [

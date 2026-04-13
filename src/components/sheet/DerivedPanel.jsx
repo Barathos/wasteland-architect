@@ -1,5 +1,17 @@
 import { calculateDerivedStats } from "../../lib/falloutData";
 
+function parseJson(str, fb) { try { return JSON.parse(str || ''); } catch { return fb; } }
+const APPAREL_SLOTS = ['head','torso','left_arm','right_arm','left_leg','right_leg','power_armor'];
+function getApparelDR(character) {
+  const apparel = parseJson(character.apparel, {});
+  let phys = 0, energy = 0, rad = 0;
+  APPAREL_SLOTS.forEach(k => {
+    const s = apparel[k];
+    if (s?.worn) { phys += parseInt(s.physDR) || 0; energy += parseInt(s.energyDR) || 0; rad += parseInt(s.radDR) || 0; }
+  });
+  return { phys, energy, rad };
+}
+
 function SectionHeader({ label }) {
   return (
     <div className="px-3 py-1.5" style={{ background: '#06111f', borderTop: '1px solid #1e3a5f', borderBottom: '1px solid #1e3a5f' }}>
@@ -50,6 +62,7 @@ function StatRow({ label, icon, value, editable, onChange, type = 'number' }) {
 
 export default function DerivedPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
+  const apparelDR = getApparelDR(character);
 
   return (
     <div>
@@ -58,12 +71,15 @@ export default function DerivedPanel({ character, updateField }) {
       <StatRow label="DEFENSE" value={derived.defense} />
       <StatRow label="INITIATIVE" value={derived.initiative} />
 
-      <SectionHeader label="RESISTANCE BONUSES" />
-      <StatRow label="PHYSICAL" icon="⚡" value={character.resistance_physical ?? 0} editable
+      <SectionHeader label="RESISTANCES" />
+      <div className="px-3 py-1" style={{ borderBottom: '1px solid #091525' }}>
+        <p className="text-[9px] font-mono" style={{ color: '#4a6a8a' }}>BONUS + APPAREL DR = TOTAL</p>
+      </div>
+      <StatRow label={`PHYSICAL (${(character.resistance_physical ?? 0) + apparelDR.phys})`} icon="🛡" value={character.resistance_physical ?? 0} editable
         onChange={v => updateField({ resistance_physical: v })} />
-      <StatRow label="ENERGY" icon="⚡" value={character.resistance_energy ?? 0} editable
+      <StatRow label={`ENERGY (${(character.resistance_energy ?? 0) + apparelDR.energy})`} icon="⚡" value={character.resistance_energy ?? 0} editable
         onChange={v => updateField({ resistance_energy: v })} />
-      <StatRow label="RADIATION" icon="☢" value={character.resistance_radiation ?? 0} editable
+      <StatRow label={`RADIATION (${(character.resistance_radiation ?? 0) + apparelDR.rad})`} icon="☢" value={character.resistance_radiation ?? 0} editable
         onChange={v => updateField({ resistance_radiation: v })} />
       <StatRow label="POISON" icon="☠" value={character.resistance_poison ?? 0} editable
         onChange={v => updateField({ resistance_poison: v })} />

@@ -12,7 +12,8 @@ export default function GearTab({ character, updateField }) {
 
   const saveItems = (updated) => {
     setItems(updated);
-    updateField({ inventory: JSON.stringify(updated) });
+    const newTotal = updated.reduce((sum, item) => sum + (parseFloat(item.weight) || 0) * (parseInt(item.quantity) || 1), 0);
+    updateField({ inventory: JSON.stringify(updated), encumbrance: parseFloat(newTotal.toFixed(1)) });
   };
 
   const saveCaps = (val) => {
@@ -41,7 +42,7 @@ export default function GearTab({ character, updateField }) {
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>INVENTORY ({items.length} items)</p>
         <span className="text-xs font-mono" style={{ color: totalWeight > carryWeight ? '#cc4444' : '#22cc22' }}>
-          Weight: {totalWeight.toFixed(1)} / {carryWeight} lbs
+          {totalWeight > carryWeight ? '⚠ OVER LIMIT: ' : ''}Weight: {totalWeight.toFixed(1)} / {carryWeight} lbs
         </span>
         <button onClick={addItem} className="text-xs px-3 py-1 font-bold"
           style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer' }}>

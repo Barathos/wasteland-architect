@@ -11,7 +11,9 @@ import GearTab from "../components/sheet/GearTab";
 import DataTab from "../components/sheet/DataTab";
 import EffectsTab from "../components/sheet/EffectsTab";
 import DiceRoller from "../components/sheet/DiceRoller";
-import { ArrowLeft, Trash2, Radiation, Edit2 } from "lucide-react";
+import CompanionsTab from "../components/sheet/CompanionsTab";
+import CombatTracker from "../components/sheet/CombatTracker";
+import { ArrowLeft, Trash2, Radiation, Edit2, Swords, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -20,7 +22,7 @@ import {
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const TABS = ['STATUS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'EFFECTS'];
+const TABS = ['STATUS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'EFFECTS', 'COMPANIONS'];
 
 export default function CharacterSheet() {
   const { id } = useParams();
@@ -28,6 +30,7 @@ export default function CharacterSheet() {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('STATUS');
+  const [showCombat, setShowCombat] = useState(false);
 
   useEffect(() => { loadCharacter(); }, [id]);
 
@@ -77,6 +80,16 @@ export default function CharacterSheet() {
           <ArrowLeft className="w-4 h-4" /> All Characters
         </Link>
         <div className="flex items-center gap-2">
+          <button onClick={() => window.print()}
+            className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80 print:hidden"
+            style={{ color: '#a8c8d8', background: 'rgba(168,200,216,0.08)', border: '1px solid rgba(168,200,216,0.3)' }}>
+            <Printer className="w-3.5 h-3.5" /> Print
+          </button>
+          <button onClick={() => setShowCombat(true)}
+            className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80"
+            style={{ color: '#cc4444', background: 'rgba(204,68,68,0.08)', border: '1px solid rgba(204,68,68,0.3)' }}>
+            <Swords className="w-3.5 h-3.5" /> Combat
+          </button>
           <button onClick={() => navigate(`/builder?edit=${id}`)}
             className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80"
             style={{ color: '#f5c518', background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.3)' }}>
@@ -129,9 +142,11 @@ export default function CharacterSheet() {
       {activeTab === 'APPAREL'   && <ApparelTab character={character} updateField={updateField} />}
       {activeTab === 'GEAR'      && <GearTab character={character} updateField={updateField} />}
       {activeTab === 'DATA'      && <DataTab character={character} updateField={updateField} />}
-      {activeTab === 'EFFECTS'   && <EffectsTab character={character} updateField={updateField} />}
+      {activeTab === 'EFFECTS'     && <EffectsTab character={character} updateField={updateField} />}
+      {activeTab === 'COMPANIONS'  && <CompanionsTab character={character} updateField={updateField} />}
 
-      <DiceRoller />
+      <DiceRoller character={character} />
+      {showCombat && <CombatTracker character={character} onClose={() => setShowCombat(false)} />}
     </div>
   );
 }

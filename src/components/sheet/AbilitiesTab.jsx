@@ -1,4 +1,34 @@
+import { useState } from "react";
 import { SPECIAL_ATTRIBUTES, SKILLS, PERKS } from "../../lib/falloutData";
+
+function rollD20() { return Math.floor(Math.random() * 20) + 1; }
+
+function SkillRollResult({ result, onClose }) {
+  if (!result) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.5)' }} onClick={onClose}>
+      <div className="p-5 text-center" style={{ background: '#060f1c', border: `2px solid ${result.successes > 0 ? '#22cc22' : '#cc4444'}`, minWidth: '280px' }} onClick={e => e.stopPropagation()}>
+        <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#f5c518' }}>SKILL CHECK: {result.skill}</p>
+        <p className="text-xs mb-3" style={{ color: '#4a6a8a' }}>Target Number: {result.target}</p>
+        <div className="flex justify-center gap-4 mb-3">
+          {result.rolls.map((r, i) => (
+            <div key={i} className="w-14 h-14 flex items-center justify-center text-2xl font-bold"
+              style={{ background: r <= result.target ? '#0a2a0a' : '#2a0a0a', border: `2px solid ${r <= result.target ? '#22cc22' : '#cc4444'}`, color: r <= result.target ? '#22cc22' : '#cc4444' }}>
+              {r}
+            </div>
+          ))}
+        </div>
+        <p className="text-2xl font-bold mb-1" style={{ color: result.successes > 0 ? '#22cc22' : '#cc4444' }}>
+          {result.successes > 0 ? `${result.successes} SUCCESS${result.successes > 1 ? 'ES' : ''}` : 'FAILURE'}
+        </p>
+        {result.rolls.some(r => r === 1) && <p className="text-xs" style={{ color: '#f5c518' }}>⚡ CRITICAL HIT!</p>}
+        {result.rolls.some(r => r === 20) && <p className="text-xs" style={{ color: '#cc4444' }}>💀 COMPLICATION!</p>}
+        <button onClick={onClose} className="mt-3 px-4 py-1.5 text-xs font-bold"
+          style={{ background: '#0a1a2d', border: '1px solid #4a6a8a', color: '#a8c8d8', cursor: 'pointer' }}>DISMISS</button>
+      </div>
+    </div>
+  );
+}
 
 const STAT_COLORS = {
   strength:     { bar: '#cc4444', text: '#cc6666' },
@@ -15,6 +45,13 @@ function parseJson(str, fallback) {
 }
 
 export default function AbilitiesTab({ character }) {
+  const [rollResult, setRollResult] = useState(null);
+
+  const rollSkill = (skill, target) => {
+    const rolls = [rollD20(), rollD20()];
+    const successes = rolls.filter(r => r <= target).length;
+    setRollResult({ skill: skill.label, target, rolls, successes });
+  };
   const skills = parseJson(character.skills, {});
   const tagSkills = parseJson(character.tag_skills, []);
   const selectedPerks = parseJson(character.perks, []);
@@ -22,6 +59,7 @@ export default function AbilitiesTab({ character }) {
 
   return (
     <div style={{ background: '#0d2137', color: '#a8c8d8' }}>
+      <SkillRollResult result={rollResult} onClose={() => setRollResult(null)} />
       <div className="flex flex-wrap">
         {/* SPECIAL */}
         <div style={{ width: '260px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
@@ -54,7 +92,10 @@ export default function AbilitiesTab({ character }) {
         {/* Skills */}
         <div className="flex-1" style={{ borderRight: '1px solid #1e3a5f', minWidth: '240px' }}>
           <div className="px-3 py-2" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
-            <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>SKILLS</p>
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>SKILLS</p>
+              <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>click to roll</p>
+            </div>
           </div>
           <div className="p-2">
             {SKILLS.map(skill => {
@@ -66,7 +107,8 @@ export default function AbilitiesTab({ character }) {
 
               return (
                 <div key={skill.key}
-                  className="flex items-center justify-between py-1.5 px-2 rounded"
+                  onClick={() => rollSkill(skill, target)}
+                  className="flex items-center justify-between py-1.5 px-2 rounded cursor-pointer hover:opacity-80 transition-opacity"
                   style={{ background: isTag ? 'rgba(245,197,24,0.05)' : 'transparent', borderBottom: '1px solid #091525' }}>
                   <div className="flex items-center gap-2">
                     {isTag && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#f5c518' }} />}
@@ -79,6 +121,7 @@ export default function AbilitiesTab({ character }) {
                     <span className="font-heading font-bold text-sm w-6 text-right" style={{ color: isTag ? '#f5c518' : '#e8e8e8' }}>
                       {target}
                     </span>
+                    <span className="text-[10px]" style={{ color: '#4a6a8a' }}>⚄</span>
                   </div>
                 </div>
               );
