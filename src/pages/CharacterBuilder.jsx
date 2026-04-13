@@ -33,6 +33,7 @@ export default function CharacterBuilder() {
   const [skills, setSkills] = useState({});
   const [tagSkills, setTagSkills] = useState([]);
   const [selectedPerks, setSelectedPerks] = useState([]);
+  const [ncrTraits, setNcrTraits] = useState([]);
 
   useEffect(() => {
     if (editId) {
@@ -43,6 +44,7 @@ export default function CharacterBuilder() {
           if (c.skills) { try { setSkills(JSON.parse(c.skills)); } catch {} }
           if (c.tag_skills) { try { setTagSkills(JSON.parse(c.tag_skills)); } catch {} }
           if (c.perks) { try { setSelectedPerks(JSON.parse(c.perks)); } catch {} }
+          if (c.ncr_traits) { try { setNcrTraits(JSON.parse(c.ncr_traits)); } catch {} }
         }
       });
     }
@@ -65,6 +67,7 @@ export default function CharacterBuilder() {
       skills: JSON.stringify(skills),
       tag_skills: JSON.stringify(tagSkills),
       perks: JSON.stringify(selectedPerks),
+      ncr_traits: JSON.stringify(ncrTraits),
       hp_current: derived.hp, hp_max: derived.hp,
       defense: derived.defense, initiative: derived.initiative,
       melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
@@ -111,13 +114,13 @@ export default function CharacterBuilder() {
               ))}
             </TabsList>
             <TabsContent value="details" className="mt-0">
-              <DetailsPanel character={character} onChange={updateCharacter} />
+              <DetailsPanel character={character} onChange={updateCharacter} ncrTraits={ncrTraits} onNcrTraitsChange={setNcrTraits} />
             </TabsContent>
             <TabsContent value="special" className="mt-0">
               <SpecialStats character={character} onChange={updateCharacter} />
             </TabsContent>
             <TabsContent value="skills" className="mt-0">
-              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={setSkills} onTagSkillsChange={setTagSkills} />
+              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={setSkills} onTagSkillsChange={setTagSkills} ncrTraits={ncrTraits} />
             </TabsContent>
             <TabsContent value="perks" className="mt-0">
               <PerksPanel character={character} selectedPerks={selectedPerks} onPerksChange={setSelectedPerks} />

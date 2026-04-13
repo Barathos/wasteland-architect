@@ -2,16 +2,25 @@ import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES } from "../../lib/falloutDa
 import { Minus, Plus, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange }) {
+const GOOD_NATURED_EXEMPT = ['speech', 'medicine', 'repair', 'science', 'barter'];
+
+export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits }) {
+  const hasGoodNatured = (ncrTraits || []).includes('good_natured');
   const totalSkillPoints = 9 + (character.intelligence || 5);
   const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
   const remaining = totalSkillPoints - usedPoints;
   const tagCount = tagSkills.length;
 
+  const getMaxRank = (key) => {
+    if (hasGoodNatured && !GOOD_NATURED_EXEMPT.includes(key)) return 4;
+    return 6;
+  };
+
   const handleSkillChange = (key, delta) => {
     const current = skills[key] || 0;
     const newVal = current + delta;
-    if (newVal < 0 || newVal > 6) return;
+    const max = getMaxRank(key);
+    if (newVal < 0 || newVal > max) return;
     if (delta > 0 && remaining <= 0) return;
     onSkillsChange({ ...skills, [key]: newVal });
   };
@@ -55,6 +64,8 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
       <div className="space-y-2">
         {SKILLS.map((skill) => {
           const value = skills[skill.key] || 0;
+          const maxRank = getMaxRank(skill.key);
+          const isCapped = hasGoodNatured && !GOOD_NATURED_EXEMPT.includes(skill.key);
           const isTag = tagSkills.includes(skill.key);
           const attrAttr = SPECIAL_ATTRIBUTES.find(a => a.key === skill.attribute);
           const attrVal = getAttributeValue(skill.attribute);
@@ -82,7 +93,10 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
                   <Tag className="w-3 h-3" />
                 </button>
                 <div className="min-w-0">
-                  <span className="font-heading text-sm text-foreground block truncate">{skill.label}</span>
+                  <span className="font-heading text-sm text-foreground block truncate">
+                    {skill.label}
+                    {isCapped && <span className="ml-1 text-[9px] font-mono px-1 rounded" style={{ color: '#f97316', background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)' }}>MAX 4</span>}
+                  </span>
                   <span className="text-[10px] font-mono text-muted-foreground">
                     {attrAttr?.abbr} {attrVal} + {value}{isTag ? " +2 tag" : ""} = <span className="text-secondary font-bold">{targetNumber}</span>
                   </span>
@@ -105,7 +119,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
                   size="icon"
                   className="w-6 h-6 rounded hover:bg-primary/20 hover:text-primary"
                   onClick={() => handleSkillChange(skill.key, 1)}
-                  disabled={value >= 6 || remaining <= 0}
+                  disabled={value >= maxRank || remaining <= 0}
                 >
                   <Plus className="w-3 h-3" />
                 </Button>

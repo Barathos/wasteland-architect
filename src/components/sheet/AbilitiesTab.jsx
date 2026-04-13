@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, calculateDerivedStats } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, NCR_TRAITS, calculateDerivedStats } from "../../lib/falloutData";
 
 function rollD20() { return Math.floor(Math.random() * 20) + 1; }
 
@@ -89,6 +89,8 @@ export default function AbilitiesTab({ character, updateField }) {
   const tagSkills = parseJson(character.tag_skills, []);
   const selectedPerks = parseJson(character.perks, []);
   const perkDetails = selectedPerks.map(pk => PERKS.find(p => p.key === pk)).filter(Boolean);
+  const selectedNcrTraitKeys = parseJson(character.ncr_traits, []);
+  const ncrTraitDetails = selectedNcrTraitKeys.map(k => NCR_TRAITS.find(t => t.key === k)).filter(Boolean);
 
   return (
     <div style={{ background: '#0d2137', color: '#a8c8d8' }}>
@@ -182,6 +184,24 @@ export default function AbilitiesTab({ character, updateField }) {
             })}
           </div>
         </div>
+
+        {/* Origin Traits */}
+        {ncrTraitDetails.length > 0 && (
+          <div style={{ width: '240px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
+            <div className="px-3 py-2" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
+              <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>ORIGIN TRAITS</p>
+            </div>
+            <div className="p-3 space-y-3">
+              {ncrTraitDetails.map(trait => (
+                <div key={trait.key} className="p-2.5 rounded" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
+                  <h4 className="font-heading font-semibold text-sm mb-1" style={{ color: '#f5c518' }}>{trait.label}</h4>
+                  <p className="text-[10px] font-mono mb-1" style={{ color: '#4ade80' }}>✦ {trait.benefit}</p>
+                  <p className="text-[10px] font-mono" style={{ color: '#f97316' }}>✦ {trait.penalty}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Perks */}
         <div style={{ width: '240px', flexShrink: 0 }}>

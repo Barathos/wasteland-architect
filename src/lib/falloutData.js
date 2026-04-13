@@ -201,6 +201,42 @@ export const PERKS = [
   { key: 'true_friends', label: 'True Friends', description: 'Rank 1: Roll CD equal to current reputation when it would decrease — on at least one Effect, it does not decrease. Rank 2: CHA+Speech difficulty 3 to increase affinity by 2 instead of 1.', requirement: { level: 1, perception: 6, charisma: 6 }, rank: 1, maxRanks: 2, source: 'Settlers' },
 ];
 
+export const NCR_TRAITS = [
+  {
+    key: 'good_natured',
+    label: 'Good Natured',
+    benefit: 'Tag two additional skills from: Speech, Medicine, Repair, Science, or Barter.',
+    penalty: 'The maximum rank for all other skills not listed above is reduced from 6 to 4.',
+  },
+  {
+    key: 'grunt',
+    label: 'Grunt',
+    benefit: '+1 CD damage with submachine guns, combat rifles, assault rifles, frag grenades, and combat knives.',
+    penalty: 'Complication range of tests when attacking with big guns or energy weapons is increased by 2.',
+  },
+  {
+    key: 'home_on_the_range',
+    label: 'Home on the Range',
+    benefit: 'When sleeping by a campfire for at least 6 hours, difficulty to recover from injuries through rest is decreased by 1.',
+    penalty: 'You cannot gain the Well Rested bonus.',
+  },
+  {
+    key: 'trigger_discipline',
+    label: 'Trigger Discipline',
+    benefit: 'When making ranged attacks using small guns or energy weapons you may re-roll 1d20.',
+    penalty: 'While wielding small guns and energy weapons, reduce their fire rate by 1.',
+  },
+  {
+    key: 'brahmin_baron',
+    label: 'Brahmin Baron',
+    benefit: 'Each Brahmin Feed Trough provides upkeep for 3 Brahmin. When performing Tend Crops, gain an additional +1 CD Brahmin milk per feed trough.',
+    penalty: "Roll +1d20 when determining risk of attack to your settlement if its Food resource exceeds the settlement's People.",
+  },
+];
+
+// NCR Survivor traits use the same list — Survivor origin characters may also pick from NCR_TRAITS.
+export const NCR_SURVIVOR_TRAITS = NCR_TRAITS;
+
 export function calculateDerivedStats(character) {
   const str = character.strength || 5;
   const end = character.endurance || 5;

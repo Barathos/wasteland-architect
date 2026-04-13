@@ -1,9 +1,10 @@
 import { Input } from "@/components/ui/input";
+import NCRTraitsPanel from "./NCRTraitsPanel";
 import { Textarea } from "@/components/ui/textarea";
 import { ORIGINS } from "../../lib/falloutData";
 import { Check } from "lucide-react";
 
-export default function DetailsPanel({ character, onChange }) {
+export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTraitsChange }) {
   const selectedOrigin = ORIGINS.find(o => o.label === character.origin);
 
   return (
@@ -96,6 +97,11 @@ export default function DetailsPanel({ character, onChange }) {
           )}
         </div>
       </div>
+
+      {/* NCR Traits */}
+      {character.origin === 'New California Republic' && (
+        <NCRTraitsPanel ncrTraits={ncrTraits || []} onNcrTraitsChange={onNcrTraitsChange} />
+      )}
 
       {/* Background */}
       <div>
