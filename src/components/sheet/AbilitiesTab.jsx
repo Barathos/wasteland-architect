@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, WANDERERS_PERKS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
+
+const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
+const ALL_PERKS = [
+  ...PERKS,
+  ...WANDERERS_PERKS.map(p => ({
+    key: p.key, label: p.label, description: p.description, source: p.source, maxRanks: p.ranks, rank: 1,
+    requirement: Object.fromEntries(Object.entries(p.requirements).map(([k, v]) => k === 'level' ? [k, v] : [SPECIAL_KEY_MAP[k] || k.toLowerCase(), v])),
+  }))
+];
 
 function rollD20() { return Math.floor(Math.random() * 20) + 1; }
 
@@ -89,7 +98,7 @@ export default function AbilitiesTab({ character, updateField }) {
   const skills = parseJson(character.skills, {});
   const tagSkills = parseJson(character.tag_skills, []);
   const selectedPerks = parseJson(character.perks, []);
-  const perkDetails = selectedPerks.map(pk => PERKS.find(p => p.key === pk)).filter(Boolean);
+  const perkDetails = selectedPerks.map(pk => ALL_PERKS.find(p => p.key === pk)).filter(Boolean);
   const selectedNcrTraitKeys = parseJson(character.ncr_traits, []);
   const ncrTraitDetails = selectedNcrTraitKeys.map(k => NCR_TRAITS.find(t => t.key === k)).filter(Boolean);
 
@@ -230,7 +239,15 @@ export default function AbilitiesTab({ character, updateField }) {
               <p className="text-xs font-mono" style={{ color: '#4a6a8a' }}>No perks selected.</p>
             ) : perkDetails.map(perk => (
               <div key={perk.key} className="p-2.5 rounded" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
-                <h4 className="font-heading font-semibold text-sm" style={{ color: '#f5c518' }}>{perk.label}</h4>
+                <div className="flex items-center gap-1.5 flex-wrap mb-0.5">
+                  <h4 className="font-heading font-semibold text-sm" style={{ color: '#f5c518' }}>{perk.label}</h4>
+                  {perk.source === 'Wanderers' && (
+                    <span className="text-[9px] font-mono px-1 py-0.5" style={{ background: 'rgba(180,120,255,0.12)', color: '#aa66ff', border: '1px solid rgba(170,102,255,0.35)' }}>Wanderers</span>
+                  )}
+                  {perk.source === 'Settlers' && (
+                    <span className="text-[9px] font-mono px-1 py-0.5" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>Settlers</span>
+                  )}
+                </div>
                 <p className="text-xs mt-0.5" style={{ color: '#6a8a9a' }}>{perk.description}</p>
               </div>
             ))}

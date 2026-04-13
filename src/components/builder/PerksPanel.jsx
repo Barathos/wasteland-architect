@@ -1,5 +1,25 @@
-import { PERKS } from "../../lib/falloutData";
+import { PERKS, WANDERERS_PERKS } from "../../lib/falloutData";
 import { Check, Lock } from "lucide-react";
+
+// Map SPECIAL abbr to character key
+const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
+
+const ALL_PERKS = [
+  ...PERKS,
+  ...WANDERERS_PERKS.map(p => ({
+    key: p.key,
+    label: p.label,
+    description: p.description,
+    source: p.source,
+    maxRanks: p.ranks,
+    rank: 1,
+    requirement: Object.fromEntries(
+      Object.entries(p.requirements).map(([k, v]) =>
+        k === 'level' ? [k, v] : [SPECIAL_KEY_MAP[k] || k.toLowerCase(), v]
+      )
+    ),
+  }))
+];
 
 export default function PerksPanel({ character, selectedPerks, onPerksChange }) {
   const level = character.level || 1;
@@ -22,7 +42,7 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
     }
   };
 
-  const perksByLevel = PERKS.reduce((acc, perk) => {
+  const perksByLevel = ALL_PERKS.reduce((acc, perk) => {
     const lvl = perk.requirement.level;
     if (!acc[lvl]) acc[lvl] = [];
     acc[lvl].push(perk);
@@ -61,6 +81,8 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
                 const isSelected = selectedPerks.includes(perk.key);
                 const isAvailable = meetsRequirements(perk);
                 const isLocked = !isAvailable;
+                const isWanderers = perk.source === 'Wanderers';
+                const isSettlers = perk.source === 'Settlers';
 
                 return (
                   <button
@@ -82,10 +104,14 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
                         <h5 className={`font-heading font-semibold text-sm ${isSelected ? 'text-primary' : 'text-foreground'}`}>
                           {perk.label}
                         </h5>
-                        {perk.source && (
-                          <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>
-                            {perk.source}
-                          </span>
+                        {isWanderers && (
+                          <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(180,120,255,0.12)', color: '#aa66ff', border: '1px solid rgba(170,102,255,0.35)' }}>Wanderers</span>
+                        )}
+                        {isSettlers && (
+                          <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>Settlers</span>
+                        )}
+                        {perk.maxRanks > 1 && (
+                          <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(245,197,24,0.08)', color: '#a89040', border: '1px solid rgba(245,197,24,0.2)' }}>{perk.maxRanks}R</span>
                         )}
                       </div>
                       <div className="flex-shrink-0">
@@ -112,6 +138,7 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
             </div>
           </div>
         ))}
+
     </div>
   );
 }
