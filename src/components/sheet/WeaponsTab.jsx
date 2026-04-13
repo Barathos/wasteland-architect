@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
+import WeaponEffectTags from "./WeaponEffectTags";
 import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, CORE_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
 
 const EMPTY_WEAPON = {
@@ -119,7 +120,10 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <span className="text-[10px] font-bold w-4" style={{ color: '#f5c518' }}>#{index + 1}</span>
         {field('name', weapon.name, { flex: 1, minWidth: '120px' })}
-        {field('damage', weapon.damage, { width: '60px' })}
+        <div className="flex items-center gap-1">
+          {field('damage', weapon.damage, { width: '55px' })}
+          <span className="text-xs font-mono flex-shrink-0" style={{ minWidth: '30px' }}><CombatDiceDisplay value={weapon.damage} /></span>
+        </div>
         <select value={weapon.damageType} onChange={e => onChange({ ...weapon, damageType: e.target.value })}
           style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', fontSize: '11px', padding: '3px 4px' }}>
           {DAMAGE_TYPES.map(t => <option key={t}>{t}</option>)}
@@ -130,14 +134,20 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
         </select>
         <button onClick={onRemove} className="text-xs font-bold ml-auto" style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer' }}>✕</button>
       </div>
-      <div className="flex items-center gap-2 mb-2 flex-wrap">
-        <div className="flex items-center gap-1">
-          <span className="text-[10px]" style={{ color: '#4a6a8a' }}>Effects:</span>
-          {field('damageEffect', weapon.damageEffect, { flex: 1, minWidth: '100px' })}
+      <div className="flex flex-col gap-1 mb-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-1">
+            <span className="text-[10px]" style={{ color: '#4a6a8a' }}>Effects:</span>
+            {field('damageEffect', weapon.damageEffect, { flex: 1, minWidth: '100px' })}
+          </div>
+          <div className="flex items-center gap-1 flex-1">
+            <span className="text-[10px]" style={{ color: '#4a6a8a' }}>Qualities:</span>
+            {field('qualities', weapon.qualities, { flex: 1, minWidth: '80px' })}
+          </div>
         </div>
-        <div className="flex items-center gap-1 flex-1">
-          <span className="text-[10px]" style={{ color: '#4a6a8a' }}>Qualities:</span>
-          {field('qualities', weapon.qualities, { flex: 1, minWidth: '80px' })}
+        <div className="flex flex-wrap gap-3">
+          <WeaponEffectTags value={weapon.damageEffect} />
+          <WeaponEffectTags value={weapon.qualities} />
         </div>
       </div>
       <div className="flex items-center gap-3 flex-wrap">
