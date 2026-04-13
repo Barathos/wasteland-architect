@@ -3,15 +3,20 @@ import { Minus, Plus, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const GOOD_NATURED_EXEMPT = ['speech', 'medicine', 'repair', 'science', 'barter'];
+const OUTCAST_EXTRA_TAG_OPTIONS = ['energy_weapons', 'science', 'repair'];
 
-export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits }) {
+export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits, outcastTagSkill }) {
   const hasGoodNatured = (ncrTraits || []).includes('good_natured');
+  const isNightkin = character.origin === 'Nightkin';
   const totalSkillPoints = 9 + (character.intelligence || 5);
   const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
   const remaining = totalSkillPoints - usedPoints;
+  const outcastExtraTagCount = outcastTagSkill ? 1 : 0;
+  const tagLimit = TAG_SKILL_COUNT + outcastExtraTagCount;
   const tagCount = tagSkills.length;
 
   const getMaxRank = (key) => {
+    if (isNightkin) return 4;
     if (hasGoodNatured && !GOOD_NATURED_EXEMPT.includes(key)) return 4;
     return 6;
   };
@@ -28,7 +33,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   const toggleTagSkill = (key) => {
     if (tagSkills.includes(key)) {
       onTagSkillsChange(tagSkills.filter(s => s !== key));
-    } else if (tagCount < TAG_SKILL_COUNT) {
+    } else if (tagCount < tagLimit) {
       onTagSkillsChange([...tagSkills, key]);
     }
   };
@@ -49,15 +54,16 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
           <div className="w-px h-8 bg-border" />
           <div>
             <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block">Tag Skills</span>
-            <span className={`font-heading font-bold text-lg ${tagCount < TAG_SKILL_COUNT ? 'text-primary' : 'text-secondary'}`}>
-              {tagCount}/{TAG_SKILL_COUNT}
+            <span className={`font-heading font-bold text-lg ${tagCount < tagLimit ? 'text-primary' : 'text-secondary'}`}>
+              {tagCount}/{tagLimit}
             </span>
           </div>
         </div>
       </div>
 
       <p className="text-xs text-muted-foreground font-mono">
-        Tag {TAG_SKILL_COUNT} skills for bonus expertise. Skill rank + attribute = target number for 2d20 tests.
+        Tag {tagLimit} skills for bonus expertise. Skill rank + attribute = target number for 2d20 tests.
+        {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
       </p>
 
       {/* Skills Grid */}

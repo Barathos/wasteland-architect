@@ -159,11 +159,22 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
   );
 }
 
+const CAPACITOR_OPTIONS = [
+  { label: 'Mk III', damage: '+1 CD', shots: 3 },
+  { label: 'Mk IV',  damage: '+2 CD', shots: 4 },
+  { label: 'Mk V',   damage: '+3 CD', shots: 5 },
+  { label: 'Mk VI',  damage: '+4 CD', shots: 6 },
+];
+
 export default function WeaponsTab({ character, updateField }) {
   const [weapons, setWeapons] = useState(() => {
     try { return JSON.parse(character.equipment || '[]'); } catch { return []; }
   });
   const [showRef, setShowRef] = useState(false);
+  const [laserShots, setLaserShots] = useState(0);
+  const isAssaultron = character.origin === 'Assaultron';
+  const capacitorLevel = character.assaultron_capacitor || 'Mk III';
+  const capacitorInfo = CAPACITOR_OPTIONS.find(c => c.label === capacitorLevel) || CAPACITOR_OPTIONS[0];
 
   const save = (updated) => {
     setWeapons(updated);
@@ -197,6 +208,57 @@ export default function WeaponsTab({ character, updateField }) {
 
   return (
     <div className="p-4" style={{ color: '#a8c8d8' }}>
+      {/* Assaultron Built-in Weapons */}
+      {isAssaultron && (
+        <div className="mb-5 p-3" style={{ background: '#0a1525', border: '1px solid #4488ff' }}>
+          <p className="text-xs font-bold tracking-widest mb-3" style={{ color: '#4488ff' }}>BUILT-IN WEAPONS</p>
+          {/* Claws */}
+          <div className="py-2" style={{ borderBottom: '1px solid #1e3a5f' }}>
+            <div className="flex items-center justify-between">
+              <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>Claws</span>
+              <span className="text-xs font-mono" style={{ color: '#22cc22' }}>4 CD Physical</span>
+            </div>
+            <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4a6a8a' }}>Unarmed • Melee • +1 CD already included from trait</p>
+          </div>
+          {/* Head Laser */}
+          <div className="py-2" style={{ borderBottom: '1px solid #1e3a5f' }}>
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>Assaultron Head Laser</span>
+              <span className="text-xs font-mono" style={{ color: '#22cc22' }}>5{capacitorInfo.damage !== '+1 CD' ? ` (${capacitorInfo.damage})` : ''} CD Piercing Energy</span>
+            </div>
+            <p className="text-[10px] font-mono mt-0.5 mb-2" style={{ color: '#4a6a8a' }}>Range: Close • Costs 2 Fusion Cell per shot</p>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[10px]" style={{ color: '#4a6a8a' }}>Capacitor:</span>
+              {CAPACITOR_OPTIONS.map(cap => (
+                <button key={cap.label} onClick={() => updateField({ assaultron_capacitor: cap.label })}
+                  className="text-[10px] px-2 py-0.5 font-bold"
+                  style={{ background: capacitorLevel === cap.label ? 'rgba(68,136,255,0.15)' : '#0a1525', border: `1px solid ${capacitorLevel === cap.label ? '#4488ff' : '#1e3a5f'}`, color: capacitorLevel === cap.label ? '#4488ff' : '#4a6a8a', cursor: 'pointer' }}>
+                  {cap.label} ({cap.damage}, {cap.shots} shots)
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-[10px]" style={{ color: '#4a6a8a' }}>Shots used:</span>
+              <button onClick={() => setLaserShots(Math.max(0, laserShots - 1))} className="w-5 h-5 flex items-center justify-center text-xs" style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8' }}>-</button>
+              <span className="text-xs font-mono" style={{ color: laserShots >= capacitorInfo.shots ? '#cc4444' : '#e8e8e8' }}>{laserShots}/{capacitorInfo.shots}</span>
+              <button onClick={() => setLaserShots(Math.min(capacitorInfo.shots, laserShots + 1))} className="w-5 h-5 flex items-center justify-center text-xs" style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8' }}>+</button>
+              <button onClick={() => setLaserShots(0)} className="text-[10px] px-2 py-0.5" style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer' }}>Recharge</button>
+            </div>
+          </div>
+          {/* Self-Destruct */}
+          <div className="py-2">
+            <div className="flex items-center justify-between">
+              <span className="font-heading font-semibold text-sm" style={{ color: '#cc4444' }}>Self-Destruct</span>
+              <span className="text-xs font-mono" style={{ color: '#22cc22' }}>6 CD Blast Energy</span>
+            </div>
+            <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4a6a8a' }}>Range: Close • END + Explosives</p>
+            <p className="text-[10px] font-mono mt-1 px-2 py-1" style={{ background: 'rgba(204,68,68,0.12)', border: '1px solid rgba(204,68,68,0.4)', color: '#cc4444' }}>
+              ⚠ DESTROYS YOU PERMANENTLY. Cannot be repaired.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>WEAPONS ({weapons.length}/5)</p>
         <div className="flex gap-2">

@@ -128,6 +128,26 @@ export default function HealthPanel({ character, updateField }) {
         </div>
       </div>
 
+      {/* Radiation Points — Child of Atom */}
+      {character.origin === 'Child of Atom' && (
+        <div className="px-3 py-2" style={{ background: '#0a2a0a', borderBottom: '1px solid #1e3a5f' }}>
+          <p className="text-xs font-bold tracking-wider mb-2" style={{ color: '#22cc22' }}>☢ RADIATION POINTS</p>
+          <div className="flex items-center gap-2">
+            {[0,1,2,3,4,5].map(n => {
+              const active = (character.radiation_points ?? 0) >= n && n > 0;
+              return (
+                <button key={n} onClick={() => updateField({ radiation_points: n })}
+                  className="w-7 h-7 flex items-center justify-center text-xs font-bold transition-all"
+                  style={{ background: active ? '#0a3a0a' : '#060f1c', border: `1px solid ${active ? '#22cc22' : '#1e3a5f'}`, color: active ? '#22cc22' : '#2a4a6a' }}>
+                  {n}
+                </button>
+              );
+            })}
+            <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>+{(character.radiation_points ?? 0) * 2} CD melee</span>
+          </div>
+        </div>
+      )}
+
       {/* Injuries */}
       <div className="flex items-center justify-between px-3 py-2" style={{ background: '#3a0d0d', borderBottom: '1px solid #1e3a5f' }}>
         <div className="flex items-center gap-1.5">

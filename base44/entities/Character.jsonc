@@ -16,7 +16,18 @@
         "Super Mutant",
         "Wastelander",
         "Mister Handy",
-        "Survivor"
+        "Survivor",
+        "Commonwealth Minuteman",
+        "New California Republic",
+        "Protectron",
+        "Robobrain",
+        "Securitron",
+        "Generation 3 Synth",
+        "Assaultron",
+        "Brotherhood Outcast",
+        "Child of Atom",
+        "Nightkin",
+        "Tribal"
       ]
     },
     "level": {
@@ -95,6 +106,37 @@
     "ncr_traits": {
       "type": "string",
       "title": "NCR Traits JSON"
+    },
+    "tribal_traits": {
+      "type": "string",
+      "title": "Tribal Traits JSON"
+    },
+    "outcast_tag_skill": {
+      "type": "string",
+      "title": "Outcast Extra Tag Skill"
+    },
+    "radiation_points": {
+      "type": "number",
+      "title": "Radiation Points (Child of Atom)",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5
+    },
+    "stealth_boy_doses": {
+      "type": "number",
+      "title": "Stealth Boy Doses This Session",
+      "default": 0,
+      "minimum": 0
+    },
+    "stealth_boy_addicted": {
+      "type": "boolean",
+      "title": "Stealth Boy Addiction",
+      "default": false
+    },
+    "assaultron_capacitor": {
+      "type": "string",
+      "title": "Assaultron Capacitor Level",
+      "default": "Mk III"
     },
     "hp_current": {
       "type": "number",

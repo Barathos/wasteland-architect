@@ -140,6 +140,47 @@ export const ORIGINS = [
     special: 'Gain one additional tag skill. Cannot suffer starvation or dehydration. Does not need sleep. Immune to Poison, Radiation, and disease. When NPCs know you are a synth, CHA test difficulty increases by +2. Has a recall code that incapacitates you if spoken.',
     source: 'Settlers',
   },
+  // Wanderers supplement
+  {
+    key: 'assaultron',
+    label: 'Assaultron',
+    description: 'A sleek RobCo combat android built for rapid close-quarters engagement. Your advanced chassis and integrated weapons make you a lethal force on the battlefield.',
+    bonusSkills: ['unarmed', 'energy_weapons'],
+    special: 'Robot: Immune to radiation, poison, disease. Cannot use chems, food, drink, or rest. Must receive repairs to heal. Built-in Claws (4CD), Head Laser (5CD Piercing Energy), and Self-Destruct. Carry weight 150 lbs.',
+    source: 'Wanderers',
+  },
+  {
+    key: 'brotherhood_outcast_wanderers',
+    label: 'Brotherhood Outcast',
+    description: 'Expelled or defected from the Brotherhood of Steel, you carry their training but not their loyalty. The Chain that Breaks — you forge your own path with their technology.',
+    bonusSkills: ['energy_weapons', 'repair'],
+    special: 'The Chain that Breaks: +1d20 junk at start. Spend 1 AP (up to 3×) for 1 Uncommon material per AP. One extra loot roll without spending AP. Gain one extra Tag skill from: Energy Weapons, Science, or Repair.',
+    source: 'Wanderers',
+  },
+  {
+    key: 'child_of_atom',
+    label: 'Child of Atom',
+    description: 'A devoted worshipper of the great Atom, you have learned to embrace radiation as a divine gift rather than a curse that destroys.',
+    bonusSkills: ['survival', 'speech'],
+    special: 'Rad Sponge: Extra perk at level 1. Base Radiation resistance: 1. Once per scene, intercept Radiation damage for a nearby ally. Gain Radiation Points (0–5) from rad damage for +2 CD melee bonus per point. Lose 1 point per sleep.',
+    source: 'Wanderers',
+  },
+  {
+    key: 'nightkin',
+    label: 'Nightkin',
+    description: 'An elite super mutant trained in stealth by the Master\'s army. Your Stealth Boy addiction grants tremendous power at a terrible, maddening cost.',
+    bonusSkills: ['sneak', 'melee_weapons'],
+    special: 'Stealth Boy Addict: STR/END +2 at creation. Max STR/END 12, max INT/CHA 8. Max 4 skill ranks. Immune to Radiation and Poison. Super mutant armor only.',
+    source: 'Wanderers',
+  },
+  {
+    key: 'tribal',
+    label: 'Tribal',
+    description: 'Raised in an isolated tribe far from Old World influence, you have learned ancient wisdom and survival skills that technology cannot replicate.',
+    bonusSkills: ['survival', 'unarmed'],
+    special: 'Choose 2 traits from Tribal Traits or Survivor Traits (NCR list), or 1 trait + 1 extra perk slot.',
+    source: 'Wanderers',
+  },
 ];
 
 export const PERKS = [
@@ -201,7 +242,7 @@ export const PERKS = [
   { key: 'true_friends', label: 'True Friends', description: 'Rank 1: Roll CD equal to current reputation when it would decrease — on at least one Effect, it does not decrease. Rank 2: CHA+Speech difficulty 3 to increase affinity by 2 instead of 1.', requirement: { level: 1, perception: 6, charisma: 6 }, rank: 1, maxRanks: 2, source: 'Settlers' },
 ];
 
-export const ROBOT_ORIGINS = ['Protectron', 'Robobrain', 'Securitron', 'Mister Handy'];
+export const ROBOT_ORIGINS = ['Protectron', 'Robobrain', 'Securitron', 'Mister Handy', 'Assaultron'];
 export function isRobotCharacter(character) {
   return ROBOT_ORIGINS.includes(character.origin);
 }
@@ -412,6 +453,39 @@ export const NCR_TRAITS = [
 
 // NCR Survivor traits use the same list — Survivor origin characters may also pick from NCR_TRAITS.
 export const NCR_SURVIVOR_TRAITS = NCR_TRAITS;
+
+export const WANDERERS_TRIBAL_TRAITS = [
+  {
+    key: 'mother_wasteland',
+    label: 'Mother Wasteland',
+    benefit: 'Spend 1 Luck point to gain insight into the quest, situation, or scene as if you had spent 3 AP to use Obtain Information 3 times. This information is often cryptic and mystical in nature.',
+    penalty: 'Complications make scenes involving pre-War artifacts harder to understand, limiting your use of them.',
+  },
+  {
+    key: 'nomad',
+    label: 'Nomad',
+    benefit: 'Re-roll 1d20 on Survival tests to travel, set up camp, and forage for food and water. Ignore the first complication rolled when making these tests.',
+    penalty: 'Barter and Speech tests increase difficulty and complication range by 1 when dealing with inhabitants of a static settlement. Science cannot be a Tag skill.',
+  },
+  {
+    key: 'rite_of_passage',
+    label: 'Rite of Passage',
+    benefit: 'The first time you spend Luck in a scene, roll 1 CD. If you roll an effect you have not spent that Luck point.',
+    penalty: 'You view everyone who has not gone through your rite of passage as lesser. You cannot assist another PC without spending 1 AP first.',
+  },
+  {
+    key: 'tools_of_the_old_world',
+    label: 'Tools of the Old World',
+    benefit: 'You may use Survival instead of Repair or Science to repair or make use of pre-War tech.',
+    penalty: 'The complication range of tests involving pre-War technology (not weapons) is increased by 2.',
+  },
+  {
+    key: 'the_chosen_one',
+    label: 'The Chosen One',
+    benefit: "The first d20 you purchase is free on tests relating to your tribe's quest, and you can always succeed at a cost.",
+    penalty: 'The GM adds 2 AP to their pool when your quest comes up.',
+  },
+];
 
 export function calculateDerivedStats(character) {
   const str = character.strength || 5;

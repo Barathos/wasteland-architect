@@ -117,6 +117,32 @@ function BottomSection({ character, updateField }) {
           ))}
         </div>
       )}
+
+      {/* Nightkin Stealth Boy Tracker */}
+      {character.origin === 'Nightkin' && (
+        <div className="p-3" style={{ minWidth: '220px', borderLeft: '1px solid #1e3a5f' }}>
+          <p className="text-xs font-bold tracking-widest mb-3" style={{ color: '#aa44dd' }}>STEALTH BOY DOSES</p>
+          <div className="flex items-center gap-2 mb-2">
+            <button onClick={() => updateField({ stealth_boy_doses: Math.max(0, (character.stealth_boy_doses ?? 0) - 1) })}
+              className="w-6 h-6 flex items-center justify-center text-xs" style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8' }}>-</button>
+            <span className="font-mono font-bold text-lg" style={{ color: '#aa44dd' }}>{character.stealth_boy_doses ?? 0}</span>
+            <button onClick={() => updateField({ stealth_boy_doses: (character.stealth_boy_doses ?? 0) + 1 })}
+              className="w-6 h-6 flex items-center justify-center text-xs" style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8' }}>+</button>
+            <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>doses this session</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => updateField({ stealth_boy_addicted: !character.stealth_boy_addicted })}
+              className="px-3 py-1 text-xs font-bold transition-all"
+              style={{ background: character.stealth_boy_addicted ? 'rgba(204,68,68,0.15)' : '#0a1525', border: `1px solid ${character.stealth_boy_addicted ? '#cc4444' : '#1e3a5f'}`, color: character.stealth_boy_addicted ? '#cc4444' : '#4a6a8a', cursor: 'pointer' }}>
+              {character.stealth_boy_addicted ? '⚠ ADDICTED' : 'Not Addicted'}
+            </button>
+          </div>
+          {character.stealth_boy_addicted && (
+            <p className="text-[10px] font-mono mt-2" style={{ color: '#cc4444' }}>+2 difficulty to PER & INT tests. +1 to CHA tests.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
