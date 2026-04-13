@@ -454,3 +454,64 @@ export const XP_TABLE = [
 export function getNextLevelXP(level) {
   return XP_TABLE[Math.min(level, XP_TABLE.length - 1)] || 0;
 }
+
+export const SETTLERS_WEAPONS = [
+  // Small Guns
+  { key: 'm79_grenade_launcher', label: 'M79 Grenade Launcher', type: 'Small Guns', damage: '6 CD', damageEffect: '', damageType: 'Physical', fireRate: 0, range: 'Long', qualities: 'Blast, Inaccurate, Slow Load, Two-Handed', weight: 6, cost: 300, rarity: 3, ammo: '40mm Grenade Round', source: 'Settlers' },
+  { key: 'smoke_claw', label: 'Smoke Claw', type: 'Small Guns', damage: '4 CD', damageEffect: 'Persistent', damageType: 'Poison', fireRate: 0, range: 'Medium', qualities: 'Blast, Inaccurate', weight: 3, cost: 80, rarity: 3, ammo: 'Gas Grenade', source: 'Settlers' },
+  // Energy Weapons
+  { key: 'acid_soaker', label: 'Acid Soaker', type: 'Energy Weapons', damage: '3 CD', damageEffect: 'Breaking, Persistent', damageType: 'Poison', fireRate: 2, range: 'Close', qualities: 'Debilitating, Inaccurate', weight: 3, cost: 125, rarity: 3, ammo: 'Acid Concentrate', source: 'Settlers' },
+  { key: 'alien_blaster', label: 'Alien Blaster', type: 'Energy Weapons', damage: '5 CD', damageEffect: 'Vicious', damageType: 'Energy/Radiation', fireRate: 2, range: 'Close', qualities: 'Close Quarters, Inaccurate', weight: 2, cost: 90, rarity: 5, ammo: 'Alien Blaster Round', source: 'Settlers' },
+  { key: 'assaultron_head_laser', label: 'Assaultron Head Laser', type: 'Energy Weapons', damage: '5 CD', damageEffect: 'Piercing 1', damageType: 'Energy', fireRate: 0, range: 'Close', qualities: '—', weight: 8, cost: 115, rarity: 4, ammo: 'Fusion Cell', source: 'Settlers' },
+  { key: 'cryojet', label: 'Cryojet', type: 'Energy Weapons', damage: '3 CD', damageEffect: 'Burst, Freeze', damageType: 'Energy', fireRate: 3, range: 'Close', qualities: 'Inaccurate', weight: 8, cost: 261, rarity: 4, ammo: 'Cryo Cell', source: 'Settlers' },
+  { key: 'mesmetron', label: 'Mesmetron', type: 'Energy Weapons', damage: '3 CD', damageEffect: 'Stun', damageType: 'Energy', fireRate: 1, range: 'Medium', qualities: '—', weight: 2, cost: 120, rarity: 4, ammo: 'Fusion Cell', source: 'Settlers' },
+  { key: 'tesla_rifle', label: 'Tesla Rifle', type: 'Energy Weapons', damage: '4 CD', damageEffect: 'Arc', damageType: 'Energy', fireRate: 2, range: 'Medium', qualities: 'Two-Handed', weight: 8, cost: 180, rarity: 4, ammo: 'Fusion Cell', source: 'Settlers' },
+  // Big Guns
+  { key: 'broadsider', label: 'Broadsider', type: 'Big Guns', damage: '8 CD', damageEffect: 'Blast', damageType: 'Physical', fireRate: 0, range: 'Medium', qualities: 'Inaccurate, Slow Load, Two-Handed', weight: 15, cost: 250, rarity: 5, ammo: 'Cannonball', source: 'Settlers' },
+  { key: 'cryolator', label: 'Cryolator', type: 'Big Guns', damage: '4 CD', damageEffect: 'Burst, Freeze, Spread', damageType: 'Energy', fireRate: 4, range: 'Close', qualities: 'Inaccurate, Two-Handed', weight: 14, cost: 300, rarity: 4, ammo: 'Cryo Cell', source: 'Settlers' },
+  { key: 'harpoon_gun', label: 'Harpoon Gun', type: 'Big Guns', damage: '12 CD', damageEffect: 'Piercing 1', damageType: 'Physical', fireRate: 0, range: 'Medium', qualities: 'Debilitating, Inaccurate, Two-Handed', weight: 16, cost: 120, rarity: 5, ammo: 'Harpoon', source: 'Settlers' },
+  // Melee / Unarmed
+  { key: 'buzz_saw', label: 'Buzz Saw', type: 'Melee', damage: '3 CD', damageEffect: 'Piercing', damageType: 'Physical', fireRate: null, range: 'Melee', qualities: '—', weight: 3, cost: 25, rarity: 2, ammo: null, source: 'Settlers' },
+  { key: 'robot_claw', label: 'Claw (Robot)', type: 'Unarmed', damage: '3 CD', damageEffect: '—', damageType: 'Physical', fireRate: null, range: 'Melee', qualities: '—', weight: 2, cost: 25, rarity: 1, ammo: null, source: 'Settlers' },
+  { key: 'construction_claw', label: 'Construction Claw', type: 'Unarmed', damage: '4 CD', damageEffect: 'Breaking', damageType: 'Physical', fireRate: null, range: 'Melee', qualities: '—', weight: 3, cost: 25, rarity: 0, ammo: null, source: 'Settlers' },
+  { key: 'drill', label: 'Drill', type: 'Unarmed', damage: '5 CD', damageEffect: 'Vicious', damageType: 'Physical', fireRate: null, range: 'Melee', qualities: 'Debilitating', weight: 20, cost: 50, rarity: 1, ammo: null, source: 'Settlers' },
+  { key: 'vice_grip', label: 'Vice Grip', type: 'Unarmed', damage: '4 CD', damageEffect: 'Breaking', damageType: 'Physical', fireRate: null, range: 'Melee', qualities: '—', weight: 15, cost: 30, rarity: 2, ammo: null, source: 'Settlers' },
+];
+
+export const SETTLERS_AMMO = [
+  { key: '40mm_grenade_round', label: '40mm Grenade Round', weight: '<1', cost: 2, rarity: 4, source: 'Settlers' },
+  { key: 'acid_concentrate', label: 'Acid Concentrate', weight: '<1', cost: 2, rarity: 3, source: 'Settlers' },
+  { key: 'alien_blaster_round', label: 'Alien Blaster Round', weight: '<1', cost: 1, rarity: 6, source: 'Settlers' },
+  { key: 'cannonball', label: 'Cannonball', weight: '4', cost: 8, rarity: 5, source: 'Settlers' },
+  { key: 'cryo_cell', label: 'Cryo Cell', weight: '<1', cost: 10, rarity: 5, source: 'Settlers' },
+  { key: 'gas_grenade', label: 'Gas Grenade', weight: '<1', cost: 2, rarity: 4, source: 'Settlers' },
+  { key: 'harpoon', label: 'Harpoon', weight: '<1', cost: 3, rarity: 4, source: 'Settlers' },
+];
+
+export const STANDARD_AMMO = [
+  { key: '10mm', label: '10mm', weight: '<1', rarity: 1 },
+  { key: '308', label: '.308', weight: '<1', rarity: 2 },
+  { key: '44', label: '.44', weight: '<1', rarity: 2 },
+  { key: '45', label: '.45', weight: '<1', rarity: 2 },
+  { key: '50', label: '.50', weight: '<1', rarity: 3 },
+  { key: '5mm', label: '5mm', weight: '<1', rarity: 1 },
+  { key: '5_56mm', label: '5.56mm', weight: '<1', rarity: 1 },
+  { key: 'fusion_cell', label: 'Fusion Cell', weight: '<1', rarity: 2 },
+  { key: 'fusion_core', label: 'Fusion Core', weight: '4', rarity: 3 },
+  { key: 'microfusion_cell', label: 'Microfusion Cell', weight: '<1', rarity: 2 },
+  { key: 'plasma_cartridge', label: 'Plasma Cartridge', weight: '<1', rarity: 2 },
+  { key: 'railway_spike', label: 'Railway Spike', weight: '1', rarity: 2 },
+  { key: 'shotgun_shell', label: 'Shotgun Shell', weight: '<1', rarity: 1 },
+  { key: 'flamer_fuel', label: 'Flamer Fuel', weight: '<1', rarity: 3 },
+  { key: 'missile', label: 'Missile', weight: '3', rarity: 4 },
+  { key: 'mini_nuke', label: 'Mini Nuke', weight: '3', rarity: 5 },
+];
+
+export const SETTLERS_DAMAGE_EFFECTS = [
+  { key: 'arc', label: 'Arc', description: 'Each Effect rolled automatically hits one additional target within Close range of the primary target for half the rolled damage.' },
+  { key: 'freeze', label: 'Freeze', description: 'Enemies hit are Frozen if Effects rolled ≥ half the target\'s END. A Frozen creature cannot take actions on its next turn.' },
+];
+
+export const SETTLERS_WEAPON_QUALITIES = [
+  { key: 'slow_load', label: 'Slow Load', description: 'After this weapon has been fired, you must spend a minor action to reload before it can be fired again.' },
+];

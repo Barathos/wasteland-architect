@@ -1,31 +1,72 @@
 import { useState } from "react";
+import { SETTLERS_AMMO, STANDARD_AMMO } from "../../lib/falloutData";
+
+const ALL_AMMO = [
+  ...STANDARD_AMMO,
+  ...SETTLERS_AMMO,
+];
+
+function ammoWeightNum(w) {
+  if (!w || w === '<1') return 0.1;
+  return parseFloat(w) || 0;
+}
+
+function rarityDot(rarity) {
+  let color = '#6a8a9a';
+  if (rarity === 3) color = '#22cc22';
+  else if (rarity === 4) color = '#4488ff';
+  else if (rarity >= 5) color = '#f5c518';
+  return <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: color, marginRight: 4, flexShrink: 0 }} />;
+}
 
 function parseInventory(str) {
   try { return JSON.parse(str || '[]'); } catch { return []; }
 }
 
 const EMPTY_ITEM = { name: '', quantity: 1, weight: 0, notes: '' };
+const EMPTY_AMMO = { type: '', quantity: 10 };
 
 export default function GearTab({ character, updateField }) {
   const [items, setItems] = useState(() => parseInventory(character.inventory));
+  const [ammoList, setAmmoList] = useState(() => parseInventory(character.ammo_inventory));
   const [caps, setCaps] = useState(character.caps || 0);
 
   const saveItems = (updated) => {
     setItems(updated);
-    const newTotal = updated.reduce((sum, item) => sum + (parseFloat(item.weight) || 0) * (parseInt(item.quantity) || 1), 0);
-    updateField({ inventory: JSON.stringify(updated), encumbrance: parseFloat(newTotal.toFixed(1)) });
+    const w = updated.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
+    const ammoW = ammoList.reduce((s, a) => {
+      const def = ALL_AMMO.find(x => x.label === a.type);
+      return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
+    }, 0);
+    updateField({ inventory: JSON.stringify(updated), encumbrance: parseFloat((w + ammoW).toFixed(1)) });
   };
 
-  const saveCaps = (val) => {
-    setCaps(val);
-    updateField({ caps: val });
+  const saveAmmo = (updated) => {
+    setAmmoList(updated);
+    const ammoW = updated.reduce((s, a) => {
+      const def = ALL_AMMO.find(x => x.label === a.type);
+      return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
+    }, 0);
+    const itemW = items.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
+    updateField({ ammo_inventory: JSON.stringify(updated), encumbrance: parseFloat((itemW + ammoW).toFixed(1)) });
   };
+
+  const saveCaps = (val) => { setCaps(val); updateField({ caps: val }); };
 
   const addItem = () => saveItems([...items, { ...EMPTY_ITEM }]);
   const removeItem = (i) => saveItems(items.filter((_, idx) => idx !== i));
   const updateItem = (i, field, val) => saveItems(items.map((item, idx) => idx === i ? { ...item, [field]: val } : item));
 
-  const totalWeight = items.reduce((sum, item) => sum + (parseFloat(item.weight) || 0) * (parseInt(item.quantity) || 1), 0);
+  const addAmmo = () => saveAmmo([...ammoList, { ...EMPTY_AMMO }]);
+  const removeAmmo = (i) => saveAmmo(ammoList.filter((_, idx) => idx !== i));
+  const updateAmmo = (i, field, val) => saveAmmo(ammoList.map((a, idx) => idx === i ? { ...a, [field]: val } : a));
+
+  const itemWeight = items.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
+  const ammoWeight = ammoList.reduce((s, a) => {
+    const def = ALL_AMMO.find(x => x.label === a.type);
+    return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
+  }, 0);
+  const totalWeight = itemWeight + ammoWeight;
   const carryWeight = character.carry_weight || 150;
 
   return (
@@ -36,6 +77,53 @@ export default function GearTab({ character, updateField }) {
         <input type="number" value={caps} onChange={e => saveCaps(parseInt(e.target.value) || 0)}
           style={{ width: '80px', background: '#060f1c', border: '1px solid #f5c518', color: '#f5c518', outline: 'none', padding: '4px 8px', fontSize: '16px', fontWeight: 'bold', textAlign: 'center' }}
         />
+      </div>
+
+      {/* Ammunition Section */}
+      <div className="mb-5 p-3" style={{ background: '#0a1525', border: '1px solid #1e3a5f' }}>
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>AMMUNITION ({ammoList.length})</p>
+          <button onClick={addAmmo} className="text-xs px-3 py-1 font-bold"
+            style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer' }}>
+            + ADD AMMO
+          </button>
+        </div>
+        {ammoList.length === 0 ? (
+          <p className="text-xs font-mono text-center py-2" style={{ color: '#4a6a8a' }}>No ammo tracked.</p>
+        ) : (
+          <>
+            <div className="grid gap-2 mb-1" style={{ gridTemplateColumns: '1fr 60px 28px' }}>
+              {['AMMO TYPE', 'QTY', ''].map((h, i) => (
+                <span key={i} className="text-[10px]" style={{ color: '#4a6a8a' }}>{h}</span>
+              ))}
+            </div>
+            {ammoList.map((a, i) => {
+              const def = ALL_AMMO.find(x => x.label === a.type);
+              return (
+                <div key={i} className="grid gap-2 items-center py-1" style={{ gridTemplateColumns: '1fr 60px 28px', borderBottom: '1px solid #0d2137' }}>
+                  <div className="flex items-center gap-1">
+                    {def && rarityDot(def.rarity)}
+                    <select value={a.type} onChange={e => updateAmmo(i, 'type', e.target.value)}
+                      style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px' }}>
+                      <option value="">— select —</option>
+                      <optgroup label="Standard">
+                        {STANDARD_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
+                      </optgroup>
+                      <optgroup label="Settlers Supplement">
+                        {SETTLERS_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
+                      </optgroup>
+                    </select>
+                  </div>
+                  <input type="number" value={a.quantity} onChange={e => updateAmmo(i, 'quantity', parseInt(e.target.value) || 0)}
+                    style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px', textAlign: 'center' }}
+                  />
+                  <button onClick={() => removeAmmo(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
+                </div>
+              );
+            })}
+            <p className="text-[10px] font-mono mt-2" style={{ color: '#4a6a8a' }}>Ammo weight: {ammoWeight.toFixed(1)} lbs</p>
+          </>
+        )}
       </div>
 
       {/* Weight summary */}
@@ -50,7 +138,7 @@ export default function GearTab({ character, updateField }) {
         </button>
       </div>
 
-      {/* Header */}
+      {/* Inventory Header */}
       <div className="grid gap-2 mb-1" style={{ gridTemplateColumns: '1fr 45px 55px 1fr 30px' }}>
         {['ITEM NAME', 'QTY', 'WEIGHT', 'NOTES', ''].map((h, i) => (
           <span key={i} className="text-[10px]" style={{ color: '#4a6a8a' }}>{h}</span>
