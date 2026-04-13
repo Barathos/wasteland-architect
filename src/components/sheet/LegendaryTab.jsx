@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import {
   LEGENDARY_WEAPON_PROPERTIES, LEGENDARY_ARMOR_PROPERTIES,
   RARE_BOOKS, SETTLERS_WEAPONS, WANDERERS_WEAPONS, WANDERERS_ARMOR
@@ -34,7 +35,7 @@ function WeaponRefModal({ onSelect, onClose }) {
               <div className="flex items-center justify-between">
                 <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>{w.label}</span>
                 <div className="flex gap-2">
-                  <span className="text-xs font-mono" style={{ color: '#22cc22' }}>{w.damage}</span>
+                  <CombatDiceDisplay value={w.damage} />
                   <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>{w.type}</span>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import { SETTLERS_WEAPONS, WANDERERS_WEAPONS } from "../../lib/falloutData";
 
 const EMPTY_WEAPON = {
@@ -85,7 +86,7 @@ function WeaponReferenceModal({ onSelect, onClose }) {
                       style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 110px 80px 90px', gap: '10px', alignItems: 'center', padding: '6px 0 4px' }}>
                         <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{w.label}</span>
-                        <span className="text-xs font-mono text-center" style={{ color: '#22cc22', whiteSpace: 'nowrap' }}>{w.damage}</span>
+                        <span className="text-xs font-mono text-center" style={{ whiteSpace: 'nowrap' }}><CombatDiceDisplay value={w.damage} /></span>
                         <span className="text-[10px] font-mono text-center" style={{ color: '#6a8a9a', whiteSpace: 'nowrap' }}>{w.damageType}</span>
                         <span className="text-[10px] font-mono text-center" style={{ color: '#4a6a8a', whiteSpace: 'nowrap' }}>{w.range}</span>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
