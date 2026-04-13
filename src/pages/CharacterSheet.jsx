@@ -23,7 +23,7 @@ import {
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const TABS = ['STATUS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'REPUTATION', 'EFFECTS', 'COMPANIONS'];
+const TABS = ['STATUS', 'COMPANIONS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'REPUTATION', 'EFFECTS'];
 
 export default function CharacterSheet() {
   const { id } = useParams();
