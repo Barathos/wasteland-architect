@@ -271,6 +271,10 @@
     "faction_reputations": {
       "type": "string",
       "title": "Faction Reputations JSON"
+    },
+    "robot_mods": {
+      "type": "string",
+      "title": "Robot Mods JSON"
     }
   },
   "required": [

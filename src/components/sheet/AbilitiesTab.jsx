@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, NCR_TRAITS, calculateDerivedStats } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, NCR_TRAITS, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
 
 function rollD20() { return Math.floor(Math.random() * 20) + 1; }
 
@@ -85,6 +85,7 @@ export default function AbilitiesTab({ character, updateField }) {
   const apCurrent = character.action_points_current ?? apMax;
   const spendAP = () => updateField({ action_points_current: Math.max(0, apCurrent - 1) });
 
+  const isRobot = isRobotCharacter(character);
   const skills = parseJson(character.skills, {});
   const tagSkills = parseJson(character.tag_skills, []);
   const selectedPerks = parseJson(character.perks, []);
@@ -94,6 +95,13 @@ export default function AbilitiesTab({ character, updateField }) {
 
   return (
     <div style={{ background: '#0d2137', color: '#a8c8d8' }}>
+      {isRobot && (
+        <div className="px-4 py-2" style={{ background: '#1a0d2d', borderBottom: '2px solid #cc7722' }}>
+          <p className="text-xs font-bold font-mono" style={{ color: '#f5a818' }}>
+            ⚙ ROBOT CHARACTER — Immune to radiation, poison, and disease. Cannot use chems, food, drink, or rest. Must receive repairs to heal.
+          </p>
+        </div>
+      )}
       <div className="flex flex-wrap">
 
         {/* SPECIAL */}

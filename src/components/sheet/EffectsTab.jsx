@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CHEMS } from "../../lib/chemData";
+import { isRobotCharacter } from "../../lib/falloutData";
 
 const STANDARD_INJURIES = [
   'Bleeding', 'Dazed', 'Stunned', 'Slowed', 'Prone', 'Blinded',
@@ -11,6 +12,8 @@ function parse(str, fallback) {
 }
 
 export default function EffectsTab({ character, updateField }) {
+  const isRobot = isRobotCharacter(character);
+  const [mods, setMods] = useState(() => { try { return JSON.parse(character.robot_mods || '[]'); } catch { return []; } });
   const [effects, setEffects] = useState(() => parse(character.conditions_effects, {
     chems: [], injuries: [], conditions: []
   }));
@@ -44,43 +47,68 @@ export default function EffectsTab({ character, updateField }) {
 
   const removeCondition = (i) => save({ ...effects, conditions: effects.conditions.filter((_, idx) => idx !== i) });
 
+  const saveMods = (updated) => { setMods(updated); updateField({ robot_mods: JSON.stringify(updated) }); };
+  const addMod = () => saveMods([...mods, { name: '', effect: '' }]);
+  const removeMod = (i) => saveMods(mods.filter((_, idx) => idx !== i));
+  const updateMod = (i, field, val) => saveMods(mods.map((m, idx) => idx === i ? { ...m, [field]: val } : m));
+
   const sectionHeader = (title) => (
     <div className="px-3 py-2 mb-3" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
       <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>{title}</p>
     </div>
   );
 
-  const inputSm = (val, onChange, placeholder, width = '100%') => (
-    <input value={val} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-      style={{ width, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 6px', fontSize: '11px' }}
-    />
-  );
-
   return (
     <div style={{ color: '#a8c8d8' }}>
-      {/* Active Chems */}
-      <div style={{ borderBottom: '1px solid #1e3a5f' }}>
-        {sectionHeader('ACTIVE CHEMS')}
-        <div className="px-4 pb-4">
-          {(effects.chems || []).map((c, i) => (
-            <div key={i} className="flex items-center gap-2 py-1.5" style={{ borderBottom: '1px solid #0d2137' }}>
-              <span className="font-bold text-xs" style={{ color: '#22cc22', minWidth: '100px' }}>{c.name}</span>
-              <span className="text-xs flex-1" style={{ color: '#a8c8d8' }}>{c.summary || c.effect || ''}</span>
-              <span className="text-[10px] px-1.5 py-0.5" style={{ color: '#f5c518', background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.2)', whiteSpace: 'nowrap' }}>{c.duration}</span>
-              {c.addictive && <span className="text-[10px]" style={{ color: '#cc4444' }} title="Addictive">⚠</span>}
-              <button onClick={() => removeChem(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
-            </div>
-          ))}
-          <div className="flex gap-2 mt-3 flex-wrap">
-            <select value={selectedChemId} onChange={e => setSelectedChemId(e.target.value)}
-              style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '4px 6px', fontSize: '12px' }}>
-              {CHEMS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-            </select>
-            <button onClick={addChem} className="px-3 py-1 text-xs font-bold"
-              style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer', whiteSpace: 'nowrap' }}>+ ADD</button>
+      {/* Chems (non-robot) or Installed Mods (robot) */}
+      {isRobot ? (
+        <div style={{ borderBottom: '1px solid #1e3a5f' }}>
+          {sectionHeader('INSTALLED MODS')}
+          <div className="px-4 pb-4">
+            {character.origin === 'Protectron' && (
+              <p className="text-[10px] font-mono mb-3 px-2 py-1.5" style={{ color: '#f5c518', background: 'rgba(245,197,24,0.06)', border: '1px solid rgba(245,197,24,0.2)' }}>
+                ⚠ Maximum 2 mods installed simultaneously.
+              </p>
+            )}
+            {mods.map((mod, i) => (
+              <div key={i} className="flex gap-2 items-center py-1.5" style={{ borderBottom: '1px solid #0d2137' }}>
+                <input value={mod.name} onChange={e => updateMod(i, 'name', e.target.value)}
+                  placeholder="Mod name"
+                  style={{ width: '130px', background: '#060f1c', border: '1px solid #1e3a5f', color: '#f5c518', outline: 'none', padding: '3px 6px', fontSize: '11px' }} />
+                <input value={mod.effect} onChange={e => updateMod(i, 'effect', e.target.value)}
+                  placeholder="Brief effect..."
+                  style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#a8c8d8', outline: 'none', padding: '3px 6px', fontSize: '11px' }} />
+                <button onClick={() => removeMod(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
+              </div>
+            ))}
+            <button onClick={addMod} className="mt-3 px-3 py-1 text-xs font-bold w-full"
+              style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer' }}>+ ADD MOD</button>
           </div>
         </div>
-      </div>
+      ) : (
+        <div style={{ borderBottom: '1px solid #1e3a5f' }}>
+          {sectionHeader('ACTIVE CHEMS')}
+          <div className="px-4 pb-4">
+            {(effects.chems || []).map((c, i) => (
+              <div key={i} className="flex items-center gap-2 py-1.5" style={{ borderBottom: '1px solid #0d2137' }}>
+                <span className="font-bold text-xs" style={{ color: '#22cc22', minWidth: '100px' }}>{c.name}</span>
+                <span className="text-xs flex-1" style={{ color: '#a8c8d8' }}>{c.summary || c.effect || ''}</span>
+                <span className="text-[10px] px-1.5 py-0.5" style={{ color: '#f5c518', background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.2)', whiteSpace: 'nowrap' }}>{c.duration}</span>
+                {c.addictive && <span className="text-[10px]" style={{ color: '#cc4444' }} title="Addictive">⚠</span>}
+                <button onClick={() => removeChem(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
+              </div>
+            ))}
+            <div className="flex gap-2 mt-3 flex-wrap">
+              <select value={selectedChemId} onChange={e => setSelectedChemId(e.target.value)}
+                style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '4px 6px', fontSize: '12px' }}>
+                {CHEMS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </select>
+              <button onClick={addChem} className="px-3 py-1 text-xs font-bold"
+                style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer', whiteSpace: 'nowrap' }}>+ ADD</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Injuries */}
       <div style={{ borderBottom: '1px solid #1e3a5f' }}>

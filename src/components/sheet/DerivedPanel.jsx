@@ -1,4 +1,4 @@
-import { calculateDerivedStats } from "../../lib/falloutData";
+import { calculateDerivedStats, isRobotCharacter, getRobotCarryWeight } from "../../lib/falloutData";
 
 function parseJson(str, fb) { try { return JSON.parse(str || ''); } catch { return fb; } }
 const APPAREL_SLOTS = ['head','torso','left_arm','right_arm','left_leg','right_leg','power_armor'];
@@ -63,6 +63,7 @@ function StatRow({ label, icon, value, editable, onChange, type = 'number' }) {
 export default function DerivedPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
   const apparelDR = getApparelDR(character);
+  const isRobot = isRobotCharacter(character);
 
   return (
     <div>
@@ -84,14 +85,23 @@ export default function DerivedPanel({ character, updateField }) {
       <StatRow label="POISON" icon="☠" value={character.resistance_poison ?? 0} editable
         onChange={v => updateField({ resistance_poison: v })} />
 
+      {isRobot && (
+        <>
+          <SectionHeader label="CARRY WEIGHT" />
+          <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #091525' }}>
+            <p className="text-sm font-bold" style={{ color: '#e8e8e8' }}>{getRobotCarryWeight(character)} lbs</p>
+            <p className="text-[9px] font-mono mt-0.5" style={{ color: '#4a6a8a' }}>(fixed, not modified by STR or perks)</p>
+          </div>
+        </>
+      )}
       <SectionHeader label="STATUS" />
-      <StatRow label="FATIGUE" value={character.fatigue ?? 0} editable
+      <StatRow label={isRobot ? 'CORRUPTION' : 'FATIGUE'} value={character.fatigue ?? 0} editable
         onChange={v => updateField({ fatigue: Math.min(5, Math.max(0, v)) })} />
       <StatRow label="INTOXICATION" value={character.intoxication ?? 0} editable
         onChange={v => updateField({ intoxication: Math.min(5, Math.max(0, v)) })} />
-      <StatRow label="ALCOHOLIC" value={character.is_alcoholic ?? false} editable type="boolean"
-        onChange={v => updateField({ is_alcoholic: v })} />
-      <StatRow label="WELL RESTED" value={character.is_well_rested ?? false} editable type="boolean"
+      {!isRobot && <StatRow label="ALCOHOLIC" value={character.is_alcoholic ?? false} editable type="boolean"
+        onChange={v => updateField({ is_alcoholic: v })} />}
+      <StatRow label={isRobot ? 'RECENTLY REPAIRED' : 'WELL RESTED'} value={character.is_well_rested ?? false} editable type="boolean"
         onChange={v => updateField({ is_well_rested: v })} />
     </div>
   );

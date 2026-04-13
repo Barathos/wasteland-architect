@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { getNextLevelXP } from "../../lib/falloutData";
+import { getNextLevelXP, isRobotCharacter } from "../../lib/falloutData";
 
 function parseLog(str) { try { return JSON.parse(str || '[]'); } catch { return []; } }
 
 export default function DataTab({ character, updateField }) {
+  const isRobot = isRobotCharacter(character);
   const [xpInput, setXpInput] = useState('');
   const [showXpInput, setShowXpInput] = useState(false);
   const [sessionLog, setSessionLog] = useState(() => parseLog(character.session_log));
@@ -108,7 +109,7 @@ export default function DataTab({ character, updateField }) {
 
       {/* Background */}
       <div className="mb-0" style={{ borderBottom: '1px solid #1e3a5f' }}>
-        {sectionHeader('BACKGROUND STORY')}
+        {sectionHeader(isRobot ? 'ORIGIN PROGRAMMING / PERSONALITY LOG' : 'BACKGROUND STORY')}
         <div className="px-4 pb-4">
           <textarea
             value={character.background || ''}

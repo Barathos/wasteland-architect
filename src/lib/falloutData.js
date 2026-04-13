@@ -201,6 +201,16 @@ export const PERKS = [
   { key: 'true_friends', label: 'True Friends', description: 'Rank 1: Roll CD equal to current reputation when it would decrease — on at least one Effect, it does not decrease. Rank 2: CHA+Speech difficulty 3 to increase affinity by 2 instead of 1.', requirement: { level: 1, perception: 6, charisma: 6 }, rank: 1, maxRanks: 2, source: 'Settlers' },
 ];
 
+export const ROBOT_ORIGINS = ['Protectron', 'Robobrain', 'Securitron', 'Mister Handy'];
+export function isRobotCharacter(character) {
+  return ROBOT_ORIGINS.includes(character.origin);
+}
+
+const ROBOT_CARRY_WEIGHTS = { Protectron: 225, Robobrain: 150, Securitron: 150, 'Mister Handy': 150 };
+export function getRobotCarryWeight(character) {
+  return ROBOT_CARRY_WEIGHTS[character.origin] ?? 150;
+}
+
 export const FACTIONS = [
   {
     key: 'brotherhood_of_steel',
