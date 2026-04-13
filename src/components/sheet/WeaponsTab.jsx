@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SETTLERS_WEAPONS } from "../../lib/falloutData";
+import { SETTLERS_WEAPONS, WANDERERS_WEAPONS } from "../../lib/falloutData";
 
 const EMPTY_WEAPON = {
   name: '', damage: '', damageEffect: '', damageType: 'Physical',
@@ -26,9 +26,10 @@ const ALL_REF_WEAPONS = [
   { label: 'Super Sledge', type: 'Melee', damage: '7 CD', damageEffect: 'Knockdown', damageType: 'Physical', range: 'Melee', qualities: 'Two-Handed', ammo: null },
   { label: 'Combat Knife', type: 'Melee', damage: '3 CD', damageEffect: '', damageType: 'Physical', range: 'Melee', qualities: 'Stealthy', ammo: null },
   ...SETTLERS_WEAPONS,
+  ...WANDERERS_WEAPONS,
 ];
 
-const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Melee', 'Unarmed'];
+const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Explosive'];
 
 function rarityColor(r) {
   if (!r) return '#6a8a9a';
@@ -39,54 +40,71 @@ function rarityColor(r) {
 }
 
 function WeaponReferenceModal({ onSelect, onClose }) {
+  const [filter, setFilter] = useState('');
+  const lower = filter.toLowerCase();
   const grouped = TYPE_ORDER.reduce((acc, t) => {
-    acc[t] = ALL_REF_WEAPONS.filter(w => w.type === t);
+    acc[t] = ALL_REF_WEAPONS.filter(w => w.type === t && (!lower || w.label.toLowerCase().includes(lower) || (w.source || '').toLowerCase().includes(lower)));
     return acc;
   }, {});
 
+  const sourceBadge = (w) => {
+    if (w.source === 'Wanderers') return { bg: 'rgba(180,120,255,0.12)', border: 'rgba(170,102,255,0.35)', color: '#aa66ff', label: 'Wanderers' };
+    if (w.source === 'Settlers') return { bg: 'rgba(245,197,24,0.1)', border: 'rgba(245,197,24,0.3)', color: '#f5c518', label: 'Settlers' };
+    return { bg: 'rgba(106,154,186,0.1)', border: 'rgba(106,154,186,0.3)', color: '#6a9aba', label: 'Core' };
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.8)' }} onClick={onClose}>
-      <div className="w-full max-w-3xl max-h-[80vh] overflow-y-auto m-4"
+      <div className="w-full max-w-3xl max-h-[85vh] flex flex-col m-4"
         style={{ background: '#0d2137', border: '2px solid #f5c518' }}
         onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between px-4 py-3" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
+        <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
           <p className="text-sm font-bold tracking-widest" style={{ color: '#f5c518' }}>WEAPON REFERENCE — Click to Add</p>
-          <button onClick={onClose} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>✕</button>
+          <div className="flex items-center gap-3">
+            <input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..."
+              style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8', outline: 'none', padding: '3px 8px', fontSize: '11px', width: '120px' }}
+              onClick={e => e.stopPropagation()} />
+            <button onClick={onClose} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>✕</button>
+          </div>
         </div>
-        {TYPE_ORDER.map(type => {
-          const weapons = grouped[type];
-          if (!weapons?.length) return null;
-          return (
-            <div key={type}>
-              <div className="px-4 py-1.5" style={{ background: '#091525', borderBottom: '1px solid #1e3a5f' }}>
-                <p className="text-[10px] font-bold tracking-widest" style={{ color: '#4a6a8a' }}>{type.toUpperCase()}</p>
+        <div className="overflow-y-auto flex-1">
+          {TYPE_ORDER.map(type => {
+            const weapons = grouped[type];
+            if (!weapons?.length) return null;
+            const typeLabel = type === 'Bow' ? 'BOWS — AGI + Athletics to attack' : type.toUpperCase();
+            return (
+              <div key={type}>
+                <div className="px-4 py-1.5 sticky top-0" style={{ background: '#091525', borderBottom: '1px solid #1e3a5f', zIndex: 1 }}>
+                  <p className="text-[10px] font-bold tracking-widest" style={{ color: type === 'Bow' ? '#22cc22' : '#4a6a8a' }}>{typeLabel}</p>
+                </div>
+                {weapons.map((w, i) => {
+                  const badge = sourceBadge(w);
+                  return (
+                    <button key={i} onClick={() => onSelect(w)}
+                      className="w-full px-4 text-left hover:opacity-80 transition-opacity"
+                      style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 70px 110px 80px 90px', gap: '10px', alignItems: 'center', padding: '6px 0 4px' }}>
+                        <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{w.label}</span>
+                        <span className="text-xs font-mono text-center" style={{ color: '#22cc22', whiteSpace: 'nowrap' }}>{w.damage}</span>
+                        <span className="text-[10px] font-mono text-center" style={{ color: '#6a8a9a', whiteSpace: 'nowrap' }}>{w.damageType}</span>
+                        <span className="text-[10px] font-mono text-center" style={{ color: '#4a6a8a', whiteSpace: 'nowrap' }}>{w.range}</span>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                          <span className="text-[9px] px-1.5 py-0.5 font-bold"
+                            style={{ background: badge.bg, border: `1px solid ${badge.border}`, color: badge.color, whiteSpace: 'nowrap' }}>
+                            {badge.label}
+                          </span>
+                        </div>
+                      </div>
+                      {w.note && (
+                        <p className="text-[10px] font-mono italic pb-1" style={{ color: '#6a8a9a' }}>{w.note}</p>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
-              {weapons.map((w, i) => (
-                <button key={i} onClick={() => onSelect(w)}
-                  className="w-full px-4 py-2 text-left hover:opacity-80 transition-opacity"
-                  style={{ display: 'grid', gridTemplateColumns: '1fr 80px 120px 100px 100px', gap: '12px', alignItems: 'center', background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}>
-                  <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{w.label}</span>
-                  <span className="text-xs font-mono text-center" style={{ color: '#22cc22', whiteSpace: 'nowrap' }}>{w.damage}</span>
-                  <span className="text-[10px] font-mono text-center" style={{ color: '#6a8a9a', whiteSpace: 'nowrap' }}>{w.damageType}</span>
-                  <span className="text-[10px] font-mono text-center" style={{ color: '#4a6a8a', whiteSpace: 'nowrap' }}>{w.range}</span>
-                  <div className="weapon-source" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    {w.source ? (
-                      <span className="text-[9px] px-1.5 py-0.5 font-bold"
-                        style={{ background: 'rgba(245,197,24,0.1)', border: '1px solid rgba(245,197,24,0.3)', color: '#f5c518', whiteSpace: 'nowrap' }}>
-                        {w.source}
-                      </span>
-                    ) : (
-                      <span className="text-[9px] px-1.5 py-0.5 font-bold"
-                        style={{ background: 'rgba(106,154,186,0.1)', border: '1px solid rgba(106,154,186,0.3)', color: '#6a9aba', whiteSpace: 'nowrap' }}>
-                        Core
-                      </span>
-                    )}
-                  </div>
-                </button>
-              ))}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
