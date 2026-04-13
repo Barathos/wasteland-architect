@@ -1,5 +1,21 @@
 import { calculateBodyPartHP } from "../../lib/falloutData";
 
+function getSlotDR(character) {
+  const slots = ['head','torso','left_arm','right_arm','left_leg','right_leg'];
+  const result = {};
+  let apparel = {};
+  try { apparel = JSON.parse(character.apparel || '{}'); } catch { apparel = {}; }
+  slots.forEach(s => {
+    const slot = apparel[s];
+    if (slot?.worn) {
+      result[s] = { physical: parseInt(slot.physDR) || 0, energy: parseInt(slot.energyDR) || 0, radiation: parseInt(slot.radDR) || 0 };
+    } else {
+      result[s] = { physical: 0, energy: 0, radiation: 0 };
+    }
+  });
+  return result;
+}
+
 // Each box cycles: empty -> healthy -> treated -> injured -> empty
 const STATES = ['empty', 'healthy', 'treated', 'injured'];
 
@@ -23,7 +39,7 @@ function getBoxes(character, part) {
   return ['healthy', 'healthy', 'healthy', 'healthy', 'healthy'];
 }
 
-function BodyPartBoxes({ label, range, boxes, onBoxClick }) {
+function BodyPartBoxes({ label, range, boxes, onBoxClick, dr }) {
   const hasInjury = boxes.some(b => b === 'injured');
   const hasTreated = boxes.some(b => b === 'treated');
   const borderColor = hasInjury ? '#cc2222' : hasTreated ? '#cc8822' : '#1e3a5f';
@@ -48,6 +64,13 @@ function BodyPartBoxes({ label, range, boxes, onBoxClick }) {
           />
         ))}
       </div>
+      {dr && (
+        <div className="flex gap-1.5 justify-center mt-1.5">
+          <span className="text-[8px] font-mono" style={{ color: dr.physical > 0 ? '#e8e8e8' : '#2a3a4a' }}>🛡{dr.physical}</span>
+          <span className="text-[8px] font-mono" style={{ color: dr.energy > 0 ? '#4488ff' : '#2a3a4a' }}>⚡{dr.energy}</span>
+          <span className="text-[8px] font-mono" style={{ color: dr.radiation > 0 ? '#22cc22' : '#2a3a4a' }}>☢{dr.radiation}</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -63,11 +86,14 @@ export default function BodyDiagram({ character, updateField }) {
     updateField({ [`boxes_${part}`]: JSON.stringify(updated) });
   };
 
+  const slotDR = getSlotDR(character);
+
   const getProps = (key) => ({
     label: bodyParts[key].label,
     range: bodyParts[key].range,
     boxes: getBoxes(character, key),
     onBoxClick: (idx) => cycleBox(key, idx),
+    dr: slotDR[key],
   });
 
   return (
