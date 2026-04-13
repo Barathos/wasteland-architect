@@ -8,6 +8,8 @@ const OUTCAST_EXTRA_TAG_OPTIONS = ['energy_weapons', 'science', 'repair'];
 export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits, outcastTagSkill }) {
   const hasGoodNatured = (ncrTraits || []).includes('good_natured');
   const isNightkin = character.origin === 'Nightkin';
+  const isSuperMutant = character.origin === 'Super Mutant';
+  const isCapped = isNightkin || isSuperMutant;
   const totalSkillPoints = 9 + (character.intelligence || 5);
   const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
   const remaining = totalSkillPoints - usedPoints;
@@ -16,7 +18,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   const tagCount = tagSkills.length;
 
   const getMaxRank = (key) => {
-    if (isNightkin) return 4;
+    if (isCapped) return 4;
     if (hasGoodNatured && !GOOD_NATURED_EXEMPT.includes(key)) return 4;
     return 6;
   };
@@ -64,6 +66,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
       <p className="text-xs text-muted-foreground font-mono">
         Tag {tagLimit} skills for bonus expertise. Skill rank + attribute = target number for 2d20 tests.
         {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
+        {isSuperMutant && <span className="block mt-1" style={{ color: '#cc4444' }}>⚠ Super Mutant: All skills capped at rank 4 (Forced Evolution).</span>}
       </p>
 
       {/* Skills Grid */}

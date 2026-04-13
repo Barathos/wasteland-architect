@@ -11,7 +11,7 @@
       "title": "Origin",
       "enum": [
         "Vault Dweller",
-        "Brotherhood Outcast",
+        "Brotherhood Initiate",
         "Ghoul",
         "Super Mutant",
         "Wastelander",
@@ -114,6 +114,31 @@
     "outcast_tag_skill": {
       "type": "string",
       "title": "Outcast Extra Tag Skill"
+    },
+    "brotherhood_tag_skill": {
+      "type": "string",
+      "title": "Brotherhood Initiate Tag Skill"
+    },
+    "vault_tag_skill": {
+      "type": "string",
+      "title": "Vault Dweller Extra Tag Skill"
+    },
+    "vault_experiment": {
+      "type": "string",
+      "title": "Vault Experiment Type"
+    },
+    "ghoul_vault_dweller": {
+      "type": "boolean",
+      "title": "Ghoul Vault Dweller",
+      "default": false
+    },
+    "survivor_traits": {
+      "type": "string",
+      "title": "Survivor Traits JSON"
+    },
+    "mr_handy_arms": {
+      "type": "string",
+      "title": "Mr. Handy Arm Attachments JSON"
     },
     "radiation_points": {
       "type": "number",

@@ -2,12 +2,12 @@ import { Input } from "@/components/ui/input";
 import NCRTraitsPanel from "./NCRTraitsPanel";
 import WanderersTribalTraitsPanel from "./WanderersTribalTraitsPanel";
 import { Textarea } from "@/components/ui/textarea";
-import { ORIGINS, SKILLS } from "../../lib/falloutData";
+import { ORIGINS, SKILLS, SURVIVOR_TRAITS, MR_HANDY_ARMS } from "../../lib/falloutData";
 import { Check } from "lucide-react";
 
 const OUTCAST_TAG_OPTIONS = ['energy_weapons', 'science', 'repair'];
 
-export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTraitsChange, tribalTraits, onTribalTraitsChange, outcastTagSkill, onOutcastTagSkillChange }) {
+export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTraitsChange, tribalTraits, onTribalTraitsChange, outcastTagSkill, onOutcastTagSkillChange, brotherhoodTagSkill, onBrotherhoodTagSkillChange, vaultTagSkill, onVaultTagSkillChange, vaultExperiment, onVaultExperimentChange, ghoulVaultDweller, onGhoulVaultDwellerChange, survivorTraits, onSurvivorTraitsChange, mrHandyArms, onMrHandyArmsChange }) {
   const selectedOrigin = ORIGINS.find(o => o.label === character.origin);
 
   return (
@@ -111,7 +111,32 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
         <WanderersTribalTraitsPanel tribalTraits={tribalTraits || []} onTribalTraitsChange={onTribalTraitsChange} />
       )}
 
-      {/* Brotherhood Outcast — The Chain that Breaks */}
+      {/* Brotherhood Initiate — The Chain That Binds */}
+      {character.origin === 'Brotherhood Initiate' && (
+        <div className="mt-4 p-4 rounded-lg" style={{ background: '#060f1c', border: '1px solid #cc7722' }}>
+          <p className="text-xs font-bold tracking-widest mb-2" style={{ color: '#cc7722' }}>THE CHAIN THAT BINDS</p>
+          <div className="text-[10px] font-mono mb-3 px-3 py-2" style={{ background: 'rgba(204,119,34,0.08)', border: '1px solid rgba(204,119,34,0.3)', color: '#f5c518' }}>
+            You must follow the Brotherhood command structure. Disobedience risks expulsion and reclamation of all Brotherhood technology.
+          </div>
+          <p className="text-xs font-mono mb-2" style={{ color: '#6a8a9a' }}>Extra Tag Skill (choose one):</p>
+          <div className="flex gap-2">
+            {OUTCAST_TAG_OPTIONS.map(key => {
+              const skill = SKILLS.find(s => s.key === key);
+              const sel = brotherhoodTagSkill === key;
+              return (
+                <button key={key} onClick={() => onBrotherhoodTagSkillChange(sel ? '' : key)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded transition-all"
+                  style={{ background: sel ? 'rgba(204,119,34,0.15)' : 'transparent', border: `1px solid ${sel ? '#cc7722' : '#1e3a5f'}`, color: sel ? '#cc7722' : '#4a6a8a' }}>
+                  {sel && <Check className="w-3 h-3" />}
+                  {skill?.label || key}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Brotherhood Outcast (Wanderers) — The Chain That Breaks */}
       {character.origin === 'Brotherhood Outcast' && (
         <div className="mt-4 p-4 rounded-lg" style={{ background: '#060f1c', border: '1px solid #cc7722' }}>
           <p className="text-xs font-bold tracking-widest mb-2" style={{ color: '#cc7722' }}>THE CHAIN THAT BREAKS</p>
@@ -195,6 +220,119 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* Vault Dweller — Vault Kid */}
+      {character.origin === 'Vault Dweller' && (
+        <div className="mt-4 p-4 rounded-lg space-y-4" style={{ background: '#060f1c', border: '1px solid #4488ff' }}>
+          <p className="text-xs font-bold tracking-widest" style={{ color: '#4488ff' }}>TRAIT: VAULT KID</p>
+          <ul className="space-y-1">
+            {['Reduce difficulty of END tests to resist disease.', 'One additional Tag skill of your choice.', 'Once per quest, if the GM introduces a vault complication, you regain 1 Luck Point.'].map((l, i) => (
+              <li key={i} className="text-[10px] font-mono flex gap-1.5" style={{ color: '#a8c8d8' }}><span style={{ color: '#4488ff' }}>✦</span>{l}</li>
+            ))}
+          </ul>
+          <div>
+            <p className="text-xs font-mono mb-2" style={{ color: '#6a8a9a' }}>Extra Tag Skill (any):</p>
+            <select value={vaultTagSkill || ''} onChange={e => onVaultTagSkillChange(e.target.value)}
+              className="w-full text-xs px-2 py-1.5" style={{ background: '#0a1525', border: '1px solid #4488ff', color: '#e8e8e8', outline: 'none' }}>
+              <option value="">— select a skill —</option>
+              {SKILLS.map(s => <option key={s.key} value={s.key}>{s.label}</option>)}
+            </select>
+          </div>
+          <div>
+            <p className="text-xs font-mono mb-1" style={{ color: '#6a8a9a' }}>Vault Experiment Type (optional):</p>
+            <input value={vaultExperiment || ''} onChange={e => onVaultExperimentChange(e.target.value)}
+              placeholder="e.g. Social isolation, forced drug trials, FEV exposure..."
+              className="w-full text-xs px-2 py-1.5" style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none' }} />
+          </div>
+          <div className="flex items-center gap-3">
+            <input type="checkbox" id="ghoul-vd" checked={!!ghoulVaultDweller} onChange={e => onGhoulVaultDwellerChange(e.target.checked)}
+              style={{ accentColor: '#22cc22', width: '14px', height: '14px' }} />
+            <label htmlFor="ghoul-vd" className="text-xs font-mono cursor-pointer" style={{ color: '#22cc22' }}>Ghoul Vault Dweller (GM permission — replaces Vault Kid with Necrotic Post-Human)</label>
+          </div>
+        </div>
+      )}
+
+      {/* Ghoul — Necrotic Post-Human */}
+      {character.origin === 'Ghoul' && (
+        <div className="mt-4 p-4 rounded-lg" style={{ background: '#060f1c', border: '1px solid #22cc22' }}>
+          <p className="text-xs font-bold tracking-widest mb-2" style={{ color: '#22cc22' }}>TRAIT: NECROTIC POST-HUMAN</p>
+          <ul className="space-y-1">
+            {['Immune to radiation damage — instead regain 1 HP per 3 radiation damage received.', 'When resting in an irradiated area, re-roll dice when checking whether injuries heal.', 'Survival is always a Tag skill (+2 bonus ranks).', 'CHA tests with smoothskins may face increased difficulty or complication range based on NPC attitudes.'].map((l, i) => (
+              <li key={i} className="text-[10px] font-mono flex gap-1.5 mt-1" style={{ color: '#a8c8d8' }}><span style={{ color: '#22cc22' }}>✦</span>{l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Super Mutant — Forced Evolution */}
+      {character.origin === 'Super Mutant' && (
+        <div className="mt-4 p-4 rounded-lg" style={{ background: '#060f1c', border: '1px solid #cc4444' }}>
+          <p className="text-xs font-bold tracking-widest mb-2" style={{ color: '#cc4444' }}>TRAIT: FORCED EVOLUTION</p>
+          <ul className="space-y-1">
+            {['STR and END +2 at creation; max STR and END raised to 12.', 'Max INT and CHA reduced to 6. Max 4 ranks in any skill.', 'Immune to radiation and poison damage.', 'Over 7 feet tall. Can only wear Raider Armor. Sterile.'].map((l, i) => (
+              <li key={i} className="text-[10px] font-mono flex gap-1.5 mt-1" style={{ color: '#a8c8d8' }}><span style={{ color: '#cc4444' }}>✦</span>{l}</li>
+            ))}
+          </ul>
+          <p className="text-[10px] font-mono mt-2 px-2 py-1" style={{ background: 'rgba(204,68,68,0.1)', border: '1px solid rgba(204,68,68,0.3)', color: '#cc4444' }}>⚠ Armor: Raider Armor variants only. Standard armor cannot be worn.</p>
+        </div>
+      )}
+
+      {/* Mister Handy — Arm Attachments */}
+      {character.origin === 'Mister Handy' && (
+        <div className="mt-4 p-4 rounded-lg" style={{ background: '#060f1c', border: '1px solid #cc7722' }}>
+          <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#cc7722' }}>ARM ATTACHMENTS (choose 3)</p>
+          <p className="text-[10px] font-mono mb-3" style={{ color: '#6a8a9a' }}>360° vision reduces difficulty of PER tests by 1. Carry weight 150 lbs fixed.</p>
+          <div className="space-y-2">
+            {MR_HANDY_ARMS.map(arm => {
+              const sel = (mrHandyArms || []).includes(arm.key);
+              const atLimit = (mrHandyArms || []).length >= 3 && !sel;
+              return (
+                <button key={arm.key} onClick={() => {
+                  if (atLimit) return;
+                  const updated = sel ? (mrHandyArms || []).filter(k => k !== arm.key) : [...(mrHandyArms || []), arm.key];
+                  onMrHandyArmsChange(updated);
+                }} className="w-full text-left px-3 py-2 transition-all"
+                  style={{ background: sel ? 'rgba(204,119,34,0.12)' : '#0a1525', border: `1px solid ${sel ? '#cc7722' : '#1e3a5f'}`, opacity: atLimit ? 0.4 : 1, cursor: atLimit ? 'not-allowed' : 'pointer' }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold" style={{ color: sel ? '#cc7722' : '#e8e8e8' }}>{sel ? '✓ ' : ''}{arm.label}</span>
+                    <span className="text-[10px] font-mono" style={{ color: '#22cc22' }}>{arm.damage} {arm.damageType}</span>
+                  </div>
+                  {arm.note && <p className="text-[10px] font-mono mt-0.5" style={{ color: '#6a8a9a' }}>{arm.note}</p>}
+                </button>
+              );
+            })}
+          </div>
+          {(mrHandyArms || []).length > 0 && !(mrHandyArms || []).includes('pincer_arm') && (
+            <p className="text-[10px] font-mono mt-3 px-2 py-1.5" style={{ background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.3)', color: '#f5c518' }}>⚠ Without a Pincer, you cannot use Lockpick, Repair, or Throwing skills, or manipulate objects.</p>
+          )}
+        </div>
+      )}
+
+      {/* Survivor — Choose Two Traits */}
+      {character.origin === 'Survivor' && (
+        <div className="mt-4 p-4 rounded-lg" style={{ background: '#060f1c', border: '1px solid #6a9aba' }}>
+          <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#6a9aba' }}>CHOOSE TWO TRAITS (or 1 trait + 1 perk)</p>
+          <p className="text-[10px] font-mono mb-3" style={{ color: '#6a8a9a' }}>Select up to 2 traits. Or select 1 trait and check "Extra Perk" for one additional perk slot.</p>
+          <div className="space-y-2">
+            {[...SURVIVOR_TRAITS, { key: '_perk_slot_', label: '+ Extra Perk Slot', benefit: 'Gain one additional perk instead of a second trait.', penalty: '' }].map(trait => {
+              const sel = (survivorTraits || []).includes(trait.key);
+              const atLimit = (survivorTraits || []).length >= 2 && !sel;
+              return (
+                <button key={trait.key} onClick={() => {
+                  if (atLimit) return;
+                  const updated = sel ? (survivorTraits || []).filter(k => k !== trait.key) : [...(survivorTraits || []), trait.key];
+                  onSurvivorTraitsChange(updated);
+                }} className="w-full text-left px-3 py-2 transition-all"
+                  style={{ background: sel ? 'rgba(106,154,186,0.1)' : '#0a1525', border: `1px solid ${sel ? '#6a9aba' : '#1e3a5f'}`, opacity: atLimit ? 0.4 : 1, cursor: atLimit ? 'not-allowed' : 'pointer' }}>
+                  <span className="text-xs font-bold" style={{ color: sel ? '#6a9aba' : '#e8e8e8' }}>{sel ? '✓ ' : ''}{trait.label}</span>
+                  {trait.benefit && <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4ade80' }}>✦ {trait.benefit}</p>}
+                  {trait.penalty && <p className="text-[10px] font-mono" style={{ color: '#f97316' }}>✦ {trait.penalty}</p>}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 

@@ -71,6 +71,7 @@ export default function HealthPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
   const adj = (field, val, min = 0, max = 9999) => updateField({ [field]: Math.max(min, Math.min(max, val)) });
   const isRobot = isRobotCharacter(character);
+  const isGhoul = character.origin === 'Ghoul' || character.ghoul_vault_dweller;
 
   const currentHp = character.hp_current ?? derived.hp;
   const maxHp = character.hp_max ?? derived.hp;
@@ -110,23 +111,33 @@ export default function HealthPanel({ character, updateField }) {
         </div>
       )}
 
-      {/* Radiation / Power Cell */}
-      <div className="flex items-center justify-between px-3 py-2" style={{ background: isRobot ? '#1a1500' : '#0d3a1a', borderBottom: '1px solid #1e3a5f' }}>
-        <div className="flex items-center gap-1.5">
-          <span>{isRobot ? '🔋' : '☢'}</span>
-          <span className="text-xs font-bold tracking-wider" style={{ color: isRobot ? '#f5c518' : '#22cc22' }}>
-            {isRobot ? 'POWER CELL %' : 'RADIATION'}
-          </span>
+      {/* Radiation / Power Cell / Ghoul Healing */}
+      {isGhoul ? (
+        <div className="px-3 py-2" style={{ background: '#0d3a1a', borderBottom: '1px solid #1e3a5f' }}>
+          <div className="flex items-center gap-1.5 mb-1">
+            <span>☢</span>
+            <span className="text-xs font-bold tracking-wider" style={{ color: '#22cc22' }}>RADIATION HEALS YOU</span>
+          </div>
+          <p className="text-[10px] font-mono" style={{ color: '#a8c8d8' }}>Necrotic Post-Human: Immune to radiation damage. Regain 1 HP per 3 radiation damage received. When resting in irradiated areas, re-roll injury recovery dice.</p>
         </div>
-        <div className="flex items-center gap-1">
-          <button onClick={() => adj('radiation', (character.radiation ?? 0) - 1, 0, isRobot ? 100 : 9999)} className="w-5 h-5 flex items-center justify-center text-xs"
-            style={{ background: '#0a1a2d', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>−</button>
-          <div className="w-10 h-6 flex items-center justify-center text-sm font-bold"
-            style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8' }}>{character.radiation ?? 0}{isRobot ? '%' : ''}</div>
-          <button onClick={() => adj('radiation', (character.radiation ?? 0) + 1, 0, isRobot ? 100 : 9999)} className="w-5 h-5 flex items-center justify-center text-xs"
-            style={{ background: '#0a1a2d', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>+</button>
+      ) : (
+        <div className="flex items-center justify-between px-3 py-2" style={{ background: isRobot ? '#1a1500' : '#0d3a1a', borderBottom: '1px solid #1e3a5f' }}>
+          <div className="flex items-center gap-1.5">
+            <span>{isRobot ? '🔋' : '☢'}</span>
+            <span className="text-xs font-bold tracking-wider" style={{ color: isRobot ? '#f5c518' : '#22cc22' }}>
+              {isRobot ? 'POWER CELL %' : 'RADIATION'}
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            <button onClick={() => adj('radiation', (character.radiation ?? 0) - 1, 0, isRobot ? 100 : 9999)} className="w-5 h-5 flex items-center justify-center text-xs"
+              style={{ background: '#0a1a2d', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>−</button>
+            <div className="w-10 h-6 flex items-center justify-center text-sm font-bold"
+              style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8' }}>{character.radiation ?? 0}{isRobot ? '%' : ''}</div>
+            <button onClick={() => adj('radiation', (character.radiation ?? 0) + 1, 0, isRobot ? 100 : 9999)} className="w-5 h-5 flex items-center justify-center text-xs"
+              style={{ background: '#0a1a2d', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>+</button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Radiation Points — Child of Atom */}
       {character.origin === 'Child of Atom' && (

@@ -64,6 +64,8 @@ export default function DerivedPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
   const apparelDR = getApparelDR(character);
   const isRobot = isRobotCharacter(character);
+  const survivorTraits = parseJson(character.survivor_traits, []);
+  const hasSmallFrame = survivorTraits.includes('small_frame');
 
   return (
     <div>
@@ -91,6 +93,15 @@ export default function DerivedPanel({ character, updateField }) {
           <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #091525' }}>
             <p className="text-sm font-bold" style={{ color: '#e8e8e8' }}>{getRobotCarryWeight(character)} lbs</p>
             <p className="text-[9px] font-mono mt-0.5" style={{ color: '#4a6a8a' }}>(fixed, not modified by STR or perks)</p>
+          </div>
+        </>
+      )}
+      {!isRobot && hasSmallFrame && (
+        <>
+          <SectionHeader label="CARRY WEIGHT" />
+          <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #091525' }}>
+            <p className="text-sm font-bold" style={{ color: '#e8e8e8' }}>{derived.carry_weight} lbs</p>
+            <p className="text-[9px] font-mono mt-0.5" style={{ color: '#6a9aba' }}>Small Frame: 150 + 5×STR</p>
           </div>
         </>
       )}

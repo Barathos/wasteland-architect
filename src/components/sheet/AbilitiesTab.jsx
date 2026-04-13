@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, WANDERERS_PERKS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, WANDERERS_PERKS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
 
 const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
 const ALL_PERKS = [
@@ -211,11 +211,48 @@ export default function AbilitiesTab({ character, updateField }) {
           </div>
         </div>
 
-        {/* Origin Traits */}
+        {/* Core Origin Trait */}
+        {ORIGIN_TRAIT_SUMMARIES[character.origin] && (
+          <div style={{ width: '240px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
+            <div className="px-3 py-2" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
+              <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>ORIGIN TRAIT</p>
+            </div>
+            <div className="p-3">
+              {(() => {
+                const t = ORIGIN_TRAIT_SUMMARIES[character.origin];
+                return (
+                  <div className="p-2.5 rounded mb-2" style={{ background: '#0a1a2d', border: `1px solid ${t.color}44` }}>
+                    <h4 className="font-heading font-semibold text-sm mb-1.5" style={{ color: t.color }}>{t.name}</h4>
+                    {(t.benefits || []).map((b, i) => <p key={i} className="text-[10px] font-mono mb-1" style={{ color: '#4ade80' }}>✦ {b}</p>)}
+                    {(t.penalties || []).map((p, i) => <p key={i} className="text-[10px] font-mono mb-1" style={{ color: '#f97316' }}>✦ {p}</p>)}
+                    {(t.notes || []).map((n, i) => <p key={i} className="text-[10px] font-mono mt-1 italic" style={{ color: '#6a8a9a' }}>{n}</p>)}
+                  </div>
+                );
+              })()}
+              {/* Survivor selected traits */}
+              {character.origin === 'Survivor' && (() => {
+                const keys = (() => { try { return JSON.parse(character.survivor_traits || '[]'); } catch { return []; } })();
+                return keys.filter(k => k !== '_perk_slot_').map(k => {
+                  const tr = SURVIVOR_TRAITS.find(t => t.key === k);
+                  if (!tr) return null;
+                  return (
+                    <div key={k} className="p-2 rounded mb-1" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
+                      <p className="text-[10px] font-bold" style={{ color: '#6a9aba' }}>{tr.label}</p>
+                      <p className="text-[10px] font-mono" style={{ color: '#4ade80' }}>✦ {tr.benefit}</p>
+                      <p className="text-[10px] font-mono" style={{ color: '#f97316' }}>✦ {tr.penalty}</p>
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+          </div>
+        )}
+
+        {/* Chosen Origin Traits (NCR / Tribal) */}
         {allOriginTraits.length > 0 && (
           <div style={{ width: '240px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
             <div className="px-3 py-2" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
-              <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>ORIGIN TRAITS</p>
+              <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>CHOSEN TRAITS</p>
             </div>
             <div className="p-3 space-y-3">
               {allOriginTraits.map(trait => (

@@ -41,33 +41,39 @@ export const ORIGINS = [
   {
     key: 'vault_dweller',
     label: 'Vault Dweller',
-    description: 'Raised in the safety of a Vault-Tec vault, you emerged into the wasteland with education but little practical experience.',
+    description: 'Raised in the safety of a Vault-Tec vault, you emerged into the wasteland with education but little practical experience. You know the old world only from lessons, though your vault\'s experiment shaped you in ways you\'re still discovering.',
     bonuses: { intelligence: 1 },
     bonusSkills: ['science', 'repair'],
+    traitName: 'Vault Kid',
+    source: 'Core',
   },
   {
-    key: 'brotherhood_outcast',
-    label: 'Brotherhood Outcast',
-    description: 'A former member of the Brotherhood of Steel who left or was expelled. You know technology and warfare.',
+    key: 'brotherhood_initiate',
+    label: 'Brotherhood Initiate',
+    description: 'A member of the Brotherhood of Steel, bound by the Chain That Binds. You are trained in advanced technology and disciplined combat, but your loyalty to the order is absolute — or you risk expulsion and the loss of all you carry.',
     bonuses: { endurance: 1 },
     bonusSkills: ['energy_weapons', 'big_guns'],
+    traitName: 'The Chain That Binds',
+    source: 'Core',
   },
   {
     key: 'ghoul',
     label: 'Ghoul',
-    description: 'Irradiated and transformed, you have lived for centuries. Radiation heals you but you are shunned by many.',
+    description: 'Irradiated and transformed by centuries of radiation exposure, you are a walking relic of the pre-war world. Your body is necrotic but resilient — radiation heals rather than harms you — though many smoothskins fear or despise your kind.',
     bonuses: { endurance: 1 },
     bonusSkills: ['survival', 'medicine'],
-    special: 'Radiation heals instead of harms. -2 CHA with non-ghouls.',
+    traitName: 'Necrotic Post-Human',
+    source: 'Core',
   },
   {
     key: 'super_mutant',
     label: 'Super Mutant',
-    description: 'Transformed by FEV, you are immensely strong but intellectually diminished. Few trust your kind.',
-    bonuses: { strength: 2 },
+    description: 'Transformed by the Forced Evolutionary Virus, you stand over seven feet tall with incredible strength and resilience. Your intellect is diminished, your charisma limited, and you can only wear armor built for your kind — but few enemies can match your raw power.',
+    bonuses: { strength: 2, endurance: 2 },
     penalties: { intelligence: -1, charisma: -1 },
     bonusSkills: ['melee_weapons', 'unarmed'],
-    special: '+2 Physical DR. Cannot wear normal armor.',
+    traitName: 'Forced Evolution',
+    source: 'Core',
   },
   {
     key: 'wastelander',
@@ -79,17 +85,20 @@ export const ORIGINS = [
   {
     key: 'mister_handy',
     label: 'Mister Handy',
-    description: 'A General Atomics robot still running after the bombs fell. Loyal, versatile, and slightly eccentric.',
+    description: 'A General Atomics domestic robot still running after the bombs fell. Loyal, versatile, and slightly eccentric, your three arms handle everything from combat to cooking — though your precision depends entirely on what attachments you carry.',
     bonuses: { intelligence: 1 },
     bonusSkills: ['repair', 'science'],
-    special: 'Robot: Does not eat, drink, or breathe. Immune to radiation and poison. Repaired, not healed.',
+    traitName: 'Mister Handy Robot',
+    source: 'Core',
   },
   {
     key: 'survivor',
     label: 'Survivor',
-    description: 'A pre-war human who survived cryogenic freezing or another preservation method. The world is new and terrifying.',
+    description: 'A pre-war human who survived cryogenic freezing or another preservation method. The world is alien and terrifying, but your old-world knowledge and adaptability give you an edge — if you can survive long enough to use it.',
     bonuses: { charisma: 1 },
     bonusSkills: ['speech', 'barter'],
+    traitName: 'Choose Two Traits',
+    source: 'Core',
   },
   // Settlers supplement
   {
@@ -558,12 +567,18 @@ export function calculateDerivedStats(character) {
   const lck = character.luck || 5;
   const per = character.perception || 5;
 
+  const survivorTraits = (() => { try { return JSON.parse(character.survivor_traits || '[]'); } catch { return []; } })();
+  const hasSmallFrame = survivorTraits.includes('small_frame');
+  const hasHeavyHanded = survivorTraits.includes('heavy_handed');
+  const carryMult = hasSmallFrame ? 5 : 10;
+  const meleeBonus = Math.max(0, Math.floor((str - 5) / 2)) + (hasHeavyHanded ? 1 : 0);
+
   return {
     hp: end + lck,
     initiative: per + agi,
     defense: 1,
-    melee_bonus: Math.max(0, Math.floor((str - 5) / 2)),
-    carry_weight: str * 10 + 150,
+    melee_bonus: meleeBonus,
+    carry_weight: str * carryMult + 150,
     luck_points: lck,
     action_points: 2,
   };
@@ -811,6 +826,100 @@ export const RARE_BOOKS = [
   { roll: 19, title: 'U.S. Army: 30 Handy Flamethrower Recipes', perk: 'Far-Flung Fireworks', perkDescription: 'When you kill an enemy with a ranged weapon, spend 1 Luck point to make them explode for bonus damage. Ranks 1, Level 9+.' },
   { roll: 20, title: 'Zeta Invaders (Holotape)', perk: 'Retribution', perkDescription: 'When using Defend and an enemy misses you with a melee attack, regain 2/3/4 HP and add 1/2/3 AP to the group pool. Ranks 3, Level 12+.' },
 ];
+
+export const SURVIVOR_TRAITS = [
+  { key: 'educated', label: 'Educated', benefit: 'One additional Tag skill of your choice.', penalty: 'When you fail a test using a non-Tag skill, the GM gains 1 AP.' },
+  { key: 'fast_shot', label: 'Fast Shot', benefit: 'A second major action ranged attack costs 1 AP instead of 2.', penalty: 'Cannot benefit from the Aim minor action.' },
+  { key: 'gifted', label: 'Gifted', benefit: 'Choose two SPECIAL attributes; each increases by +1 at creation.', penalty: 'Maximum Luck points reduced by 1.' },
+  { key: 'heavy_handed', label: 'Heavy Handed', benefit: '+1 CD to your melee damage bonus.', penalty: 'Melee and unarmed attacks trigger a complication on 19–20 instead of only 20.' },
+  { key: 'small_frame', label: 'Small Frame', benefit: 'Re-roll 1d20 on AGI tests involving balance or contortion.', penalty: 'Carry weight = 150 + 5×STR instead of 150 + 10×STR.' },
+];
+
+export const MR_HANDY_ARMS = [
+  { key: 'pistol_10mm', label: '10mm Auto Pistol', damage: '2 CD', damageType: 'Physical', range: 'Short', qualities: 'Ranged', note: 'Standard issue arm weapon.' },
+  { key: 'buzz_saw_arm', label: 'Buzz-Saw', damage: '3 CD', damageEffect: 'Piercing 1', damageType: 'Physical', range: 'Melee', qualities: 'Melee', note: '' },
+  { key: 'flamer_arm', label: 'Flamer (built-in)', damage: '4 CD', damageEffect: 'Persistent, Spread', damageType: 'Energy', range: 'Close', qualities: 'Ranged, Inaccurate', note: '' },
+  { key: 'laser_emitter_arm', label: 'Laser Emitter', damage: '3 CD', damageType: 'Energy', range: 'Medium', qualities: 'Ranged', note: '' },
+  { key: 'pincer_arm', label: 'Pincer', damage: '2 CD', damageType: 'Physical', range: 'Melee', qualities: 'Unarmed', note: 'Required for Lockpick, Repair, Throwing, and object manipulation.' },
+];
+
+export const RESTRICTED_ARMOR_ORIGINS = ['Super Mutant'];
+
+export const ORIGIN_TRAIT_SUMMARIES = {
+  'Vault Dweller': {
+    name: 'Vault Kid',
+    color: '#4488ff',
+    benefits: [
+      'Reduce difficulty of all END tests to resist disease.',
+      'One additional Tag skill of your choice.',
+      'Once per quest, if the GM introduces a vault-related complication, you immediately regain 1 Luck Point.',
+    ],
+    penalties: [],
+    notes: ['With GM permission, may be a Ghoul — replaces Vault Kid with Necrotic Post-Human.'],
+  },
+  'Brotherhood Initiate': {
+    name: 'The Chain That Binds',
+    color: '#cc7722',
+    benefits: [
+      'One additional Tag skill: Energy Weapons, Science, or Repair.',
+    ],
+    penalties: [
+      'Must follow the Brotherhood command structure. Disobedience risks expulsion and loss of all Brotherhood technology.',
+    ],
+  },
+  'Ghoul': {
+    name: 'Necrotic Post-Human',
+    color: '#22cc22',
+    benefits: [
+      'Immune to radiation damage; instead regain 1 HP per 3 radiation damage received.',
+      'When resting in an irradiated location, re-roll dice when checking whether injuries heal.',
+      'Survival is always a Tag skill (+2 bonus ranks).',
+    ],
+    penalties: [
+      'Smoothskins may treat you with hostility (+difficulty or +complication range on CHA tests per NPC beliefs).',
+      'Sterile. Ages at greatly decreased rate.',
+    ],
+  },
+  'Super Mutant': {
+    name: 'Forced Evolution',
+    color: '#cc4444',
+    benefits: [
+      'STR and END +2 at creation; max STR and END raised to 12.',
+      'Immune to radiation and poison damage.',
+    ],
+    penalties: [
+      'Max INT and CHA reduced to 6. Max 4 ranks in any skill.',
+      'Can only wear Raider Armor. Sterile.',
+    ],
+  },
+  'Mister Handy': {
+    name: 'Mister Handy Robot',
+    color: '#cc7722',
+    benefits: [
+      '360° vision: reduce difficulty of PER tests relying on sight or smell by 1.',
+      'Immune to radiation, poison, and disease. Cannot eat, drink, or rest.',
+      'Three arm attachments chosen from equipment pack.',
+    ],
+    penalties: [
+      'Must receive repairs to heal. Carry weight 150 lbs (fixed, not modified by STR).',
+      'Without a Pincer arm, cannot use Lockpick, Repair, or Throwing skills, or manipulate objects.',
+    ],
+  },
+  'Survivor': {
+    name: 'Choose Two Traits',
+    color: '#6a9aba',
+    benefits: [
+      'Select any two Survivor traits from the list, OR one trait + one additional perk slot.',
+    ],
+    penalties: [],
+  },
+  'Wastelander': {
+    name: 'Wasteland Born',
+    color: '#aa8844',
+    benefits: ['+1 Luck. Bonus to Survival and Small Guns Tag skills from origin.'],
+    penalties: [],
+  },
+};
 
 export const WANDERERS_WEAPON_QUALITIES = [
   { key: 'ammo_hungry', label: 'Ammo-Hungry (X)', description: 'Each time the weapon is fired it spends X ammo. Extra damage costs X ammo per +1 CD. Additional ammo uses (e.g. Burst) also spend X ammo per 1 normally spent.' },

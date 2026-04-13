@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
-import { SETTLERS_WEAPONS, WANDERERS_WEAPONS } from "../../lib/falloutData";
+import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
 
 const EMPTY_WEAPON = {
   name: '', damage: '', damageEffect: '', damageType: 'Physical',
@@ -192,6 +192,9 @@ export default function WeaponsTab({ character, updateField }) {
   const [showRef, setShowRef] = useState(false);
   const [laserShots, setLaserShots] = useState(0);
   const isAssaultron = character.origin === 'Assaultron';
+  const isMrHandy = character.origin === 'Mister Handy';
+  const mrHandyArmKeys = (() => { try { return JSON.parse(character.mr_handy_arms || '[]'); } catch { return []; } })();
+  const selectedMrHandyArms = MR_HANDY_ARMS.filter(a => mrHandyArmKeys.includes(a.key));
   const capacitorLevel = character.assaultron_capacitor || 'Mk III';
   const capacitorInfo = CAPACITOR_OPTIONS.find(c => c.label === capacitorLevel) || CAPACITOR_OPTIONS[0];
 
@@ -227,6 +230,30 @@ export default function WeaponsTab({ character, updateField }) {
 
   return (
     <div className="p-4" style={{ color: '#a8c8d8' }}>
+      {/* Mister Handy Built-in Arms */}
+      {isMrHandy && (
+        <div className="mb-5 p-3" style={{ background: '#0a1525', border: '1px solid #cc7722' }}>
+          <p className="text-xs font-bold tracking-widest mb-3" style={{ color: '#cc7722' }}>BUILT-IN ARM ATTACHMENTS</p>
+          {selectedMrHandyArms.length === 0 ? (
+            <p className="text-xs font-mono" style={{ color: '#4a6a8a' }}>No arms configured. Edit character to select arm attachments.</p>
+          ) : (
+            selectedMrHandyArms.map(arm => (
+              <div key={arm.key} className="py-2" style={{ borderBottom: '1px solid #1e3a5f' }}>
+                <div className="flex items-center justify-between">
+                  <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>{arm.label}</span>
+                  <span className="text-xs font-mono" style={{ color: '#22cc22' }}><CombatDiceDisplay value={arm.damage} /> {arm.damageType}</span>
+                </div>
+                <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4a6a8a' }}>{arm.qualities} • {arm.range}{arm.damageEffect ? ` • ${arm.damageEffect}` : ''}</p>
+                {arm.note && <p className="text-[10px] font-mono mt-0.5 italic" style={{ color: '#f5c518' }}>{arm.note}</p>}
+              </div>
+            ))
+          )}
+          {mrHandyArmKeys.length > 0 && !mrHandyArmKeys.includes('pincer_arm') && (
+            <p className="text-[10px] font-mono mt-2 px-2 py-1" style={{ background: 'rgba(245,197,24,0.06)', border: '1px solid rgba(245,197,24,0.25)', color: '#f5c518' }}>⚠ No Pincer: cannot use Lockpick, Repair, or Throwing skills, or manipulate objects.</p>
+          )}
+        </div>
+      )}
+
       {/* Assaultron Built-in Weapons */}
       {isAssaultron && (
         <div className="mb-5 p-3" style={{ background: '#0a1525', border: '1px solid #4488ff' }}>

@@ -36,6 +36,12 @@ export default function CharacterBuilder() {
   const [ncrTraits, setNcrTraits] = useState([]);
   const [tribalTraits, setTribalTraits] = useState([]);
   const [outcastTagSkill, setOutcastTagSkill] = useState('');
+  const [brotherhoodTagSkill, setBrotherhoodTagSkill] = useState('');
+  const [vaultTagSkill, setVaultTagSkill] = useState('');
+  const [vaultExperiment, setVaultExperiment] = useState('');
+  const [ghoulVaultDweller, setGhoulVaultDweller] = useState(false);
+  const [survivorTraits, setSurvivorTraits] = useState([]);
+  const [mrHandyArms, setMrHandyArms] = useState([]);
 
   useEffect(() => {
     if (editId) {
@@ -49,6 +55,12 @@ export default function CharacterBuilder() {
           if (c.ncr_traits) { try { setNcrTraits(JSON.parse(c.ncr_traits)); } catch {} }
           if (c.tribal_traits) { try { setTribalTraits(JSON.parse(c.tribal_traits)); } catch {} }
           if (c.outcast_tag_skill) setOutcastTagSkill(c.outcast_tag_skill);
+          if (c.brotherhood_tag_skill) setBrotherhoodTagSkill(c.brotherhood_tag_skill);
+          if (c.vault_tag_skill) setVaultTagSkill(c.vault_tag_skill);
+          if (c.vault_experiment) setVaultExperiment(c.vault_experiment);
+          if (c.ghoul_vault_dweller) setGhoulVaultDweller(c.ghoul_vault_dweller);
+          if (c.survivor_traits) { try { setSurvivorTraits(JSON.parse(c.survivor_traits)); } catch {} }
+          if (c.mr_handy_arms) { try { setMrHandyArms(JSON.parse(c.mr_handy_arms)); } catch {} }
         }
       });
     }
@@ -65,7 +77,8 @@ export default function CharacterBuilder() {
     if (specialTotal > SPECIAL_TOTAL_POINTS) { toast.error("Too many S.P.E.C.I.A.L. points allocated"); setActiveTab("special"); return; }
 
     setSaving(true);
-    const derived = calculateDerivedStats(character);
+    const fullChar = { ...character, survivor_traits: JSON.stringify(survivorTraits) };
+    const derived = calculateDerivedStats(fullChar);
     const charData = {
       ...character,
       skills: JSON.stringify(skills),
@@ -74,6 +87,12 @@ export default function CharacterBuilder() {
       ncr_traits: JSON.stringify(ncrTraits),
       tribal_traits: JSON.stringify(tribalTraits),
       outcast_tag_skill: outcastTagSkill,
+      brotherhood_tag_skill: brotherhoodTagSkill,
+      vault_tag_skill: vaultTagSkill,
+      vault_experiment: vaultExperiment,
+      ghoul_vault_dweller: ghoulVaultDweller,
+      survivor_traits: JSON.stringify(survivorTraits),
+      mr_handy_arms: JSON.stringify(mrHandyArms),
       hp_current: derived.hp, hp_max: derived.hp,
       defense: derived.defense, initiative: derived.initiative,
       melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
@@ -120,7 +139,17 @@ export default function CharacterBuilder() {
               ))}
             </TabsList>
             <TabsContent value="details" className="mt-0">
-              <DetailsPanel character={character} onChange={updateCharacter} ncrTraits={ncrTraits} onNcrTraitsChange={setNcrTraits} tribalTraits={tribalTraits} onTribalTraitsChange={setTribalTraits} outcastTagSkill={outcastTagSkill} onOutcastTagSkillChange={setOutcastTagSkill} />
+              <DetailsPanel character={character} onChange={updateCharacter}
+                ncrTraits={ncrTraits} onNcrTraitsChange={setNcrTraits}
+                tribalTraits={tribalTraits} onTribalTraitsChange={setTribalTraits}
+                outcastTagSkill={outcastTagSkill} onOutcastTagSkillChange={setOutcastTagSkill}
+                brotherhoodTagSkill={brotherhoodTagSkill} onBrotherhoodTagSkillChange={setBrotherhoodTagSkill}
+                vaultTagSkill={vaultTagSkill} onVaultTagSkillChange={setVaultTagSkill}
+                vaultExperiment={vaultExperiment} onVaultExperimentChange={setVaultExperiment}
+                ghoulVaultDweller={ghoulVaultDweller} onGhoulVaultDwellerChange={setGhoulVaultDweller}
+                survivorTraits={survivorTraits} onSurvivorTraitsChange={setSurvivorTraits}
+                mrHandyArms={mrHandyArms} onMrHandyArmsChange={setMrHandyArms}
+              />
             </TabsContent>
             <TabsContent value="special" className="mt-0">
               <SpecialStats character={character} onChange={updateCharacter} />
