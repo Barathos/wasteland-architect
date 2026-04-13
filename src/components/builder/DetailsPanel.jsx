@@ -1,4 +1,3 @@
-import { useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import NCRTraitsPanel from "./NCRTraitsPanel";
 import WanderersTribalTraitsPanel from "./WanderersTribalTraitsPanel";
@@ -10,13 +9,7 @@ const OUTCAST_TAG_OPTIONS = ['energy_weapons', 'science', 'repair'];
 
 export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTraitsChange, tribalTraits, onTribalTraitsChange, outcastTagSkill, onOutcastTagSkillChange, brotherhoodTagSkill, onBrotherhoodTagSkillChange, vaultTagSkill, onVaultTagSkillChange, vaultExperiment, onVaultExperimentChange, ghoulVaultDweller, onGhoulVaultDwellerChange, survivorTraits, onSurvivorTraitsChange, mrHandyArms, onMrHandyArmsChange }) {
   const selectedOrigin = ORIGINS.find(o => o.label === character.origin);
-  const detailPanelRef = useRef(null);
 
-  useEffect(() => {
-    if (selectedOrigin && detailPanelRef.current) {
-      detailPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }, [character.origin]);
 
   return (
     <div className="space-y-6">
@@ -33,117 +26,116 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
         />
       </div>
 
-      {/* Origin Selection */}
+      {/* Origin Selection — two-pane master/detail */}
       <div>
         <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">
           Origin
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {ORIGINS.map((origin) => {
-            const isSelected = character.origin === origin.label;
-            return (
-              <button
-                key={origin.key}
-                onClick={() => onChange({ origin: origin.label })}
-                className={`
-                  text-left p-4 rounded-lg border transition-all duration-200
-                  ${isSelected
-                    ? "border-primary/50 bg-primary/10"
-                    : "border-border bg-card hover:border-primary/30 hover:bg-muted"
-                  }
-                `}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-2">
-                  <h4 className={`font-heading font-semibold text-sm ${isSelected ? "text-primary" : "text-foreground"}`}>
-                    {origin.label}
-                  </h4>
-                  {origin.source && (
-                    <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>{origin.source}</span>
+        <div className="flex flex-col sm:flex-row gap-3" style={{ minHeight: '380px' }}>
+
+          {/* LEFT: compact selectable list */}
+          <div className="sm:w-[32%] flex-shrink-0 overflow-y-auto" style={{ maxHeight: '520px', borderRight: '1px solid #1e3a5f' }}>
+            {ORIGINS.map((origin) => {
+              const isSelected = character.origin === origin.label;
+              return (
+                <button
+                  key={origin.key}
+                  onClick={() => onChange({ origin: origin.label })}
+                  className="w-full text-left px-3 py-2.5 transition-all duration-150 flex flex-col gap-1"
+                  style={{
+                    background: isSelected ? 'rgba(245,197,24,0.08)' : 'transparent',
+                    borderLeft: `3px solid ${isSelected ? '#f5c518' : 'transparent'}`,
+                    borderBottom: '1px solid #0d2137',
+                  }}
+                >
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className={`font-heading font-semibold text-sm leading-tight ${isSelected ? 'text-primary' : 'text-foreground'}`}>
+                      {origin.label}
+                    </span>
+                    {isSelected && <Check className="w-3 h-3 text-primary flex-shrink-0" />}
+                  </div>
+                  <div className="flex items-center gap-1 flex-wrap">
+                    {origin.source && (
+                      <span className="text-[9px] font-mono px-1 py-0.5" style={{ background: 'rgba(168,200,216,0.08)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.25)' }}>{origin.source}</span>
+                    )}
+                    {origin.bonusSkills && origin.bonusSkills.map(s => (
+                      <span key={s} className="text-[9px] font-mono px-1 py-0.5" style={{ background: 'rgba(120,60,140,0.1)', color: '#aa77dd', border: '1px solid rgba(170,102,255,0.2)' }}>
+                        +{s.replace(/_/g, ' ')}
+                      </span>
+                    ))}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* RIGHT: full detail panel */}
+          <div className="flex-1 overflow-y-auto px-4 py-3" style={{ maxHeight: '520px', background: '#06111f', border: '1px solid #1e3a5f' }}>
+            {selectedOrigin ? (
+              <>
+                {/* Header */}
+                <div className="flex items-center gap-2 mb-3 pb-2" style={{ borderBottom: '1px solid #1e3a5f' }}>
+                  <p className="font-heading font-bold text-base tracking-widest" style={{ color: '#f5c518' }}>{selectedOrigin.label.toUpperCase()}</p>
+                  {selectedOrigin.source && (
+                    <span className="text-[9px] font-mono px-1.5 py-0.5" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>{selectedOrigin.source}</span>
                   )}
                 </div>
-                  {isSelected && <Check className="w-4 h-4 text-primary flex-shrink-0" />}
-                </div>
-                <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-snug">
-                  {origin.description}
+
+                {/* Full description */}
+                <p className="text-xs font-mono leading-relaxed mb-4" style={{ color: '#a8c8d8' }}>
+                  {selectedOrigin.description}
                 </p>
-                {origin.bonusSkills && (
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {origin.bonusSkills.map(s => (
-                      <span key={s} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-secondary/20 text-secondary">
+
+                {/* SPECIAL bonuses/penalties */}
+                {(selectedOrigin.bonuses || selectedOrigin.penalties) && (
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {selectedOrigin.bonuses && Object.entries(selectedOrigin.bonuses).map(([k, v]) => (
+                      <span key={k} className="text-[10px] font-mono px-1.5 py-0.5" style={{ background: 'rgba(34,204,34,0.12)', border: '1px solid rgba(34,204,34,0.3)', color: '#22cc22' }}>
+                        {k.slice(0,3).toUpperCase()} +{v}
+                      </span>
+                    ))}
+                    {selectedOrigin.penalties && Object.entries(selectedOrigin.penalties).map(([k, v]) => (
+                      <span key={k} className="text-[10px] font-mono px-1.5 py-0.5" style={{ background: 'rgba(204,68,68,0.12)', border: '1px solid rgba(204,68,68,0.3)', color: '#cc6666' }}>
+                        {k.slice(0,3).toUpperCase()} {v}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Bonus skills */}
+                {selectedOrigin.bonusSkills && selectedOrigin.bonusSkills.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5 mb-4">
+                    <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>Bonus skills:</span>
+                    {selectedOrigin.bonusSkills.map(s => (
+                      <span key={s} className="text-[10px] font-mono px-1.5 py-0.5" style={{ background: 'rgba(120,60,140,0.15)', border: '1px solid rgba(170,102,255,0.3)', color: '#cc99ff' }}>
                         +{s.replace(/_/g, ' ')}
                       </span>
                     ))}
                   </div>
                 )}
-                {origin.special && (
-                  <p className="text-[10px] font-mono text-primary/80 mt-1.5 italic">
-                    {origin.special}
+
+                {/* Trait name */}
+                {selectedOrigin.traitName && (
+                  <p className="text-[10px] font-bold tracking-widest mb-2" style={{ color: '#22cc22' }}>
+                    TRAIT: {selectedOrigin.traitName.toUpperCase()}
                   </p>
                 )}
-              </button>
-            );
-          })}
-        </div>
 
-        {/* Selected Origin Detail Panel */}
-        {selectedOrigin && (
-          <div ref={detailPanelRef} className="mt-4 p-4 rounded-lg" style={{ background: '#06111f', border: '1px solid #f5c518', borderLeft: '3px solid #f5c518' }}>
-            <div className="flex items-center gap-2 mb-2">
-              <p className="text-sm font-bold tracking-widest font-heading" style={{ color: '#f5c518' }}>{selectedOrigin.label.toUpperCase()}</p>
-              {selectedOrigin.source && (
-                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>{selectedOrigin.source}</span>
-              )}
-            </div>
-
-            {/* Full description — no truncation */}
-            <p className="text-xs font-mono leading-relaxed mb-3" style={{ color: '#a8c8d8' }}>
-              {selectedOrigin.description}
-            </p>
-
-            {/* Trait name */}
-            {selectedOrigin.traitName && (
-              <p className="text-[10px] font-bold tracking-widest mb-1.5" style={{ color: '#22cc22' }}>
-                TRAIT: {selectedOrigin.traitName.toUpperCase()}
-              </p>
-            )}
-
-            {/* Special / effect summary */}
-            {selectedOrigin.special && (
-              <p className="text-[10px] font-mono leading-relaxed mb-3 px-2 py-2" style={{ background: 'rgba(34,204,34,0.05)', border: '1px solid rgba(34,204,34,0.2)', color: '#a8d8a8' }}>
-                {selectedOrigin.special}
-              </p>
-            )}
-
-            {/* SPECIAL bonuses */}
-            {(selectedOrigin.bonuses || selectedOrigin.penalties) && (
-              <div className="flex flex-wrap gap-2 mb-2">
-                {selectedOrigin.bonuses && Object.entries(selectedOrigin.bonuses).map(([k, v]) => (
-                  <span key={k} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(34,204,34,0.12)', border: '1px solid rgba(34,204,34,0.3)', color: '#22cc22' }}>
-                    {k.slice(0,3).toUpperCase()} +{v}
-                  </span>
-                ))}
-                {selectedOrigin.penalties && Object.entries(selectedOrigin.penalties).map(([k, v]) => (
-                  <span key={k} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(204,68,68,0.12)', border: '1px solid rgba(204,68,68,0.3)', color: '#cc6666' }}>
-                    {k.slice(0,3).toUpperCase()} {v}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {/* Bonus skills */}
-            {selectedOrigin.bonusSkills && selectedOrigin.bonusSkills.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>Bonus skills:</span>
-                {selectedOrigin.bonusSkills.map(s => (
-                  <span key={s} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(120,60,140,0.15)', border: '1px solid rgba(170,102,255,0.3)', color: '#cc99ff' }}>
-                    +{s.replace(/_/g, ' ')}
-                  </span>
-                ))}
+                {/* Special / effect summary */}
+                {selectedOrigin.special && (
+                  <div className="text-[10px] font-mono leading-relaxed px-3 py-2.5" style={{ background: 'rgba(34,204,34,0.04)', border: '1px solid rgba(34,204,34,0.18)', color: '#a8d8a8' }}>
+                    {selectedOrigin.special}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <p className="text-xs font-mono" style={{ color: '#4a6a8a' }}>← Select an origin to view details</p>
               </div>
             )}
           </div>
-        )}
+
+        </div>
       </div>
 
       {/* Portrait URL */}
