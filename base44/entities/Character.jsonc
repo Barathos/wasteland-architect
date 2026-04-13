@@ -126,7 +126,20 @@
     },
     "equipment": {
       "type": "string",
-      "title": "Favorite Weapons"
+      "title": "Weapons JSON"
+    },
+    "apparel": {
+      "type": "string",
+      "title": "Apparel JSON"
+    },
+    "inventory": {
+      "type": "string",
+      "title": "Inventory JSON"
+    },
+    "caps": {
+      "type": "number",
+      "title": "Caps",
+      "default": 0
     },
     "background": {
       "type": "string",
@@ -224,6 +237,10 @@
     "conditions": {
       "type": "string",
       "title": "Conditions JSON"
+    },
+    "conditions_effects": {
+      "type": "string",
+      "title": "Conditions & Effects JSON"
     },
     "encumbrance": {
       "type": "number",

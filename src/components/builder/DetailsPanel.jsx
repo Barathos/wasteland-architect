@@ -70,6 +70,28 @@ export default function DetailsPanel({ character, onChange }) {
         </div>
       </div>
 
+      {/* Portrait URL */}
+      <div>
+        <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+          Portrait URL (Optional)
+        </label>
+        <div className="flex gap-3 items-start">
+          <Input
+            value={character.portrait_url || ""}
+            onChange={(e) => onChange({ portrait_url: e.target.value })}
+            placeholder="https://..."
+            className="bg-muted border-border font-mono text-sm"
+          />
+          {character.portrait_url && (
+            <img src={character.portrait_url} alt="Portrait preview"
+              className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+              style={{ border: '2px solid hsl(var(--primary))' }}
+              onError={e => { e.target.style.display = 'none'; }}
+            />
+          )}
+        </div>
+      </div>
+
       {/* Background */}
       <div>
         <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">

@@ -5,7 +5,13 @@ import { calculateBodyPartHP } from "../lib/falloutData";
 import SheetHeader from "../components/sheet/SheetHeader";
 import StatusTab from "../components/sheet/StatusTab";
 import AbilitiesTab from "../components/sheet/AbilitiesTab";
-import { ArrowLeft, Trash2, Radiation } from "lucide-react";
+import WeaponsTab from "../components/sheet/WeaponsTab";
+import ApparelTab from "../components/sheet/ApparelTab";
+import GearTab from "../components/sheet/GearTab";
+import DataTab from "../components/sheet/DataTab";
+import EffectsTab from "../components/sheet/EffectsTab";
+import DiceRoller from "../components/sheet/DiceRoller";
+import { ArrowLeft, Trash2, Radiation, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -70,25 +76,32 @@ export default function CharacterSheet() {
         <Link to="/" className="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity" style={{ color: '#a8c8d8' }}>
           <ArrowLeft className="w-4 h-4" /> All Characters
         </Link>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-red-400 hover:bg-red-900/20 font-mono text-xs gap-1.5">
-              <Trash2 className="w-3.5 h-3.5" /> Delete
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent className="bg-card border-border">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="font-heading text-foreground">Delete Character?</AlertDialogTitle>
-              <AlertDialogDescription className="text-muted-foreground font-mono text-sm">
-                Permanently remove {character.name} from vault records.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground">Delete</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <div className="flex items-center gap-2">
+          <button onClick={() => navigate(`/builder?edit=${id}`)}
+            className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80"
+            style={{ color: '#f5c518', background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.3)' }}>
+            <Edit2 className="w-3.5 h-3.5" /> Edit
+          </button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" size="sm" className="text-red-400 hover:bg-red-900/20 font-mono text-xs gap-1.5">
+                <Trash2 className="w-3.5 h-3.5" /> Delete
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="bg-card border-border">
+              <AlertDialogHeader>
+                <AlertDialogTitle className="font-heading text-foreground">Delete Character?</AlertDialogTitle>
+                <AlertDialogDescription className="text-muted-foreground font-mono text-sm">
+                  Permanently remove {character.name} from vault records.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground">Delete</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       </div>
 
       <SheetHeader character={character} updateField={updateField} />
@@ -96,30 +109,29 @@ export default function CharacterSheet() {
       {/* Tab Navigation */}
       <div className="flex overflow-x-auto" style={{ background: '#060f1c', borderBottom: '2px solid #f5c518' }}>
         {TABS.map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
+          <button key={tab} onClick={() => setActiveTab(tab)}
             className="px-5 py-3 text-xs font-bold tracking-widest whitespace-nowrap transition-all"
             style={{
               color: activeTab === tab ? '#f5c518' : '#4a6a8a',
               background: activeTab === tab ? 'rgba(245,197,24,0.08)' : 'transparent',
               borderBottom: activeTab === tab ? '2px solid #f5c518' : '2px solid transparent',
               marginBottom: '-2px',
-            }}
-          >
+            }}>
             {tab}
           </button>
         ))}
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'STATUS' && <StatusTab character={character} updateField={updateField} />}
+      {activeTab === 'STATUS'    && <StatusTab character={character} updateField={updateField} />}
       {activeTab === 'ABILITIES' && <AbilitiesTab character={character} />}
-      {['WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'EFFECTS'].includes(activeTab) && (
-        <div className="flex items-center justify-center h-64" style={{ color: '#4a6a8a' }}>
-          <p className="font-mono text-sm">{activeTab} — Coming Soon</p>
-        </div>
-      )}
+      {activeTab === 'WEAPONS'   && <WeaponsTab character={character} updateField={updateField} />}
+      {activeTab === 'APPAREL'   && <ApparelTab character={character} updateField={updateField} />}
+      {activeTab === 'GEAR'      && <GearTab character={character} updateField={updateField} />}
+      {activeTab === 'DATA'      && <DataTab character={character} updateField={updateField} />}
+      {activeTab === 'EFFECTS'   && <EffectsTab character={character} updateField={updateField} />}
+
+      <DiceRoller />
     </div>
   );
 }
