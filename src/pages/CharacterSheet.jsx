@@ -12,6 +12,7 @@ import DataTab from "../components/sheet/DataTab";
 import EffectsTab from "../components/sheet/EffectsTab";
 import DiceRoller from "../components/sheet/DiceRoller";
 import CompanionsTab from "../components/sheet/CompanionsTab";
+import ReputationTab from "../components/sheet/ReputationTab";
 import CombatTracker from "../components/sheet/CombatTracker";
 import { ArrowLeft, Trash2, Radiation, Edit2, Swords, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ import {
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const TABS = ['STATUS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'EFFECTS', 'COMPANIONS'];
+const TABS = ['STATUS', 'ABILITIES', 'WEAPONS', 'APPAREL', 'GEAR', 'DATA', 'REPUTATION', 'EFFECTS', 'COMPANIONS'];
 
 export default function CharacterSheet() {
   const { id } = useParams();
@@ -142,6 +143,7 @@ export default function CharacterSheet() {
       {activeTab === 'APPAREL'   && <ApparelTab character={character} updateField={updateField} />}
       {activeTab === 'GEAR'      && <GearTab character={character} updateField={updateField} />}
       {activeTab === 'DATA'      && <DataTab character={character} updateField={updateField} />}
+      {activeTab === 'REPUTATION'  && <ReputationTab character={character} updateField={updateField} />}
       {activeTab === 'EFFECTS'     && <EffectsTab character={character} updateField={updateField} />}
       {activeTab === 'COMPANIONS'  && <CompanionsTab character={character} updateField={updateField} />}
 

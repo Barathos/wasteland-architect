@@ -92,6 +92,10 @@
       "type": "string",
       "title": "Perks JSON"
     },
+    "ncr_traits": {
+      "type": "string",
+      "title": "NCR Traits JSON"
+    },
     "hp_current": {
       "type": "number",
       "title": "Current HP"
@@ -263,6 +267,10 @@
     "session_log": {
       "type": "string",
       "title": "Session Log JSON"
+    },
+    "faction_reputations": {
+      "type": "string",
+      "title": "Faction Reputations JSON"
     }
   },
   "required": [
