@@ -63,26 +63,25 @@ function WeaponReferenceModal({ onSelect, onClose }) {
               </div>
               {weapons.map((w, i) => (
                 <button key={i} onClick={() => onSelect(w)}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left hover:opacity-80 transition-opacity"
-                  style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}>
-                  <span className="font-heading font-semibold text-sm flex-1 text-left" style={{ color: '#e8e8e8' }}>{w.label}</span>
-                  <span className="text-xs font-mono" style={{ color: '#22cc22', minWidth: '50px' }}>{w.damage}</span>
-                  <span className="text-[10px] font-mono" style={{ color: '#6a8a9a', minWidth: '60px' }}>{w.damageType}</span>
-                  <span className="text-[10px] font-mono" style={{ color: '#4a6a8a', minWidth: '50px' }}>{w.range}</span>
-                  {w.source ? (
-                    <span className="text-[9px] px-1.5 py-0.5 font-bold"
-                      style={{ background: 'rgba(245,197,24,0.1)', border: '1px solid rgba(245,197,24,0.3)', color: '#f5c518' }}>
-                      {w.source}
-                    </span>
-                  ) : (
-                    <span className="text-[9px] px-1.5 py-0.5 font-bold"
-                      style={{ background: 'rgba(106,154,186,0.1)', border: '1px solid rgba(106,154,186,0.3)', color: '#6a9aba' }}>
-                      Core
-                    </span>
-                  )}
-                  {w.rarity != null && (
-                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: rarityColor(w.rarity), flexShrink: 0, display: 'inline-block' }} />
-                  )}
+                  className="w-full px-4 py-2 text-left hover:opacity-80 transition-opacity"
+                  style={{ display: 'grid', gridTemplateColumns: '1fr 80px 120px 100px 100px', gap: '12px', alignItems: 'center', background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}>
+                  <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{w.label}</span>
+                  <span className="text-xs font-mono text-center" style={{ color: '#22cc22', whiteSpace: 'nowrap' }}>{w.damage}</span>
+                  <span className="text-[10px] font-mono text-center" style={{ color: '#6a8a9a', whiteSpace: 'nowrap' }}>{w.damageType}</span>
+                  <span className="text-[10px] font-mono text-center" style={{ color: '#4a6a8a', whiteSpace: 'nowrap' }}>{w.range}</span>
+                  <div className="weapon-source" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    {w.source ? (
+                      <span className="text-[9px] px-1.5 py-0.5 font-bold"
+                        style={{ background: 'rgba(245,197,24,0.1)', border: '1px solid rgba(245,197,24,0.3)', color: '#f5c518', whiteSpace: 'nowrap' }}>
+                        {w.source}
+                      </span>
+                    ) : (
+                      <span className="text-[9px] px-1.5 py-0.5 font-bold"
+                        style={{ background: 'rgba(106,154,186,0.1)', border: '1px solid rgba(106,154,186,0.3)', color: '#6a9aba', whiteSpace: 'nowrap' }}>
+                        Core
+                      </span>
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
