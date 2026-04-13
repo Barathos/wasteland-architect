@@ -1,31 +1,64 @@
 import { useState } from "react";
-import { SPECIAL_ATTRIBUTES, SKILLS, PERKS } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, calculateDerivedStats } from "../../lib/falloutData";
 
 function rollD20() { return Math.floor(Math.random() * 20) + 1; }
 
-function SkillRollResult({ result, onClose }) {
-  if (!result) return null;
+function InlineRollPanel({ skill, target, apCurrent, onSpendAP, onClose }) {
+  const [rolls, setRolls] = useState([]);
+
+  const doRoll = (extraDie) => {
+    if (extraDie && apCurrent <= 0) return;
+    const count = extraDie ? 3 : 2;
+    setRolls(Array.from({ length: count }, rollD20));
+    if (extraDie) onSpendAP();
+  };
+
+  const successes = rolls.filter(r => r <= target).length;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.5)' }} onClick={onClose}>
-      <div className="p-5 text-center" style={{ background: '#060f1c', border: `2px solid ${result.successes > 0 ? '#22cc22' : '#cc4444'}`, minWidth: '280px' }} onClick={e => e.stopPropagation()}>
-        <p className="text-xs font-bold tracking-widest mb-1" style={{ color: '#f5c518' }}>SKILL CHECK: {result.skill}</p>
-        <p className="text-xs mb-3" style={{ color: '#4a6a8a' }}>Target Number: {result.target}</p>
-        <div className="flex justify-center gap-4 mb-3">
-          {result.rolls.map((r, i) => (
-            <div key={i} className="w-14 h-14 flex items-center justify-center text-2xl font-bold"
-              style={{ background: r <= result.target ? '#0a2a0a' : '#2a0a0a', border: `2px solid ${r <= result.target ? '#22cc22' : '#cc4444'}`, color: r <= result.target ? '#22cc22' : '#cc4444' }}>
-              {r}
-            </div>
-          ))}
-        </div>
-        <p className="text-2xl font-bold mb-1" style={{ color: result.successes > 0 ? '#22cc22' : '#cc4444' }}>
-          {result.successes > 0 ? `${result.successes} SUCCESS${result.successes > 1 ? 'ES' : ''}` : 'FAILURE'}
-        </p>
-        {result.rolls.some(r => r === 1) && <p className="text-xs" style={{ color: '#f5c518' }}>⚡ CRITICAL HIT!</p>}
-        {result.rolls.some(r => r === 20) && <p className="text-xs" style={{ color: '#cc4444' }}>💀 COMPLICATION!</p>}
-        <button onClick={onClose} className="mt-3 px-4 py-1.5 text-xs font-bold"
-          style={{ background: '#0a1a2d', border: '1px solid #4a6a8a', color: '#a8c8d8', cursor: 'pointer' }}>DISMISS</button>
+    <div className="mx-2 mb-1 p-3" style={{ background: '#060f1c', border: '1px solid #4a6a8a', borderTop: 'none' }}>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[10px] font-bold tracking-wider" style={{ color: '#f5c518' }}>TN: {target}</span>
+        <button onClick={onClose} className="text-[10px] font-mono px-2 py-0.5"
+          style={{ color: '#4a6a8a', background: 'none', border: '1px solid #1e3a5f', cursor: 'pointer' }}>CLOSE</button>
       </div>
+      <div className="flex gap-2 mb-3">
+        <button onClick={() => doRoll(false)} className="flex-1 py-1.5 text-xs font-bold"
+          style={{ background: '#0a1a2d', border: '1px solid #f5c518', color: '#f5c518', cursor: 'pointer' }}>
+          ROLL 2d20
+        </button>
+        <button onClick={() => doRoll(true)} disabled={apCurrent <= 0} className="flex-1 py-1.5 text-xs font-bold"
+          style={{
+            background: apCurrent > 0 ? '#0a1525' : '#060f1c',
+            border: `1px solid ${apCurrent > 0 ? '#4a6a8a' : '#1e3a5f'}`,
+            color: apCurrent > 0 ? '#6a9aba' : '#2a4a6a',
+            cursor: apCurrent > 0 ? 'pointer' : 'not-allowed',
+          }}>
+          +1d20 &mdash; 1 AP {apCurrent > 0 ? `(${apCurrent} left)` : '(none)'}
+        </button>
+      </div>
+      {rolls.length > 0 && (
+        <div>
+          <div className="flex gap-2 mb-2 flex-wrap">
+            {rolls.map((r, i) => {
+              const hit = r <= target;
+              return (
+                <div key={i} className="w-12 h-12 flex items-center justify-center text-lg font-bold"
+                  style={{ background: hit ? '#0a2a0a' : '#2a0a0a', border: `2px solid ${hit ? '#22cc22' : '#cc4444'}`, color: hit ? '#22cc22' : '#cc4444' }}>
+                  {r}
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-bold" style={{ color: successes > 0 ? '#22cc22' : '#cc4444' }}>
+              {successes > 0 ? `${successes} SUCCESS${successes > 1 ? 'ES' : ''}` : 'FAILURE'}
+            </span>
+            {rolls.some(r => r === 1) && <span className="text-[10px]" style={{ color: '#f5c518' }}>&#9889; CRIT!</span>}
+            {rolls.some(r => r === 20) && <span className="text-[10px]" style={{ color: '#cc4444' }}>&#128128; COMPLICATION!</span>}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -44,14 +77,14 @@ function parseJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
 }
 
-export default function AbilitiesTab({ character }) {
-  const [rollResult, setRollResult] = useState(null);
+export default function AbilitiesTab({ character, updateField }) {
+  const [openSkill, setOpenSkill] = useState(null);
 
-  const rollSkill = (skill, target) => {
-    const rolls = [rollD20(), rollD20()];
-    const successes = rolls.filter(r => r <= target).length;
-    setRollResult({ skill: skill.label, target, rolls, successes });
-  };
+  const derived = calculateDerivedStats(character);
+  const apMax = derived.action_points ?? 2;
+  const apCurrent = character.action_points_current ?? apMax;
+  const spendAP = () => updateField({ action_points_current: Math.max(0, apCurrent - 1) });
+
   const skills = parseJson(character.skills, {});
   const tagSkills = parseJson(character.tag_skills, []);
   const selectedPerks = parseJson(character.perks, []);
@@ -59,8 +92,8 @@ export default function AbilitiesTab({ character }) {
 
   return (
     <div style={{ background: '#0d2137', color: '#a8c8d8' }}>
-      <SkillRollResult result={rollResult} onClose={() => setRollResult(null)} />
       <div className="flex flex-wrap">
+
         {/* SPECIAL */}
         <div style={{ width: '260px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
           <div className="px-3 py-2" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
@@ -94,7 +127,10 @@ export default function AbilitiesTab({ character }) {
           <div className="px-3 py-2" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
             <div className="flex items-center justify-between">
               <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>SKILLS</p>
-              <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>click to roll</p>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono" style={{ color: '#6a9aba' }}>&#9889; {apCurrent} AP</span>
+                <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>click to roll</p>
+              </div>
             </div>
           </div>
           <div className="p-2">
@@ -104,25 +140,43 @@ export default function AbilitiesTab({ character }) {
               const attrVal = character[skill.attribute] || 5;
               const target = value + attrVal + (isTag ? 2 : 0);
               const attrAttr = SPECIAL_ATTRIBUTES.find(a => a.key === skill.attribute);
+              const isOpen = openSkill === skill.key;
 
               return (
-                <div key={skill.key}
-                  onClick={() => rollSkill(skill, target)}
-                  className="flex items-center justify-between py-1.5 px-2 rounded cursor-pointer hover:opacity-80 transition-opacity"
-                  style={{ background: isTag ? 'rgba(245,197,24,0.05)' : 'transparent', borderBottom: '1px solid #091525' }}>
-                  <div className="flex items-center gap-2">
-                    {isTag && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#f5c518' }} />}
-                    <span className="font-heading text-sm" style={{ color: '#c8dde8' }}>{skill.label}</span>
+                <div key={skill.key}>
+                  <div
+                    onClick={() => setOpenSkill(isOpen ? null : skill.key)}
+                    className="flex items-center justify-between py-1.5 px-2 rounded cursor-pointer hover:opacity-80 transition-opacity"
+                    style={{
+                      background: isOpen ? '#0a1525' : isTag ? 'rgba(245,197,24,0.05)' : 'transparent',
+                      borderBottom: isOpen ? 'none' : '1px solid #091525',
+                      border: isOpen ? '1px solid #4a6a8a' : undefined,
+                      borderBottomLeftRadius: isOpen ? 0 : undefined,
+                      borderBottomRightRadius: isOpen ? 0 : undefined,
+                    }}>
+                    <div className="flex items-center gap-2">
+                      {isTag && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#f5c518' }} />}
+                      <span className="font-heading text-sm" style={{ color: '#c8dde8' }}>{skill.label}</span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>
+                        {attrAttr?.abbr} {attrVal}+{value}{isTag ? '+2' : ''}
+                      </span>
+                      <span className="font-heading font-bold text-sm w-6 text-right" style={{ color: isTag ? '#f5c518' : '#e8e8e8' }}>
+                        {target}
+                      </span>
+                      <span className="text-[10px]" style={{ color: '#4a6a8a' }}>{isOpen ? '▲' : '⚄'}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>
-                      {attrAttr?.abbr} {attrVal}+{value}{isTag ? '+2' : ''}
-                    </span>
-                    <span className="font-heading font-bold text-sm w-6 text-right" style={{ color: isTag ? '#f5c518' : '#e8e8e8' }}>
-                      {target}
-                    </span>
-                    <span className="text-[10px]" style={{ color: '#4a6a8a' }}>⚄</span>
-                  </div>
+                  {isOpen && (
+                    <InlineRollPanel
+                      skill={skill}
+                      target={target}
+                      apCurrent={apCurrent}
+                      onSpendAP={spendAP}
+                      onClose={() => setOpenSkill(null)}
+                    />
+                  )}
                 </div>
               );
             })}
@@ -145,6 +199,7 @@ export default function AbilitiesTab({ character }) {
             ))}
           </div>
         </div>
+
       </div>
     </div>
   );

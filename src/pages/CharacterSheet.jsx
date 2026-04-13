@@ -137,7 +137,7 @@ export default function CharacterSheet() {
 
       {/* Tab Content */}
       {activeTab === 'STATUS'    && <StatusTab character={character} updateField={updateField} />}
-      {activeTab === 'ABILITIES' && <AbilitiesTab character={character} />}
+      {activeTab === 'ABILITIES' && <AbilitiesTab character={character} updateField={updateField} />}
       {activeTab === 'WEAPONS'   && <WeaponsTab character={character} updateField={updateField} />}
       {activeTab === 'APPAREL'   && <ApparelTab character={character} updateField={updateField} />}
       {activeTab === 'GEAR'      && <GearTab character={character} updateField={updateField} />}

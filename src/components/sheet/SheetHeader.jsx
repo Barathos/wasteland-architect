@@ -1,11 +1,14 @@
 import { User } from "lucide-react";
-import { getNextLevelXP } from "../../lib/falloutData";
+import { getNextLevelXP, calculateDerivedStats } from "../../lib/falloutData";
 
 export default function SheetHeader({ character, updateField }) {
   const level = character.level || 1;
   const currentXP = character.xp || 0;
   const nextLevelXP = getNextLevelXP(level);
   const luckPoints = character.luck_points ?? (character.luck || 5);
+  const derived = calculateDerivedStats(character);
+  const apMax = derived.action_points ?? 2;
+  const apCurrent = character.action_points_current ?? apMax;
 
   return (
     <div style={{ background: '#0a1a2d', borderBottom: '2px solid #1e3a5f' }}>
@@ -68,6 +71,28 @@ export default function SheetHeader({ character, updateField }) {
               {luckPoints}
             </div>
             <button onClick={() => updateField({ luck_points: luckPoints + 1 })}
+              className="w-5 h-5 flex items-center justify-center text-xs font-bold"
+              style={{ background: '#060f1c', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>+</button>
+          </div>
+        </div>
+
+        {/* Action Points */}
+        <div className="flex-shrink-0 px-4 py-2" style={{ border: '2px solid #4a6a8a', background: '#0a1525', borderRadius: '4px' }}>
+          <div className="flex items-center gap-2 justify-center mb-1">
+            <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold"
+              style={{ background: '#4a6a8a', color: '#0a1525' }}>⚡</div>
+            <p className="text-sm font-bold italic" style={{ color: '#6a9aba' }}>AP</p>
+          </div>
+          <p className="text-[10px] text-center mb-1" style={{ color: '#3a5a7a' }}>{apCurrent}/{apMax}</p>
+          <div className="flex items-center gap-1 justify-center">
+            <button onClick={() => updateField({ action_points_current: Math.max(0, apCurrent - 1) })}
+              className="w-5 h-5 flex items-center justify-center text-xs font-bold"
+              style={{ background: '#060f1c', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>-</button>
+            <div className="w-10 h-8 flex items-center justify-center text-xl font-bold"
+              style={{ background: '#060f1c', border: '1px solid #2a4a6a', color: '#e8e8e8' }}>
+              {apCurrent}
+            </div>
+            <button onClick={() => updateField({ action_points_current: Math.min(apMax, apCurrent + 1) })}
               className="w-5 h-5 flex items-center justify-center text-xs font-bold"
               style={{ background: '#060f1c', border: '1px solid #2a4a6a', color: '#a8c8d8' }}>+</button>
           </div>

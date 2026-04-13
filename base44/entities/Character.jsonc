@@ -120,6 +120,11 @@
       "type": "number",
       "title": "Luck Points"
     },
+    "action_points_current": {
+      "type": "number",
+      "title": "Current Action Points",
+      "default": 2
+    },
     "notes": {
       "type": "string",
       "title": "Notes"
