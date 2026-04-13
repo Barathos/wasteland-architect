@@ -76,7 +76,7 @@ function WeaponReferenceModal({ onSelect, onClose }) {
                     </span>
                   ) : (
                     <span className="text-[9px] px-1.5 py-0.5 font-bold"
-                      style={{ background: 'rgba(168,200,216,0.08)', border: '1px solid rgba(168,200,216,0.2)', color: '#6a9aba' }}>
+                      style={{ background: 'rgba(106,154,186,0.1)', border: '1px solid rgba(106,154,186,0.3)', color: '#6a9aba' }}>
                       Core
                     </span>
                   )}
