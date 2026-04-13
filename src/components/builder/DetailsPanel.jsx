@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import NCRTraitsPanel from "./NCRTraitsPanel";
 import WanderersTribalTraitsPanel from "./WanderersTribalTraitsPanel";
@@ -9,6 +10,13 @@ const OUTCAST_TAG_OPTIONS = ['energy_weapons', 'science', 'repair'];
 
 export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTraitsChange, tribalTraits, onTribalTraitsChange, outcastTagSkill, onOutcastTagSkillChange, brotherhoodTagSkill, onBrotherhoodTagSkillChange, vaultTagSkill, onVaultTagSkillChange, vaultExperiment, onVaultExperimentChange, ghoulVaultDweller, onGhoulVaultDwellerChange, survivorTraits, onSurvivorTraitsChange, mrHandyArms, onMrHandyArmsChange }) {
   const selectedOrigin = ORIGINS.find(o => o.label === character.origin);
+  const detailPanelRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedOrigin && detailPanelRef.current) {
+      detailPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [character.origin]);
 
   return (
     <div className="space-y-6">
@@ -56,7 +64,7 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
                 </div>
                   {isSelected && <Check className="w-4 h-4 text-primary flex-shrink-0" />}
                 </div>
-                <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-snug">
                   {origin.description}
                 </p>
                 {origin.bonusSkills && (
@@ -77,6 +85,65 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
             );
           })}
         </div>
+
+        {/* Selected Origin Detail Panel */}
+        {selectedOrigin && (
+          <div ref={detailPanelRef} className="mt-4 p-4 rounded-lg" style={{ background: '#06111f', border: '1px solid #f5c518', borderLeft: '3px solid #f5c518' }}>
+            <div className="flex items-center gap-2 mb-2">
+              <p className="text-sm font-bold tracking-widest font-heading" style={{ color: '#f5c518' }}>{selectedOrigin.label.toUpperCase()}</p>
+              {selectedOrigin.source && (
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>{selectedOrigin.source}</span>
+              )}
+            </div>
+
+            {/* Full description — no truncation */}
+            <p className="text-xs font-mono leading-relaxed mb-3" style={{ color: '#a8c8d8' }}>
+              {selectedOrigin.description}
+            </p>
+
+            {/* Trait name */}
+            {selectedOrigin.traitName && (
+              <p className="text-[10px] font-bold tracking-widest mb-1.5" style={{ color: '#22cc22' }}>
+                TRAIT: {selectedOrigin.traitName.toUpperCase()}
+              </p>
+            )}
+
+            {/* Special / effect summary */}
+            {selectedOrigin.special && (
+              <p className="text-[10px] font-mono leading-relaxed mb-3 px-2 py-2" style={{ background: 'rgba(34,204,34,0.05)', border: '1px solid rgba(34,204,34,0.2)', color: '#a8d8a8' }}>
+                {selectedOrigin.special}
+              </p>
+            )}
+
+            {/* SPECIAL bonuses */}
+            {(selectedOrigin.bonuses || selectedOrigin.penalties) && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {selectedOrigin.bonuses && Object.entries(selectedOrigin.bonuses).map(([k, v]) => (
+                  <span key={k} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(34,204,34,0.12)', border: '1px solid rgba(34,204,34,0.3)', color: '#22cc22' }}>
+                    {k.slice(0,3).toUpperCase()} +{v}
+                  </span>
+                ))}
+                {selectedOrigin.penalties && Object.entries(selectedOrigin.penalties).map(([k, v]) => (
+                  <span key={k} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(204,68,68,0.12)', border: '1px solid rgba(204,68,68,0.3)', color: '#cc6666' }}>
+                    {k.slice(0,3).toUpperCase()} {v}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Bonus skills */}
+            {selectedOrigin.bonusSkills && selectedOrigin.bonusSkills.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>Bonus skills:</span>
+                {selectedOrigin.bonusSkills.map(s => (
+                  <span key={s} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: 'rgba(120,60,140,0.15)', border: '1px solid rgba(170,102,255,0.3)', color: '#cc99ff' }}>
+                    +{s.replace(/_/g, ' ')}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Portrait URL */}
