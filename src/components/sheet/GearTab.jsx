@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getAssignedSlot, SLOT_LABELS } from "../../lib/armorSlotUtils";
 import ConsumablesPanel from "./ConsumablesPanel";
 import { SETTLERS_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR, CORE_AMMO, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/falloutData";
 
@@ -114,6 +115,7 @@ export default function GearTab({ character, updateField }) {
   const [caps, setCaps] = useState(character.caps || 0);
   const [armorList, setArmorList] = useState(() => parseInventory(character.armor_equipped));
   const [showArmorRef, setShowArmorRef] = useState(false);
+  const apparelMap = (() => { try { return JSON.parse(character.apparel || '{}'); } catch { return {}; } })();
 
   const saveArmor = (updated) => {
     setArmorList(updated);
@@ -240,6 +242,12 @@ export default function GearTab({ character, updateField }) {
               <div className="flex items-center justify-between">
                 <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>{a.name}</span>
                 <div className="flex items-center gap-2">
+                  {(() => {
+                    const assigned = getAssignedSlot(apparelMap, a.name);
+                    return assigned
+                      ? <span className="text-[9px] font-mono px-1.5 py-0.5" style={{ background: 'rgba(34,204,34,0.1)', border: '1px solid #22cc2244', color: '#22cc22' }}>📌 {SLOT_LABELS[assigned] || assigned}</span>
+                      : <span className="text-[9px] font-mono px-1.5 py-0.5" style={{ background: 'rgba(74,106,138,0.1)', border: '1px solid #1e3a5f', color: '#4a6a8a' }}>Not assigned</span>;
+                  })()}
                   <span className="text-[10px] font-mono" style={{ color: '#22cc22' }}>P:{a.physRes} E:{a.enerRes} R:{a.radRes}{a.hp ? ` HP:${a.hp}` : ''}</span>
                   <button onClick={() => removeArmor(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
                 </div>
