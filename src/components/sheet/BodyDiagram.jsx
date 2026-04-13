@@ -1,20 +1,7 @@
 import { calculateBodyPartHP } from "../../lib/falloutData";
+import { getPerSlotArmorDR } from "../../lib/apparelArmorResolver";
 
-function getSlotDR(character) {
-  const slots = ['head','torso','left_arm','right_arm','left_leg','right_leg'];
-  const result = {};
-  let apparel = {};
-  try { apparel = JSON.parse(character.apparel || '{}'); } catch { apparel = {}; }
-  slots.forEach(s => {
-    const slot = apparel[s];
-    if (slot?.worn) {
-      result[s] = { physical: parseInt(slot.physDR) || 0, energy: parseInt(slot.energyDR) || 0, radiation: parseInt(slot.radDR) || 0 };
-    } else {
-      result[s] = { physical: 0, energy: 0, radiation: 0 };
-    }
-  });
-  return result;
-}
+
 
 // Each box cycles: empty -> healthy -> treated -> injured -> empty
 const STATES = ['empty', 'healthy', 'treated', 'injured'];
@@ -64,13 +51,15 @@ function BodyPartBoxes({ label, range, boxes, onBoxClick, dr }) {
           />
         ))}
       </div>
-      {dr && (
-        <div className="flex gap-1.5 justify-center mt-1.5">
-          <span className="text-[8px] font-mono" style={{ color: dr.physical > 0 ? '#e8e8e8' : '#2a3a4a' }}>🛡{dr.physical}</span>
-          <span className="text-[8px] font-mono" style={{ color: dr.energy > 0 ? '#4488ff' : '#2a3a4a' }}>⚡{dr.energy}</span>
-          <span className="text-[8px] font-mono" style={{ color: dr.radiation > 0 ? '#22cc22' : '#2a3a4a' }}>☢{dr.radiation}</span>
-        </div>
-      )}
+      <div
+        className="flex gap-1.5 justify-center mt-1.5"
+        title={dr?.worn && dr?.name ? dr.name : undefined}
+        style={{ cursor: dr?.worn && dr?.name ? 'help' : 'default' }}
+      >
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.physical > 0 ? '#e8e8e8' : '#4a6a8a', fontWeight: dr?.physical > 0 ? '700' : '400' }}>P{dr?.physical ?? 0}</span>
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.energy > 0 ? '#4ab8ff' : '#4a6a8a', fontWeight: dr?.energy > 0 ? '700' : '400' }}>E{dr?.energy ?? 0}</span>
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.radiation > 0 ? '#22cc22' : '#4a6a8a', fontWeight: dr?.radiation > 0 ? '700' : '400' }}>R{dr?.radiation ?? 0}</span>
+      </div>
     </div>
   );
 }
@@ -86,7 +75,7 @@ export default function BodyDiagram({ character, updateField }) {
     updateField({ [`boxes_${part}`]: JSON.stringify(updated) });
   };
 
-  const slotDR = getSlotDR(character);
+  const slotDR = getPerSlotArmorDR(character);
 
   const getProps = (key) => ({
     label: bodyParts[key].label,

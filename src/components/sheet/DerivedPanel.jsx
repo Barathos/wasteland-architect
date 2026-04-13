@@ -1,16 +1,7 @@
 import { calculateDerivedStats, isRobotCharacter, getRobotCarryWeight } from "../../lib/falloutData";
+import { getTotalApparelDR } from "../../lib/apparelArmorResolver";
 
 function parseJson(str, fb) { try { return JSON.parse(str || ''); } catch { return fb; } }
-const APPAREL_SLOTS = ['head','torso','left_arm','right_arm','left_leg','right_leg','power_armor'];
-function getApparelDR(character) {
-  const apparel = parseJson(character.apparel, {});
-  let phys = 0, energy = 0, rad = 0;
-  APPAREL_SLOTS.forEach(k => {
-    const s = apparel[k];
-    if (s?.worn) { phys += parseInt(s.physDR) || 0; energy += parseInt(s.energyDR) || 0; rad += parseInt(s.radDR) || 0; }
-  });
-  return { phys, energy, rad };
-}
 
 function SectionHeader({ label }) {
   return (
@@ -62,7 +53,7 @@ function StatRow({ label, icon, value, editable, onChange, type = 'number' }) {
 
 export default function DerivedPanel({ character, updateField }) {
   const derived = calculateDerivedStats(character);
-  const apparelDR = getApparelDR(character);
+  const apparelDR = getTotalApparelDR(character);
   const isRobot = isRobotCharacter(character);
   const survivorTraits = parseJson(character.survivor_traits, []);
   const hasSmallFrame = survivorTraits.includes('small_frame');
