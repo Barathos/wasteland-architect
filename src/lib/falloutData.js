@@ -654,6 +654,59 @@ export const SETTLERS_WEAPON_QUALITIES = [
   { key: 'slow_load', label: 'Slow Load', description: 'After this weapon has been fired, you must spend a minor action to reload before it can be fired again.' },
 ];
 
+export const WANDERERS_AMMO = [
+  { key: '357_magnum', label: '.357 Magnum', weight: '<1', cost: 2, rarity: 1, source: 'Wanderers' },
+  { key: '127mm', label: '12.7mm', weight: '<1', cost: 2, rarity: 2, source: 'Wanderers' },
+  { key: '9mm', label: '9mm', weight: '<1', cost: 1, rarity: 0, source: 'Wanderers' },
+  { key: '50_ball', label: '.50 Ball', weight: '<1', cost: 1, rarity: 3, source: 'Wanderers' },
+  { key: '25mm_grenade', label: '25mm Grenade', weight: '<1', cost: 8, rarity: 4, source: 'Wanderers' },
+  { key: 'alien_power_cells', label: 'Alien Power Cells', weight: '<1', cost: 5, rarity: 5, source: 'Wanderers' },
+  { key: 'alien_power_module', label: 'Alien Power Module', weight: '<1', cost: 10, rarity: 6, source: 'Wanderers' },
+  { key: 'arrow', label: 'Arrow', weight: '<1', cost: 2, rarity: 1, source: 'Wanderers' },
+  { key: 'arrow_cryo', label: 'Arrow — Cryo', weight: '<1', cost: 10, rarity: 4, source: 'Wanderers', note: 'Gains Freeze damage effect' },
+  { key: 'arrow_explosive', label: 'Arrow — Explosive', weight: '<1', cost: 8, rarity: 3, source: 'Wanderers', note: 'Loses Suppressed, gains Blast' },
+  { key: 'arrow_flaming', label: 'Arrow — Flaming', weight: '<1', cost: 4, rarity: 2, source: 'Wanderers', note: 'Gains Persistent (Energy)' },
+  { key: 'arrow_serrated', label: 'Arrow — Serrated', weight: '<1', cost: 6, rarity: 2, source: 'Wanderers', note: 'Gains Persistent (Physical) and Piercing 1' },
+  { key: 'arrow_plasma', label: 'Arrow — Plasma', weight: '<1', cost: 11, rarity: 5, source: 'Wanderers', note: '+2 CD damage, Physical/Energy; reduced by lower resistance' },
+  { key: 'arrow_poison', label: 'Arrow — Poison', weight: '<1', cost: 5, rarity: 2, source: 'Wanderers', note: 'Gains Persistent (Poison)' },
+  { key: 'crossbow_bolt', label: 'Crossbow Bolt', weight: '<1', cost: 3, rarity: 2, source: 'Wanderers' },
+  { key: 'plasma_core', label: 'Plasma Core', weight: '4', cost: 200, rarity: 5, source: 'Wanderers', note: 'Contains 500 shots for Gatling Plasma. Consumed at 10× normal rate.' },
+];
+
+export const WANDERERS_ARMOR = [
+  // Headgear
+  { key: 'beer_hat', label: 'Beer Hat', type: 'Headgear', physRes: 0, enerRes: 0, radRes: 0, locations: ['Head'], weight: 1, cost: 15, rarity: 2, special: 'Can hold 1 beverage; consume as minor action in combat.', source: 'Wanderers' },
+  { key: 'marine_tactical_helmet', label: 'Marine Tactical Helmet', type: 'Headgear', physRes: 2, enerRes: 2, radRes: 2, locations: ['Head'], weight: 2, cost: 25, rarity: 3, special: 'Can breathe underwater when worn with Marine Wetsuit.', source: 'Wanderers' },
+  { key: 'spacesuit_helmet', label: 'Spacesuit Helmet', type: 'Headgear', physRes: 1, enerRes: 4, radRes: 2, locations: ['Head'], weight: 5, cost: 85, rarity: 3, source: 'Wanderers' },
+  { key: 'hunters_hood', label: "Hunter's Hood", type: 'Headgear', physRes: 1, enerRes: 1, radRes: 0, locations: ['Head'], weight: 2, cost: 15, rarity: 2, special: 'Shadowed.', source: 'Wanderers' },
+  // Clothing
+  { key: 'marine_wetsuit', label: 'Marine Wetsuit', type: 'Clothing', physRes: 1, enerRes: 1, radRes: 1, locations: ['Arms', 'Legs', 'Torso'], weight: 2, cost: 25, rarity: 3, special: 'No cold water exposure penalty while worn.', source: 'Wanderers' },
+  { key: 'underarmor_suit', label: 'Underarmor Suit', type: 'Clothing', physRes: 0, enerRes: 0, radRes: 0, locations: ['Arms', 'Legs', 'Torso'], weight: 1, cost: 30, rarity: 2, special: 'Re-roll 1d20 on one STR or PER test per scene. Can be fitted with lining mods.', source: 'Wanderers' },
+  // Outfits
+  { key: 'bos_armored_battlecoat', label: 'BOS Armored Battlecoat', type: 'Outfit', physRes: 4, enerRes: 1, radRes: 1, locations: ['Arms', 'Legs', 'Torso'], weight: 20, cost: 400, rarity: 4, special: 'Can be reinforced with Ballistic Weave.', source: 'Wanderers' },
+  { key: 'bos_bomber_jacket', label: 'BOS Bomber Jacket', type: 'Outfit', physRes: 2, enerRes: 5, radRes: 1, locations: ['Arms', 'Legs', 'Torso'], weight: 4, cost: 40, rarity: 3, special: 'Can be reinforced with Ballistic Weave.', source: 'Wanderers' },
+  { key: 'cleanroom_suit', label: 'Cleanroom Suit', type: 'Outfit', physRes: 0, enerRes: 0, radRes: 6, locations: ['All'], weight: 5, cost: 65, rarity: 2, special: 'Re-roll 1d20 on all END tests while hood is up and mask in place.', source: 'Wanderers' },
+  { key: 'hunters_pelt_outfit', label: "Hunter's Pelt Outfit", type: 'Outfit', physRes: 2, enerRes: 2, radRes: 0, locations: ['Arms', 'Legs', 'Torso'], weight: 15, cost: 50, rarity: 2, special: 'Shadowed. Counts as wearing 4 pieces of shadowed armor.', source: 'Wanderers' },
+  { key: 'spacesuit_costume', label: 'Spacesuit Costume', type: 'Outfit', physRes: 1, enerRes: 4, radRes: 2, locations: ['Arms', 'Legs', 'Torso'], weight: 8, cost: 100, rarity: 4, special: 'When worn with Spacesuit Helmet: breathe underwater. Re-roll 1d20 on one CHA test per scene.', source: 'Wanderers' },
+  // Armor
+  { key: 'chinese_stealth_armor', label: 'Chinese Stealth Armor', type: 'Light Armor', physRes: 4, enerRes: 4, radRes: 6, locations: ['All'], weight: 5, cost: 750, rarity: 6, special: 'Re-roll 1d20 on Sneak tests. Activate stealth field as minor action: enemies +2 difficulty to spot; defense +2 while invisible. Attacking disables the field. Cannot be modded.', source: 'Wanderers' },
+  { key: 'diving_suit', label: 'Diving Suit', type: 'Heavy Armor', physRes: 3, enerRes: 3, radRes: 9, locations: ['All'], weight: 8, cost: 350, rarity: 3, special: 'Breathe underwater. Immune to extreme water pressure and cold water damage. Cannot be modded.', source: 'Wanderers' },
+  { key: 'recon_armor', label: 'Recon Armor', type: 'Light Armor', physRes: 3, enerRes: 3, radRes: 2, locations: ['All'], weight: 3, cost: 360, rarity: 4, special: 'Cannot accept mods.', source: 'Wanderers' },
+  // Power Armor
+  { key: 'excavator_chest', label: 'Excavator Chest Piece', type: 'Power Armor', physRes: 6, enerRes: 5, radRes: 11, hp: 14, locations: ['Torso'], weight: 15, cost: 113, rarity: 3, source: 'Wanderers' },
+  { key: 'excavator_arm', label: 'Excavator Arm', type: 'Power Armor', physRes: 3, enerRes: 2, radRes: 8, hp: 7, locations: ['Arm'], weight: 12, cost: 61, rarity: 3, source: 'Wanderers' },
+  { key: 'excavator_leg', label: 'Excavator Leg', type: 'Power Armor', physRes: 3, enerRes: 2, radRes: 8, hp: 7, locations: ['Leg'], weight: 12, cost: 81, rarity: 3, source: 'Wanderers' },
+  { key: 'excavator_helmet', label: 'Excavator Helmet', type: 'Power Armor', physRes: 5, enerRes: 3, radRes: 8, hp: 7, locations: ['Head'], weight: 10, cost: 49, rarity: 3, special: 'Full suit: +100 carry weight. Each Arm: +2 CD ore found when mining.', source: 'Wanderers' },
+  { key: 'hellcat_chest', label: 'Hellcat Chest Piece', type: 'Power Armor', physRes: 9, enerRes: 4, radRes: 9, hp: 15, locations: ['Torso'], weight: 12, cost: 146, rarity: 3, source: 'Wanderers' },
+  { key: 'hellcat_arm', label: 'Hellcat Arm', type: 'Power Armor', physRes: 5, enerRes: 3, radRes: 8, hp: 9, locations: ['Arm'], weight: 8, cost: 105, rarity: 3, source: 'Wanderers' },
+  { key: 'hellcat_leg', label: 'Hellcat Leg', type: 'Power Armor', physRes: 5, enerRes: 3, radRes: 8, hp: 9, locations: ['Leg'], weight: 10, cost: 105, rarity: 3, source: 'Wanderers' },
+  { key: 'hellcat_helmet', label: 'Hellcat Helmet', type: 'Power Armor', physRes: 6, enerRes: 4, radRes: 8, hp: 9, locations: ['Head'], weight: 8, cost: 65, rarity: 3, special: '+1 Physical DR against ranged attacks (full suit).', source: 'Wanderers' },
+  { key: 't65_chest', label: 'T-65 Chest Piece', type: 'Power Armor', physRes: 10, enerRes: 9, radRes: 9, hp: 22, locations: ['Torso'], weight: 15, cost: 230, rarity: 5, source: 'Wanderers' },
+  { key: 't65_arm', label: 'T-65 Arm', type: 'Power Armor', physRes: 7, enerRes: 6, radRes: 8, hp: 10, locations: ['Arm'], weight: 12, cost: 160, rarity: 5, source: 'Wanderers' },
+  { key: 't65_leg', label: 'T-65 Leg', type: 'Power Armor', physRes: 7, enerRes: 6, radRes: 8, hp: 10, locations: ['Leg'], weight: 14, cost: 160, rarity: 5, source: 'Wanderers' },
+  { key: 't65_helmet', label: 'T-65 Helmet', type: 'Power Armor', physRes: 9, enerRes: 7, radRes: 8, hp: 12, locations: ['Head'], weight: 11, cost: 100, rarity: 5, source: 'Wanderers' },
+];
+
 export const WANDERERS_DAMAGE_EFFECTS = [
   // Arc and Freeze already defined in Settlers supplement
 ];

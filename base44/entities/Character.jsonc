@@ -183,6 +183,10 @@
       "type": "string",
       "title": "Apparel JSON"
     },
+    "armor_equipped": {
+      "type": "string",
+      "title": "Armor Equipped JSON"
+    },
     "inventory": {
       "type": "string",
       "title": "Inventory JSON"

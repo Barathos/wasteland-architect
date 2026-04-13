@@ -1,10 +1,75 @@
 import { useState } from "react";
-import { SETTLERS_AMMO, STANDARD_AMMO } from "../../lib/falloutData";
+import { SETTLERS_AMMO, STANDARD_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR } from "../../lib/falloutData";
 
 const ALL_AMMO = [
   ...STANDARD_AMMO,
   ...SETTLERS_AMMO,
+  ...WANDERERS_AMMO,
 ];
+
+const ARMOR_TYPE_ORDER = ['Headgear', 'Clothing', 'Outfit', 'Light Armor', 'Heavy Armor', 'Power Armor'];
+
+function ArmorRefModal({ onSelect, onClose }) {
+  const [filter, setFilter] = useState('');
+  const lower = filter.toLowerCase();
+  const grouped = ARMOR_TYPE_ORDER.reduce((acc, t) => {
+    acc[t] = WANDERERS_ARMOR.filter(a => a.type === t && (!lower || a.label.toLowerCase().includes(lower)));
+    return acc;
+  }, {});
+  const sourceBadge = (a) => {
+    if (a.source === 'Wanderers') return { bg: 'rgba(180,120,255,0.12)', border: 'rgba(170,102,255,0.35)', color: '#aa66ff' };
+    return { bg: 'rgba(245,197,24,0.1)', border: 'rgba(245,197,24,0.3)', color: '#f5c518' };
+  };
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.8)' }} onClick={onClose}>
+      <div className="w-full max-w-2xl max-h-[85vh] flex flex-col m-4" style={{ background: '#0d2137', border: '2px solid #f5c518' }} onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
+          <p className="text-sm font-bold tracking-widest" style={{ color: '#f5c518' }}>ARMOR REFERENCE — Click to Add</p>
+          <div className="flex items-center gap-3">
+            <input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..."
+              style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8', outline: 'none', padding: '3px 8px', fontSize: '11px', width: '120px' }}
+              onClick={e => e.stopPropagation()} />
+            <button onClick={onClose} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>✕</button>
+          </div>
+        </div>
+        <div className="overflow-y-auto flex-1">
+          {ARMOR_TYPE_ORDER.map(type => {
+            const items = grouped[type];
+            if (!items?.length) return null;
+            return (
+              <div key={type}>
+                <div className="px-4 py-1.5 sticky top-0" style={{ background: '#091525', borderBottom: '1px solid #1e3a5f', zIndex: 1 }}>
+                  <p className="text-[10px] font-bold tracking-widest" style={{ color: '#4a6a8a' }}>{type.toUpperCase()}</p>
+                </div>
+                {items.map((a, i) => {
+                  const badge = sourceBadge(a);
+                  return (
+                    <button key={i} onClick={() => onSelect(a)}
+                      className="w-full px-4 py-2 text-left hover:opacity-80 transition-opacity"
+                      style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>{a.label}</span>
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <span className="text-[10px] font-mono" style={{ color: '#22cc22' }}>P:{a.physRes} E:{a.enerRes} R:{a.radRes}</span>
+                          {a.hp && <span className="text-[10px] font-mono" style={{ color: '#f5c518' }}>HP:{a.hp}</span>}
+                          <span className="text-[9px] px-1.5 py-0.5 font-bold" style={{ background: badge.bg, border: `1px solid ${badge.border}`, color: badge.color }}>{a.source}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>{(a.locations || []).join(', ')}</span>
+                        {a.special && <span className="text-[10px] font-mono italic" style={{ color: '#6a8a9a' }}>{a.special}</span>}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function ammoWeightNum(w) {
   if (!w || w === '<1') return 0.1;
@@ -30,6 +95,18 @@ export default function GearTab({ character, updateField }) {
   const [items, setItems] = useState(() => parseInventory(character.inventory));
   const [ammoList, setAmmoList] = useState(() => parseInventory(character.ammo_inventory));
   const [caps, setCaps] = useState(character.caps || 0);
+  const [armorList, setArmorList] = useState(() => parseInventory(character.armor_equipped));
+  const [showArmorRef, setShowArmorRef] = useState(false);
+
+  const saveArmor = (updated) => {
+    setArmorList(updated);
+    updateField({ armor_equipped: JSON.stringify(updated) });
+  };
+  const addArmorFromRef = (a) => {
+    saveArmor([...armorList, { name: a.label, physRes: a.physRes, enerRes: a.enerRes, radRes: a.radRes, locations: (a.locations || []).join(', '), special: a.special || '', hp: a.hp || null, source: a.source }]);
+    setShowArmorRef(false);
+  };
+  const removeArmor = (i) => saveArmor(armorList.filter((_, idx) => idx !== i));
 
   const saveItems = (updated) => {
     setItems(updated);
@@ -112,6 +189,9 @@ export default function GearTab({ character, updateField }) {
                       <optgroup label="Settlers Supplement">
                         {SETTLERS_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
                       </optgroup>
+                      <optgroup label="Wanderers Supplement">
+                        {WANDERERS_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}{am.note ? ` — ${am.note}` : ''}</option>)}
+                      </optgroup>
                     </select>
                   </div>
                   <input type="number" value={a.quantity} onChange={e => updateAmmo(i, 'quantity', parseInt(e.target.value) || 0)}
@@ -125,6 +205,38 @@ export default function GearTab({ character, updateField }) {
           </>
         )}
       </div>
+
+      {/* Armor Section */}
+      <div className="mb-5 p-3" style={{ background: '#0a1525', border: '1px solid #1e3a5f' }}>
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>EQUIPPED ARMOR ({armorList.length})</p>
+          <button onClick={() => setShowArmorRef(true)} className="text-xs px-3 py-1 font-bold"
+            style={{ background: '#0a1525', border: '1px solid #4a6a8a', color: '#a8c8d8', cursor: 'pointer' }}>
+            📋 Add from Reference
+          </button>
+        </div>
+        {armorList.length === 0 ? (
+          <p className="text-xs font-mono text-center py-2" style={{ color: '#4a6a8a' }}>No armor equipped.</p>
+        ) : (
+          armorList.map((a, i) => (
+            <div key={i} className="p-2 mb-1.5" style={{ background: '#060f1c', border: '1px solid #1e3a5f' }}>
+              <div className="flex items-center justify-between">
+                <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>{a.name}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono" style={{ color: '#22cc22' }}>P:{a.physRes} E:{a.enerRes} R:{a.radRes}{a.hp ? ` HP:${a.hp}` : ''}</span>
+                  <button onClick={() => removeArmor(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
+                </div>
+              </div>
+              <div className="flex gap-2 mt-0.5">
+                {a.locations && <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>{a.locations}</span>}
+                {a.special && <span className="text-[10px] font-mono italic" style={{ color: '#6a8a9a' }}>{a.special}</span>}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {showArmorRef && <ArmorRefModal onSelect={addArmorFromRef} onClose={() => setShowArmorRef(false)} />}
 
       {/* Weight summary */}
       <div className="flex items-center justify-between mb-3">
