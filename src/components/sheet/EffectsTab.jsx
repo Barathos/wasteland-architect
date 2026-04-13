@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CHEMS } from "../../lib/chemData";
 
 const STANDARD_INJURIES = [
   'Bleeding', 'Dazed', 'Stunned', 'Slowed', 'Prone', 'Blinded',
@@ -13,7 +14,7 @@ export default function EffectsTab({ character, updateField }) {
   const [effects, setEffects] = useState(() => parse(character.conditions_effects, {
     chems: [], injuries: [], conditions: []
   }));
-  const [newChem, setNewChem] = useState({ name: '', effect: '', duration: '' });
+  const [selectedChemId, setSelectedChemId] = useState(CHEMS[0]?.id || '');
   const [newCondition, setNewCondition] = useState('');
 
   const save = (updated) => {
@@ -22,9 +23,9 @@ export default function EffectsTab({ character, updateField }) {
   };
 
   const addChem = () => {
-    if (!newChem.name.trim()) return;
-    save({ ...effects, chems: [...(effects.chems || []), { ...newChem }] });
-    setNewChem({ name: '', effect: '', duration: '' });
+    const chem = CHEMS.find(c => c.id === selectedChemId);
+    if (!chem) return;
+    save({ ...effects, chems: [...(effects.chems || []), { ...chem }] });
   };
 
   const removeChem = (i) => save({ ...effects, chems: effects.chems.filter((_, idx) => idx !== i) });
@@ -63,16 +64,18 @@ export default function EffectsTab({ character, updateField }) {
         <div className="px-4 pb-4">
           {(effects.chems || []).map((c, i) => (
             <div key={i} className="flex items-center gap-2 py-1.5" style={{ borderBottom: '1px solid #0d2137' }}>
-              <span className="font-bold text-xs" style={{ color: '#22cc22', minWidth: '80px' }}>{c.name}</span>
-              <span className="text-xs flex-1" style={{ color: '#a8c8d8' }}>{c.effect}</span>
-              <span className="text-xs" style={{ color: '#f5c518', minWidth: '60px' }}>{c.duration}</span>
+              <span className="font-bold text-xs" style={{ color: '#22cc22', minWidth: '100px' }}>{c.name}</span>
+              <span className="text-xs flex-1" style={{ color: '#a8c8d8' }}>{c.summary || c.effect || ''}</span>
+              <span className="text-[10px] px-1.5 py-0.5" style={{ color: '#f5c518', background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.2)', whiteSpace: 'nowrap' }}>{c.duration}</span>
+              {c.addictive && <span className="text-[10px]" style={{ color: '#cc4444' }} title="Addictive">⚠</span>}
               <button onClick={() => removeChem(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
             </div>
           ))}
           <div className="flex gap-2 mt-3 flex-wrap">
-            {inputSm(newChem.name, v => setNewChem(p => ({ ...p, name: v })), 'Chem name', '120px')}
-            {inputSm(newChem.effect, v => setNewChem(p => ({ ...p, effect: v })), 'Effect', '1')}
-            {inputSm(newChem.duration, v => setNewChem(p => ({ ...p, duration: v })), 'Duration', '80px')}
+            <select value={selectedChemId} onChange={e => setSelectedChemId(e.target.value)}
+              style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '4px 6px', fontSize: '12px' }}>
+              {CHEMS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </select>
             <button onClick={addChem} className="px-3 py-1 text-xs font-bold"
               style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer', whiteSpace: 'nowrap' }}>+ ADD</button>
           </div>
