@@ -42,9 +42,14 @@ export default function DetailsPanel({ character, onChange }) {
                 `}
               >
                 <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-2">
                   <h4 className={`font-heading font-semibold text-sm ${isSelected ? "text-primary" : "text-foreground"}`}>
                     {origin.label}
                   </h4>
+                  {origin.source && (
+                    <span className="text-[9px] font-mono px-1 py-0.5 rounded" style={{ background: 'rgba(168,200,216,0.1)', color: '#6a9aba', border: '1px solid rgba(106,154,186,0.3)' }}>{origin.source}</span>
+                  )}
+                </div>
                   {isSelected && <Check className="w-4 h-4 text-primary flex-shrink-0" />}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
