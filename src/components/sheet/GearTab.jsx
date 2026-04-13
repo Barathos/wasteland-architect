@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { SETTLERS_AMMO, STANDARD_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR } from "../../lib/falloutData";
+import { SETTLERS_AMMO, STANDARD_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR, CORE_AMMO } from "../../lib/falloutData";
 
 const ALL_AMMO = [
-  ...STANDARD_AMMO,
+  ...CORE_AMMO,
   ...SETTLERS_AMMO,
   ...WANDERERS_AMMO,
 ];
@@ -183,8 +183,8 @@ export default function GearTab({ character, updateField }) {
                     <select value={a.type} onChange={e => updateAmmo(i, 'type', e.target.value)}
                       style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px' }}>
                       <option value="">— select —</option>
-                      <optgroup label="Standard">
-                        {STANDARD_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
+                      <optgroup label="Core">
+                        {CORE_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
                       </optgroup>
                       <optgroup label="Settlers Supplement">
                         {SETTLERS_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}

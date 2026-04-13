@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
-import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
+import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, CORE_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
 
 const EMPTY_WEAPON = {
   name: '', damage: '', damageEffect: '', damageType: 'Physical',
@@ -12,25 +12,12 @@ const FIRE_MODES = ['Single', 'Burst', 'Auto'];
 const RANGES = ['Melee', 'Close', 'Short', 'Medium', 'Long', 'Extreme'];
 
 const ALL_REF_WEAPONS = [
-  // Core weapons
-  { label: 'Pipe Pistol', type: 'Small Guns', damage: '2 CD', damageEffect: '', damageType: 'Physical', range: 'Short', qualities: 'Inaccurate', ammo: '10mm' },
-  { label: '10mm Pistol', type: 'Small Guns', damage: '3 CD', damageEffect: '', damageType: 'Physical', range: 'Short', qualities: '—', ammo: '10mm' },
-  { label: 'Hunting Rifle', type: 'Small Guns', damage: '4 CD', damageEffect: '', damageType: 'Physical', range: 'Long', qualities: 'Two-Handed', ammo: '.308' },
-  { label: 'Combat Shotgun', type: 'Small Guns', damage: '3 CD', damageEffect: 'Spread', damageType: 'Physical', range: 'Short', qualities: 'Two-Handed', ammo: 'Shotgun Shell' },
-  { label: 'Laser Pistol', type: 'Energy Weapons', damage: '3 CD', damageEffect: '', damageType: 'Energy', range: 'Medium', qualities: '—', ammo: 'Microfusion Cell' },
-  { label: 'Plasma Pistol', type: 'Energy Weapons', damage: '4 CD', damageEffect: 'Vicious', damageType: 'Energy', range: 'Short', qualities: '—', ammo: 'Plasma Cartridge' },
-  { label: 'Laser Rifle', type: 'Energy Weapons', damage: '4 CD', damageEffect: '', damageType: 'Energy', range: 'Long', qualities: 'Two-Handed', ammo: 'Fusion Cell' },
-  { label: 'Minigun', type: 'Big Guns', damage: '3 CD', damageEffect: '', damageType: 'Physical', range: 'Short', qualities: 'Two-Handed, Inaccurate', ammo: '5mm' },
-  { label: 'Fat Man', type: 'Big Guns', damage: '10 CD', damageEffect: 'Blast, Vicious', damageType: 'Radiation', range: 'Long', qualities: 'Two-Handed, Inaccurate', ammo: 'Mini Nuke' },
-  { label: 'Flamer', type: 'Big Guns', damage: '4 CD', damageEffect: 'Persistent, Spread', damageType: 'Energy', range: 'Close', qualities: 'Two-Handed, Inaccurate', ammo: 'Flamer Fuel' },
-  { label: 'Baseball Bat', type: 'Melee', damage: '4 CD', damageEffect: '', damageType: 'Physical', range: 'Melee', qualities: '—', ammo: null },
-  { label: 'Super Sledge', type: 'Melee', damage: '7 CD', damageEffect: 'Knockdown', damageType: 'Physical', range: 'Melee', qualities: 'Two-Handed', ammo: null },
-  { label: 'Combat Knife', type: 'Melee', damage: '3 CD', damageEffect: '', damageType: 'Physical', range: 'Melee', qualities: 'Stealthy', ammo: null },
+  ...CORE_WEAPONS,
   ...SETTLERS_WEAPONS,
   ...WANDERERS_WEAPONS,
 ];
 
-const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Explosive'];
+const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Throwing', 'Explosive'];
 
 function rarityColor(r) {
   if (!r) return '#6a8a9a';
