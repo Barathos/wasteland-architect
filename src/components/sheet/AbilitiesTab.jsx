@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CORE_CHEMS } from "../../lib/falloutData";
 import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, WANDERERS_PERKS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
 
 const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
@@ -100,6 +101,7 @@ export default function AbilitiesTab({ character, updateField }) {
   const selectedPerks = parseJson(character.perks, []);
   const perkDetails = selectedPerks.map(pk => ALL_PERKS.find(p => p.key === pk)).filter(Boolean);
   const selectedNcrTraitKeys = parseJson(character.ncr_traits, []);
+  const characterAddictions = parseJson(character.character_addictions, []);
   const ncrTraitDetails = selectedNcrTraitKeys.map(k => NCR_TRAITS.find(t => t.key === k)).filter(Boolean);
 
   // Wanderers Tribal traits
@@ -260,6 +262,23 @@ export default function AbilitiesTab({ character, updateField }) {
                   <h4 className="font-heading font-semibold text-sm mb-1" style={{ color: '#f5c518' }}>{trait.label}</h4>
                   <p className="text-[10px] font-mono mb-1" style={{ color: '#4ade80' }}>✦ {trait.benefit}</p>
                   <p className="text-[10px] font-mono" style={{ color: '#f97316' }}>✦ {trait.penalty}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Active Addictions */}
+        {characterAddictions.length > 0 && (
+          <div style={{ width: '240px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
+            <div className="px-3 py-2" style={{ background: '#1a0000', borderBottom: '1px solid #cc4444' }}>
+              <p className="text-xs font-bold tracking-widest" style={{ color: '#cc4444' }}>⚠ ACTIVE ADDICTIONS</p>
+            </div>
+            <div className="p-3 space-y-2">
+              {characterAddictions.map((ad, i) => (
+                <div key={i} className="p-2.5 rounded" style={{ background: '#1a0000', border: '1px solid #cc4444' }}>
+                  <h4 className="font-heading font-semibold text-sm mb-0.5" style={{ color: '#ff6666' }}>{ad.label}</h4>
+                  <p className="text-[10px] font-mono" style={{ color: '#ff8888' }}>{ad.effect}</p>
                 </div>
               ))}
             </div>

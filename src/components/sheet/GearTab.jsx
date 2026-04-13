@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ConsumablesPanel from "./ConsumablesPanel";
 import { SETTLERS_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR, CORE_AMMO, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/falloutData";
 
 const ALL_AMMO = [
@@ -253,6 +254,9 @@ export default function GearTab({ character, updateField }) {
       </div>
 
       {showArmorRef && <ArmorRefModal onSelect={addArmorFromRef} onClose={() => setShowArmorRef(false)} />}
+
+      {/* Consumables */}
+      <ConsumablesPanel character={character} updateField={updateField} />
 
       {/* Weight summary */}
       <div className="flex items-center justify-between mb-3">

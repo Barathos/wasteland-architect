@@ -228,6 +228,26 @@
       "type": "string",
       "title": "Ammo Inventory JSON"
     },
+    "food_inventory": {
+      "type": "string",
+      "title": "Food Inventory JSON"
+    },
+    "chems_inventory": {
+      "type": "string",
+      "title": "Chems Inventory JSON"
+    },
+    "other_consumables_inventory": {
+      "type": "string",
+      "title": "Other Consumables Inventory JSON"
+    },
+    "active_chems": {
+      "type": "string",
+      "title": "Active Chems JSON"
+    },
+    "character_addictions": {
+      "type": "string",
+      "title": "Character Addictions JSON"
+    },
     "caps": {
       "type": "number",
       "title": "Caps",
