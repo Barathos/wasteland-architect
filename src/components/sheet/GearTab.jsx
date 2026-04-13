@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SETTLERS_AMMO, STANDARD_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR, CORE_AMMO } from "../../lib/falloutData";
+import { SETTLERS_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR, CORE_AMMO, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/falloutData";
 
 const ALL_AMMO = [
   ...CORE_AMMO,
@@ -7,18 +7,28 @@ const ALL_AMMO = [
   ...WANDERERS_AMMO,
 ];
 
-const ARMOR_TYPE_ORDER = ['Headgear', 'Clothing', 'Outfit', 'Light Armor', 'Heavy Armor', 'Power Armor'];
+const ARMOR_TYPE_ORDER = ['Headgear', 'Clothing', 'Outfit', 'Dog Armor', 'Raider', 'Leather', 'Metal', 'Combat', 'Synth', 'Vault-Tec Security', 'Raider Power', 'T-45', 'T-51', 'T-60', 'X-01', 'Power Armor (Wanderers)'];
+
+// Build all armor items, grouped by set or type
+const ALL_ARMOR_GROUPS = (() => {
+  const groups = {};
+  const add = (key, item) => { if (!groups[key]) groups[key] = []; groups[key].push(item); };
+  CORE_APPAREL.forEach(a => add(a.type, a));
+  CORE_ARMOR.forEach(a => add(a.set, a));
+  CORE_POWER_ARMOR.forEach(a => add(a.set === 'Frame' ? 'T-45' : a.set, a)); // Frame goes with T-45 section
+  WANDERERS_ARMOR.forEach(a => add(a.type === 'Power Armor' ? 'Power Armor (Wanderers)' : a.type, a));
+  return groups;
+})();
+
+const POWER_ARMOR_SETS = new Set(['Raider Power', 'T-45', 'T-51', 'T-60', 'X-01', 'Power Armor (Wanderers)']);
 
 function ArmorRefModal({ onSelect, onClose }) {
   const [filter, setFilter] = useState('');
   const lower = filter.toLowerCase();
-  const grouped = ARMOR_TYPE_ORDER.reduce((acc, t) => {
-    acc[t] = WANDERERS_ARMOR.filter(a => a.type === t && (!lower || a.label.toLowerCase().includes(lower)));
-    return acc;
-  }, {});
   const sourceBadge = (a) => {
     if (a.source === 'Wanderers') return { bg: 'rgba(180,120,255,0.12)', border: 'rgba(170,102,255,0.35)', color: '#aa66ff' };
-    return { bg: 'rgba(245,197,24,0.1)', border: 'rgba(245,197,24,0.3)', color: '#f5c518' };
+    if (a.source === 'Settlers') return { bg: 'rgba(245,197,24,0.1)', border: 'rgba(245,197,24,0.3)', color: '#f5c518' };
+    return { bg: 'rgba(106,154,186,0.1)', border: 'rgba(106,154,186,0.3)', color: '#6a9aba' };
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.8)' }} onClick={onClose}>
@@ -34,14 +44,20 @@ function ArmorRefModal({ onSelect, onClose }) {
         </div>
         <div className="overflow-y-auto flex-1">
           {ARMOR_TYPE_ORDER.map(type => {
-            const items = grouped[type];
-            if (!items?.length) return null;
+            const sectionItems = (ALL_ARMOR_GROUPS[type] || []).filter(a => !lower || a.label.toLowerCase().includes(lower));
+            if (!sectionItems.length) return null;
+            const isPowerArmor = POWER_ARMOR_SETS.has(type);
             return (
               <div key={type}>
-                <div className="px-4 py-1.5 sticky top-0" style={{ background: '#091525', borderBottom: '1px solid #1e3a5f', zIndex: 1 }}>
-                  <p className="text-[10px] font-bold tracking-widest" style={{ color: '#4a6a8a' }}>{type.toUpperCase()}</p>
+                <div className="px-4 py-1.5 sticky top-0" style={{ background: isPowerArmor ? '#0d1a0d' : '#091525', borderBottom: '1px solid #1e3a5f', zIndex: 1 }}>
+                  <p className="text-[10px] font-bold tracking-widest" style={{ color: isPowerArmor ? '#f5a818' : '#4a6a8a' }}>
+                    {isPowerArmor ? `⚡ POWER ARMOR — ${type.toUpperCase()}` : type.toUpperCase()}
+                  </p>
+                  {isPowerArmor && type === 'T-45' && (
+                    <p className="text-[9px] font-mono" style={{ color: '#4a6a8a' }}>Requires Armor Frame. STR 11 while worn. Ablative HP. Fusion Core powered.</p>
+                  )}
                 </div>
-                {items.map((a, i) => {
+                {sectionItems.map((a, i) => {
                   const badge = sourceBadge(a);
                   return (
                     <button key={i} onClick={() => onSelect(a)}
@@ -51,7 +67,7 @@ function ArmorRefModal({ onSelect, onClose }) {
                         <span className="font-heading font-semibold text-sm" style={{ color: '#e8e8e8' }}>{a.label}</span>
                         <div className="flex items-center gap-2 flex-shrink-0">
                           <span className="text-[10px] font-mono" style={{ color: '#22cc22' }}>P:{a.physRes} E:{a.enerRes} R:{a.radRes}</span>
-                          {a.hp && <span className="text-[10px] font-mono" style={{ color: '#f5c518' }}>HP:{a.hp}</span>}
+                          {a.hp != null && a.hp > 0 && <span className="text-[10px] font-mono" style={{ color: '#f5c518' }}>HP:{a.hp}</span>}
                           <span className="text-[9px] px-1.5 py-0.5 font-bold" style={{ background: badge.bg, border: `1px solid ${badge.border}`, color: badge.color }}>{a.source}</span>
                         </div>
                       </div>
