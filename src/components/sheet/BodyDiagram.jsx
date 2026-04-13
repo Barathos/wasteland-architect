@@ -56,9 +56,9 @@ function BodyPartBoxes({ label, range, boxes, onBoxClick, dr }) {
         title={dr?.worn && dr?.name ? dr.name : undefined}
         style={{ cursor: dr?.worn && dr?.name ? 'help' : 'default' }}
       >
-        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.physical > 0 ? '#e8e8e8' : '#4a6a8a', fontWeight: dr?.physical > 0 ? '700' : '400' }}>P{dr?.physical ?? 0}</span>
-        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.energy > 0 ? '#4ab8ff' : '#4a6a8a', fontWeight: dr?.energy > 0 ? '700' : '400' }}>E{dr?.energy ?? 0}</span>
-        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.radiation > 0 ? '#22cc22' : '#4a6a8a', fontWeight: dr?.radiation > 0 ? '700' : '400' }}>R{dr?.radiation ?? 0}</span>
+        <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: dr?.physical > 0 ? '#e8e8e8' : '#5a7a8a', fontWeight: '700' }}>P{dr?.physical ?? 0}</span>
+        <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: dr?.energy > 0 ? '#4ab8ff' : '#5a7a8a', fontWeight: '700' }}>E{dr?.energy ?? 0}</span>
+        <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: dr?.radiation > 0 ? '#22cc22' : '#5a7a8a', fontWeight: '700' }}>R{dr?.radiation ?? 0}</span>
       </div>
     </div>
   );
