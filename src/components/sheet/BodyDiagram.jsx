@@ -105,7 +105,7 @@ export default function BodyDiagram({ character, updateField }) {
       {/* Main body layout — fills remaining space */}
       <div style={{ position: 'relative', flex: 1, minHeight: '380px' }}>
 
-        {/* Vault Boy silhouette — fills center */}
+        {/* Vault Boy silhouette — fills center, slightly larger */}
         <img
           src="https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
           alt=""
@@ -115,7 +115,7 @@ export default function BodyDiagram({ character, updateField }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            height: '88%',
+            height: '105%',
             width: 'auto',
             objectFit: 'contain',
             opacity: 0.22,
@@ -131,28 +131,28 @@ export default function BodyDiagram({ character, updateField }) {
           <BodyPartBoxes {...getProps('head')} />
         </div>
 
-        {/* LEFT ARM — left side, arm level */}
-        <div style={{ position: 'absolute', top: '130px', left: '8px', zIndex: 1 }}>
+        {/* LEFT ARM — moved inward */}
+        <div style={{ position: 'absolute', top: '130px', left: '24px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_arm')} />
         </div>
 
-        {/* TORSO — center, chest level */}
-        <div style={{ position: 'absolute', top: '145px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+        {/* TORSO — moved down to chest area */}
+        <div style={{ position: 'absolute', top: '175px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('torso')} />
         </div>
 
-        {/* RIGHT ARM — right side, arm level */}
-        <div style={{ position: 'absolute', top: '130px', right: '8px', zIndex: 1 }}>
+        {/* RIGHT ARM — moved inward */}
+        <div style={{ position: 'absolute', top: '130px', right: '24px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_arm')} />
         </div>
 
-        {/* LEFT LEG — lower left */}
-        <div style={{ position: 'absolute', bottom: '30px', left: '8px', zIndex: 1 }}>
+        {/* LEFT LEG — moved inward */}
+        <div style={{ position: 'absolute', bottom: '30px', left: '24px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_leg')} />
         </div>
 
-        {/* RIGHT LEG — lower right */}
-        <div style={{ position: 'absolute', bottom: '30px', right: '8px', zIndex: 1 }}>
+        {/* RIGHT LEG — moved inward */}
+        <div style={{ position: 'absolute', bottom: '30px', right: '24px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_leg')} />
         </div>
 
