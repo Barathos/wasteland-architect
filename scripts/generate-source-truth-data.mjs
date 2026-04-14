@@ -1,10 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { Level } from 'level';
 
 const ROOT = process.cwd();
 const REF_PACKS = path.join(ROOT, 'Reference', 'packs');
 const OUT_FILE = path.join(ROOT, 'src', 'lib', 'sourceTruthData.generated.js');
+
+function compendiumUuid(packName, itemId) {
+  return `Compendium.fallout.${packName}.Item.${itemId}`;
+}
 
 function slugify(value) {
   return String(value || '')
@@ -61,7 +66,17 @@ function sourceLabel(raw) {
 
 async function readPackItems(packName) {
   const packPath = path.join(REF_PACKS, packName);
-  const db = new Level(packPath, { valueEncoding: 'utf8' });
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `fallout-pack-${packName}-`));
+  const tempPackPath = path.join(tempRoot, packName);
+  fs.cpSync(packPath, tempPackPath, { recursive: true });
+
+  const currentPath = path.join(tempPackPath, 'CURRENT');
+  if (fs.existsSync(currentPath)) {
+    const currentRaw = fs.readFileSync(currentPath, 'utf8');
+    fs.writeFileSync(currentPath, currentRaw.replace(/\r\n/g, '\n'));
+  }
+
+  const db = new Level(tempPackPath, { valueEncoding: 'utf8' });
   const out = [];
 
   try {
@@ -75,6 +90,7 @@ async function readPackItems(packName) {
     }
   } finally {
     await db.close();
+    fs.rmSync(tempRoot, { recursive: true, force: true });
   }
 
   return out;
@@ -181,6 +197,7 @@ function mapWeapon(item) {
     ammo: system.ammo || '',
     source: sourceLabel(system.source),
     note: stripHtml(system.description || ''),
+    foundryUuid: compendiumUuid('weapons', item._id),
   };
 }
 
@@ -233,6 +250,7 @@ function mapApparel(item) {
     special: stripHtml(system.description || ''),
     isPower,
     foundryType: item.type,
+    foundryUuid: compendiumUuid('apparel', item._id),
   };
 
   if (!payload.locations.length && isPower) payload.locations = ['All'];
@@ -249,6 +267,7 @@ function mapAmmo(item) {
     rarity: Number(system.rarity || 0),
     effect: stripHtml(system.effect || ''),
     source: sourceLabel(system.source),
+    foundryUuid: compendiumUuid('ammunition', item._id),
   };
 }
 
@@ -274,6 +293,7 @@ function mapConsumable(item, addictionLookup) {
     cost: Number(system.cost || 0),
     rarity: Number(system.rarity || 0),
     source: sourceLabel(system.source),
+    foundryUuid: compendiumUuid('consumables', item._id),
   };
 
   if (type === 'chem') {
@@ -340,6 +360,7 @@ function mapPerk(item) {
     requirements,
     source: sourceLabel(system.source),
     description: stripHtml(system.description || ''),
+    foundryUuid: compendiumUuid('perks', item._id),
   };
 }
 

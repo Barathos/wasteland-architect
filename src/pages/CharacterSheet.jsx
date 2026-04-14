@@ -17,6 +17,10 @@ import ReputationTab from "../components/sheet/ReputationTab";
 import CombatTracker from "../components/sheet/CombatTracker";
 import { ArrowLeft, Trash2, Radiation, Edit2, Swords, Printer, Download } from "lucide-react";
 import { exportToFoundry } from "../lib/foundryExport";
+import {
+  exportFoundryScavengingImportScript,
+  getFoundryScavengingScriptFilename,
+} from "../lib/foundryScavengingExport";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -98,6 +102,22 @@ export default function CharacterSheet() {
           <ArrowLeft className="w-4 h-4" /> All Characters
         </Link>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              const script = exportFoundryScavengingImportScript();
+              const blob = new Blob([script], { type: "application/javascript" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = getFoundryScavengingScriptFilename();
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+            title="Run this macro in Foundry as GM to create scavenging loot roll tables and auto-assign category mappings"
+            className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80 print:hidden"
+            style={{ color: '#6ab0ff', background: 'rgba(68,136,255,0.08)', border: '1px solid rgba(68,136,255,0.3)' }}>
+            <Download className="w-3.5 h-3.5" /> Export Scavenging Tables Script
+          </button>
           <button
             onClick={() => {
               const data = exportToFoundry(character);
