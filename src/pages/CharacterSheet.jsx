@@ -15,7 +15,8 @@ import DiceRoller from "../components/sheet/DiceRoller";
 import CompanionsTab from "../components/sheet/CompanionsTab";
 import ReputationTab from "../components/sheet/ReputationTab";
 import CombatTracker from "../components/sheet/CombatTracker";
-import { ArrowLeft, Trash2, Radiation, Edit2, Swords, Printer } from "lucide-react";
+import { ArrowLeft, Trash2, Radiation, Edit2, Swords, Printer, Download } from "lucide-react";
+import { exportToFoundry } from "../lib/foundryExport";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -82,6 +83,23 @@ export default function CharacterSheet() {
           <ArrowLeft className="w-4 h-4" /> All Characters
         </Link>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              const data = exportToFoundry(character);
+              const json = JSON.stringify(data, null, 2);
+              const blob = new Blob([json], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `fvtt-Actor-${(character.name || 'character').replace(/\s+/g, '-')}.json`;
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+            title="Import in Foundry: right-click Actor directory → Import Data"
+            className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80 print:hidden"
+            style={{ color: '#22cc22', background: 'rgba(34,204,34,0.08)', border: '1px solid rgba(34,204,34,0.3)' }}>
+            <Download className="w-3.5 h-3.5" /> Export to Foundry VTT
+          </button>
           <button onClick={() => window.print()}
             className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80 print:hidden"
             style={{ color: '#a8c8d8', background: 'rgba(168,200,216,0.08)', border: '1px solid rgba(168,200,216,0.3)' }}>
