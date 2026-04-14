@@ -76,13 +76,6 @@ export const ORIGINS = [
     source: 'Core',
   },
   {
-    key: 'wastelander',
-    label: 'Wastelander',
-    description: 'Born and raised in the wasteland, you know how to survive by any means necessary.',
-    bonuses: { luck: 1 },
-    bonusSkills: ['survival', 'small_guns'],
-  },
-  {
     key: 'mister_handy',
     label: 'Mister Handy',
     description: 'A General Atomics domestic robot still running after the bombs fell. Loyal, versatile, and slightly eccentric, your three arms handle everything from combat to cooking — though your precision depends entirely on what attachments you carry.',

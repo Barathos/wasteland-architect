@@ -14,7 +14,6 @@
         "Brotherhood Initiate",
         "Ghoul",
         "Super Mutant",
-        "Wastelander",
         "Mister Handy",
         "Survivor",
         "Commonwealth Minuteman",
@@ -215,6 +214,10 @@
     "notes": {
       "type": "string",
       "title": "Notes"
+    },
+    "favorite_weapons": {
+      "type": "string",
+      "title": "Favorite Weapons"
     },
     "equipment": {
       "type": "string",
