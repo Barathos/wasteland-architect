@@ -7,18 +7,14 @@ const TYPE_ICONS = {
 };
 
 function EquipPreview({ equipment }) {
-  const preview = equipment.slice(0, 4);
   return (
     <div className="flex flex-wrap gap-1 mt-1.5">
-      {preview.map((item, i) => (
+      {equipment.map((item, i) => (
         <span key={i} className="text-[9px] font-mono px-1 py-0.5 flex items-center gap-0.5"
           style={{ background: 'rgba(168,200,216,0.06)', border: '1px solid rgba(168,200,216,0.15)', color: '#6a9aba' }}>
           {TYPE_ICONS[item.type] || '•'} {item.name}{item.quantity > 1 ? ` ×${item.quantity}` : ''}{item.optional ? ' (choice)' : ''}
         </span>
       ))}
-      {equipment.length > 4 && (
-        <span className="text-[9px] font-mono px-1 py-0.5" style={{ color: '#4a6a8a' }}>+{equipment.length - 4} more</span>
-      )}
     </div>
   );
 }
