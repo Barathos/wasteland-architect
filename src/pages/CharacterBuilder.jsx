@@ -8,7 +8,9 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS } from "../lib/falloutData";
+import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
+import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
 import { toast } from "sonner";
 
@@ -66,7 +68,22 @@ export default function CharacterBuilder() {
     }
   }, [editId]);
 
-  const updateCharacter = (updates) => setCharacter(prev => ({ ...prev, ...updates }));
+  const updateCharacter = (updates) => {
+    setCharacter(prev => {
+      const next = { ...prev, ...updates };
+      // When sub_origin changes, auto-apply starting equipment
+      if (updates.sub_origin && updates.sub_origin !== prev.sub_origin) {
+        const result = buildStartingEquipment(next, updates.sub_origin, tagSkills);
+        if (result) return { ...next, ...result.updates };
+      }
+      return next;
+    });
+  };
+
+  const handleResolveChoice = (choiceKey, chosenValue) => {
+    const updates = resolveEquipmentChoice(character, choiceKey, chosenValue);
+    if (updates) setCharacter(prev => ({ ...prev, ...updates }));
+  };
   const currentStepIndex = STEPS.findIndex(s => s.id === activeTab);
   const goNext = () => { if (currentStepIndex < STEPS.length - 1) setActiveTab(STEPS[currentStepIndex + 1].id); };
   const goPrev = () => { if (currentStepIndex > 0) setActiveTab(STEPS[currentStepIndex - 1].id); };
@@ -93,6 +110,16 @@ export default function CharacterBuilder() {
       ghoul_vault_dweller: ghoulVaultDweller,
       survivor_traits: JSON.stringify(survivorTraits),
       mr_handy_arms: JSON.stringify(mrHandyArms),
+      sub_origin: character.sub_origin || '',
+      pending_equipment_choices: character.pending_equipment_choices || '[]',
+      miscellany: character.miscellany || '[]',
+      equipment: character.equipment || '[]',
+      ammo_inventory: character.ammo_inventory || '[]',
+      armor_equipped: character.armor_equipped || '[]',
+      chems_inventory: character.chems_inventory || '[]',
+      food_inventory: character.food_inventory || '[]',
+      robot_mods: character.robot_mods || '[]',
+      caps: character.caps || 0,
       hp_current: derived.hp, hp_max: derived.hp,
       defense: derived.defense, initiative: derived.initiative,
       melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
@@ -150,6 +177,7 @@ export default function CharacterBuilder() {
                 survivorTraits={survivorTraits} onSurvivorTraitsChange={setSurvivorTraits}
                 mrHandyArms={mrHandyArms} onMrHandyArmsChange={setMrHandyArms}
               />
+              <EquipmentChoices character={character} onResolve={handleResolveChoice} />
             </TabsContent>
             <TabsContent value="special" className="mt-0">
               <SpecialStats character={character} onChange={updateCharacter} />

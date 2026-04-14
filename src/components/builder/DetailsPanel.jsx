@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import NCRTraitsPanel from "./NCRTraitsPanel";
 import WanderersTribalTraitsPanel from "./WanderersTribalTraitsPanel";
+import SubOriginSelector from "./SubOriginSelector";
 import { Textarea } from "@/components/ui/textarea";
 import { ORIGINS, SKILLS, SURVIVOR_TRAITS, MR_HANDY_ARMS } from "../../lib/falloutData";
 import { Check } from "lucide-react";
@@ -273,6 +274,9 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
                     {selectedOrigin.special}
                   </div>
                 )}
+
+                {/* Sub-origin / background selection + starting equipment */}
+                <SubOriginSelector character={character} onChange={onChange} />
 
                 {/* Origin-specific interactive choices — inline, no separate section */}
                 <OriginChoices

@@ -30,6 +30,10 @@
         "Tribal"
       ]
     },
+    "sub_origin": {
+      "type": "string",
+      "title": "Sub-Origin / Background"
+    },
     "level": {
       "type": "number",
       "title": "Level",
@@ -139,6 +143,14 @@
     "mr_handy_arms": {
       "type": "string",
       "title": "Mr. Handy Arm Attachments JSON"
+    },
+    "pending_equipment_choices": {
+      "type": "string",
+      "title": "Pending Equipment Choices JSON"
+    },
+    "miscellany": {
+      "type": "string",
+      "title": "Miscellaneous Items JSON"
     },
     "radiation_points": {
       "type": "number",

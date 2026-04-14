@@ -28,6 +28,60 @@ function parseInventory(str) {
 const EMPTY_ITEM = { name: '', quantity: 1, weight: 0, notes: '' };
 const EMPTY_AMMO = { type: '', quantity: 10 };
 
+function StartingEquipmentSection({ character }) {
+  const [open, setOpen] = useState(false);
+
+  const weapons = parseInventory(character.equipment).filter(i => i.source === 'starting_equipment');
+  const ammo = parseInventory(character.ammo_inventory).filter(i => i.source === 'starting_equipment');
+  const armor = parseInventory(character.armor_equipped).filter(i => i.source === 'starting_equipment');
+  const chems = parseInventory(character.chems_inventory).filter(i => i.source === 'starting_equipment');
+  const food = parseInventory(character.food_inventory).filter(i => i.source === 'starting_equipment');
+  const misc = parseInventory(character.miscellany).filter(i => i.source === 'starting_equipment');
+
+  const allItems = [
+    ...weapons.map(i => ({ ...i, cat: 'Weapon' })),
+    ...ammo.map(i => ({ ...i, name: i.type || i.name, cat: 'Ammo' })),
+    ...armor.map(i => ({ ...i, cat: 'Armor' })),
+    ...chems.map(i => ({ ...i, name: i.label || i.name, cat: 'Consumable' })),
+    ...food.map(i => ({ ...i, name: i.label || i.name, cat: 'Food' })),
+    ...misc.map(i => ({ ...i, cat: 'Misc' })),
+  ];
+
+  if (!character.sub_origin && allItems.length === 0) return null;
+
+  return (
+    <div className="mb-4" style={{ border: '1px solid #1e3a5f' }}>
+      <button onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-3 py-2 text-left"
+        style={{ background: '#06111f' }}>
+        <span className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>
+          ★ STARTING EQUIPMENT {character.sub_origin ? `— ${character.sub_origin.replace(/_/g, ' ').toUpperCase()}` : ''}
+        </span>
+        <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>{open ? '▲' : '▼'} {allItems.length} items</span>
+      </button>
+      {open && (
+        <div className="px-3 py-2" style={{ background: 'rgba(6,17,31,0.6)' }}>
+          {allItems.length === 0 ? (
+            <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>No starting gear recorded.</p>
+          ) : (
+            <div className="space-y-1">
+              {allItems.map((item, i) => (
+                <div key={i} className="flex items-center justify-between">
+                  <span className="text-xs font-mono" style={{ color: '#a8c8d8' }}>{item.name}</span>
+                  <div className="flex items-center gap-2">
+                    {item.quantity > 1 && <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>×{item.quantity}</span>}
+                    <span className="text-[9px] font-mono px-1 py-0.5" style={{ background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.2)', color: '#f5c518' }}>{item.cat}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function GearTab({ character, updateField }) {
   const [items, setItems] = useState(() => parseInventory(character.inventory));
   const [ammoList, setAmmoList] = useState(() => parseInventory(character.ammo_inventory));
@@ -73,6 +127,9 @@ export default function GearTab({ character, updateField }) {
 
   return (
     <div className="p-4" style={{ color: '#a8c8d8' }}>
+      {/* Starting Equipment */}
+      <StartingEquipmentSection character={character} />
+
       {/* Caps */}
       <div className="flex items-center gap-3 mb-4 p-3" style={{ background: '#1a1500', border: '1px solid #f5c518' }}>
         <span className="text-base font-bold" style={{ color: '#f5c518' }}>💰 CAPS</span>
