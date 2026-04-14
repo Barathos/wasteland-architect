@@ -103,11 +103,12 @@ export default function BodyDiagram({ character, updateField }) {
         <span style={{ color: '#4a6a8a' }}>(click to cycle)</span>
       </div>
 
-      {/* Body layout with Vault Boy background */}
-      <div className="relative flex flex-col items-center gap-2" style={{ minHeight: '240px' }}>
-        {/* Vault Boy decorative background — purely visual, no pointer events */}
+      {/* Body layout — Vault Boy silhouette with anchored panels */}
+      <div className="relative mx-auto" style={{ width: '340px', height: '320px' }}>
+
+        {/* Vault Boy background silhouette */}
         <img
-          src="https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/518e365ca_Gemini_Generated_Image_rkg1d0rkg1d0rkg1.png"
+          src="https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
           alt=""
           aria-hidden="true"
           style={{
@@ -115,30 +116,47 @@ export default function BodyDiagram({ character, updateField }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            height: '220px',
+            height: '300px',
             width: 'auto',
             objectFit: 'contain',
-            opacity: 0.18,
-            filter: 'saturate(0.4) brightness(0.75)',
+            opacity: 0.20,
+            filter: 'saturate(0.3) brightness(0.8) hue-rotate(170deg)',
             pointerEvents: 'none',
             userSelect: 'none',
             zIndex: 0,
           }}
         />
-        {/* Body part indicators — sit above the background */}
-        <div className="relative" style={{ zIndex: 1 }}>
+
+        {/* HEAD — top center */}
+        <div style={{ position: 'absolute', top: '0px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('head')} />
         </div>
-        <div className="relative flex gap-2 items-start" style={{ zIndex: 1 }}>
+
+        {/* LEFT ARM — mid-left (character's right arm from viewer left) */}
+        <div style={{ position: 'absolute', top: '100px', left: '0px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_arm')} />
+        </div>
+
+        {/* TORSO — center */}
+        <div style={{ position: 'absolute', top: '108px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('torso')} />
+        </div>
+
+        {/* RIGHT ARM — mid-right */}
+        <div style={{ position: 'absolute', top: '100px', right: '0px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_arm')} />
         </div>
-        <div className="relative flex gap-2" style={{ zIndex: 1 }}>
+
+        {/* LEFT LEG — bottom-left */}
+        <div style={{ position: 'absolute', bottom: '0px', left: '20px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_leg')} />
-          <div style={{ minWidth: '90px' }} />
+        </div>
+
+        {/* RIGHT LEG — bottom-right */}
+        <div style={{ position: 'absolute', bottom: '0px', right: '20px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_leg')} />
         </div>
+
       </div>
 
       {/* Encumbrance — compact inline row */}
