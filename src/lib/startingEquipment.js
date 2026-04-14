@@ -11,11 +11,16 @@ const ALL_WEAPONS = [...CORE_WEAPONS, ...SETTLERS_WEAPONS, ...WANDERERS_WEAPONS]
 
 function findWeaponByName(name) {
   const clean = name.split('+')[0].split('(')[0].trim().toLowerCase();
-  return (
-    ALL_WEAPONS.find(w => w.label.toLowerCase() === clean) ||
-    ALL_WEAPONS.find(w => w.label.toLowerCase().includes(clean)) ||
-    ALL_WEAPONS.find(w => clean.includes(w.label.toLowerCase()))
-  );
+  const result = ALL_WEAPONS.find(w => {
+    if (w.label.toLowerCase() === clean) return true;
+    if (w.label.toLowerCase().includes(clean)) return true;
+    if (clean.includes(w.label.toLowerCase())) return true;
+    if (w.aliases?.some(a => a.toLowerCase() === clean)) return true;
+    if (w.aliases?.some(a => a.toLowerCase().includes(clean))) return true;
+    return false;
+  });
+  console.log('findWeaponByName:', name, '->', result?.label ?? 'NOT FOUND');
+  return result;
 }
 
 function buildWeaponEntry(itemName, quantity = 1) {

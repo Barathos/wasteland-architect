@@ -106,10 +106,12 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
     onChange({ ...weapon, fireModes: updated });
   };
 
+  const cleanDisplay = (v) => (!v || v === '-' || v === '—' || v.trim() === '') ? '' : v;
+
   const field = (key, value, style = {}) => (
     <input
       type="text"
-      value={value ?? ''}
+      value={key === 'qualities' || key === 'damageEffect' ? cleanDisplay(value) : (value ?? '')}
       onChange={e => onChange({ ...weapon, [key]: e.target.value })}
       style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 6px', fontSize: '11px', ...style }}
     />
