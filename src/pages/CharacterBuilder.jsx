@@ -45,6 +45,12 @@ export default function CharacterBuilder() {
   const [survivorTraits, setSurvivorTraits] = useState([]);
   const [mrHandyArms, setMrHandyArms] = useState([]);
 
+  // Keep survivor_traits synced on character so getActiveTraitEffects works during creation
+  const handleSurvivorTraitsChange = (updated) => {
+    setSurvivorTraits(updated);
+    setCharacter(prev => ({ ...prev, survivor_traits: JSON.stringify(updated) }));
+  };
+
   useEffect(() => {
     if (editId) {
       base44.entities.Character.filter({ id: editId }).then(chars => {
@@ -175,7 +181,7 @@ export default function CharacterBuilder() {
                 vaultTagSkill={vaultTagSkill} onVaultTagSkillChange={setVaultTagSkill}
                 vaultExperiment={vaultExperiment} onVaultExperimentChange={setVaultExperiment}
                 ghoulVaultDweller={ghoulVaultDweller} onGhoulVaultDwellerChange={setGhoulVaultDweller}
-                survivorTraits={survivorTraits} onSurvivorTraitsChange={setSurvivorTraits}
+                survivorTraits={survivorTraits} onSurvivorTraitsChange={handleSurvivorTraitsChange}
                 mrHandyArms={mrHandyArms} onMrHandyArmsChange={setMrHandyArms}
               />
               <EquipmentChoices character={character} onResolve={handleResolveChoice} />
