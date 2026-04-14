@@ -77,6 +77,8 @@ export default function BodyDiagram({ character, updateField }) {
 
   const slotDR = getPerSlotArmorDR(character);
   const isNightkin = character.origin === 'Nightkin';
+  const ROBOT_ORIGINS = ['Protectron', 'Robobrain', 'Securitron', 'Mister Handy', 'Assaultron'];
+  const isRobot = ROBOT_ORIGINS.includes(character.origin);
 
   const getProps = (key) => ({
     label: bodyParts[key].label,
@@ -86,13 +88,13 @@ export default function BodyDiagram({ character, updateField }) {
     dr: slotDR[key],
   });
 
-  // Nightkin is wider/bulkier, so spread panels further out
-  const leftArmPos  = isNightkin ? 'calc(50% - 210px)' : 'calc(50% - 160px)';
-  const rightArmPos = isNightkin ? 'calc(50% + 110px)' : 'calc(50% + 60px)';
-  const leftLegPos  = isNightkin ? 'calc(50% - 200px)' : 'calc(50% - 160px)';
-  const rightLegPos = isNightkin ? 'calc(50% + 100px)' : 'calc(50% + 60px)';
-  const headPos     = isNightkin ? 'calc(50% - 130px)' : '50%';
-  const headTransform = isNightkin ? 'none' : 'translateX(-50%)';
+  // Determine panel positions based on origin type
+  const leftArmPos    = (isNightkin || isRobot) ? 'calc(50% - 210px)' : 'calc(50% - 160px)';
+  const rightArmPos   = (isNightkin || isRobot) ? 'calc(50% + 110px)' : 'calc(50% + 60px)';
+  const leftLegPos    = (isNightkin || isRobot) ? 'calc(50% - 200px)' : 'calc(50% - 160px)';
+  const rightLegPos   = (isNightkin || isRobot) ? 'calc(50% + 100px)' : 'calc(50% + 60px)';
+  const headPos       = (isNightkin || isRobot) ? 'calc(50% - 130px)' : '50%';
+  const headTransform = (isNightkin || isRobot) ? 'none' : 'translateX(-50%)';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -118,6 +120,8 @@ export default function BodyDiagram({ character, updateField }) {
         <img
           src={isNightkin
             ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/009360bcb_GlowingNightkinontransparentbackground.png"
+            : isRobot
+            ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/52472759c_GlowingoutlineofMrHandyrobot.png"
             : "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
           }
           alt=""
