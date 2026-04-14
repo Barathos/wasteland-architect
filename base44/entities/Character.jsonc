@@ -140,6 +140,10 @@
       "type": "string",
       "title": "Survivor Traits JSON"
     },
+    "gifted_bonuses": {
+      "type": "string",
+      "title": "Gifted Bonus Attributes JSON"
+    },
     "mr_handy_arms": {
       "type": "string",
       "title": "Mr. Handy Arm Attachments JSON"

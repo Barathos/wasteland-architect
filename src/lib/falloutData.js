@@ -560,6 +560,27 @@ export const WANDERERS_PERKS = [
   { key: 'storm_chaser', label: 'Storm Chaser', ranks: 1, requirements: { LCK: 6, level: 15 }, source: 'Wanderers', description: 'When it is raining or during a rad storm, regain 1 HP at the start of each of your turns in combat. Out of combat, regain HP equal to half your Luck score (rounded up) every hour of rain.' },
 ];
 
+function safeParseJSON(str, fallback) {
+  try { return JSON.parse(str || ''); } catch { return fallback; }
+}
+
+export function getActiveTraitEffects(character) {
+  const survivorTraits = safeParseJSON(character.survivor_traits, []);
+  const origin = character.origin || '';
+  const extraTagFromOrigin = ['Vault Dweller', 'Brotherhood Initiate', 'Brotherhood Outcast'].includes(origin) ? 1 : 0;
+  return {
+    extraTagSkills: (survivorTraits.includes('educated') ? 1 : 0) + extraTagFromOrigin,
+    hasGifted: survivorTraits.includes('gifted'),
+    giftedBonuses: safeParseJSON(character.gifted_bonuses, []),
+    luckPointPenalty: survivorTraits.includes('gifted') ? 1 : 0,
+    carryWeightMultiplier: survivorTraits.includes('small_frame') ? 5 : 10,
+    meleeComplicationRange: survivorTraits.includes('heavy_handed') ? 19 : 20,
+    meleeDamageBonus: survivorTraits.includes('heavy_handed') ? 1 : 0,
+    canAim: !survivorTraits.includes('fast_shot'),
+    hasGoodNatured: survivorTraits.includes('good_natured') || safeParseJSON(character.ncr_traits, []).includes('good_natured'),
+  };
+}
+
 export function calculateDerivedStats(character) {
   const str = character.strength || 5;
   const end = character.endurance || 5;
@@ -567,19 +588,16 @@ export function calculateDerivedStats(character) {
   const lck = character.luck || 5;
   const per = character.perception || 5;
 
-  const survivorTraits = (() => { try { return JSON.parse(character.survivor_traits || '[]'); } catch { return []; } })();
-  const hasSmallFrame = survivorTraits.includes('small_frame');
-  const hasHeavyHanded = survivorTraits.includes('heavy_handed');
-  const carryMult = hasSmallFrame ? 5 : 10;
-  const meleeBonus = Math.max(0, Math.floor((str - 5) / 2)) + (hasHeavyHanded ? 1 : 0);
+  const traits = getActiveTraitEffects(character);
+  const meleeBonus = Math.max(0, Math.floor((str - 5) / 2)) + traits.meleeDamageBonus;
 
   return {
     hp: end + lck,
     initiative: per + agi,
     defense: 1,
     melee_bonus: meleeBonus,
-    carry_weight: str * carryMult + 150,
-    luck_points: lck,
+    carry_weight: str * traits.carryWeightMultiplier + 150,
+    luck_points: Math.max(0, lck - traits.luckPointPenalty),
     action_points: 2,
   };
 }

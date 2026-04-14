@@ -111,6 +111,7 @@ export default function CharacterBuilder() {
       survivor_traits: JSON.stringify(survivorTraits),
       mr_handy_arms: JSON.stringify(mrHandyArms),
       sub_origin: character.sub_origin || '',
+      gifted_bonuses: character.gifted_bonuses || '[]',
       pending_equipment_choices: character.pending_equipment_choices || '[]',
       miscellany: character.miscellany || '[]',
       equipment: character.equipment || '[]',

@@ -1,8 +1,9 @@
-import { calculateDerivedStats } from "../../lib/falloutData";
+import { calculateDerivedStats, getActiveTraitEffects } from "../../lib/falloutData";
 import { Heart, Shield, Zap, Swords, Weight, Clover, Timer } from "lucide-react";
 
 export default function DerivedStats({ character }) {
   const derived = calculateDerivedStats(character);
+  const traits = getActiveTraitEffects(character);
 
   const stats = [
     { label: "Hit Points", value: derived.hp, icon: Heart, color: "text-red-400" },
@@ -10,7 +11,7 @@ export default function DerivedStats({ character }) {
     { label: "Defense", value: derived.defense, icon: Shield, color: "text-blue-400" },
     { label: "Melee Bonus", value: `+${derived.melee_bonus}`, icon: Swords, color: "text-yellow-400" },
     { label: "Carry Weight", value: `${derived.carry_weight} lbs`, icon: Weight, color: "text-green-400" },
-    { label: "Luck Points", value: derived.luck_points, icon: Clover, color: "text-purple-400" },
+    { label: "Luck Points", value: `${derived.luck_points}${traits.luckPointPenalty ? ' (−1 Gifted)' : ''}`, icon: Clover, color: "text-purple-400" },
     { label: "Action Points", value: derived.action_points, icon: Zap, color: "text-primary" },
   ];
 
