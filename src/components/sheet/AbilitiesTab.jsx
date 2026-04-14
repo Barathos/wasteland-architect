@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CORE_CHEMS } from "../../lib/falloutData";
+import { CORE_CHEMS } from "../../lib/sourceTruthData";
 import { SPECIAL_ATTRIBUTES, SKILLS, PERKS, WANDERERS_PERKS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
 
 const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };

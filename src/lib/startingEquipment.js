@@ -1,5 +1,6 @@
 // Starting equipment application logic
-import { ORIGIN_PACKS, TAG_SKILL_ITEMS, CORE_WEAPONS, SETTLERS_WEAPONS, WANDERERS_WEAPONS } from './falloutData';
+import { ORIGIN_PACKS, TAG_SKILL_ITEMS, SETTLERS_WEAPONS, WANDERERS_WEAPONS } from './falloutData';
+import { CORE_WEAPONS } from './sourceTruthData';
 
 function safeJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }

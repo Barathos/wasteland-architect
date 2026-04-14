@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ConsumablesPanel from "./ConsumablesPanel";
-import { SETTLERS_AMMO, WANDERERS_AMMO, CORE_AMMO } from "../../lib/falloutData";
+import { SETTLERS_AMMO, WANDERERS_AMMO } from "../../lib/falloutData";
+import { CORE_AMMO } from "../../lib/sourceTruthData";
 
 const ALL_AMMO = [
   ...CORE_AMMO,

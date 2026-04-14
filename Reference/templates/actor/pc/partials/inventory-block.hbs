@@ -1,0 +1,37 @@
+<ol class="items-list">
+	<li class="flexrow items-header">
+		<div class="flexrow flexlarge item-name upperC">
+			{{blockTitle}}
+		</div>
+		{{#if noCreate}}
+			<div class="item-controls">
+				<a class="find-any-from-compendium">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</a>
+			</div>
+		{{else}}
+			<div class="item-controls">
+				<a
+					class="item-control item-create"
+					data-type="{{type}}"
+					title="{{createTitle}}"
+				>
+					<i class="fas fa-plus"></i>
+					{{localize 'FALLOUT.UI.Add'}}
+				</a>
+				<a
+					class="find-from-compendium"
+					data-type="{{type}}"
+				>
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</a>
+			</div>
+		{{/if}}
+	</li>
+	{{#each items}}
+		{{> actor/_shared-partials/simple-expandable-item
+			isRobot=../isRobot
+			item=this
+		}}
+	{{/each}}
+</ol>

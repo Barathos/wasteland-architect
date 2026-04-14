@@ -1,0 +1,22 @@
+import {
+  SOURCE_WEAPONS,
+  SOURCE_AMMO,
+  SOURCE_APPAREL,
+  SOURCE_ARMOR,
+  SOURCE_POWER_ARMOR,
+  SOURCE_FOOD,
+  SOURCE_CHEMS,
+  SOURCE_OTHER_CONSUMABLES,
+  SOURCE_CORE_PERKS,
+} from './sourceTruthData.generated.js';
+
+// Canonical data exported from the Foundry VTT Reference system.
+export const CORE_WEAPONS = SOURCE_WEAPONS;
+export const CORE_AMMO = SOURCE_AMMO;
+export const CORE_APPAREL = SOURCE_APPAREL;
+export const CORE_ARMOR = SOURCE_ARMOR;
+export const CORE_POWER_ARMOR = SOURCE_POWER_ARMOR;
+export const CORE_FOOD = SOURCE_FOOD;
+export const CORE_CHEMS = SOURCE_CHEMS;
+export const CORE_OTHER_CONSUMABLES = SOURCE_OTHER_CONSUMABLES;
+export const CORE_PERKS = SOURCE_CORE_PERKS;

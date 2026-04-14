@@ -1,0 +1,349 @@
+{
+  "id": "fallout",
+  "title": "Fallout: The Roleplaying Game",
+  "description": "An unofficial system for playing the Fallout RPG from Modiphius Entertainment Ltd.",
+  "version": "11.16.6",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Paul Maskelyne",
+      "email": "mu77ley@gmail.com",
+      "url": "https://www.patreon.com/muttley",
+      "discord": "muttley",
+      "flags": {}
+    },
+    {
+      "name": "HappySteve",
+      "flags": {}
+    },
+    {
+      "name": "QckSilverDragon",
+      "email": "qcksilverdragon@gmail.com",
+      "discord": "qcksilverdragon",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "fallout-compiled.mjs"
+  ],
+  "styles": [
+    {
+      "src": "css/fallout.css"
+    }
+  ],
+  "packs": [
+    {
+      "name": "addictions",
+      "label": "Addictions",
+      "path": "packs/addictions",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "ammunition",
+      "label": "Ammunition",
+      "path": "packs/ammunition",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "apparel_mods",
+      "label": "Armor & Clothing Mods",
+      "path": "packs/apparel_mods",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "apparel",
+      "label": "Apparel",
+      "path": "packs/apparel",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "books_and_magz",
+      "label": "Books & Magazines",
+      "path": "packs/books_and_magz",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "consumables",
+      "label": "Consumables",
+      "path": "packs/consumables",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "diseases",
+      "label": "Diseases",
+      "path": "packs/diseases",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "fallout_adventures",
+      "label": "Fallout Adventures",
+      "path": "packs/fallout_adventures",
+      "type": "Adventure",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "fallout_macros",
+      "label": "Fallout Macros",
+      "path": "packs/fallout_macros",
+      "type": "Macro",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "miscellany",
+      "label": "Miscellany",
+      "path": "packs/miscellany",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "perks",
+      "label": "Perks",
+      "path": "packs/perks",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "robot_modules",
+      "label": "Robot Modules",
+      "path": "packs/robot_modules",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "rollable_tables",
+      "label": "Rollable Tables",
+      "path": "packs/rollable_tables",
+      "type": "RollTable",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "skills",
+      "label": "Skills",
+      "path": "packs/skills",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "system_documentation",
+      "label": "System Documentation",
+      "path": "packs/system_documentation",
+      "type": "JournalEntry",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "traits",
+      "label": "Traits",
+      "path": "packs/traits",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "weapon_mods",
+      "label": "Weapon Mods",
+      "path": "packs/weapon_mods",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "path": "packs/weapons",
+      "type": "Item",
+      "system": "fallout",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Fallout RPG",
+      "sorting": "a",
+      "color": "#293f5f",
+      "packs": [
+        "fallout_adventures",
+        "fallout_macros",
+        "rollable_tables",
+        "system_documentation"
+      ],
+      "folders": [
+        {
+          "name": "Items & Abilities",
+          "sorting": "a",
+          "color": "#141c2b",
+          "packs": [
+            "addictions",
+            "ammunition",
+            "apparel_mods",
+            "apparel",
+            "books_and_magz",
+            "consumables",
+            "diseases",
+            "miscellany",
+            "perks",
+            "robot_modules",
+            "skills",
+            "traits",
+            "weapon_mods",
+            "weapons"
+          ],
+          "folders": []
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "i18n/de.json",
+      "flags": {}
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "i18n/en.json",
+      "flags": {}
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "i18n/es.json",
+      "flags": {}
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "i18n/fr.json",
+      "flags": {}
+    },
+    {
+      "lang": "pl",
+      "name": "Polski",
+      "path": "i18n/pl.json",
+      "flags": {}
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "i18n/pt_BR.json",
+      "flags": {}
+    }
+  ],
+  "socket": true,
+  "url": "https://github.com/Muttley/foundryvtt-fallout",
+  "manifest": "https://raw.githubusercontent.com/Muttley/foundryvtt-fallout/main/system/system.json",
+  "download": "https://github.com/Muttley/foundryvtt-fallout/releases/latest/download/fallout.zip",
+  "background": "systems/fallout/assets/images/please-stand-by.webp",
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "css",
+        "hbs",
+        "json"
+      ],
+      "paths": [
+        "css",
+        "i18n",
+        "templates"
+      ]
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { getArmorForSlot, SLOT_LABELS } from "../../lib/armorSlotUtils";
 import { getTotalApparelDR } from "../../lib/apparelArmorResolver";
-import { SETTLERS_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR, CORE_AMMO, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/falloutData";
+import { SETTLERS_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR } from "../../lib/falloutData";
+import { CORE_AMMO, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/sourceTruthData";
 
 const SLOTS = [
   { key: 'head',        label: 'Head' },

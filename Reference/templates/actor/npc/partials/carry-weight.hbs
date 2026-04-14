@@ -1,0 +1,31 @@
+<div class="box no-padding bgOdd">
+	<h4 class="box-header text-center upperC">
+		{{localize "FALLOUT.UI.CarryWeight"}}
+	</h4>
+	<div class="text-center">
+		<label>
+			{{system.carryWeight.base}}
+			{{#if useKgs}}
+				{{localize "FALLOUT.TEMPLATES.kgs"}}
+			{{else}}
+				{{localize "FALLOUT.TEMPLATES.lbs"}}
+			{{/if}}
+			+
+		</label>
+		<input
+			type="number"
+			name="system.carryWeight.mod"
+			class="num-short-3"
+			value="{{system.carryWeight.mod}}"
+		>
+		<label>
+			=
+			{{system.carryWeight.value}}
+			{{#if useKgs}}
+				{{localize "FALLOUT.TEMPLATES.kgs"}}
+			{{else}}
+				{{localize "FALLOUT.TEMPLATES.lbs"}}
+			{{/if}}
+		</label>
+	</div>
+</div>

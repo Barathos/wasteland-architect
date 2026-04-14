@@ -1,0 +1,50 @@
+<div class="box">
+	<div class="box-header upperC">
+		<h4>{{localize "FALLOUT.TEMPLATES.DERIVED"}}</h4>
+	</div>
+	<div class="flexrow resource-row align-mid">
+		<label class="resource-label upperC">
+			{{localize "FALLOUT.TEMPLATES.Melee_Damage"}}
+		</label>
+		<input
+			class="num-short-2"
+			name="system.meleeDamage.value"
+			type="number"
+			value="{{system.meleeDamage.value}}"
+			{{#unless disableAutoDerivedStats}}
+			data-tooltip="{{localize 'FALLOUT.Actor.Warnings.DerivedValue'}}"
+			disabled
+			{{/unless}}
+		>
+	</div>
+	<div class="flexrow resource-row align-mid">
+		<label class="resource-label upperC">
+			{{localize "FALLOUT.TEMPLATES.DEFENSE"}}
+		</label>
+		<input
+			class="num-short-2"
+			type="number"
+			name="system.defense.value"
+			value="{{system.defense.value}}"
+			{{#unless disableAutoDerivedStats}}
+			data-tooltip="{{localize 'FALLOUT.Actor.Warnings.DerivedValue'}}"
+			disabled
+			{{/unless}}
+		>
+	</div>
+	<div class="flexrow resource-row align-mid">
+		<label class="resource-label upperC">
+			{{localize "FALLOUT.TEMPLATES.INITIATIVE"}}
+		</label>
+		<input
+			class="num-short-2"
+			type="number"
+			name="system.initiative.value"
+			value="{{system.initiative.value}}"
+			{{#unless disableAutoDerivedStats}}
+			data-tooltip="{{localize 'FALLOUT.Actor.Warnings.DerivedValue'}}"
+			disabled
+			{{/unless}}
+		>
+	</div>
+</div>

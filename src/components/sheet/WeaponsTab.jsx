@@ -1,7 +1,8 @@
 import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import WeaponEffectTags from "./WeaponEffectTags";
-import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, CORE_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
+import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
+import { CORE_WEAPONS } from "../../lib/sourceTruthData";
 
 const EMPTY_WEAPON = {
   name: '', damage: '', damageEffect: '', damageType: 'Physical',

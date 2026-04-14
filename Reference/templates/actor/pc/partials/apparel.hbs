@@ -1,0 +1,49 @@
+{{#each apparelGroups}}
+	<ol class="items-list">
+		<li class="apparel flexrow items-header">
+			<div class="flexrow flexlarge item-name upperC">
+				{{localize (concat 'FALLOUT.APPAREL.' apparelType)}}
+			</div>
+			<div class="flexrow flexlarge item-info">
+				{{#ifCond apparelType '===' 'powerArmor'}}
+					<div class="text-center">
+						<p>{{localize "FALLOUT.powered"}}</p>
+					</div>
+				{{/ifCond}}
+				<div class="text-center flex2">
+					<p>{{localize "FALLOUT.TEMPLATES.Locations"}}</p>
+				</div>
+				<div class="text-center flex2">
+					<p>{{localize "FALLOUT.TEMPLATES.Resistances"}}</p>
+				</div>
+			</div>
+			<div class="item-controls">
+				<a
+					class="item-control item-create"
+					data-apparel-type="{{apparelType}}"
+					data-type="apparel"
+					title="Create item"
+				>
+					<i class="fas fa-plus"></i>
+					{{localize 'FALLOUT.UI.Add'}}
+				</a>
+				<a
+					class="find-from-compendium"
+					{{#if ../isRobot}}
+						data-type="{{apparelType}}_robot"
+					{{else}}
+						data-type="{{apparelType}}"
+					{{/if}}
+				>
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</a>
+			</div>
+		</li>
+		{{#each list}}
+			{{> actor/pc/partials/apparel-item-row
+				isRobot=../../isRobot
+				item=this
+			}}
+		{{/each}}
+	</ol>
+{{/each}}

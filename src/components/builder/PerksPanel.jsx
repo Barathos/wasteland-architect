@@ -1,4 +1,5 @@
-import { PERKS, WANDERERS_PERKS, CORE_PERKS, RARE_BOOKS } from "../../lib/falloutData";
+import { PERKS, WANDERERS_PERKS, RARE_BOOKS } from "../../lib/falloutData";
+import { CORE_PERKS } from "../../lib/sourceTruthData";
 import { Check, Lock } from "lucide-react";
 
 // Normalize SPECIAL abbr → character key

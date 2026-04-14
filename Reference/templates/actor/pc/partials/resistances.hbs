@@ -1,0 +1,111 @@
+<div class="box">
+	<div class="box-header">
+		<h4>{{localize "FALLOUT.TEMPLATES.RESISTANCE_BONUSES"}}</h4>
+	</div>
+	<div class="flexcol">
+		<div class="flexrow resource-row">
+			<span>
+				<i class="fo-physical"></i>
+				&nbsp;
+				<label for="system.resistance.physical" class="resource-label upperC">
+					{{localize "FALLOUT.RESISTANCE.physical"}}
+				</label>
+			</span>
+			<input
+				class="num-short-2"
+				name="system.resistance.physical"
+				type="number"
+				value="{{system.resistance.physical}}"
+			>
+		</div>
+		<div class="flexrow resource-row">
+			<span>
+				<i class="fo-energy"></i>
+				&nbsp;
+				<label for="system.resistance.energy" class="resource-label upperC">
+					{{localize "FALLOUT.RESISTANCE.energy"}}
+				</label>
+			</span>
+			<input
+				class="num-short-2"
+				name="system.resistance.energy"
+				type="number"
+				value="{{system.resistance.energy}}"
+			>
+		</div>
+		<div class="flexrow resource-row">
+			<span>
+				<a
+					class="immune-toggle"
+					data-immunity-type="radiation"
+				>
+					<i
+						class="fo-radiation"
+						data-tooltip="{{localize 'FALLOUT.RESISTANCE.ClickToToggleImmunity'}}"
+						{{#if system.immunities.radiation}}
+							style="color: darkgray";
+						{{/if}}
+					></i>
+				</a>
+				&nbsp;
+				<label for="system.resistance.radiation" class="resource-label upperC">
+					{{localize "FALLOUT.RESISTANCE.radiation"}}
+				</label>
+			</span>
+			{{#if system.immunities.radiation}}
+				<input
+					class="num-short-2"
+					data-tooltip="{{localize 'FALLOUT.RESISTANCE.Immunity.radiation'}}"
+					data-dtype="String"
+					type="text"
+					value="&infin;"
+					disabled
+				>
+			{{else}}
+				<input
+					class="num-short-2"
+					name="system.resistance.radiation"
+					type="number"
+					value="{{system.resistance.radiation}}"
+				>
+			{{/if}}
+		</div>
+		<div class="flexrow resource-row">
+			<span>
+				<a
+					class="immune-toggle"
+					data-immunity-type="poison"
+				>
+					<i
+						class="fo-poison"
+						data-tooltip="{{localize 'FALLOUT.RESISTANCE.ClickToToggleImmunity'}}"
+						{{#if system.immunities.poison}}
+							style="color: darkgray";
+						{{/if}}
+					></i>
+				</a>
+				&nbsp;
+				<label for="system.resistance.poison" class="resource-label upperC">
+					{{localize "FALLOUT.RESISTANCE.poison"}}
+				</label>
+			</span>
+			{{#if system.immunities.poison}}
+				<input
+					class="num-short-2"
+					data-tooltip="{{localize 'FALLOUT.RESISTANCE.Immunity.poison'}}"
+					data-dtype="String"
+					type="text"
+					value="&infin;"
+					disabled
+				>
+			{{else}}
+				<input
+					class="num-short-2"
+					name="system.resistance.poison"
+					type="number"
+					value="{{system.resistance.poison}}"
+				>
+			{{/if}}
+		</div>
+	</div>
+</div>

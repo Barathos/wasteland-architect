@@ -1,0 +1,39 @@
+<div class="resource-row">
+	<label class="field-label">
+		{{localize "FALLOUT.TEMPLATES.WEAPON_QUALITIES"}}
+	</label>
+	<div class="grid-4-columns item-list" style="margin: 4px;">
+		{{#each weaponQualities}}
+			<div
+				{{#ifCond this.active '>' 0}}
+					class="flexrow toggle-label active"
+				{{else}}
+					class="flexrow toggle-label"
+				{{/ifCond}}
+				{{#if ../modded}}
+					data-tooltip="-{{localize "FALLOUT.Item.Warnings.Modded"}}-<br><br>{{fromConfig "WEAPON_QUALITY_TOOLTIPS" this.key}}"
+				{{else}}
+					data-tooltip="{{fromConfig "WEAPON_QUALITY_TOOLTIPS" this.key}}"
+				{{/if}}
+				data-active="{{this.active}}"
+				data-name="{{this.key}}"
+				data-type="quality"
+			>
+				<label style="align-self: center;">
+					{{this.label}}
+				</label>
+				{{#if this.hasRank}}
+					<input
+						class="num-short-2"
+						name="system.damage.weaponQuality.{{this.key}}.rank"
+						type="number"
+						value="{{this.rank}}"
+						   {{#if ../modded}}
+						   disabled
+						   {{/if}}
+					>
+				{{/if}}
+			</div>
+		{{/each}}
+	</div>
+</div>

@@ -1,0 +1,123 @@
+<div class="attributes tab" data-group="primary" data-tab="attributes">
+
+	<div class="flexrow resource-row">
+		<label class="field-label" for="system.fusionCore">
+			{{localize "FALLOUT.TEMPLATES.Ammo.FusionCore"}}
+		</label>
+
+		<input
+			class="input-checkbox"
+			data-dtype="Boolean"
+			name="system.fusionCore"
+			type="checkbox"
+			{{checked system.fusionCore}}
+		/>
+	</div>
+
+	{{#if system.fusionCore}}
+		<div class="flexrow resource-row">
+			<label class="field-label">
+				{{localize "FALLOUT.TEMPLATES.Ammo.ChargesRemaining"}}
+			</label>
+
+			<span class="align-right">
+				<label class="field-label" for="system.charges.current">
+					{{localize "FALLOUT.TEMPLATES.current"}}
+				</label>
+				&nbsp;
+				<input
+					class="num-short-3"
+					min="0"
+					name="system.charges.current"
+					type="number"
+					value="{{system.charges.current}}"
+				/>
+				&sol;
+				<input
+					class="num-short-3"
+					min="0"
+					name="system.charges.max"
+					type="number"
+					value="{{system.charges.max}}"
+				/>
+				&nbsp;
+				<label class="field-label" for="system.charges.max">
+					{{localize "FALLOUT.TEMPLATES.max"}}
+				</label>
+			</span>
+		</div>
+	{{/if}}
+
+	<div class="flexrow resource-row">
+		<label class="field-label">
+			{{localize "FALLOUT.TEMPLATES.Ammo.Current"}}
+		</label>
+
+		<span class="align-right">
+			<label class="field-label" for="system.shots.current">
+				{{localize "FALLOUT.TEMPLATES.current"}}
+			</label>
+			&nbsp;
+			<input
+				class="num-short-3"
+				min="0"
+				name="system.shots.current"
+				type="number"
+				value="{{system.shots.current}}"
+			/>
+			&sol;
+			<input
+				class="num-short-3"
+				min="0"
+				name="system.shots.max"
+				type="number"
+				value="{{system.shots.max}}"
+				{{#if system.fusionCore}}
+					data-tooltip="{{localize 'FALLOUT.TEMPLATES.Ammo.FusionCoreShots.tooltip'}}"
+					disabled
+				{{/if}}
+			/>
+			&nbsp;
+			<label class="field-label" for="system.shots.max">
+				{{localize "FALLOUT.TEMPLATES.max"}}
+			</label>
+		</span>
+	</div>
+
+	{{#if isGM}}
+		<div class="flexrow resource-row">
+			<label
+				class="field-label"
+				for="system.quantityRoll"
+			>
+				{{localize "FALLOUT.TEMPLATES.Ammo.QuantityRoll"}}
+				<a class="quantity-roll">
+					<i class="fa-solid fa-dice"></i>
+				</a>
+			</label>
+
+			<input
+				data-dtype="String"
+				name="system.quantityRoll"
+				type="text"
+				value="{{system.quantityRoll}}"
+			/>
+		</div>
+	{{/if}}
+
+	<div class="resource-row">
+		<h3 class="resource-label">
+			{{localize "FALLOUT.TEMPLATES.Effect"}}
+		</h3>
+
+		<div class="description-field">
+			{{editor effectHTML
+				button=true
+				editable=editable
+				owner=owner
+				target="system.effect"
+			}}
+		</div>
+	</div>
+
+</div>

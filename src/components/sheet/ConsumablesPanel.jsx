@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CORE_FOOD, CORE_CHEMS, CORE_OTHER_CONSUMABLES } from "../../lib/falloutData";
+import { CORE_FOOD, CORE_CHEMS, CORE_OTHER_CONSUMABLES } from "../../lib/sourceTruthData";
 
 function parseJ(str) { try { return JSON.parse(str || '[]'); } catch { return []; } }
 

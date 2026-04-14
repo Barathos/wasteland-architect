@@ -1,0 +1,63 @@
+<div class="tab attributes" data-group="primary" data-tab="attributes">
+
+	<div class="flexrow resource-row">
+		<label class="field-label" for="system.issue">
+			{{localize "FALLOUT.TEMPLATES.Publication"}}
+		</label>
+
+		<input
+			name="system.publication"
+			type="text"
+			value="{{system.publication}}"
+		>
+	</div>
+
+	<div class="flexrow resource-row">
+		<label class="field-label">
+			{{localize "FALLOUT.TEMPLATES.Uses"}}
+		</label>
+
+		<span class="align-right">
+			<input
+				class="num-short-3"
+				name="system.uses.value"
+				type="Number"
+				value="{{system.uses.value}}"
+			/>
+			&sol;
+			<input
+				class="num-short-3"
+				name="system.uses.max"
+				type="Number"
+				value="{{system.uses.max}}"
+			/>
+		</span>
+	</div>
+
+	<div class="flexrow align-left resource-row">
+		<label class="field-label" for="system.learned">
+			{{localize "FALLOUT.UI.Read"}}
+		</label>
+
+		<input
+			name="system.read"
+			type="checkbox"
+			{{checked system.read}}
+		>
+	</div>
+
+	<div class="resource-row">
+		<h3 class="resource-label">
+			{{localize "FALLOUT.TEMPLATES.Effect"}}
+		</h3>
+		<div class="description-field">
+			{{editor effectHTML
+				button=true
+				editable=editable
+				owner=owner
+				target="system.effect"
+			}}
+		</div>
+	</div>
+
+</div>

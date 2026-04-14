@@ -1,0 +1,32 @@
+{{!-- <li style="padding: 0 5px; border-bottom: 1px solid #637294; background-color: rgba(0, 0, 0, 0.2);"> --}}
+<li class="item">
+	<div class="flexrow">
+		<input
+			type="number"
+			class="num-short-3"
+			name="{{material.key}}"
+			value="{{material.value}}"
+			min="0"
+		>
+		&nbsp;&nbsp;
+		<div class="item-name flexlarge">
+			<h4>
+				<p class="resource-label">
+					{{material.label}}
+				</p>
+			</h4>
+		</div>
+		<div class="item-controls">
+			{{#if isPlayerCharacter}}
+				{{#ifCond material.key "===" "system.materials.junk"}}
+					<a
+						class="item-control salvage-junk"
+						title='{{localize "FALLOUT.actor.inventory.materials.junkSalvageControl"}}'
+					>
+						<i class="fa-solid fa-screwdriver-wrench"></i>
+					</a>
+				{{/ifCond}}
+			{{/if}}
+		</div>
+	</div>
+</li>

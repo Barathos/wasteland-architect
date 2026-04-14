@@ -1,0 +1,31 @@
+<div class="attributes-list">
+	{{#each FALLOUT.ATTRIBUTES as |attribute key|}}
+		{{> specialAttribute
+			attributeName=(localize attribute)
+			attribute=(lookup ../system.attributes key)
+			key=key
+		}}
+	{{/each}}
+</div>
+
+{{#*inline "specialAttribute"}}
+	<div class="attribute special-letter">
+		<label
+			class="resource-label align-left"
+			data-label="{{attributeName}}"
+			data-tooltip="{{attributeName}}"
+			for="system.attributes.{{key}}.value"
+		>
+			{{subString attributeName 0 1}}
+		</label>
+		<div class='special-number'>
+			<input
+				data-dtype="Number"
+				min="0"
+				name="system.attributes.{{key}}.value"
+				type="number"
+				value={{attribute.value}}
+			/>
+		</div>
+	</div>
+{{/inline}}

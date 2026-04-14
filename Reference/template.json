@@ -1,0 +1,1683 @@
+{
+	"Actor": {
+		"types": [
+			"character",
+			"creature",
+			"npc",
+			"robot",
+			"scavenging_location",
+			"settlement",
+			"vehicle"
+		],
+		"character": {
+			"chemDoses": {},
+			"templates": [
+				"base",
+				"body",
+				"derived",
+				"encumbrance",
+				"pc_shared",
+				"stats",
+				"valuables"
+			]
+		},
+		"vehicle": {
+			"cover": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"fuel": 0,
+			"health": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"impact": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"injuries": "",
+			"locations": [],
+			"passengers": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"resistance": {
+				"energy": {
+					"locations": "",
+					"value": 0
+				},
+				"physical": {
+					"locations": "",
+					"value": 0
+				}
+			},
+			"salvage": {
+				"tn": 0
+			},
+			"scale": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"travel_speed": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"vehicleQuality": {
+				"cargo_x": {
+					"rank": 25,
+					"value": false
+				},
+				"cumbersome": {
+					"rank": 0,
+					"value": false
+				},
+				"enclosed": {
+					"rank": 0,
+					"value": false
+				},
+				"exposed": {
+					"rank": 0,
+					"value": false
+				},
+				"high_performance": {
+					"rank": 0,
+					"value": false
+				},
+				"rugged": {
+					"rank": 0,
+					"value": false
+				},
+				"single_seat": {
+					"rank": 0,
+					"value": false
+				},
+				"flying": {
+					"rank": 1,
+					"value": false
+				},
+				"watercraft": {
+					"rank": 0,
+					"value": false
+				}
+			},
+			"zone_speed": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"templates": [
+				"base",
+				"encumbrance",
+				"valuables",
+				"body_vehicle",
+				"npc_shared"
+			]
+		},
+		"creature": {
+			"body": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"butchery": {
+				"common": 0,
+				"rare": 0,
+				"tn": 0,
+				"uncommon": 0
+			},
+			"defense": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"guns": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"health": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"initiative": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"injuries": "",
+			"locations": [],
+			"melee": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"mind": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"other": {
+				"max": 1,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"resistance": {
+				"energy": {
+					"locations": "",
+					"value": 0
+				},
+				"physical": {
+					"locations": "",
+					"value": 0
+				},
+				"poison": {
+					"locations": "",
+					"value": 0
+				},
+				"radiation": {
+					"locations": "",
+					"value": 0
+				}
+			},
+			"salvage": {
+				"tn": 0
+			},
+			"templates": [
+				"base",
+				"encumbrance",
+				"valuables",
+				"body",
+				"npc_shared"
+			]
+		},
+		"npc": {
+			"templates": [
+				"base",
+				"derived",
+				"encumbrance",
+				"settler",
+				"stats",
+				"valuables",
+				"body",
+				"npc_shared"
+			],
+			"wealth": 1
+		},
+		"robot": {
+			"templates": [
+				"base",
+				"body",
+				"derived",
+				"encumbrance",
+				"pc_shared",
+				"stats",
+				"valuables"
+			],
+			"conditions": {
+				"tinkeredWith": false
+			}
+		},
+		"scavenging_location": {
+			"templates": [
+				"valuables"
+			],
+			"caps_roll": "",
+			"category": "",
+			"complications": "",
+			"degree": "untouched",
+			"hazards": "",
+			"inhabitants": "",
+			"item_types": {
+				"ammunition": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"armor": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"beverages": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"chems": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"clothing": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"food": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"junk": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"other": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				},
+				"weapons": {
+					"max": 0,
+					"maxSpend": 0,
+					"min": 0,
+					"spend": 0,
+					"table": ""
+				}
+			},
+			"level": 0,
+			"notes": "",
+			"obstacles": "",
+			"prewar_roll": "",
+			"scale": "tiny"
+		},
+		"settlement": {
+			"templates": [
+				"valuables"
+			],
+			"beds": {
+				"value": 0
+			},
+			"defense": {
+				"value": 0
+			},
+			"food": {
+				"value": 0
+			},
+			"happiness": {
+				"mod": 0,
+				"total": 0,
+				"value": 0
+			},
+			"income": {
+				"value": 0
+			},
+			"leader": "",
+			"people": {
+				"mod": 0,
+				"value": 0
+			},
+			"power": {
+				"min": 0,
+				"value": 0
+			},
+			"water": {
+				"value": 0
+			},
+			"storage": {
+				"base": 0,
+				"mod": 0,
+				"total": 0,
+				"value": 0
+			}
+		},
+		"templates": {
+			"base": {
+				"biography": "",
+				"complication": 20,
+				"description": "",
+				"level": {
+					"currentXP": 0,
+					"nextLevelXP": 0,
+					"rewardXP": 0,
+					"value": 1
+				},
+				"origin": "",
+				"trait": ""
+			},
+			"body": {
+				"body_parts": {
+					"armL": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"armR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"head": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"legL": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"legR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"torso": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					}
+				},
+				"bodyType": "humanoid",
+				"immunities": {
+					"poison": false,
+					"radiation": false
+				}
+			},
+			"derived": {
+				"conditions": {
+					"alcoholic": false,
+					"fatigue": 0,
+					"hunger": 0,
+					"lastChanged": {
+						"hunger": 0,
+						"sleep": 0,
+						"thirst": 0
+					},
+					"intoxication": 0,
+					"sleep": 0,
+					"thirst": 0,
+					"wellRested": false
+				},
+				"defense": {
+					"bonus": 0,
+					"value": 0
+				},
+				"health": {
+					"bonus": 0,
+					"max": 0,
+					"value": 0
+				},
+				"initiative": {
+					"bonus": 0,
+					"value": 0
+				},
+				"luckPoints": 0,
+				"meleeDamage": {
+					"bonus": 0,
+					"value": 0
+				},
+				"radiation": 0,
+				"resistance": {
+					"energy": 0,
+					"physical": 0,
+					"poison": 0,
+					"radiation": 0
+				}
+			},
+			"encumbrance": {
+				"carryWeight": {
+					"base": 0,
+					"encumbranceLevel": 0,
+					"mod": 0,
+					"total": 0,
+					"value": 0
+				}
+			},
+			"npc_shared": {
+				"category": "normal"
+			},
+			"pc_shared": {
+				"readMagazines": []
+			},
+			"settler": {
+				"settlement": {
+					"action": "unnasigned",
+					"uuid": ""
+				}
+			},
+			"stats": {
+				"attributes": {
+					"agi": {
+						"value": 5
+					},
+					"cha": {
+						"value": 5
+					},
+					"end": {
+						"value": 5
+					},
+					"int": {
+						"value": 5
+					},
+					"luc": {
+						"value": 5
+					},
+					"per": {
+						"value": 5
+					},
+					"str": {
+						"value": 5
+					}
+				},
+				"skill": {
+					"tags": {
+						"additionalTags": [],
+						"bonus": 0,
+						"max": 3
+					}
+				}
+			},
+			"valuables": {
+				"currency": {
+					"caps": 0,
+					"other": ""
+				},
+				"materials": {
+					"junk": 0,
+					"common": 0,
+					"rare": 0,
+					"uncommon": 0
+				}
+			},
+			"body_vehicle": {
+				"body_parts": {
+					"chassis": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"engine": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"engineL": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"engineR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelF": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelFL": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelFR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy",
+						"wheelFR": {
+							"injuries": [
+								0,
+								0,
+								0,
+								0,
+								0
+							],
+							"injuryOpenCount": 0,
+							"injuryTreatedCount": 0,
+							"resistance": {
+								"energy": 0,
+								"physical": 0
+							},
+							"status": "healthy"
+						}
+					},
+					"wheelML": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelMR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelRL": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelRR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelRL1": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelRR1": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelRL2": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wheelRR2": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wingL": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"wingR": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"weaponNG": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					},
+					"weaponDG": {
+						"injuries": [
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"injuryOpenCount": 0,
+						"injuryTreatedCount": 0,
+						"resistance": {
+							"energy": 0,
+							"physical": 0,
+							"poison": 0,
+							"radiation": 0
+						},
+						"status": "healthy"
+					}
+				},
+				"bodyType": "carTruck",
+				"immunities": {
+					"poison": true,
+					"radiation": true
+				}
+			}
+		}
+	},
+	"Item": {
+		"types": [
+			"addiction",
+			"ammo",
+			"apparel",
+			"apparel_mod",
+			"books_and_magz",
+			"consumable",
+			"disease",
+			"miscellany",
+			"object_or_structure",
+			"perk",
+			"robot_armor",
+			"robot_mod",
+			"skill",
+			"special_ability",
+			"trait",
+			"weapon",
+			"weapon_mod"
+		],
+		"addiction": {
+			"templates": [
+				"base"
+			]
+		},
+		"ammo": {
+			"charges": {
+				"current": 0,
+				"max": 0
+			},
+			"effect": "",
+			"fusionCore": false,
+			"shots": {
+				"current": 1,
+				"max": 1
+			},
+			"quantityRoll": "",
+			"templates": [
+				"base",
+				"physical"
+			]
+		},
+		"apparel": {
+			"apparelType": "armor",
+			"health": {
+				"max": 0,
+				"min": 0,
+				"mod": 0,
+				"value": 0
+			},
+			"location": {
+				"armL": false,
+				"armR": false,
+				"head": false,
+				"legL": false,
+				"legR": false,
+				"torso": false
+			},
+			"mods": {
+				"current": 0,
+				"installedMods": "",
+				"list": "",
+				"max": 0,
+				"modded": false
+			},
+			"powerArmor": {
+				"frameId": "",
+				"isFrame": false,
+				"powered": false
+			},
+			"resistance": {
+				"energy": 0,
+				"physical": 0,
+				"radiation": 0
+			},
+			"shadowed": false,
+			"templates": [
+				"base",
+				"physical",
+				"equipable",
+				"scrappable"
+			]
+		},
+		"apparel_mod": {
+			"apparelType": "",
+			"effect": "",
+			"health": {
+				"value": 0
+			},
+			"location": "",
+			"modType": "material",
+			"perks": "",
+			"resistance": {
+				"energy": 0,
+				"physical": 0,
+				"radiation": 0
+			},
+			"shadowed": false,
+			"summary": "",
+			"templates": [
+				"base",
+				"physical",
+				"attachable",
+				"scrappable"
+			]
+		},
+		"books_and_magz": {
+			"effect": "",
+			"publication": "",
+			"read": false,
+			"uses": {
+				"max": 1,
+				"value": 0
+			},
+			"templates": [
+				"base",
+				"physical"
+			]
+		},
+		"consumable": {
+			"addiction": 0,
+			"addictive": false,
+			"alcoholic": false,
+			"butchery": false,
+			"group": "",
+			"consumableType": "food",
+			"duration": "instant",
+			"effect": "",
+			"hp": 0,
+			"irradiated": false,
+			"prepared": false,
+			"providesCap": false,
+			"quantityRoll": "",
+			"radiation": 0,
+			"radiationDamage": 1,
+			"thirstReduction": 0,
+			"templates": [
+				"base",
+				"physical"
+			]
+		},
+		"disease": {
+			"daysInfected": 0,
+			"duration": 1,
+			"infectionActive": false,
+			"templates": [
+				"base"
+			]
+		},
+		"miscellany": {
+			"effect": "",
+			"quantityRoll": "",
+			"templates": [
+				"base",
+				"physical",
+				"scrappable"
+			]
+		},
+		"object_or_structure": {
+			"templates": [
+				"base"
+			],
+			"constructionTime": 0,
+			"effect": "",
+			"itemType": "crafting_table",
+			"materials": {
+				"common": 0,
+				"rare": 0,
+				"uncommon": 0
+			},
+			"parentItem": "",
+			"perks": "",
+			"rarity": "common",
+			"skills": ""
+		},
+		"perk": {
+			"rank": {
+				"max": 1,
+				"value": 0
+			},
+			"requirements": "",
+			"requirementsEx": {
+				"level": 1,
+				"levelIncrease": 0,
+				"attributes": {
+					"str": {
+						"value": 0
+					},
+					"per": {
+						"value": 0
+					},
+					"end": {
+						"value": 0
+					},
+					"cha": {
+						"value": 0
+					},
+					"int": {
+						"value": 0
+					},
+					"agi": {
+						"value": 0
+					},
+					"luc": {
+						"value": 0
+					}
+				},
+				"isCompanion": false,
+				"magazineUuids": [],
+				"notGhoul": false,
+				"notHuman": false,
+				"notRadiationImmune": false,
+				"notRobot": false,
+				"notSupermutant": false
+			},
+			"templates": [
+				"base"
+			]
+		},
+		"robot_armor": {
+			"apparelType": "",
+			"carry": 0,
+			"location": {
+				"armL": false,
+				"armR": false,
+				"head": false,
+				"legL": false,
+				"legR": false,
+				"torso": false
+			},
+			"perks": "",
+			"resistance": {
+				"energy": 0,
+				"physical": 0,
+				"radiation": 0
+			},
+			"templates": [
+				"base",
+				"physical",
+				"equipable",
+				"scrappable"
+			]
+		},
+		"robot_mod": {
+			"effect": "",
+			"perks": "",
+			"templates": [
+				"base",
+				"physical",
+				"equipable",
+				"scrappable"
+			]
+		},
+		"skill": {
+			"defaultAttribute": "str",
+			"summary": "",
+			"tag": false,
+			"templates": [
+				"base"
+			],
+			"value": 0
+		},
+		"special_ability": {
+			"templates": [
+				"base"
+			]
+		},
+		"trait": {
+			"templates": [
+				"base"
+			]
+		},
+		"templates": {
+			"attachable": {
+				"attachable": true,
+				"attached": false
+			},
+			"base": {
+				"description": "",
+				"favorite": false,
+				"source": ""
+			},
+			"equipable": {
+				"equippable": true,
+				"equipped": false
+			},
+			"physical": {
+				"cost": 0,
+				"quantity": 1,
+				"rarity": 0,
+				"stashed": false,
+				"weight": 0
+			},
+			"scrappable": {
+				"canBeScrapped": true,
+				"isJunk": false
+			}
+		},
+		"weapon": {
+			"ammo": "",
+			"ammoPerShot": 1,
+			"attribute": "",
+			"condition": "",
+			"consumedOnUse": false,
+			"creatureAttribute": "",
+			"creatureSkill": "",
+			"damage": {
+				"damageEffect": {
+					"arc": {
+						"rank": 0,
+						"value": 0
+					},
+					"breaking": {
+						"rank": 0,
+						"value": 0
+					},
+					"burst": {
+						"rank": 0,
+						"value": 0
+					},
+					"freeze": {
+						"rank": 0,
+						"value": 0
+					},
+					"persistent": {
+						"rank": 0,
+						"value": 0
+					},
+					"piercing_x": {
+						"rank": 1,
+						"value": 0
+					},
+					"radioactive": {
+						"rank": 0,
+						"value": 0
+					},
+					"spread": {
+						"rank": 0,
+						"value": 0
+					},
+					"stun": {
+						"rank": 0,
+						"value": 0
+					},
+					"tranquilize_x": {
+						"rank": 1,
+						"value": 0
+					},
+					"vicious": {
+						"rank": 0,
+						"value": 0
+					}
+				},
+				"damageType": {
+					"energy": false,
+					"physical": false,
+					"poison": false,
+					"radiation": false
+				},
+				"originalDamageType": {
+					"energy": false,
+					"physical": false,
+					"poison": false,
+					"radiation": false
+				},
+				"originalRating": 0,
+				"rating": 1,
+				"weaponQuality": {
+					"accurate": {
+						"rank": 0,
+						"value": 0
+					},
+					"aquatic": {
+						"rank": 0,
+						"value": 0
+					},
+					"ammo_hungry_x": {
+						"rank": 1,
+						"value": 0
+					},
+					"blast": {
+						"rank": 0,
+						"value": 0
+					},
+					"bombard": {
+						"rank": 0,
+						"value": 0
+					},
+					"close_quarters": {
+						"rank": 0,
+						"value": 0
+					},
+					"concealed": {
+						"rank": 0,
+						"value": 0
+					},
+					"debilitating": {
+						"rank": 0,
+						"value": 0
+					},
+					"delay_x": {
+						"rank": 1,
+						"value": 0
+					},
+					"gatling": {
+						"rank": 0,
+						"value": 0
+					},
+					"fuel_x": {
+						"rank": 1,
+						"value": 0
+					},
+					"inaccurate": {
+						"rank": 0,
+						"value": 0
+					},
+					"limited": {
+						"rank": 0,
+						"value": 0
+					},
+					"mine": {
+						"rank": 0,
+						"value": 0
+					},
+					"night_vision": {
+						"rank": 0,
+						"value": 0
+					},
+					"parry": {
+						"rank": 0,
+						"value": 0
+					},
+					"placed": {
+						"rank": 0,
+						"value": 0
+					},
+					"recoil_x": {
+						"rank": 1,
+						"value": 0
+					},
+					"recon": {
+						"rank": 0,
+						"value": 0
+					},
+					"reliable": {
+						"rank": 0,
+						"value": 0
+					},
+					"slow_load": {
+						"rank": 0,
+						"value": 0
+					},
+					"suppressed": {
+						"rank": 0,
+						"value": 0
+					},
+					"surge": {
+						"rank": 0,
+						"value": 0
+					},
+					"thrown": {
+						"rank": 0,
+						"value": 0
+					},
+					"two_handed": {
+						"rank": 0,
+						"value": 0
+					},
+					"unreliable": {
+						"rank": 0,
+						"value": 0
+					},
+					"unstable_radiation": {
+						"rank": 0,
+						"value": 0
+					},
+					"wrangle": {
+						"rank": 0,
+						"value": 0
+					}
+				}
+			},
+			"fireRate": 0,
+			"melee": false,
+			"mods": {
+				"current": 0,
+				"installedMods": "",
+				"list": "",
+				"max": 0,
+				"modded": false
+			},
+			"naturalWeapon":  false,
+			"originalAmmoPerShot": 0,
+			"quantityRoll": "",
+			"range": "",
+			"skill": "",
+			"tear": 0,
+			"templates": [
+				"base",
+				"physical",
+				"equipable",
+				"scrappable"
+			],
+			"weaponType": ""
+		},
+		"weapon_mod": {
+			"modEffects": {
+				"ammo": "",
+				"ammoPerShot": 0,
+				"damage": {
+					"damageEffect": {
+						"arc": {
+							"rank": 0,
+							"value": 0
+						},
+						"breaking": {
+							"rank": 0,
+							"value": 0
+						},
+						"burst": {
+							"rank": 0,
+							"value": 0
+						},
+						"freeze": {
+							"rank": 0,
+							"value": 0
+						},
+						"persistent": {
+							"rank": 0,
+							"value": 0
+						},
+						"piercing_x": {
+							"rank": 0,
+							"value": 0
+						},
+						"radioactive": {
+							"rank": 0,
+							"value": 0
+						},
+						"spread": {
+							"rank": 0,
+							"value": 0
+						},
+						"stun": {
+							"rank": 0,
+							"value": 0
+						},
+						"tranquilize_x": {
+							"rank": 0,
+							"value": 0
+						},
+						"vicious": {
+							"rank": 0,
+							"value": 0
+						}
+					},
+					"damageType": {
+						"energy": false,
+						"physical": false,
+						"poison": false,
+						"radiation": false
+					},
+					"overrideDamage": "modify",
+					"rating": 0,
+					"weaponQuality": {
+						"accurate": {
+							"rank": 0,
+							"value": 0
+						},
+						"aquatic": {
+							"rank": 0,
+							"value": 0
+						},
+						"ammo_hungry_x": {
+							"rank": 0,
+							"value": 0
+						},
+						"blast": {
+							"rank": 0,
+							"value": 0
+						},
+						"bombard": {
+							"rank": 0,
+							"value": 0
+						},
+						"close_quarters": {
+							"rank": 0,
+							"value": 0
+						},
+						"concealed": {
+							"rank": 0,
+							"value": 0
+						},
+						"debilitating": {
+							"rank": 0,
+							"value": 0
+						},
+						"delay_x": {
+							"rank": 0,
+							"value": 0
+						},
+						"fuel_x": {
+							"rank": 1,
+							"value": 0
+						},
+						"gatling": {
+							"rank": 0,
+							"value": 0
+						},
+						"inaccurate": {
+							"rank": 0,
+							"value": 0
+						},
+						"limited": {
+							"rank": 0,
+							"value": 0
+						},
+						"mine": {
+							"rank": 0,
+							"value": 0
+						},
+						"night_vision": {
+							"rank": 0,
+							"value": 0
+						},
+						"parry": {
+							"rank": 0,
+							"value": 0
+						},
+						"placed": {
+							"rank": 0,
+							"value": 0
+						},
+						"recoil_x": {
+							"rank": 0,
+							"value": 0
+						},
+						"recon": {
+							"rank": 0,
+							"value": 0
+						},
+						"reliable": {
+							"rank": 0,
+							"value": 0
+						},
+						"slow_load": {
+							"rank": 0,
+							"value": 0
+						},
+						"suppressed": {
+							"rank": 0,
+							"value": 0
+						},
+						"surge": {
+							"rank": 0,
+							"value": 0
+						},
+						"thrown": {
+							"rank": 0,
+							"value": 0
+						},
+						"two_handed": {
+							"rank": 0,
+							"value": 0
+						},
+						"unreliable": {
+							"rank": 0,
+							"value": 0
+						},
+						"unstable_radiation": {
+							"rank": 0,
+							"value": 0
+						},
+						"wrangle": {
+							"rank": 0,
+							"value": 0
+						}
+					}
+				},
+				"effect": "",
+				"fireRate": 0,
+				"info": "",
+				"range": 0,
+				"summary": ""
+			},
+			"modType": "",
+			"namePrefix": "",
+			"perks": "",
+			"templates": [
+				"base",
+				"attachable",
+				"physical"
+			],
+			"weaponType": ""
+		}
+	}
+}

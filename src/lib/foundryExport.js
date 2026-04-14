@@ -1,6 +1,17 @@
 // Foundry VTT export utility for Fallout 2d20 system
 // Matches Foundry 13.351 / fallout system 11.16.6 actor document shape
 // Item system objects are built by cloning from embedded template data.
+import {
+  CORE_AMMO,
+  CORE_APPAREL,
+  CORE_ARMOR,
+  CORE_CHEMS,
+  CORE_FOOD,
+  CORE_OTHER_CONSUMABLES,
+  CORE_PERKS,
+  CORE_POWER_ARMOR,
+  CORE_WEAPONS,
+} from "./sourceTruthData.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Embedded template fragments (sourced from Foundry system template.json)
@@ -162,6 +173,29 @@ const ITEM_TEMPLATES = {
     thirstReduction: 0,
     templates: ['base', 'physical'],
   },
+
+  miscellany: {
+    effect: '',
+    quantityRoll: '',
+    templates: ['base', 'physical', 'scrappable'],
+  },
+
+  robot_mod: {
+    effect: '',
+    perks: '',
+    templates: ['base', 'physical', 'equipable', 'scrappable'],
+  },
+
+  addiction: {
+    templates: ['base'],
+  },
+
+  disease: {
+    daysInfected: 0,
+    duration: 1,
+    infectionActive: false,
+    templates: ['base'],
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -274,6 +308,74 @@ function safeParseJson(str, fallback) {
 
 // Foundry uses integers 0/1 for damageEffect/weaponQuality value fields
 function b(v) { return v ? 1 : 0; }
+
+function isDefined(v) {
+  return v !== undefined && v !== null && !(typeof v === 'string' && v.trim() === '');
+}
+
+function pickFirst(...values) {
+  for (const value of values) {
+    if (isDefined(value)) return value;
+  }
+  return undefined;
+}
+
+function normalizeKey(input) {
+  return String(input || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+function normalizeName(input) {
+  return String(input || '')
+    .toLowerCase()
+    .replace(/[+]/g, ' ')
+    .replace(/[()]/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function stripHtml(input) {
+  return String(input || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function buildLookup(items, labelField = 'label') {
+  const map = new Map();
+  for (const item of items || []) {
+    if (!item || typeof item !== 'object') continue;
+    const key = normalizeKey(item.key);
+    const label = normalizeName(item[labelField] || item.name || item.type);
+    if (key) map.set(`key:${key}`, item);
+    if (label) map.set(`name:${label}`, item);
+  }
+  return map;
+}
+
+function findInLookup(map, candidates = []) {
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+    const byKey = map.get(`key:${normalizeKey(candidate)}`);
+    if (byKey) return byKey;
+    const byName = map.get(`name:${normalizeName(candidate)}`);
+    if (byName) return byName;
+  }
+  return null;
+}
+
+function safeQty(value, fallback = 1) {
+  const qty = parseInt(value, 10);
+  return Number.isFinite(qty) && qty > 0 ? qty : fallback;
+}
+
+const WEAPON_LOOKUP = buildLookup(CORE_WEAPONS);
+const AMMO_LOOKUP = buildLookup(CORE_AMMO);
+const APPAREL_LOOKUP = buildLookup([...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR]);
+const CHEM_LOOKUP = buildLookup(CORE_CHEMS);
+const FOOD_LOOKUP = buildLookup(CORE_FOOD);
+const OTHER_CONSUMABLE_LOOKUP = buildLookup(CORE_OTHER_CONSUMABLES);
+const PERK_LOOKUP = buildLookup(CORE_PERKS);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Metadata builders
@@ -485,75 +587,122 @@ function buildSkillItems(character) {
 }
 
 function buildWeaponItem(w) {
-  const isMelee     = ['Melee', 'Unarmed'].includes(w.type);
-  const damageRating = parseInt((w.damage || '0').toString().replace(/[^0-9]/g, '')) || 0;
-  const dtStr        = w.damageType || '';
+  const ref = findInLookup(WEAPON_LOOKUP, [w.key, w.name, w.label]);
+  const resolved = {
+    name: pickFirst(w.name, w.label, ref?.label, 'Unknown Weapon'),
+    type: pickFirst(w.type, ref?.type, 'Melee'),
+    damage: pickFirst(w.damage, ref?.damage, '0'),
+    damageType: pickFirst(w.damageType, ref?.damageType, 'Physical'),
+    damageEffect: pickFirst(w.damageEffect, ref?.damageEffect, ''),
+    qualities: pickFirst(w.qualities, ref?.qualities, ''),
+    range: pickFirst(w.range, ref?.range, 'Close'),
+    fireRate: pickFirst(w.fireRate, w.fire_rate, ref?.fireRate, 0),
+    ammo: pickFirst(w.ammoType, w.ammo, ref?.ammo, ''),
+    cost: pickFirst(w.cost, ref?.cost, 0),
+    rarity: pickFirst(w.rarity, ref?.rarity, 0),
+    weight: pickFirst(w.weight, ref?.weight, 0),
+    quantity: safeQty(w.quantity, 1),
+    notes: pickFirst(w.note, w.notes, ref?.note, ''),
+  };
+
+  const isMelee     = ['Melee', 'Unarmed'].includes(resolved.type);
+  const damageRating = parseInt(String(resolved.damage || '0').replace(/[^0-9]/g, ''), 10) || 0;
+  const dtStr        = resolved.damageType || '';
   const isEnergy     = /energy/i.test(dtStr);
   const isRadiation  = /radiation/i.test(dtStr);
   const isPoison     = /poison/i.test(dtStr);
   const isPhysical   = /physical/i.test(dtStr) || (!isEnergy && !isRadiation && !isPoison);
 
-  const item = makeItemBase(null, w.name || 'Unknown Weapon', 'weapon', 'systems/fallout/assets/icons/items/weapon.svg');
+  const item = makeItemBase(null, resolved.name, 'weapon', 'systems/fallout/assets/icons/items/weapon.svg');
 
   // Build via template, then patch nested objects that need deep mutation
   const system = createSystemFromTemplate('weapon', {
-    description:      w.notes ? `<p>${w.notes}</p>` : '',
+    description:      resolved.notes ? `<p>${resolved.notes}</p>` : '',
     source:           'custom',
-    cost:             w.cost || 0,
-    quantity:         1,
-    rarity:           w.rarity || 0,
-    weight:           parseFloat(w.weight) || 0,
-    ammo:             w.ammoType || w.ammo || '',
+    cost:             parseInt(resolved.cost, 10) || 0,
+    quantity:         resolved.quantity,
+    rarity:           parseInt(resolved.rarity, 10) || 0,
+    weight:           parseFloat(resolved.weight) || 0,
+    ammo:             resolved.ammo || '',
     ammoPerShot:      1,
     creatureSkill:    isMelee ? 'melee' : 'guns',
-    fireRate:         w.fireRate ?? w.fire_rate ?? 0,
+    fireRate:         parseInt(resolved.fireRate, 10) || 0,
     melee:            isMelee,
-    range:            mapRange(w.range),
-    weaponType:       mapWeaponType(w.type),
+    range:            mapRange(resolved.range),
+    weaponType:       mapWeaponType(resolved.type),
   });
 
   // Patch damage sub-object individually (nested merge)
   system.damage.rating = damageRating;
   system.damage.damageType = { energy: isEnergy, physical: isPhysical, poison: isPoison, radiation: isRadiation };
-  system.damage.damageEffect  = parseDamageEffects(w.damageEffect || '');
-  system.damage.weaponQuality = parseWeaponQualities(w.qualities || '');
+  system.damage.damageEffect  = parseDamageEffects(resolved.damageEffect || '');
+  system.damage.weaponQuality = parseWeaponQualities(resolved.qualities || '');
 
   item.system = system;
   return item;
 }
 
 function buildApparelItem(a) {
-  const locationsRaw = a.locations
-    ? (typeof a.locations === 'string' ? a.locations.split(',').map(s => s.trim()) : a.locations)
-    : [];
-  const hp = a.hp || 0;
+  const ref = findInLookup(APPAREL_LOOKUP, [a.key, a.name, a.label, a.linkedArmorName]);
+  const source = {
+    name: pickFirst(a.name, a.label, a.linkedArmorName, ref?.label, 'Apparel'),
+    type: pickFirst(a.type, ref?.type, 'Armor'),
+    special: pickFirst(a.special, ref?.special, ''),
+    cost: pickFirst(a.cost, ref?.cost, 0),
+    rarity: pickFirst(a.rarity, ref?.rarity, 0),
+    weight: pickFirst(a.weight, ref?.weight, 0),
+    quantity: safeQty(a.quantity, 1),
+    physRes: pickFirst(a.physRes, a.physDR, ref?.physRes, 0),
+    enerRes: pickFirst(a.enerRes, a.energyDR, ref?.enerRes, 0),
+    radRes: pickFirst(a.radRes, a.radDR, ref?.radRes, 0),
+    hp: pickFirst(a.hp, ref?.hp, 0),
+    locations: pickFirst(a.locations, ref?.locations, []),
+  };
 
-  const item = makeItemBase(null, a.name || 'Apparel', 'apparel', 'systems/fallout/assets/icons/items/apparel.svg');
-  const system = createSystemFromTemplate('apparel', {
-    description:  a.special ? `<p>${a.special}</p>` : '',
+  const locationsRaw = source.locations
+    ? (typeof source.locations === 'string' ? source.locations.split(',').map(s => s.trim()) : source.locations)
+    : (Array.isArray(source.locations) ? source.locations : []);
+  const hp = parseInt(source.hp, 10) || 0;
+  const normalizedType = String(source.type || '').toLowerCase();
+  const itemType = normalizedType.includes('robot') ? 'robot_armor' : 'apparel';
+  const item = makeItemBase(null, source.name, itemType, 'systems/fallout/assets/icons/items/apparel.svg');
+  const system = createSystemFromTemplate(itemType, {
+    description:  source.special ? `<p>${source.special}</p>` : '',
     source:       'custom',
-    cost:         parseInt(a.cost) || 0,
-    quantity:     1,
-    rarity:       parseInt(a.rarity) || 0,
-    weight:       parseFloat(a.weight) || 0,
-    apparelType:  mapApparelType(a.type || ''),
+    cost:         parseInt(source.cost, 10) || 0,
+    quantity:     source.quantity,
+    rarity:       parseInt(source.rarity, 10) || 0,
+    weight:       parseFloat(source.weight) || 0,
+    apparelType:  mapApparelType(source.type || ''),
     shadowed:     false,
   });
 
   // Patch nested objects
   system.health     = { max: hp, min: 0, mod: 0, value: hp };
   system.location   = mapApparelLocations(locationsRaw);
-  system.resistance = { energy: a.enerRes ?? 0, physical: a.physRes ?? 0, radiation: a.radRes ?? 0 };
+  system.resistance = {
+    energy: parseInt(source.enerRes, 10) || 0,
+    physical: parseInt(source.physRes, 10) || 0,
+    radiation: parseInt(source.radRes, 10) || 0,
+  };
 
   item.system = system;
   return item;
 }
 
 function buildPerkItem(p) {
-  const label       = typeof p === 'string'
-    ? p.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
-    : (p.label || p.name || 'Perk');
-  const description = typeof p === 'object' ? (p.description || '') : '';
+  const key = typeof p === 'string' ? p : p?.key;
+  const ref = findInLookup(PERK_LOOKUP, [key, p?.label, p?.name]);
+  const label       = pickFirst(
+    typeof p === 'string' ? p.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : undefined,
+    p?.label,
+    p?.name,
+    ref?.label,
+    'Perk'
+  );
+  const description = pickFirst(p?.description, ref?.description, '');
+  const requirements = pickFirst(p?.requirements, ref?.requirements, {});
+  const rankMax = parseInt(pickFirst(p?.ranks, p?.maxRanks, ref?.ranks, 1), 10) || 1;
 
   const item = makeItemBase(null, label, 'perk', 'systems/fallout/assets/icons/items/perk.webp');
   item.system = createSystemFromTemplate('perk', {
@@ -562,18 +711,28 @@ function buildPerkItem(p) {
   });
   // Set rank value to 1 (character has this perk)
   item.system.rank.value = 1;
+  item.system.rank.max = rankMax;
+  item.system.requirementsEx.level = parseInt(requirements.level, 10) || 1;
+  const attrMap = { STR: 'str', PER: 'per', END: 'end', CHA: 'cha', INT: 'int', AGI: 'agi', LCK: 'luc' };
+  for (const [abbr, field] of Object.entries(attrMap)) {
+    const req = parseInt(requirements[abbr], 10);
+    if (req > 0) item.system.requirementsEx.attributes[field].value = req;
+  }
   return item;
 }
 
 function buildAmmoItem(a) {
-  const qty  = parseInt(a.quantity) || 0;
-  const item = makeItemBase(null, a.type || a.label || a.name || 'Ammo', 'ammo', 'systems/fallout/assets/icons/items/ammo.webp');
+  const ref = findInLookup(AMMO_LOOKUP, [a.key, a.type, a.label, a.name]);
+  const name = pickFirst(a.type, a.label, a.name, ref?.label, 'Ammo');
+  const qty = safeQty(a.quantity, 1);
+  const item = makeItemBase(null, name, 'ammo', 'systems/fallout/assets/icons/items/ammo.webp');
   item.system = createSystemFromTemplate('ammo', {
     source:   'custom',
-    cost:     1,
+    cost:     parseInt(pickFirst(a.cost, ref?.cost, 1), 10) || 1,
     quantity: qty,
-    rarity:   1,
-    weight:   0.1,
+    rarity:   parseInt(pickFirst(a.rarity, ref?.rarity, 1), 10) || 1,
+    weight:   parseFloat(pickFirst(a.weight, ref?.weight, 0.1)) || 0.1,
+    effect:   pickFirst(a.effect, ref?.effect, ''),
     fusionCore: false,
   });
   item.system.charges = { current: qty, max: qty };
@@ -582,25 +741,101 @@ function buildAmmoItem(a) {
 }
 
 function buildConsumableItem(c, type = 'chem') {
-  const name = c.label || c.name || (type === 'food' ? 'Food' : 'Consumable');
+  const lookup = type === 'chem' ? CHEM_LOOKUP : type === 'food' ? FOOD_LOOKUP : OTHER_CONSUMABLE_LOOKUP;
+  const ref = findInLookup(lookup, [c.key, c.label, c.name]);
+  const name = pickFirst(c.label, c.name, ref?.label, type === 'food' ? 'Food' : 'Consumable');
+  const quantity = safeQty(c.quantity, 1);
+  const cost = parseInt(pickFirst(c.cost, ref?.cost, 0), 10) || 0;
+  const rarity = parseInt(pickFirst(c.rarity, ref?.rarity, 0), 10) || 0;
+  const weight = parseFloat(pickFirst(c.weight, ref?.weight, type === 'food' ? 0.5 : 0.1)) || (type === 'food' ? 0.5 : 0.1);
+  const effectText = pickFirst(c.effect, ref?.effect, '');
+  const hp = parseInt(pickFirst(c.hp, ref?.hp, 0), 10) || 0;
+  const isAddictive = Boolean(pickFirst(c.addictive, ref?.addictive, false));
+  const duration = pickFirst(c.duration, ref?.duration, type === 'food' ? 'instant' : 'lasting');
+  const consumableType = type === 'food' ? 'food' : type === 'chem' ? 'chem' : 'other';
+  const irradiated = Boolean(pickFirst(c.irradiated, ref?.irradiated, false));
   const desc = type === 'food'
-    ? `<p>Heals ${c.hp || 0} HP.${c.effect ? ' ' + c.effect : ''}</p>`
-    : (c.effect ? `<p>${c.effect}</p>` : '');
+    ? `<p>Heals ${hp} HP.${effectText ? ` ${effectText}` : ''}</p>`
+    : (effectText ? `<p>${effectText}</p>` : '');
 
   const item = makeItemBase(null, name, 'consumable', 'systems/fallout/assets/icons/items/consumable.webp');
   item.system = createSystemFromTemplate('consumable', {
     description:     desc,
     source:          'core_rulebook',
-    cost:            c.cost || 0,
-    quantity:        c.quantity || 1,
-    rarity:          c.rarity || 0,
-    weight:          parseFloat(c.weight) || (type === 'food' ? 0.5 : 0.1),
-    consumableType:  type === 'food' ? 'food' : 'chem',
-    duration:        c.duration || (type === 'food' ? 'instant' : 'lasting'),
-    effect:          c.effect || '',
-    hp:              c.hp || 0,
-    addictive:       c.addictive || false,
-    irradiated:      c.irradiated || false,
+    cost,
+    quantity,
+    rarity,
+    weight,
+    consumableType,
+    duration:        String(duration).toLowerCase(),
+    effect:          effectText || '',
+    hp,
+    addictive:       isAddictive,
+    irradiated,
+  });
+
+  const addictionRating = parseInt(pickFirst(c.addictionNumber, ref?.addictionNumber, c.addiction, 0), 10);
+  if (addictionRating > 0) item.system.addiction = addictionRating;
+
+  return item;
+}
+
+function buildMiscellanyItem(entry) {
+  const name = pickFirst(entry.name, entry.label, 'Miscellany');
+  const qty = safeQty(entry.quantity, 1);
+  const effect = pickFirst(entry.effect, entry.note, entry.notes, '');
+  const item = makeItemBase(null, name, 'miscellany', 'systems/fallout/assets/icons/items/miscellany.svg');
+  item.system = createSystemFromTemplate('miscellany', {
+    description: effect ? `<p>${stripHtml(effect)}</p>` : '',
+    source: 'custom',
+    cost: parseInt(entry.cost, 10) || 0,
+    quantity: qty,
+    rarity: parseInt(entry.rarity, 10) || 0,
+    weight: parseFloat(entry.weight) || 0,
+    effect: effect || '',
+  });
+  return item;
+}
+
+function buildRobotModItem(entry) {
+  const name = pickFirst(entry.name, entry.label, 'Robot Mod');
+  const qty = safeQty(entry.quantity, 1);
+  const effect = pickFirst(entry.effect, entry.note, entry.notes, '');
+  const item = makeItemBase(null, name, 'robot_mod', 'systems/fallout/assets/icons/items/robot_mod.svg');
+  item.system = createSystemFromTemplate('robot_mod', {
+    description: effect ? `<p>${stripHtml(effect)}</p>` : '',
+    source: 'custom',
+    cost: parseInt(entry.cost, 10) || 0,
+    quantity: qty,
+    rarity: parseInt(entry.rarity, 10) || 0,
+    weight: parseFloat(entry.weight) || 0,
+    effect: effect || '',
+    perks: entry.perks || '',
+  });
+  return item;
+}
+
+function buildAddictionItem(entry) {
+  const name = pickFirst(entry.label, entry.name, entry.key, 'Addiction');
+  const effect = pickFirst(entry.effect, '');
+  const item = makeItemBase(null, name, 'addiction', 'systems/fallout/assets/icons/items/addiction.svg');
+  item.system = createSystemFromTemplate('addiction', {
+    description: effect ? `<p>${stripHtml(effect)}</p>` : '',
+    source: 'custom',
+  });
+  return item;
+}
+
+function buildDiseaseItem(entry) {
+  const name = pickFirst(entry.label, entry.name, entry.key, 'Disease');
+  const effect = pickFirst(entry.effect, entry.notes, '');
+  const item = makeItemBase(null, name, 'disease', 'systems/fallout/assets/icons/items/disease.svg');
+  item.system = createSystemFromTemplate('disease', {
+    description: effect ? `<p>${stripHtml(effect)}</p>` : '',
+    source: 'custom',
+    duration: parseInt(entry.duration, 10) || 1,
+    daysInfected: parseInt(entry.daysInfected, 10) || 0,
+    infectionActive: Boolean(entry.infectionActive ?? true),
   });
   return item;
 }
@@ -616,7 +851,7 @@ function buildEmbeddedItems(character) {
   const appWeapons = safeParseJson(character.equipment, []);
   if (Array.isArray(appWeapons)) {
     appWeapons.forEach(w => {
-      if (!w || typeof w !== 'object' || w.source === 'starting_equipment') return;
+      if (!w || typeof w !== 'object') return;
       items.push(buildWeaponItem(w));
     });
   }
@@ -625,7 +860,7 @@ function buildEmbeddedItems(character) {
   const appAmmo = safeParseJson(character.ammo_inventory, []);
   if (Array.isArray(appAmmo)) {
     appAmmo.forEach(a => {
-      if (!a || a.source === 'starting_equipment') return;
+      if (!a) return;
       items.push(buildAmmoItem(a));
     });
   }
@@ -655,6 +890,42 @@ function buildEmbeddedItems(character) {
   const appFood = safeParseJson(character.food_inventory, []);
   if (Array.isArray(appFood)) {
     appFood.forEach(f => { if (f) items.push(buildConsumableItem(f, 'food')); });
+  }
+
+  // Other consumables
+  const appOtherConsumables = safeParseJson(character.other_consumables_inventory, []);
+  if (Array.isArray(appOtherConsumables)) {
+    appOtherConsumables.forEach(c => { if (c) items.push(buildConsumableItem(c, 'other')); });
+  }
+
+  // Generic inventory -> miscellany
+  const appInventory = safeParseJson(character.inventory, []);
+  if (Array.isArray(appInventory)) {
+    appInventory.forEach(i => { if (i) items.push(buildMiscellanyItem(i)); });
+  }
+
+  // Explicit miscellany list
+  const appMiscellany = safeParseJson(character.miscellany, []);
+  if (Array.isArray(appMiscellany)) {
+    appMiscellany.forEach(i => { if (i) items.push(buildMiscellanyItem(i)); });
+  }
+
+  // Robot mods
+  const appRobotMods = safeParseJson(character.robot_mods, []);
+  if (Array.isArray(appRobotMods)) {
+    appRobotMods.forEach(mod => { if (mod) items.push(buildRobotModItem(mod)); });
+  }
+
+  // Active addictions
+  const appAddictions = safeParseJson(character.character_addictions, []);
+  if (Array.isArray(appAddictions)) {
+    appAddictions.forEach(addiction => { if (addiction) items.push(buildAddictionItem(addiction)); });
+  }
+
+  // Diseases
+  const appDiseases = safeParseJson(character.diseases, []);
+  if (Array.isArray(appDiseases)) {
+    appDiseases.forEach(disease => { if (disease) items.push(buildDiseaseItem(disease)); });
   }
 
   return items;
