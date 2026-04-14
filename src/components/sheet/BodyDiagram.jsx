@@ -103,23 +103,46 @@ export default function BodyDiagram({ character, updateField }) {
         <span style={{ color: '#4a6a8a' }}>(click to cycle)</span>
       </div>
 
-      {/* Body layout */}
-      <div className="flex flex-col items-center gap-2">
-        <BodyPartBoxes {...getProps('head')} />
-        <div className="flex gap-2 items-start">
+      {/* Body layout with Vault Boy background */}
+      <div className="relative flex flex-col items-center gap-2" style={{ minHeight: '240px' }}>
+        {/* Vault Boy decorative background — purely visual, no pointer events */}
+        <img
+          src="https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/518e365ca_Gemini_Generated_Image_rkg1d0rkg1d0rkg1.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            height: '220px',
+            width: 'auto',
+            objectFit: 'contain',
+            opacity: 0.18,
+            filter: 'saturate(0.4) brightness(0.75)',
+            pointerEvents: 'none',
+            userSelect: 'none',
+            zIndex: 0,
+          }}
+        />
+        {/* Body part indicators — sit above the background */}
+        <div className="relative" style={{ zIndex: 1 }}>
+          <BodyPartBoxes {...getProps('head')} />
+        </div>
+        <div className="relative flex gap-2 items-start" style={{ zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_arm')} />
           <BodyPartBoxes {...getProps('torso')} />
           <BodyPartBoxes {...getProps('right_arm')} />
         </div>
-        <div className="flex gap-2">
+        <div className="relative flex gap-2" style={{ zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_leg')} />
           <div style={{ minWidth: '90px' }} />
           <BodyPartBoxes {...getProps('right_leg')} />
         </div>
       </div>
 
-      {/* Encumbrance */}
-      <div className="mt-4 pt-3 flex items-center gap-2 text-xs" style={{ borderTop: '1px solid #1e3a5f', color: '#a8c8d8' }}>
+      {/* Encumbrance — compact inline row */}
+      <div className="mt-2 pt-2 flex items-center gap-2 text-xs" style={{ borderTop: '1px solid #1e3a5f', color: '#a8c8d8' }}>
         <span style={{ color: '#f5c518' }}>Encumbrance:</span>
         <input
           type="number"
