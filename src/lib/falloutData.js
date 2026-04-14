@@ -575,6 +575,33 @@ export function getActiveTraitEffects(character) {
   };
 }
 
+export function getSpecialAttributeBounds(character = {}) {
+  const origin = String(character.origin || '');
+  const bounds = {
+    strength: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+    perception: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+    endurance: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+    charisma: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+    intelligence: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+    agility: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+    luck: { min: SPECIAL_MIN, max: SPECIAL_MAX },
+  };
+
+  if (origin === 'Super Mutant') {
+    bounds.strength.max = 12;
+    bounds.endurance.max = 12;
+    bounds.intelligence.max = 6;
+    bounds.charisma.max = 6;
+  } else if (origin === 'Nightkin') {
+    bounds.strength.max = 12;
+    bounds.endurance.max = 12;
+    bounds.intelligence.max = 8;
+    bounds.charisma.max = 8;
+  }
+
+  return bounds;
+}
+
 export function calculateDerivedStats(character) {
   const str = character.strength || 5;
   const end = character.endurance || 5;

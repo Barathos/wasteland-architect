@@ -1,4 +1,4 @@
-import { SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, SPECIAL_MIN, SPECIAL_MAX, getActiveTraitEffects } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, getActiveTraitEffects, getSpecialAttributeBounds } from "../../lib/falloutData";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +15,7 @@ const STAT_COLORS = {
 export default function SpecialStats({ character, onChange }) {
   const traits = getActiveTraitEffects(character);
   const giftedBonuses = traits.giftedBonuses;
+  const bounds = getSpecialAttributeBounds(character);
 
   const currentTotal = SPECIAL_ATTRIBUTES.reduce(
     (sum, attr) => sum + (character[attr.key] || 5), 0
@@ -24,7 +25,8 @@ export default function SpecialStats({ character, onChange }) {
   const handleChange = (key, delta) => {
     const current = character[key] || 5;
     const newVal = current + delta;
-    if (newVal < SPECIAL_MIN || newVal > SPECIAL_MAX) return;
+    const { min, max } = bounds[key] || { min: 4, max: 10 };
+    if (newVal < min || newVal > max) return;
     if (delta > 0 && remaining <= 0) return;
     onChange({ [key]: newVal });
   };
@@ -58,9 +60,10 @@ export default function SpecialStats({ character, onChange }) {
       <div className="space-y-3">
         {SPECIAL_ATTRIBUTES.map((attr) => {
           const baseValue = character[attr.key] || 5;
+          const { min, max } = bounds[attr.key] || { min: 4, max: 10 };
           const giftedBoost = traits.hasGifted && giftedBonuses.includes(attr.key) ? 1 : 0;
           const displayValue = baseValue + giftedBoost;
-          const percentage = ((baseValue - SPECIAL_MIN) / (SPECIAL_MAX - SPECIAL_MIN)) * 100;
+          const percentage = ((baseValue - min) / Math.max(1, (max - min))) * 100;
           const color = STAT_COLORS[attr.key];
 
           return (
@@ -79,7 +82,7 @@ export default function SpecialStats({ character, onChange }) {
                     size="icon"
                     className="w-7 h-7 rounded-md hover:bg-destructive/20 hover:text-destructive"
                     onClick={() => handleChange(attr.key, -1)}
-                    disabled={baseValue <= SPECIAL_MIN}
+                    disabled={baseValue <= min}
                   >
                     <Minus className="w-3 h-3" />
                   </Button>
@@ -91,7 +94,7 @@ export default function SpecialStats({ character, onChange }) {
                     size="icon"
                     className="w-7 h-7 rounded-md hover:bg-primary/20 hover:text-primary"
                     onClick={() => handleChange(attr.key, 1)}
-                    disabled={baseValue >= SPECIAL_MAX || remaining <= 0}
+                    disabled={baseValue >= max || remaining <= 0}
                   >
                     <Plus className="w-3 h-3" />
                   </Button>
@@ -106,6 +109,7 @@ export default function SpecialStats({ character, onChange }) {
               </div>
               <p className="text-[10px] text-muted-foreground mt-0.5 font-mono opacity-0 group-hover:opacity-100 transition-opacity">
                 {attr.description}
+                <span className="ml-1">({min}-{max})</span>
               </p>
             </div>
           );

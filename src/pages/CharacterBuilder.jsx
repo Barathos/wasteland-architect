@@ -8,7 +8,7 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, ORIGINS } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, ORIGINS, getSpecialAttributeBounds } from "../lib/falloutData";
 import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
 import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
@@ -88,6 +88,14 @@ export default function CharacterBuilder() {
       const nextDelta = Number(nextOrigin?.bonuses?.[key] || 0) + Number(nextOrigin?.penalties?.[key] || 0);
       const current = Number(baseCharacter[key] || 5);
       nextCharacter[key] = current - prevDelta + nextDelta;
+    }
+
+    const bounds = getSpecialAttributeBounds({ ...nextCharacter, origin: nextOriginLabel });
+    for (const attr of SPECIAL_ATTRIBUTES) {
+      const key = attr.key;
+      const { min, max } = bounds[key] || { min: 4, max: 10 };
+      const value = Number(nextCharacter[key] || 5);
+      nextCharacter[key] = Math.min(max, Math.max(min, value));
     }
 
     return nextCharacter;
