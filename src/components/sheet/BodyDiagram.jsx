@@ -137,7 +137,7 @@ export default function BodyDiagram({ character, updateField }) {
         </div>
 
         {/* TORSO — chest level */}
-        <div style={{ position: 'absolute', top: '350px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+        <div style={{ position: 'absolute', top: '175px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('torso')} />
         </div>
 
