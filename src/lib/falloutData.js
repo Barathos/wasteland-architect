@@ -168,15 +168,6 @@ export const ORIGINS = [
     source: 'Wanderers',
   },
   {
-    key: 'nightkin',
-    label: 'Nightkin',
-    description: 'An elite super mutant trained in stealth by the Master\'s army. Your Stealth Boy addiction grants tremendous power at a terrible, maddening cost.',
-    bonuses: { strength: 2, endurance: 2 },
-    bonusSkills: ['sneak', 'melee_weapons'],
-    special: 'Stealth Boy Addict: STR/END +2 at creation. Max STR/END 12, max INT/CHA 8. Max 4 skill ranks. Immune to Radiation and Poison. Super mutant armor only.',
-    source: 'Wanderers',
-  },
-  {
     key: 'tribal',
     label: 'Tribal',
     description: 'Raised in an isolated tribe far from Old World influence, you have learned ancient wisdom and survival skills that technology cannot replicate.',
@@ -187,7 +178,8 @@ export const ORIGINS = [
 ];
 
 export function getOriginSpecialAdjustment(originLabel = '') {
-  const origin = ORIGINS.find((entry) => entry.label === originLabel);
+  const normalizedOriginLabel = originLabel === 'Nightkin' ? 'Super Mutant' : originLabel;
+  const origin = ORIGINS.find((entry) => entry.label === normalizedOriginLabel);
   const bonuses = origin?.bonuses || {};
   const penalties = origin?.penalties || {};
 
@@ -273,6 +265,13 @@ export const PERKS = [
 export const ROBOT_ORIGINS = ['Protectron', 'Robobrain', 'Securitron', 'Mister Handy', 'Assaultron'];
 export function isRobotCharacter(character) {
   return ROBOT_ORIGINS.includes(character.origin);
+}
+
+export function isNightkinCharacter(character = {}) {
+  const origin = String(character.origin || '');
+  const subOrigin = String(character.sub_origin || '').toLowerCase();
+  if (origin === 'Nightkin') return true; // legacy records
+  return origin === 'Super Mutant' && subOrigin === 'nightkin';
 }
 
 const ROBOT_CARRY_WEIGHTS = { Protectron: 225, Robobrain: 150, Securitron: 150, 'Mister Handy': 150 };
@@ -602,6 +601,7 @@ export function getActiveTraitEffects(character) {
 
 export function getSpecialAttributeBounds(character = {}) {
   const origin = String(character.origin || '');
+  const isNightkin = isNightkinCharacter(character);
   const bounds = {
     strength: { min: SPECIAL_MIN, max: SPECIAL_MAX },
     perception: { min: SPECIAL_MIN, max: SPECIAL_MAX },
@@ -617,7 +617,8 @@ export function getSpecialAttributeBounds(character = {}) {
     bounds.endurance.max = 12;
     bounds.intelligence.max = 6;
     bounds.charisma.max = 6;
-  } else if (origin === 'Nightkin') {
+  }
+  if (isNightkin) {
     bounds.strength.max = 12;
     bounds.endurance.max = 12;
     bounds.intelligence.max = 8;
@@ -1425,6 +1426,15 @@ export const ORIGIN_PACKS = {
       { type: 'miscellany', name: 'Personal Trinket', quantity: 1 },
       { type: 'currency', name: 'Caps', quantity: 5 },
     ]},
+    { key: 'nightkin', label: 'Nightkin', description: 'Stealth, silence, safety - a survivor who trusts nothing more than a Stealth Boy.', equipment: [
+      { type: 'weapon', name: 'Laser Rifle', quantity: 1 },
+      { type: 'ammo', name: 'Fusion Cell', quantity: 8, note: '+6CD shots' },
+      { type: 'weapon', name: 'Bumper Sword', quantity: 1 },
+      { type: 'apparel', name: 'Raider Chest Piece', quantity: 1 },
+      { type: 'apparel', name: 'Raider Arm', quantity: 1, note: 'Choice of arm' },
+      { type: 'apparel', name: 'Raider Leg', quantity: 1, note: 'Choice of leg' },
+      { type: 'consumable', name: 'Stealth Boy', quantity: 1 },
+    ]},
   ],
   'Mister Handy': [
     { key: 'mh_miss_nanny', label: 'Miss Nanny', description: 'A domestic caretaker model with a feminine voice and persona.', equipment: [
@@ -1686,17 +1696,6 @@ export const ORIGIN_PACKS = {
       { type: 'weapon', name: 'Gamma Gun', quantity: 1 },
       { type: 'ammo', name: 'Gamma Rounds', quantity: 4, note: '+2CD rounds' },
       { type: 'apparel', name: 'Gas Mask', quantity: 1 },
-    ]},
-  ],
-  'Nightkin': [
-    { key: 'nightkin', label: 'Nightkin', description: 'Stealth, silence, safety — a survivor who trusts nothing more than a Stealth Boy.', equipment: [
-      { type: 'weapon', name: 'Laser Rifle', quantity: 1 },
-      { type: 'ammo', name: 'Fusion Cell', quantity: 8, note: '+6CD shots' },
-      { type: 'weapon', name: 'Bumper Sword', quantity: 1 },
-      { type: 'apparel', name: 'Raider Chest Piece', quantity: 1 },
-      { type: 'apparel', name: 'Raider Arm', quantity: 1, note: 'Choice of arm' },
-      { type: 'apparel', name: 'Raider Leg', quantity: 1, note: 'Choice of leg' },
-      { type: 'consumable', name: 'Stealth Boy', quantity: 1 },
     ]},
   ],
   'Tribal': [

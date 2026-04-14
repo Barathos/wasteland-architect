@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import DerivedPanel from "./DerivedPanel";
 import BodyDiagram from "./BodyDiagram";
 import HealthPanel from "./HealthPanel";
-import { isRobotCharacter } from "../../lib/falloutData";
+import { isNightkinCharacter, isRobotCharacter } from "../../lib/falloutData";
 
 function parseJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
@@ -11,6 +11,7 @@ function parseJson(str, fallback) {
 
 function BottomSection({ character, updateField }) {
   const isRobot = isRobotCharacter(character);
+  const isNightkin = isNightkinCharacter(character);
   const addictions = parseJson(character.addictions, []);
   const diseases = parseJson(character.diseases, []);
   const conditions = parseJson(character.conditions, { hunger: 'Full', thirst: 'Quenched', rest: 'Rested' });
@@ -106,7 +107,7 @@ function BottomSection({ character, updateField }) {
       )}
 
       {/* Nightkin Stealth Boy Tracker */}
-      {character.origin === 'Nightkin' && (
+      {isNightkin && (
         <div className="p-3" style={{ minWidth: '220px', borderLeft: '1px solid #1e3a5f' }}>
           <p className="text-xs font-bold tracking-widest mb-3" style={{ color: '#aa44dd' }}>STEALTH BOY DOSES</p>
           <div className="flex items-center gap-2 mb-2">

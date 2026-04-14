@@ -12,6 +12,7 @@ import {
   CORE_POWER_ARMOR,
   CORE_WEAPONS,
 } from "./sourceTruthData.js";
+import { isNightkinCharacter } from "./falloutData.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Embedded template fragments (sourced from Foundry system template.json)
@@ -1016,6 +1017,7 @@ export function exportToFoundry(character) {
     : 'systems/fallout/assets/tokens/character.webp';
 
   const items = buildEmbeddedItems(character);
+  const isNightkin = isNightkinCharacter(character);
 
   const systemData = {
     biography: character.background || '',
@@ -1035,8 +1037,8 @@ export function exportToFoundry(character) {
     },
     bodyType: isRobot ? 'robot' : 'humanoid',
     immunities: {
-      poison:    isRobot || ['Ghoul', 'Nightkin', 'Super Mutant'].includes(origin),
-      radiation: isRobot || ['Ghoul', 'Nightkin', 'Super Mutant', 'Child of Atom'].includes(origin),
+      poison:    isRobot || isNightkin || ['Ghoul', 'Super Mutant'].includes(origin),
+      radiation: isRobot || isNightkin || ['Ghoul', 'Super Mutant', 'Child of Atom'].includes(origin),
     },
     defense:     { bonus: 0, value: 1 },
     health:      { bonus: 0, max: maxHP, value: currentHP },

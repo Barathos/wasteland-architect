@@ -46,6 +46,13 @@ export default function CharacterBuilder() {
   const [survivorTraits, setSurvivorTraits] = useState([]);
   const [mrHandyArms, setMrHandyArms] = useState([]);
 
+  const normalizeLegacyOrigin = (input = {}) => {
+    if (input.origin === 'Nightkin') {
+      return { ...input, origin: 'Super Mutant', sub_origin: input.sub_origin || 'nightkin' };
+    }
+    return input;
+  };
+
   // Keep survivor_traits synced on character so getActiveTraitEffects works during creation
   const handleSurvivorTraitsChange = (updated) => {
     setSurvivorTraits(updated);
@@ -56,7 +63,7 @@ export default function CharacterBuilder() {
     if (editId) {
       base44.entities.Character.filter({ id: editId }).then(chars => {
         if (chars.length > 0) {
-          const c = chars[0];
+          const c = normalizeLegacyOrigin(chars[0]);
           setCharacter(c);
           if (c.skills) { try { setSkills(JSON.parse(c.skills)); } catch {} }
           if (c.tag_skills) { try { setTagSkills(JSON.parse(c.tag_skills)); } catch {} }

@@ -1,4 +1,4 @@
-import { calculateBodyPartHP } from "../../lib/falloutData";
+import { calculateBodyPartHP, isNightkinCharacter } from "../../lib/falloutData";
 import { getPerSlotArmorDR } from "../../lib/apparelArmorResolver";
 
 const STATES = ['empty', 'healthy', 'treated', 'injured'];
@@ -76,7 +76,7 @@ export default function BodyDiagram({ character, updateField }) {
   };
 
   const slotDR = getPerSlotArmorDR(character);
-  const isNightkin = character.origin === 'Nightkin';
+  const isNightkin = isNightkinCharacter(character);
   const ROBOT_ORIGINS = ['Protectron', 'Robobrain', 'Securitron', 'Mister Handy', 'Assaultron'];
   const isRobot = ROBOT_ORIGINS.includes(character.origin);
 
