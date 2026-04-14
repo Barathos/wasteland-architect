@@ -2,24 +2,25 @@
 // Matches Foundry 13.351 / fallout system 11.16.6 actor document shape
 
 // --- Stable skill IDs matching Foundry compendium entries ---
+// Stable skill IDs matching Foundry Fallout system compendium entries (confirmed from working exports)
 const SKILL_IDS = {
-  'Unarmed':         '5xAG0eRrcvDeJAFk',
-  'Athletics':       'F4uIprrKWh9ApMaU',
-  'Science':         'G3mN15diMiTCDZ0U',
-  'Sneak':           'HEegw2EUmmEzfdDM',
-  'Pilot':           'PEN70F6ovA3g5HI2',
-  'Survival':        'R8YnBNUwhZhG89iQ',
-  'Lockpick':        'SH09XavazYU9CqY4',
-  'Throwing':        'UQ4TLtVUR2kRlYkb',
-  'Small Guns':      'UZDBirrZeUxrAk7b',
-  'Medicine':        'V3mPqKj8wXnRtY2s',
-  'Repair':          'W4nQrLk9xYoSuZ3t',
-  'Speech':          'X5oRsMl0yZpTvA4u',
-  'Explosives':      'Y6pStNm1zAqUwB5v',
-  'Energy Weapons':  'Z7qTuOn2aBrVxC6w',
-  'Melee Weapons':   'a8rUvPo3bCsWyD7x',
-  'Big Guns':        'b9sVwQp4cDtXzE8y',
-  'Barter':          'c0tWxRq5dEuYAF9z',
+  'Unarmed':        '5xAG0eRrcvDeJAFk',
+  'Athletics':      'F4uIprrKWh9ApMaU',
+  'Science':        'G3mN15diMiTCDZ0U',
+  'Sneak':          'HEegw2EUmmEzfdDM',
+  'Pilot':          'PEN70F6ovA3g5HI2',
+  'Survival':       'R8YnBNUwhZhG89iQ',
+  'Lockpick':       'SH09XavazYU9CqY4',
+  'Throwing':       'UQ4TLtVUR2kRlYkb',
+  'Small Guns':     'UZDBirrZeUxrAk7b',
+  'Medicine':       'UrVd0BmoXkAxmrvv',
+  'Repair':         'ZQw4TLZbaLm5F0BW',
+  'Speech':         'dOTrlwZ60XWqegQA',
+  'Explosives':     'ejKiqeUyjkahCjQf',
+  'Energy Weapons': 'jAJPNJpHYawNBp2h',
+  'Melee Weapons':  'kCGaEuF27yXyE04i',
+  'Big Guns':       'p3GhRmIwrYTJmuhr',
+  'Barter':         'vf1Qszkq1om2Xgmn',
 };
 
 function generateId() {
@@ -170,21 +171,25 @@ function buildSkillItems(character) {
 
 // --- Weapon helpers ---
 
+// Foundry uses integers 0/1 for value fields, NOT booleans
+function b(v) { return v ? 1 : 0; }
+
 function parseDamageEffects(effectsStr) {
   const str = (effectsStr || '').toLowerCase();
   const piercingMatch = str.match(/piercing\s*(\d+)/);
+  const hasPiercing = !!piercingMatch;
   return {
-    arc: { rank: 0, value: str.includes('arc') },
-    breaking: { rank: 0, value: str.includes('breaking') },
-    burst: { rank: 0, value: str.includes('burst') },
-    freeze: { rank: 0, value: str.includes('freeze') },
-    persistent: { rank: 0, value: str.includes('persistent') },
-    piercing_x: { rank: piercingMatch ? parseInt(piercingMatch[1]) : 1, value: !!piercingMatch },
-    radioactive: { rank: 0, value: str.includes('radioactive') },
-    spread: { rank: 0, value: str.includes('spread') },
-    stun: { rank: 0, value: str.includes('stun') },
-    tranquilize_x: { rank: 1, value: false },
-    vicious: { rank: 0, value: str.includes('vicious') },
+    arc:          { rank: 0, value: b(str.includes('arc')) },
+    breaking:     { rank: 0, value: b(str.includes('breaking')) },
+    burst:        { rank: 0, value: b(str.includes('burst')) },
+    freeze:       { rank: 0, value: b(str.includes('freeze')) },
+    persistent:   { rank: 0, value: b(str.includes('persistent')) },
+    piercing_x:   { rank: piercingMatch ? parseInt(piercingMatch[1]) : 1, value: b(hasPiercing) },
+    radioactive:  { rank: 0, value: b(str.includes('radioactive')) },
+    spread:       { rank: 0, value: b(str.includes('spread')) },
+    stun:         { rank: 0, value: b(str.includes('stun')) },
+    tranquilize_x:{ rank: 1, value: 0 },
+    vicious:      { rank: 0, value: b(str.includes('vicious')) },
   };
 }
 
@@ -193,34 +198,34 @@ function parseWeaponQualities(qualStr) {
   const recoilMatch = str.match(/recoil\s*\((\d+)\)/);
   const ammoHungryMatch = str.match(/ammo.hungry\s*\((\d+)\)/);
   return {
-    accurate: { rank: 0, value: str.includes('accurate') && !str.includes('inaccurate') },
-    aquatic: { rank: 0, value: false },
-    ammo_hungry_x: { rank: ammoHungryMatch ? parseInt(ammoHungryMatch[1]) : 1, value: !!ammoHungryMatch },
-    blast: { rank: 0, value: str.includes('blast') },
-    bombard: { rank: 0, value: false },
-    close_quarters: { rank: 0, value: str.includes('close quarters') },
-    concealed: { rank: 0, value: str.includes('concealed') },
-    debilitating: { rank: 0, value: str.includes('debilitating') },
-    delay_x: { rank: 1, value: str.includes('delay') },
-    gatling: { rank: 0, value: str.includes('gatling') },
-    fuel_x: { rank: 1, value: false },
-    inaccurate: { rank: 0, value: str.includes('inaccurate') },
-    limited: { rank: 0, value: false },
-    mine: { rank: 0, value: str.includes('mine') },
-    night_vision: { rank: 0, value: false },
-    parry: { rank: 0, value: str.includes('parry') },
-    placed: { rank: 0, value: str.includes('placed') },
-    recoil_x: { rank: recoilMatch ? parseInt(recoilMatch[1]) : 0, value: !!recoilMatch },
-    recon: { rank: 0, value: false },
-    reliable: { rank: 0, value: str.includes('reliable') && !str.includes('unreliable') },
-    slow_load: { rank: 0, value: str.includes('slow load') },
-    suppressed: { rank: 0, value: str.includes('suppressed') },
-    surge: { rank: 0, value: false },
-    thrown: { rank: 0, value: str.includes('thrown') },
-    two_handed: { rank: 0, value: str.includes('two-handed') || str.includes('two handed') },
-    unreliable: { rank: 0, value: str.includes('unreliable') },
-    unstable_radiation: { rank: 0, value: false },
-    wrangle: { rank: 0, value: false },
+    accurate:           { rank: 0, value: b(str.includes('accurate') && !str.includes('inaccurate')) },
+    aquatic:            { rank: 0, value: 0 },
+    ammo_hungry_x:      { rank: ammoHungryMatch ? parseInt(ammoHungryMatch[1]) : 1, value: b(!!ammoHungryMatch) },
+    blast:              { rank: 0, value: b(str.includes('blast')) },
+    bombard:            { rank: 0, value: 0 },
+    close_quarters:     { rank: 0, value: b(str.includes('close quarters')) },
+    concealed:          { rank: 0, value: b(str.includes('concealed')) },
+    debilitating:       { rank: 0, value: b(str.includes('debilitating')) },
+    delay_x:            { rank: 1, value: b(str.includes('delay')) },
+    gatling:            { rank: 0, value: b(str.includes('gatling')) },
+    fuel_x:             { rank: 1, value: 0 },
+    inaccurate:         { rank: 0, value: b(str.includes('inaccurate')) },
+    limited:            { rank: 0, value: 0 },
+    mine:               { rank: 0, value: b(str.includes('mine')) },
+    night_vision:       { rank: 0, value: 0 },
+    parry:              { rank: 0, value: b(str.includes('parry')) },
+    placed:             { rank: 0, value: b(str.includes('placed')) },
+    recoil_x:           { rank: recoilMatch ? parseInt(recoilMatch[1]) : 1, value: b(!!recoilMatch) },
+    recon:              { rank: 0, value: 0 },
+    reliable:           { rank: 0, value: b(str.includes('reliable') && !str.includes('unreliable')) },
+    slow_load:          { rank: 0, value: b(str.includes('slow load')) },
+    suppressed:         { rank: 0, value: b(str.includes('suppressed')) },
+    surge:              { rank: 0, value: 0 },
+    thrown:             { rank: 0, value: b(str.includes('thrown')) },
+    two_handed:         { rank: 0, value: b(str.includes('two-handed') || str.includes('two handed')) },
+    unreliable:         { rank: 0, value: b(str.includes('unreliable')) },
+    unstable_radiation: { rank: 0, value: 0 },
+    wrangle:            { rank: 0, value: 0 },
   };
 }
 
@@ -273,7 +278,7 @@ function buildEmbeddedItems(character) {
       if (!w || typeof w !== 'object' || w.source === 'starting_equipment') return;
       const isMelee = ['Melee', 'Unarmed'].includes(w.type);
       const damageRating = parseInt((w.damage || '0').toString().replace(/[^0-9]/g, '')) || 0;
-      const item = makeItemBase(null, w.name || 'Unknown Weapon', 'weapon', 'systems/fallout/assets/icons/items/weapon.webp');
+      const item = makeItemBase(null, w.name || 'Unknown Weapon', 'weapon', 'systems/fallout/assets/icons/items/weapon.svg');
       item.system = {
         description: w.notes ? `<p>${w.notes}</p>` : '',
         favorite: false,
@@ -284,7 +289,7 @@ function buildEmbeddedItems(character) {
         stashed: false,
         weight: parseFloat(w.weight) || 0,
         equippable: true,
-        equipped: true,
+        equipped: false,
         canBeScrapped: true,
         isJunk: false,
         ammo: w.ammoType || w.ammo || '',
@@ -358,22 +363,23 @@ function buildEmbeddedItems(character) {
       const locationsRaw = a.locations
         ? (typeof a.locations === 'string' ? a.locations.split(',').map(s => s.trim()) : a.locations)
         : [];
-      const item = makeItemBase(null, a.name || 'Apparel', 'apparel', 'systems/fallout/assets/icons/items/apparel.webp');
+      const hp = a.hp || 0;
+      const item = makeItemBase(null, a.name || 'Apparel', 'apparel', 'systems/fallout/assets/icons/items/apparel.svg');
       item.system = {
         description: a.special ? `<p>${a.special}</p>` : '',
         favorite: false,
         source: 'custom',
-        cost: 0,
+        cost: parseInt(a.cost) || 0,
         quantity: 1,
-        rarity: 0,
+        rarity: parseInt(a.rarity) || 0,
         stashed: false,
         weight: parseFloat(a.weight) || 0,
         equippable: true,
-        equipped: true,
+        equipped: false,
         canBeScrapped: true,
         isJunk: false,
         apparelType: mapApparelType(a.type || ''),
-        health: { max: a.hp || 0, min: 0, mod: 0, value: a.hp || 0 },
+        health: { max: hp, min: 0, mod: 0, value: hp },
         location: mapApparelLocations(locationsRaw),
         mods: { current: 0, installedMods: '', list: '', max: 0, modded: false },
         powerArmor: { frameId: '', isFrame: false, powered: false },
