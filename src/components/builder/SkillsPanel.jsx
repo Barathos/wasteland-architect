@@ -74,6 +74,9 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
         {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
         {isSuperMutant && <span className="block mt-1" style={{ color: '#cc4444' }}>⚠ Super Mutant: All skills capped at rank 4 (Forced Evolution).</span>}
         {traits.extraTagSkills > 0 && <span className="block mt-1" style={{ color: '#22cc22' }}>✦ +{traits.extraTagSkills} extra Tag skill(s) from trait/origin.</span>}
+        {(() => { try { return JSON.parse(character.survivor_traits || '[]'); } catch { return []; } })().includes('educated') && (
+          <span className="block mt-0.5" style={{ color: '#aaa', fontSize: 11 }}>+1 from Educated trait</span>
+        )}
       </p>
 
       {/* Skills Grid */}

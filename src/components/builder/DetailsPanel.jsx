@@ -97,29 +97,72 @@ function OriginChoices({ character, onChange, selectedOrigin,
     </div>
   );
 
-  if (origin === 'Survivor') return (
-    <div className="mt-4 pt-3" style={{ borderTop: '1px solid #1e3a5f' }}>
-      <p className="text-[10px] font-mono mb-2" style={{ color: '#6a8a9a' }}>Choose up to 2 traits — or 1 trait + Extra Perk Slot:</p>
-      <div className="space-y-1.5">
-        {[...SURVIVOR_TRAITS, { key: '_perk_slot_', label: '+ Extra Perk Slot', benefit: 'Gain one additional perk instead of a second trait.', penalty: '' }].map(trait => {
-          const sel = (survivorTraits || []).includes(trait.key);
-          const atLimit = (survivorTraits || []).length >= 2 && !sel;
-          return (
-            <button key={trait.key} onClick={() => {
-              if (atLimit) return;
-              const updated = sel ? (survivorTraits || []).filter(k => k !== trait.key) : [...(survivorTraits || []), trait.key];
-              onSurvivorTraitsChange(updated);
-            }} className="w-full text-left px-3 py-2 transition-all"
-              style={{ background: sel ? 'rgba(106,154,186,0.1)' : 'rgba(0,0,0,0.2)', border: `1px solid ${sel ? '#6a9aba' : '#1e3a5f'}`, opacity: atLimit ? 0.4 : 1, cursor: atLimit ? 'not-allowed' : 'pointer' }}>
-              <span className="text-xs font-bold" style={{ color: sel ? '#6a9aba' : '#e8e8e8' }}>{sel ? '✓ ' : ''}{trait.label}</span>
-              {trait.benefit && <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4ade80' }}>✦ {trait.benefit}</p>}
-              {trait.penalty && <p className="text-[10px] font-mono" style={{ color: '#f97316' }}>✦ {trait.penalty}</p>}
-            </button>
-          );
-        })}
+  if (origin === 'Survivor') {
+    const giftedBonuses = (() => { try { return JSON.parse(character.gifted_bonuses || '[]'); } catch { return []; } })();
+    const ATTR_KEYS = [
+      { abbr: 'STR', key: 'strength' }, { abbr: 'PER', key: 'perception' }, { abbr: 'END', key: 'endurance' },
+      { abbr: 'CHA', key: 'charisma' }, { abbr: 'INT', key: 'intelligence' }, { abbr: 'AGI', key: 'agility' },
+      { abbr: 'LCK', key: 'luck' },
+    ];
+    const isGiftedSelected = (survivorTraits || []).includes('gifted');
+    return (
+      <div className="mt-4 pt-3" style={{ borderTop: '1px solid #1e3a5f' }}>
+        <p className="text-[10px] font-mono mb-2" style={{ color: '#6a8a9a' }}>Choose up to 2 traits — or 1 trait + Extra Perk Slot:</p>
+        <div className="space-y-1.5">
+          {[...SURVIVOR_TRAITS, { key: '_perk_slot_', label: '+ Extra Perk Slot', benefit: 'Gain one additional perk instead of a second trait.', penalty: '' }].map(trait => {
+            const sel = (survivorTraits || []).includes(trait.key);
+            const atLimit = (survivorTraits || []).length >= 2 && !sel;
+            return (
+              <div key={trait.key}>
+                <button onClick={() => {
+                  if (atLimit) return;
+                  const updated = sel ? (survivorTraits || []).filter(k => k !== trait.key) : [...(survivorTraits || []), trait.key];
+                  onSurvivorTraitsChange(updated);
+                }} className="w-full text-left px-3 py-2 transition-all"
+                  style={{ background: sel ? 'rgba(106,154,186,0.1)' : 'rgba(0,0,0,0.2)', border: `1px solid ${sel ? '#6a9aba' : '#1e3a5f'}`, opacity: atLimit ? 0.4 : 1, cursor: atLimit ? 'not-allowed' : 'pointer' }}>
+                  <span className="text-xs font-bold" style={{ color: sel ? '#6a9aba' : '#e8e8e8' }}>{sel ? '✓ ' : ''}{trait.label}</span>
+                  {trait.benefit && <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4ade80' }}>✦ {trait.benefit}</p>}
+                  {trait.penalty && <p className="text-[10px] font-mono" style={{ color: '#f97316' }}>✦ {trait.penalty}</p>}
+                </button>
+                {/* Gifted inline attribute picker */}
+                {trait.key === 'gifted' && isGiftedSelected && (
+                  <div style={{ marginTop: 6, padding: '8px 10px', border: '1px solid rgba(240,165,0,0.5)', borderTop: 'none', background: 'rgba(240,165,0,0.05)' }}>
+                    <div className="text-[10px] font-mono mb-2" style={{ color: '#f0a500' }}>
+                      Choose 2 attributes to boost +1 each ({giftedBonuses.length}/2 selected)
+                    </div>
+                    <div className="flex gap-1.5 flex-wrap">
+                      {ATTR_KEYS.map(({ abbr, key }) => {
+                        const isSelected = giftedBonuses.includes(key);
+                        const canSelect = isSelected || giftedBonuses.length < 2;
+                        return (
+                          <button key={key}
+                            onClick={() => {
+                              const updated = isSelected
+                                ? giftedBonuses.filter(a => a !== key)
+                                : canSelect ? [...giftedBonuses, key] : giftedBonuses;
+                              onChange({ gifted_bonuses: JSON.stringify(updated) });
+                            }}
+                            className="text-[10px] font-mono px-2 py-1 transition-all"
+                            style={{
+                              background: isSelected ? 'rgba(240,165,0,0.25)' : 'transparent',
+                              color: isSelected ? '#f0a500' : canSelect ? '#c8a060' : '#555',
+                              border: `1px solid ${isSelected ? '#f0a500' : canSelect ? 'rgba(240,165,0,0.4)' : '#333'}`,
+                              cursor: canSelect ? 'pointer' : 'not-allowed',
+                            }}>
+                            {isSelected ? '✓ ' : ''}{abbr}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
   if (origin === 'Mister Handy') return (
     <div className="mt-4 pt-3" style={{ borderTop: '1px solid #1e3a5f' }}>
