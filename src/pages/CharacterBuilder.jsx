@@ -8,7 +8,7 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, ORIGINS } from "../lib/falloutData";
 import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
 import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
@@ -75,9 +75,54 @@ export default function CharacterBuilder() {
     }
   }, [editId]);
 
+  const ORIGIN_BY_LABEL = Object.fromEntries(ORIGINS.map((origin) => [origin.label, origin]));
+
+  const applyOriginStatDelta = (baseCharacter, previousOriginLabel, nextOriginLabel) => {
+    const prevOrigin = ORIGIN_BY_LABEL[previousOriginLabel] || {};
+    const nextOrigin = ORIGIN_BY_LABEL[nextOriginLabel] || {};
+    const nextCharacter = { ...baseCharacter };
+
+    for (const attr of SPECIAL_ATTRIBUTES) {
+      const key = attr.key;
+      const prevDelta = Number(prevOrigin?.bonuses?.[key] || 0) + Number(prevOrigin?.penalties?.[key] || 0);
+      const nextDelta = Number(nextOrigin?.bonuses?.[key] || 0) + Number(nextOrigin?.penalties?.[key] || 0);
+      const current = Number(baseCharacter[key] || 5);
+      nextCharacter[key] = current - prevDelta + nextDelta;
+    }
+
+    return nextCharacter;
+  };
+
   const updateCharacter = (updates) => {
     setCharacter(prev => {
-      const next = { ...prev, ...updates };
+      let next = { ...prev, ...updates };
+
+      if (updates.origin && updates.origin !== prev.origin) {
+        next = applyOriginStatDelta(next, prev.origin, updates.origin);
+
+        // Reset sub-origin when the origin changes, then auto-apply equipment
+        // for origins that have exactly one predefined starting equipment pack.
+        next.sub_origin = '';
+        next.pending_equipment_choices = '[]';
+        next.equipment = '[]';
+        next.ammo_inventory = '[]';
+        next.armor_equipped = '[]';
+        next.chems_inventory = '[]';
+        next.food_inventory = '[]';
+        next.robot_mods = '[]';
+        next.miscellany = '[]';
+        next.caps = 0;
+
+        const packs = ORIGIN_PACKS[updates.origin] || [];
+        if (packs.length === 1) {
+          const autoPack = packs[0];
+          const result = buildStartingEquipment(next, autoPack.key, tagSkills);
+          if (result) {
+            next = { ...next, ...result.updates };
+          }
+        }
+      }
+
       // When sub_origin changes, auto-apply starting equipment
       if (updates.sub_origin && updates.sub_origin !== prev.sub_origin) {
         const result = buildStartingEquipment(next, updates.sub_origin, tagSkills);

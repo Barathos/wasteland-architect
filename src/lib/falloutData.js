@@ -171,6 +171,7 @@ export const ORIGINS = [
     key: 'nightkin',
     label: 'Nightkin',
     description: 'An elite super mutant trained in stealth by the Master\'s army. Your Stealth Boy addiction grants tremendous power at a terrible, maddening cost.',
+    bonuses: { strength: 2, endurance: 2 },
     bonusSkills: ['sneak', 'melee_weapons'],
     special: 'Stealth Boy Addict: STR/END +2 at creation. Max STR/END 12, max INT/CHA 8. Max 4 skill ranks. Immune to Radiation and Poison. Super mutant armor only.',
     source: 'Wanderers',
