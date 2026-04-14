@@ -17,6 +17,22 @@ const ALL_REF_WEAPONS = CORE_WEAPONS;
 
 const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Throwing', 'Explosive'];
 
+function normalizeWeaponType(type = '') {
+  const raw = String(type || '').trim().toLowerCase();
+  if (!raw) return '';
+
+  if (raw.startsWith('small gun')) return 'Small Guns';
+  if (raw.startsWith('energy weapon')) return 'Energy Weapons';
+  if (raw.startsWith('big gun')) return 'Big Guns';
+  if (raw.startsWith('bow')) return 'Bow';
+  if (raw.startsWith('melee')) return 'Melee';
+  if (raw.startsWith('unarmed')) return 'Unarmed';
+  if (raw.startsWith('throw')) return 'Throwing';
+  if (raw.startsWith('explosive')) return 'Explosive';
+
+  return type;
+}
+
 function rarityColor(r) {
   if (!r) return '#6a8a9a';
   if (r <= 2) return '#6a8a9a';
@@ -29,7 +45,7 @@ function WeaponReferenceModal({ onSelect, onClose }) {
   const [filter, setFilter] = useState('');
   const lower = filter.toLowerCase();
   const grouped = TYPE_ORDER.reduce((acc, t) => {
-    acc[t] = ALL_REF_WEAPONS.filter(w => w.type === t && (!lower || w.label.toLowerCase().includes(lower) || (w.source || '').toLowerCase().includes(lower)));
+    acc[t] = ALL_REF_WEAPONS.filter(w => normalizeWeaponType(w.type) === t && (!lower || w.label.toLowerCase().includes(lower) || (w.source || '').toLowerCase().includes(lower)));
     return acc;
   }, {});
 
