@@ -31,7 +31,12 @@ export const WEAPON_EFFECT_DESCRIPTIONS = {
 };
 
 export function normalizeWeaponEffectLabel(label) {
-  return (label || '').trim().toLowerCase().replace(/\s*\(\d+\)/g, '').trim();
+  return (label || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s*\(\d+\)/g, '')
+    .replace(/\s+\d+$/g, '')
+    .trim();
 }
 
 export function getWeaponEffectDescription(label) {
