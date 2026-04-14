@@ -1,4 +1,4 @@
-import { SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, getActiveTraitEffects, getSpecialAttributeBounds } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, getActiveTraitEffects, getOriginSpecialAdjustment, getSpecialAttributeBounds } from "../../lib/falloutData";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -16,11 +16,17 @@ export default function SpecialStats({ character, onChange }) {
   const traits = getActiveTraitEffects(character);
   const giftedBonuses = traits.giftedBonuses;
   const bounds = getSpecialAttributeBounds(character);
+  const originAdjustment = getOriginSpecialAdjustment(character.origin);
 
   const currentTotal = SPECIAL_ATTRIBUTES.reduce(
     (sum, attr) => sum + (character[attr.key] || 5), 0
   );
-  const remaining = SPECIAL_TOTAL_POINTS - currentTotal;
+  const totalOriginAdjustment = SPECIAL_ATTRIBUTES.reduce(
+    (sum, attr) => sum + Number(originAdjustment[attr.key] || 0),
+    0
+  );
+  const spentBaseTotal = currentTotal - totalOriginAdjustment;
+  const remaining = SPECIAL_TOTAL_POINTS - spentBaseTotal;
 
   const handleChange = (key, delta) => {
     const current = character[key] || 5;

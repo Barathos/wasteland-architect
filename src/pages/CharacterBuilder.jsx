@@ -8,7 +8,7 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, ORIGINS, getSpecialAttributeBounds } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, getOriginSpecialAdjustment, getSpecialAttributeBounds } from "../lib/falloutData";
 import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
 import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
@@ -75,17 +75,15 @@ export default function CharacterBuilder() {
     }
   }, [editId]);
 
-  const ORIGIN_BY_LABEL = Object.fromEntries(ORIGINS.map((origin) => [origin.label, origin]));
-
   const applyOriginStatDelta = (baseCharacter, previousOriginLabel, nextOriginLabel) => {
-    const prevOrigin = ORIGIN_BY_LABEL[previousOriginLabel] || {};
-    const nextOrigin = ORIGIN_BY_LABEL[nextOriginLabel] || {};
+    const prevAdjustment = getOriginSpecialAdjustment(previousOriginLabel);
+    const nextAdjustment = getOriginSpecialAdjustment(nextOriginLabel);
     const nextCharacter = { ...baseCharacter };
 
     for (const attr of SPECIAL_ATTRIBUTES) {
       const key = attr.key;
-      const prevDelta = Number(prevOrigin?.bonuses?.[key] || 0) + Number(prevOrigin?.penalties?.[key] || 0);
-      const nextDelta = Number(nextOrigin?.bonuses?.[key] || 0) + Number(nextOrigin?.penalties?.[key] || 0);
+      const prevDelta = Number(prevAdjustment?.[key] || 0);
+      const nextDelta = Number(nextAdjustment?.[key] || 0);
       const current = Number(baseCharacter[key] || 5);
       nextCharacter[key] = current - prevDelta + nextDelta;
     }
@@ -150,8 +148,11 @@ export default function CharacterBuilder() {
 
   const handleSave = async () => {
     if (!character.name.trim()) { toast.error("Please enter a character name"); setActiveTab("details"); return; }
+    const originAdjustment = getOriginSpecialAdjustment(character.origin);
     const specialTotal = SPECIAL_ATTRIBUTES.reduce((sum, attr) => sum + (character[attr.key] || 5), 0);
-    if (specialTotal > SPECIAL_TOTAL_POINTS) { toast.error("Too many S.P.E.C.I.A.L. points allocated"); setActiveTab("special"); return; }
+    const adjustmentTotal = SPECIAL_ATTRIBUTES.reduce((sum, attr) => sum + Number(originAdjustment[attr.key] || 0), 0);
+    const spentBaseTotal = specialTotal - adjustmentTotal;
+    if (spentBaseTotal > SPECIAL_TOTAL_POINTS) { toast.error("Too many S.P.E.C.I.A.L. points allocated"); setActiveTab("special"); return; }
 
     setSaving(true);
     try {

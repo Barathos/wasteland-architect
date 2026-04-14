@@ -186,6 +186,31 @@ export const ORIGINS = [
   },
 ];
 
+export function getOriginSpecialAdjustment(originLabel = '') {
+  const origin = ORIGINS.find((entry) => entry.label === originLabel);
+  const bonuses = origin?.bonuses || {};
+  const penalties = origin?.penalties || {};
+
+  const adjustment = {
+    strength: 0,
+    perception: 0,
+    endurance: 0,
+    charisma: 0,
+    intelligence: 0,
+    agility: 0,
+    luck: 0,
+  };
+
+  for (const [key, value] of Object.entries(bonuses)) {
+    if (key in adjustment) adjustment[key] += Number(value || 0);
+  }
+  for (const [key, value] of Object.entries(penalties)) {
+    if (key in adjustment) adjustment[key] += Number(value || 0);
+  }
+
+  return adjustment;
+}
+
 export const PERKS = [
   // Level 1 Perks
   { key: 'toughness', label: 'Toughness', description: '+2 to max HP.', requirement: { level: 1, endurance: 5 }, rank: 1, maxRanks: 3 },
