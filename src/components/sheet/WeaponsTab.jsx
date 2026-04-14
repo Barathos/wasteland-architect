@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import WeaponEffectTags from "./WeaponEffectTags";
-import { SETTLERS_WEAPONS, WANDERERS_WEAPONS, MR_HANDY_ARMS } from "../../lib/falloutData";
+import { MR_HANDY_ARMS } from "../../lib/falloutData";
 import { CORE_WEAPONS } from "../../lib/sourceTruthData";
 
 const EMPTY_WEAPON = {
@@ -13,11 +13,7 @@ const DAMAGE_TYPES = ['Physical', 'Energy', 'Energy/Radiation', 'Radiation', 'Po
 const FIRE_MODES = ['Single', 'Burst', 'Auto'];
 const RANGES = ['Melee', 'Close', 'Short', 'Medium', 'Long', 'Extreme'];
 
-const ALL_REF_WEAPONS = [
-  ...CORE_WEAPONS,
-  ...SETTLERS_WEAPONS,
-  ...WANDERERS_WEAPONS,
-];
+const ALL_REF_WEAPONS = CORE_WEAPONS;
 
 const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Throwing', 'Explosive'];
 

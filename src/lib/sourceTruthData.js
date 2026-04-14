@@ -44,6 +44,37 @@ function mergeByLabel(baseRows = [], supplementRows = []) {
   return [...map.values()];
 }
 
+function cleanText(value) {
+  return String(value || '').trim();
+}
+
+function buildWeaponFallbackNote(weapon) {
+  const parts = [];
+  const type = cleanText(weapon.type) || 'Weapon';
+  const damage = cleanText(weapon.damage) || 'unknown damage';
+  const damageType = cleanText(weapon.damageType) || 'Physical';
+  const range = cleanText(weapon.range) || 'Close';
+  const fireRate = Number.isFinite(Number(weapon.fireRate)) ? Number(weapon.fireRate) : 0;
+  const qualities = cleanText(weapon.qualities).replace(/^-+$/, '');
+  const effects = cleanText(weapon.damageEffect).replace(/^-+$/, '');
+  const ammo = cleanText(weapon.ammo);
+
+  parts.push(`${type} weapon dealing ${damage} ${damageType} damage at ${range} range.`);
+  if (fireRate > 0) parts.push(`Fire Rate ${fireRate}.`);
+  if (effects) parts.push(`Damage effects: ${effects}.`);
+  if (qualities) parts.push(`Qualities: ${qualities}.`);
+  if (ammo) parts.push(`Uses ${ammo}.`);
+
+  return parts.join(' ');
+}
+
+function withWeaponNotes(weapons = []) {
+  return weapons.map((weapon) => {
+    if (cleanText(weapon?.note)) return weapon;
+    return { ...weapon, note: buildWeaponFallbackNote(weapon) };
+  });
+}
+
 function normalizeLegacySupplementPerks() {
   const settlersPerks = PERKS
     .filter((perk) => String(perk?.source || '').toLowerCase() === 'settlers')
@@ -71,7 +102,7 @@ function normalizeLegacySupplementPerks() {
 const SUPPLEMENT_PERKS = normalizeLegacySupplementPerks();
 
 // Canonical data exported from the Foundry VTT Reference system.
-export const CORE_WEAPONS = mergeByLabel(SOURCE_WEAPONS, PDF_WEAPONS);
+export const CORE_WEAPONS = withWeaponNotes(mergeByLabel(SOURCE_WEAPONS, PDF_WEAPONS));
 export const CORE_AMMO = mergeByLabel(SOURCE_AMMO, PDF_AMMO);
 export const CORE_APPAREL = mergeByLabel(SOURCE_APPAREL, PDF_APPAREL);
 export const CORE_ARMOR = mergeByLabel(SOURCE_ARMOR, PDF_ARMOR);
