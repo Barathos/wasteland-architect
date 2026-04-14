@@ -12,14 +12,36 @@ const ALL_WEAPONS = [...CORE_WEAPONS, ...SETTLERS_WEAPONS, ...WANDERERS_WEAPONS]
 
 function findWeaponByName(name) {
   const clean = name.split('+')[0].split('(')[0].trim().toLowerCase();
-  const result = ALL_WEAPONS.find(w => {
-    if (w.label.toLowerCase() === clean) return true;
-    if (w.label.toLowerCase().includes(clean)) return true;
-    if (clean.includes(w.label.toLowerCase())) return true;
-    if (w.aliases?.some(a => a.toLowerCase() === clean)) return true;
-    if (w.aliases?.some(a => a.toLowerCase().includes(clean))) return true;
-    return false;
-  });
+  let best = null;
+  let bestScore = -1;
+
+  for (const weapon of ALL_WEAPONS) {
+    const label = String(weapon?.label || '').toLowerCase();
+    const aliases = Array.isArray(weapon?.aliases) ? weapon.aliases.map(a => String(a).toLowerCase()) : [];
+    let score = -1;
+
+    if (label === clean) score = 100;
+    else if (aliases.includes(clean)) score = 95;
+    else if (label.includes(clean)) score = 80;
+    else if (aliases.some(a => a.includes(clean))) score = 75;
+    else if (clean.includes(label)) score = 60;
+    else if (aliases.some(a => clean.includes(a))) score = 55;
+
+    if (score < 0) continue;
+
+    // Prefer the most specific match when scores tie.
+    const currentSpecificity = Math.max(label.length, ...aliases.map(a => a.length), 0);
+    const bestLabel = String(best?.label || '').toLowerCase();
+    const bestAliases = Array.isArray(best?.aliases) ? best.aliases.map(a => String(a).toLowerCase()) : [];
+    const bestSpecificity = Math.max(bestLabel.length, ...bestAliases.map(a => a.length), 0);
+
+    if (score > bestScore || (score === bestScore && currentSpecificity > bestSpecificity)) {
+      best = weapon;
+      bestScore = score;
+    }
+  }
+
+  const result = best;
   console.log('findWeaponByName:', name, '->', result?.label ?? 'NOT FOUND');
   return result;
 }
