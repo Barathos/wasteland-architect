@@ -76,6 +76,7 @@ export default function BodyDiagram({ character, updateField }) {
   };
 
   const slotDR = getPerSlotArmorDR(character);
+  const isNightkin = character.origin === 'Nightkin';
 
   const getProps = (key) => ({
     label: bodyParts[key].label,
@@ -84,6 +85,14 @@ export default function BodyDiagram({ character, updateField }) {
     onBoxClick: (idx) => cycleBox(key, idx),
     dr: slotDR[key],
   });
+
+  // Nightkin is wider/bulkier, so spread panels further out
+  const leftArmPos  = isNightkin ? 'calc(50% - 210px)' : 'calc(50% - 160px)';
+  const rightArmPos = isNightkin ? 'calc(50% + 110px)' : 'calc(50% + 60px)';
+  const leftLegPos  = isNightkin ? 'calc(50% - 200px)' : 'calc(50% - 160px)';
+  const rightLegPos = isNightkin ? 'calc(50% + 100px)' : 'calc(50% + 60px)';
+  const headPos     = isNightkin ? 'calc(50% - 130px)' : '50%';
+  const headTransform = isNightkin ? 'none' : 'translateX(-50%)';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -105,9 +114,9 @@ export default function BodyDiagram({ character, updateField }) {
       {/* Main body layout — fills remaining space */}
       <div style={{ position: 'relative', flex: 1, minHeight: '380px' }}>
 
-        {/* Vault Boy silhouette — fills center, slightly larger */}
+        {/* Silhouette — fills center */}
         <img
-          src={character.origin === 'Nightkin'
+          src={isNightkin
             ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/009360bcb_GlowingNightkinontransparentbackground.png"
             : "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
           }
@@ -129,13 +138,13 @@ export default function BodyDiagram({ character, updateField }) {
           }}
         />
 
-        {/* HEAD — top center */}
-        <div style={{ position: 'absolute', top: '8px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+        {/* HEAD — offset left for Nightkin to avoid covering the face */}
+        <div style={{ position: 'absolute', top: '8px', left: headPos, transform: headTransform, zIndex: 1 }}>
           <BodyPartBoxes {...getProps('head')} />
         </div>
 
-        {/* LEFT ARM — inward */}
-        <div style={{ position: 'absolute', top: '130px', left: 'calc(50% - 160px)', zIndex: 1 }}>
+        {/* LEFT ARM */}
+        <div style={{ position: 'absolute', top: '130px', left: leftArmPos, zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_arm')} />
         </div>
 
@@ -144,18 +153,18 @@ export default function BodyDiagram({ character, updateField }) {
           <BodyPartBoxes {...getProps('torso')} />
         </div>
 
-        {/* RIGHT ARM — inward */}
-        <div style={{ position: 'absolute', top: '130px', left: 'calc(50% + 60px)', zIndex: 1 }}>
+        {/* RIGHT ARM */}
+        <div style={{ position: 'absolute', top: '130px', left: rightArmPos, zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_arm')} />
         </div>
 
-        {/* LEFT LEG — inward */}
-        <div style={{ position: 'absolute', bottom: '30px', left: 'calc(50% - 160px)', zIndex: 1 }}>
+        {/* LEFT LEG */}
+        <div style={{ position: 'absolute', bottom: '30px', left: leftLegPos, zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_leg')} />
         </div>
 
-        {/* RIGHT LEG — inward */}
-        <div style={{ position: 'absolute', bottom: '30px', left: 'calc(50% + 60px)', zIndex: 1 }}>
+        {/* RIGHT LEG */}
+        <div style={{ position: 'absolute', bottom: '30px', left: rightLegPos, zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_leg')} />
         </div>
 
