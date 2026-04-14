@@ -107,7 +107,10 @@ export default function BodyDiagram({ character, updateField }) {
 
         {/* Vault Boy silhouette — fills center, slightly larger */}
         <img
-          src="https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
+          src={character.origin === 'Nightkin'
+            ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/009360bcb_GlowingNightkinontransparentbackground.png"
+            : "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
+          }
           alt=""
           aria-hidden="true"
           style={{
