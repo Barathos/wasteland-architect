@@ -131,28 +131,28 @@ export default function BodyDiagram({ character, updateField }) {
           <BodyPartBoxes {...getProps('head')} />
         </div>
 
-        {/* LEFT ARM — moved inward */}
-        <div style={{ position: 'absolute', top: '130px', left: '24px', zIndex: 1 }}>
+        {/* LEFT ARM — inward */}
+        <div style={{ position: 'absolute', top: '130px', left: 'calc(50% - 160px)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_arm')} />
         </div>
 
-        {/* TORSO — moved down to chest area */}
-        <div style={{ position: 'absolute', top: '175px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+        {/* TORSO — chest level */}
+        <div style={{ position: 'absolute', top: '350px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('torso')} />
         </div>
 
-        {/* RIGHT ARM — moved inward */}
-        <div style={{ position: 'absolute', top: '130px', right: '24px', zIndex: 1 }}>
+        {/* RIGHT ARM — inward */}
+        <div style={{ position: 'absolute', top: '130px', left: 'calc(50% + 60px)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_arm')} />
         </div>
 
-        {/* LEFT LEG — moved inward */}
-        <div style={{ position: 'absolute', bottom: '30px', left: '24px', zIndex: 1 }}>
+        {/* LEFT LEG — inward */}
+        <div style={{ position: 'absolute', bottom: '30px', left: 'calc(50% - 160px)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_leg')} />
         </div>
 
-        {/* RIGHT LEG — moved inward */}
-        <div style={{ position: 'absolute', bottom: '30px', right: '24px', zIndex: 1 }}>
+        {/* RIGHT LEG — inward */}
+        <div style={{ position: 'absolute', bottom: '30px', left: 'calc(50% + 60px)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_leg')} />
         </div>
 
