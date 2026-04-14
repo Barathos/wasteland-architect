@@ -38,28 +38,43 @@ export default function CharacterSheet() {
   useEffect(() => { loadCharacter(); }, [id]);
 
   const loadCharacter = async () => {
-    const chars = await base44.entities.Character.filter({ id });
-    if (chars.length > 0) {
-      const char = chars[0];
-      const bodyParts = calculateBodyPartHP(char);
-      const initialized = { ...char };
-      Object.entries(bodyParts).forEach(([part, data]) => {
-        if (initialized[`hp_${part}`] == null) initialized[`hp_${part}`] = data.max;
-      });
-      setCharacter(initialized);
+    try {
+      const chars = await base44.entities.Character.filter({ id });
+      if (chars.length > 0) {
+        const char = chars[0];
+        const bodyParts = calculateBodyPartHP(char);
+        const initialized = { ...char };
+        Object.entries(bodyParts).forEach(([part, data]) => {
+          if (initialized[`hp_${part}`] == null) initialized[`hp_${part}`] = data.max;
+        });
+        setCharacter(initialized);
+      }
+    } catch {
+      toast.error("Failed to load character.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const updateField = async (updates) => {
-    setCharacter(prev => ({ ...prev, ...updates }));
-    await base44.entities.Character.update(id, updates);
+    const prev = character;
+    setCharacter(p => ({ ...p, ...updates }));
+    try {
+      await base44.entities.Character.update(id, updates);
+    } catch {
+      setCharacter(prev);
+      toast.error("Failed to save changes.");
+    }
   };
 
   const handleDelete = async () => {
-    await base44.entities.Character.delete(id);
-    toast.success("Character deleted");
-    navigate("/");
+    try {
+      await base44.entities.Character.delete(id);
+      toast.success("Character deleted");
+      navigate("/");
+    } catch {
+      toast.error("Failed to delete character.");
+    }
   };
 
   if (loading) return (

@@ -4,6 +4,7 @@ import { base44 } from "@/api/base44Client";
 import CharacterCard from "../components/CharacterCard";
 import { Plus, Radiation, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function Dashboard() {
   const [characters, setCharacters] = useState([]);
@@ -14,9 +15,14 @@ export default function Dashboard() {
   }, []);
 
   const loadCharacters = async () => {
-    const data = await base44.entities.Character.list("-updated_date", 50);
-    setCharacters(data);
-    setLoading(false);
+    try {
+      const data = await base44.entities.Character.list("-updated_date", 50);
+      setCharacters(data);
+    } catch {
+      toast.error("Failed to load characters.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {

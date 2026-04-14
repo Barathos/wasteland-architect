@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,9 +23,10 @@ const STEPS = [
 
 export default function CharacterBuilder() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const editId = searchParams.get('edit');
   const [activeTab, setActiveTab] = useState("details");
   const [saving, setSaving] = useState(false);
-  const editId = new URLSearchParams(window.location.search).get('edit');
 
   const [character, setCharacter] = useState({
     name: "", origin: "Wastelander", level: 1,
@@ -100,47 +101,53 @@ export default function CharacterBuilder() {
     if (specialTotal > SPECIAL_TOTAL_POINTS) { toast.error("Too many S.P.E.C.I.A.L. points allocated"); setActiveTab("special"); return; }
 
     setSaving(true);
-    const fullChar = { ...character, survivor_traits: JSON.stringify(survivorTraits) };
-    const derived = calculateDerivedStats(fullChar);
-    const charData = {
-      ...character,
-      skills: JSON.stringify(skills),
-      tag_skills: JSON.stringify(tagSkills),
-      perks: JSON.stringify(selectedPerks),
-      ncr_traits: JSON.stringify(ncrTraits),
-      tribal_traits: JSON.stringify(tribalTraits),
-      outcast_tag_skill: outcastTagSkill,
-      brotherhood_tag_skill: brotherhoodTagSkill,
-      vault_tag_skill: vaultTagSkill,
-      vault_experiment: vaultExperiment,
-      ghoul_vault_dweller: ghoulVaultDweller,
-      survivor_traits: JSON.stringify(survivorTraits),
-      mr_handy_arms: JSON.stringify(mrHandyArms),
-      sub_origin: character.sub_origin || '',
-      gifted_bonuses: character.gifted_bonuses || '[]',
-      pending_equipment_choices: character.pending_equipment_choices || '[]',
-      miscellany: character.miscellany || '[]',
-      equipment: character.equipment || '[]',
-      ammo_inventory: character.ammo_inventory || '[]',
-      armor_equipped: character.armor_equipped || '[]',
-      chems_inventory: character.chems_inventory || '[]',
-      food_inventory: character.food_inventory || '[]',
-      robot_mods: character.robot_mods || '[]',
-      caps: character.caps || 0,
-      hp_current: derived.hp, hp_max: derived.hp,
-      defense: derived.defense, initiative: derived.initiative,
-      melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
-      luck_points: derived.luck_points,
-    };
+    try {
+      const fullChar = { ...character, survivor_traits: JSON.stringify(survivorTraits) };
+      const derived = calculateDerivedStats(fullChar);
+      const charData = {
+        ...character,
+        skills: JSON.stringify(skills),
+        tag_skills: JSON.stringify(tagSkills),
+        perks: JSON.stringify(selectedPerks),
+        ncr_traits: JSON.stringify(ncrTraits),
+        tribal_traits: JSON.stringify(tribalTraits),
+        outcast_tag_skill: outcastTagSkill,
+        brotherhood_tag_skill: brotherhoodTagSkill,
+        vault_tag_skill: vaultTagSkill,
+        vault_experiment: vaultExperiment,
+        ghoul_vault_dweller: ghoulVaultDweller,
+        survivor_traits: JSON.stringify(survivorTraits),
+        mr_handy_arms: JSON.stringify(mrHandyArms),
+        sub_origin: character.sub_origin || '',
+        gifted_bonuses: character.gifted_bonuses || '[]',
+        pending_equipment_choices: character.pending_equipment_choices || '[]',
+        miscellany: character.miscellany || '[]',
+        equipment: character.equipment || '[]',
+        ammo_inventory: character.ammo_inventory || '[]',
+        armor_equipped: character.armor_equipped || '[]',
+        chems_inventory: character.chems_inventory || '[]',
+        food_inventory: character.food_inventory || '[]',
+        robot_mods: character.robot_mods || '[]',
+        caps: character.caps || 0,
+        hp_current: derived.hp, hp_max: derived.hp,
+        defense: derived.defense, initiative: derived.initiative,
+        melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
+        luck_points: derived.luck_points,
+      };
 
-    if (editId) {
-      await base44.entities.Character.update(editId, charData);
-      toast.success("Character updated!");
-      navigate(`/character/${editId}`);
-    } else {
-      const created = await base44.entities.Character.create(charData);
-      toast.success("Character saved to vault records!");
-      navigate(`/character/${created.id}`);
+      if (editId) {
+        await base44.entities.Character.update(editId, charData);
+        toast.success("Character updated!");
+        navigate(`/character/${editId}`);
+      } else {
+        const created = await base44.entities.Character.create(charData);
+        toast.success("Character saved to vault records!");
+        navigate(`/character/${created.id}`);
+      }
+    } catch {
+      toast.error("Failed to save character. Please try again.");
+    } finally {
+      setSaving(false);
     }
   };
 

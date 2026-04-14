@@ -35,10 +35,10 @@ function BottomSection({ character, updateField }) {
       <div className="flex-1 p-3" style={{ borderRight: '1px solid #1e3a5f', minWidth: '200px' }}>
         <p className="text-xs font-bold tracking-widest mb-2" style={{ color: '#f5c518' }}>FAVORITE WEAPONS</p>
         <textarea
-          value={character.equipment || ''}
+          value={character.favorite_weapons || ''}
           placeholder="List weapons..."
           rows={3}
-          onChange={e => updateField({ equipment: e.target.value })}
+          onChange={e => updateField({ favorite_weapons: e.target.value })}
           className="w-full text-xs p-2 resize-none"
           style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#a8c8d8', outline: 'none' }}
         />
