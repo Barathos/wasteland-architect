@@ -137,11 +137,11 @@ function BottomSection({ character, updateField }) {
 export default function StatusTab({ character, updateField }) {
   return (
     <div style={{ background: '#0d2137' }}>
-      <div className="flex" style={{ borderBottom: '1px solid #1e3a5f' }}>
+      <div className="flex" style={{ borderBottom: '1px solid #1e3a5f', minHeight: '460px' }}>
         <div style={{ width: '220px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
           <DerivedPanel character={character} updateField={updateField} />
         </div>
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1" style={{ display: 'flex', flexDirection: 'column' }}>
           <BodyDiagram character={character} updateField={updateField} />
         </div>
         <div style={{ width: '210px', flexShrink: 0, borderLeft: '1px solid #1e3a5f' }}>

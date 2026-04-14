@@ -1,19 +1,14 @@
 import { calculateBodyPartHP } from "../../lib/falloutData";
 import { getPerSlotArmorDR } from "../../lib/apparelArmorResolver";
 
-
-
-// Each box cycles: empty -> healthy -> treated -> injured -> empty
 const STATES = ['empty', 'healthy', 'treated', 'injured'];
 
 const STATE_STYLE = {
   empty:   { background: '#0a2a0a', border: '1px solid #1a5a1a' },
-  healthy: { background: '#22cc22', border: '1px solid #1a8a1a' },
+  healthy: { background: '#22cc22', border: '1px solid #44ee44' },
   treated: { background: '#cc8822', border: '1px solid #aa6611' },
   injured: { background: '#cc2222', border: '1px solid #8a1111' },
 };
-
-const BODY_PARTS = ['head', 'torso', 'left_arm', 'right_arm', 'left_leg', 'right_leg'];
 
 function parseBoxes(str) {
   try { return JSON.parse(str || ''); } catch { return null; }
@@ -26,39 +21,44 @@ function getBoxes(character, part) {
   return ['healthy', 'healthy', 'healthy', 'healthy', 'healthy'];
 }
 
+// Compact panel matching the reference image style
 function BodyPartBoxes({ label, range, boxes, onBoxClick, dr }) {
-  const hasInjury = boxes.some(b => b === 'injured');
+  const hasInjury  = boxes.some(b => b === 'injured');
   const hasTreated = boxes.some(b => b === 'treated');
-  const borderColor = hasInjury ? '#cc2222' : hasTreated ? '#cc8822' : '#1e3a5f';
+  const borderColor = hasInjury ? '#cc2222' : hasTreated ? '#cc8822' : '#1e4a6a';
 
   return (
-    <div className="p-2 text-center" style={{
-      background: '#0a1a2d',
+    <div style={{
+      background: 'rgba(0,10,20,0.82)',
       border: `1px solid ${borderColor}`,
       borderRadius: '2px',
-      minWidth: '90px',
+      padding: '4px 6px',
+      minWidth: '100px',
+      textAlign: 'left',
     }}>
-      <p className="text-[10px] font-bold mb-0.5" style={{ color: '#f5c518' }}>{label}</p>
-      <p className="text-[9px] mb-1.5" style={{ color: '#4a6a8a' }}>{range}</p>
-      <div className="flex gap-0.5 justify-center">
+      {/* Label + range on one line */}
+      <p style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: '700', color: '#e8e8e8', marginBottom: '3px', whiteSpace: 'nowrap' }}>
+        {label} <span style={{ color: '#4a7a9a', fontWeight: '400' }}>{range}</span>
+      </p>
+      {/* HP boxes */}
+      <div style={{ display: 'flex', gap: '2px', marginBottom: '4px' }}>
         {boxes.map((state, i) => (
           <div
             key={i}
             onClick={() => onBoxClick(i)}
             title={state}
-            className="cursor-pointer transition-colors"
-            style={{ width: '13px', height: '13px', ...STATE_STYLE[state] }}
+            style={{ width: '14px', height: '14px', cursor: 'pointer', flexShrink: 0, ...STATE_STYLE[state] }}
           />
         ))}
       </div>
+      {/* DR row */}
       <div
-        className="flex gap-1.5 justify-center mt-1.5"
+        style={{ display: 'flex', gap: '6px', cursor: dr?.worn && dr?.name ? 'help' : 'default' }}
         title={dr?.worn && dr?.name ? dr.name : undefined}
-        style={{ cursor: dr?.worn && dr?.name ? 'help' : 'default' }}
       >
-        <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: dr?.physical > 0 ? '#e8e8e8' : '#5a7a8a', fontWeight: '700' }}>P{dr?.physical ?? 0}</span>
-        <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: dr?.energy > 0 ? '#4ab8ff' : '#5a7a8a', fontWeight: '700' }}>E{dr?.energy ?? 0}</span>
-        <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: dr?.radiation > 0 ? '#22cc22' : '#5a7a8a', fontWeight: '700' }}>R{dr?.radiation ?? 0}</span>
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.physical  > 0 ? '#e8e8e8' : '#3a5a6a', fontWeight: '700' }}>⚡ {dr?.physical  ?? 0}</span>
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.energy    > 0 ? '#4ab8ff' : '#3a5a6a', fontWeight: '700' }}>👊 {dr?.energy    ?? 0}</span>
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: dr?.radiation > 0 ? '#22cc22' : '#3a5a6a', fontWeight: '700' }}>☢ {dr?.radiation ?? 0}</span>
       </div>
     </div>
   );
@@ -86,27 +86,26 @@ export default function BodyDiagram({ character, updateField }) {
   });
 
   return (
-    <div className="p-3">
-      {/* Legend */}
-      <div className="flex flex-wrap gap-3 mb-4 text-[10px]" style={{ color: '#a8c8d8' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+
+      {/* Legend — compact single row */}
+      <div style={{ display: 'flex', gap: '12px', padding: '6px 10px', borderBottom: '1px solid #1e3a5f', flexShrink: 0 }}>
         {[
           { state: 'healthy', label: 'Healthy' },
-          { state: 'treated', label: 'Treated' },
-          { state: 'injured', label: 'Injured' },
-          { state: 'empty',   label: 'None' },
+          { state: 'treated', label: 'Treated injury (Right Click)' },
+          { state: 'injured', label: 'Injury (Left Click)' },
         ].map(({ state, label }) => (
-          <span key={state} className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3" style={STATE_STYLE[state]} />
+          <span key={state} style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#a8c8d8' }}>
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', flexShrink: 0, ...STATE_STYLE[state] }} />
             {label}
           </span>
         ))}
-        <span style={{ color: '#4a6a8a' }}>(click to cycle)</span>
       </div>
 
-      {/* Body layout — Vault Boy silhouette with anchored panels */}
-      <div className="relative mx-auto" style={{ width: '340px', height: '320px' }}>
+      {/* Main body layout — fills remaining space */}
+      <div style={{ position: 'relative', flex: 1, minHeight: '380px' }}>
 
-        {/* Vault Boy background silhouette */}
+        {/* Vault Boy silhouette — fills center */}
         <img
           src="https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
           alt=""
@@ -116,11 +115,11 @@ export default function BodyDiagram({ character, updateField }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            height: '300px',
+            height: '88%',
             width: 'auto',
             objectFit: 'contain',
-            opacity: 0.20,
-            filter: 'saturate(0.3) brightness(0.8) hue-rotate(170deg)',
+            opacity: 0.22,
+            filter: 'saturate(0.25) brightness(1.1) hue-rotate(175deg)',
             pointerEvents: 'none',
             userSelect: 'none',
             zIndex: 0,
@@ -128,48 +127,52 @@ export default function BodyDiagram({ character, updateField }) {
         />
 
         {/* HEAD — top center */}
-        <div style={{ position: 'absolute', top: '0px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+        <div style={{ position: 'absolute', top: '8px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('head')} />
         </div>
 
-        {/* LEFT ARM — mid-left (character's right arm from viewer left) */}
-        <div style={{ position: 'absolute', top: '100px', left: '0px', zIndex: 1 }}>
+        {/* LEFT ARM — left side, arm level */}
+        <div style={{ position: 'absolute', top: '130px', left: '8px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_arm')} />
         </div>
 
-        {/* TORSO — center */}
-        <div style={{ position: 'absolute', top: '108px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+        {/* TORSO — center, chest level */}
+        <div style={{ position: 'absolute', top: '145px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('torso')} />
         </div>
 
-        {/* RIGHT ARM — mid-right */}
-        <div style={{ position: 'absolute', top: '100px', right: '0px', zIndex: 1 }}>
+        {/* RIGHT ARM — right side, arm level */}
+        <div style={{ position: 'absolute', top: '130px', right: '8px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_arm')} />
         </div>
 
-        {/* LEFT LEG — bottom-left */}
-        <div style={{ position: 'absolute', bottom: '0px', left: '20px', zIndex: 1 }}>
+        {/* LEFT LEG — lower left */}
+        <div style={{ position: 'absolute', bottom: '30px', left: '8px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('left_leg')} />
         </div>
 
-        {/* RIGHT LEG — bottom-right */}
-        <div style={{ position: 'absolute', bottom: '0px', right: '20px', zIndex: 1 }}>
+        {/* RIGHT LEG — lower right */}
+        <div style={{ position: 'absolute', bottom: '30px', right: '8px', zIndex: 1 }}>
           <BodyPartBoxes {...getProps('right_leg')} />
         </div>
 
-      </div>
+        {/* Encumbrance — small badge bottom center */}
+        <div style={{
+          position: 'absolute', bottom: '8px', left: '50%', transform: 'translateX(-50%)',
+          zIndex: 1, display: 'flex', alignItems: 'center', gap: '4px',
+          background: 'rgba(0,10,20,0.75)', border: '1px solid #1e3a5f',
+          padding: '2px 8px', borderRadius: '2px', whiteSpace: 'nowrap',
+        }}>
+          <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#f5c518' }}>ENC</span>
+          <input
+            type="number"
+            value={character.encumbrance || 0}
+            onChange={e => updateField({ encumbrance: parseInt(e.target.value) || 0 })}
+            style={{ width: '36px', textAlign: 'center', fontSize: '10px', fontFamily: 'var(--font-mono)', fontWeight: '700', background: 'transparent', border: 'none', color: '#e8e8e8', outline: 'none', padding: '0' }}
+          />
+          <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#4a6a8a' }}>/ {character.carry_weight || 150}</span>
+        </div>
 
-      {/* Encumbrance — compact inline row */}
-      <div className="mt-2 pt-2 flex items-center gap-2 text-xs" style={{ borderTop: '1px solid #1e3a5f', color: '#a8c8d8' }}>
-        <span style={{ color: '#f5c518' }}>Encumbrance:</span>
-        <input
-          type="number"
-          value={character.encumbrance || 0}
-          onChange={e => updateField({ encumbrance: parseInt(e.target.value) || 0 })}
-          className="w-14 text-center text-xs font-bold"
-          style={{ background: '#060f1c', border: '1px solid #2a4a6a', color: '#e8e8e8', outline: 'none', padding: '2px 4px' }}
-        />
-        <span>/ {character.carry_weight || 150} lbs</span>
       </div>
     </div>
   );
