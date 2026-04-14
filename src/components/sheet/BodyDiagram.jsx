@@ -121,7 +121,7 @@ export default function BodyDiagram({ character, updateField }) {
           src={isNightkin
             ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/009360bcb_GlowingNightkinontransparentbackground.png"
             : isRobot
-            ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/52472759c_GlowingoutlineofMrHandyrobot.png"
+            ? "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/249998fb0_YellowoutlinedMrHandyblueprint.png"
             : "https://media.base44.com/images/public/69d801affddb6cf5e785d3ab/d04204214_VaultBoyingoldenoutline.png"
           }
           alt=""
