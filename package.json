@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "gen:source-truth": "node scripts/generate-source-truth-data.mjs",
+    "gen:pdf-supplements": "python scripts/extract_pdf_supplements.py",
+    "sync:reference-data": "npm run gen:source-truth && npm run gen:pdf-supplements",
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc -p ./jsconfig.json",

@@ -1,4 +1,4 @@
-import { PERKS, WANDERERS_PERKS, RARE_BOOKS } from "../../lib/falloutData";
+import { RARE_BOOKS } from "../../lib/falloutData";
 import { CORE_PERKS } from "../../lib/sourceTruthData";
 import { Check, Lock } from "lucide-react";
 
@@ -29,21 +29,19 @@ function getPrimarySpecial(rawReq) {
   return null;
 }
 
-// Build ALL_PERKS with normalized requirements
-const OLD_PERKS = [
-  ...PERKS.map(p => ({ ...p, maxRanks: p.maxRanks || 1, rawReq: p.requirement || {}, requirement: p.requirement || {} })),
-  ...WANDERERS_PERKS.map(p => {
-    const normalized = normalizeReqs(p.requirements);
-    return { key: p.key, label: p.label, description: p.description, source: p.source, maxRanks: p.ranks || 1, rawReq: p.requirements || {}, requirement: normalized };
-  }),
-];
-
 const ALL_PERKS = [
   ...CORE_PERKS.map(p => {
     const normalized = normalizeReqs(p.requirements);
-    return { key: p.key, label: p.label, description: p.description, source: 'Core', maxRanks: p.ranks || 1, rawReq: p.requirements || {}, requirement: normalized };
+    return {
+      key: p.key,
+      label: p.label,
+      description: p.description,
+      source: p.source || 'Core',
+      maxRanks: p.ranks || p.maxRanks || 1,
+      rawReq: p.requirements || {},
+      requirement: normalized
+    };
   }),
-  ...OLD_PERKS,
 ];
 
 // Remove duplicates by key (first wins = Core first)
