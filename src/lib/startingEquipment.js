@@ -35,6 +35,14 @@ function resolveItemQuantity(item) {
 // ─── Weapon lookup helpers ────────────────────────────────────────────────────
 
 const ALL_WEAPONS = [...CORE_WEAPONS];
+const SMALL_GUNS_AMMO_TYPES = Array.from(
+  new Set(
+    CORE_WEAPONS
+      .filter(w => String(w?.type || '').toLowerCase() === 'small guns')
+      .map(w => String(w?.ammo || '').trim())
+      .filter(Boolean)
+  )
+);
 const LEGACY_WEAPON_NAME_MAP = {
   'laser pistol': 'laser gun',
   'laser rifle': 'laser gun',
@@ -140,6 +148,32 @@ function buildWeaponEntry(itemName, quantity = 1) {
   };
 }
 
+function findAmmoTypeForSmallGuns(weapons = [], ammoInventory = []) {
+  const ammoByQuantity = [...ammoInventory]
+    .filter(a => String(a?.type || '').trim())
+    .map(a => ({ type: String(a.type).trim(), quantity: Number(a.quantity || 0) }))
+    .sort((a, b) => b.quantity - a.quantity);
+
+  // Prefer ammo the character already has for a Small Guns weapon.
+  for (const entry of ammoByQuantity) {
+    if (SMALL_GUNS_AMMO_TYPES.some(t => t.toLowerCase() === entry.type.toLowerCase())) {
+      return entry.type;
+    }
+  }
+
+  // Next best: any ammo already possessed.
+  if (ammoByQuantity.length > 0) return ammoByQuantity[0].type;
+
+  // Fallback: infer from a currently-owned Small Guns weapon.
+  for (const w of weapons) {
+    const type = String(w?.type || '').toLowerCase();
+    const ammo = String(w?.ammo || '').trim();
+    if (type === 'small guns' && ammo) return ammo;
+  }
+
+  return null;
+}
+
 /**
  * Parse an option string that may bundle a weapon + ammo together.
  * e.g. "Laser Pistol + Fusion Cell (10+5CD shots)"
@@ -195,7 +229,26 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
         weapons.push(buildWeaponEntry(item.name, quantity));
         break;
       case 'ammo':
-        ammo.push({ type: item.name, quantity, source: 'starting_equipment' });
+        if (String(item.name || '').toLowerCase() === 'small guns ammo') {
+          const ammoType = findAmmoTypeForSmallGuns(weapons, ammo);
+          if (ammoType) {
+            ammo.push({ type: ammoType, quantity, source: 'starting_equipment', note: item.note || '' });
+          } else {
+            pendingChoices.push({
+              type: 'ammo',
+              optional: true,
+              optionKey: 'tag_small_guns_ammo',
+              optionLabel: 'Choose additional Small Guns ammo type',
+              options: SMALL_GUNS_AMMO_TYPES,
+              quantity,
+              note: item.note || '',
+              resolved: false,
+              resolvedValue: null,
+            });
+          }
+        } else {
+          ammo.push({ type: item.name, quantity, source: 'starting_equipment' });
+        }
         break;
       case 'apparel':
       case 'robot_armor':
@@ -267,7 +320,7 @@ export function resolveEquipmentChoice(character, choiceKey, chosenValue) {
       break;
     }
     case 'ammo':
-      ammo.push({ type: chosenValue, quantity: choice.quantity || 1, source: 'starting_equipment' });
+      ammo.push({ type: chosenValue, quantity: choice.quantity || 1, source: 'starting_equipment', note: choice.note || '' });
       break;
     case 'apparel':
     case 'robot_armor':
