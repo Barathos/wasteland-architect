@@ -6,6 +6,32 @@ function safeJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
 }
 
+function rollDiceExpression(expr) {
+  const text = String(expr || '').trim().toLowerCase();
+  const match = text.match(/^(\d+)d(\d+)$/);
+  if (!match) return 0;
+  const count = Math.max(0, parseInt(match[1], 10) || 0);
+  const sides = Math.max(0, parseInt(match[2], 10) || 0);
+  if (!count || !sides) return 0;
+  let total = 0;
+  for (let i = 0; i < count; i += 1) {
+    total += Math.floor(Math.random() * sides) + 1;
+  }
+  return total;
+}
+
+function resolveItemQuantity(item) {
+  if (typeof item?.quantity === 'number') return item.quantity;
+  if (typeof item?.quantity === 'string') {
+    const parsed = parseInt(item.quantity, 10);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+  if (typeof item?.quantityDice === 'string') {
+    return rollDiceExpression(item.quantityDice);
+  }
+  return 1;
+}
+
 // ─── Weapon lookup helpers ────────────────────────────────────────────────────
 
 const ALL_WEAPONS = [...CORE_WEAPONS];
@@ -162,13 +188,14 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
   let caps = parseInt(character.caps) || 0;
 
   autoItems.forEach(item => {
-    const base = { name: item.name, quantity: item.quantity, source: 'starting_equipment', note: item.note || '' };
+    const quantity = resolveItemQuantity(item);
+    const base = { name: item.name, quantity, source: 'starting_equipment', note: item.note || '' };
     switch (item.type) {
       case 'weapon':
-        weapons.push(buildWeaponEntry(item.name, item.quantity));
+        weapons.push(buildWeaponEntry(item.name, quantity));
         break;
       case 'ammo':
-        ammo.push({ type: item.name, quantity: item.quantity, source: 'starting_equipment' });
+        ammo.push({ type: item.name, quantity, source: 'starting_equipment' });
         break;
       case 'apparel':
       case 'robot_armor':
@@ -187,7 +214,7 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
         misc.push(base);
         break;
       case 'currency':
-        caps += item.quantity;
+        caps += quantity;
         break;
     }
   });
