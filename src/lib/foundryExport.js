@@ -738,9 +738,9 @@ function buildAmmoItem(a) {
   const ref = findInLookup(AMMO_LOOKUP, [a.key, a.type, a.label, a.name]);
   const name = pickFirst(a.type, a.label, a.name, ref?.label, 'Ammo');
   const qty = safeQty(a.quantity, 1);
-  const item = makeItemBase(null, name, 'ammo', 'systems/fallout/assets/icons/items/ammo.webp');
+  const item = makeItemBase(null, name, 'ammo', ref?.foundryUuid ? 'systems/fallout/assets/icons/items/ammo.svg' : 'systems/fallout/assets/icons/items/ammo.webp');
   item.system = createSystemFromTemplate('ammo', {
-    source:   'custom',
+    source:   ref?.foundryUuid ? 'core_rulebook' : 'custom',
     cost:     parseInt(pickFirst(a.cost, ref?.cost, 1), 10) || 1,
     quantity: qty,
     rarity:   parseInt(pickFirst(a.rarity, ref?.rarity, 1), 10) || 1,
@@ -748,6 +748,9 @@ function buildAmmoItem(a) {
     effect:   pickFirst(a.effect, ref?.effect, ''),
     fusionCore: false,
   });
+  if (ref?.foundryUuid) {
+    item._stats.compendiumSource = ref.foundryUuid;
+  }
   item.system.charges = { current: qty, max: qty };
   item.system.shots   = { current: qty, max: qty };
   return item;
