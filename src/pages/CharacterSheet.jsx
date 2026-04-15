@@ -113,10 +113,10 @@ export default function CharacterSheet() {
               a.click();
               URL.revokeObjectURL(url);
             }}
-            title="Run this macro in Foundry as GM to create scavenging loot roll tables and auto-assign category mappings"
+            title="Run this macro in Foundry as GM to create scavenging loot roll tables, import the junk roll table, and auto-assign category mappings"
             className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 transition-colors hover:opacity-80 print:hidden"
             style={{ color: '#6ab0ff', background: 'rgba(68,136,255,0.08)', border: '1px solid rgba(68,136,255,0.3)' }}>
-            <Download className="w-3.5 h-3.5" /> Export Scavenging Tables Script
+            <Download className="w-3.5 h-3.5" /> Export Scavenging + Junk Tables Script
           </button>
           <button
             onClick={() => {
