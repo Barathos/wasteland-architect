@@ -1,5 +1,5 @@
 // Starting equipment application logic
-import { ORIGIN_PACKS, TAG_SKILL_ITEMS, SETTLERS_WEAPONS, WANDERERS_WEAPONS } from './falloutData';
+import { ORIGIN_PACKS, TAG_SKILL_ITEMS } from './falloutData';
 import { CORE_WEAPONS } from './sourceTruthData';
 
 function safeJson(str, fallback) {
@@ -8,10 +8,35 @@ function safeJson(str, fallback) {
 
 // ─── Weapon lookup helpers ────────────────────────────────────────────────────
 
-const ALL_WEAPONS = [...CORE_WEAPONS, ...SETTLERS_WEAPONS, ...WANDERERS_WEAPONS];
+const ALL_WEAPONS = [...CORE_WEAPONS];
+const LEGACY_WEAPON_NAME_MAP = {
+  'laser pistol': 'laser gun',
+  'laser rifle': 'laser gun',
+  'pipe rifle': 'pipe gun',
+  'throwing knives': 'throwing knife',
+  'tomahawks': 'tomahawk',
+  'molotov cocktails': 'molotov cocktail',
+  'baseball grenades': 'baseball grenade',
+};
+
+function parseQuantityPrefix(rawName = '') {
+  const text = String(rawName || '').trim();
+  const match = text.match(/^(\d+)\s+(.+)$/);
+  if (!match) return { quantity: 1, name: text };
+  return { quantity: parseInt(match[1], 10) || 1, name: match[2].trim() };
+}
+
+function normalizeLookupName(rawName = '') {
+  const base = String(rawName || '')
+    .split('+')[0]
+    .split('(')[0]
+    .trim()
+    .toLowerCase();
+  return LEGACY_WEAPON_NAME_MAP[base] || base;
+}
 
 function findWeaponByName(name) {
-  const clean = name.split('+')[0].split('(')[0].trim().toLowerCase();
+  const clean = normalizeLookupName(name);
   let best = null;
   let bestScore = -1;
 
@@ -42,12 +67,13 @@ function findWeaponByName(name) {
   }
 
   const result = best;
-  console.log('findWeaponByName:', name, '->', result?.label ?? 'NOT FOUND');
   return result;
 }
 
 function buildWeaponEntry(itemName, quantity = 1) {
-  const found = findWeaponByName(itemName);
+  const parsed = parseQuantityPrefix(itemName);
+  const resolvedQuantity = Math.max(1, Number(quantity || 1)) * Math.max(1, parsed.quantity || 1);
+  const found = findWeaponByName(parsed.name);
   if (found) {
     return {
       id: Date.now() + Math.random(),
@@ -64,13 +90,13 @@ function buildWeaponEntry(itemName, quantity = 1) {
       rarity: found.rarity || 0,
       ammo: found.ammo || '',
       fireModes: found.fireModes || [],
-      quantity,
+      quantity: resolvedQuantity,
       source: 'starting_equipment',
       note: found.note || '',
     };
   }
   // Fallback stub
-  const cleanName = itemName.split('+')[0].split('(')[0].trim();
+  const cleanName = parsed.name.split('+')[0].split('(')[0].trim();
   return {
     id: Date.now() + Math.random(),
     name: cleanName,
@@ -83,7 +109,7 @@ function buildWeaponEntry(itemName, quantity = 1) {
     weight: 0,
     ammo: '',
     fireModes: [],
-    quantity,
+    quantity: resolvedQuantity,
     source: 'starting_equipment',
   };
 }
