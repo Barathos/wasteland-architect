@@ -9,6 +9,10 @@ const ALL_AMMO = [
   ...WANDERERS_AMMO,
 ];
 
+const AMMO_DEFAULT_SHOTS_PER_UNIT = {
+  'Fusion Cell': 20,
+};
+
 function ammoWeightNum(w) {
   if (!w || w === '<1') return 0.1;
   return parseFloat(w) || 0;
@@ -27,7 +31,26 @@ function parseInventory(str) {
 }
 
 const EMPTY_ITEM = { name: '', quantity: 1, weight: 0, notes: '' };
-const EMPTY_AMMO = { type: '', quantity: 10 };
+const EMPTY_AMMO = { type: '', quantity: 1, shotsPerUnit: 1 };
+
+function pickAmmoShots(entry) {
+  const candidate = parseInt(entry?.shotsPerUnit ?? entry?.shots_per_unit ?? entry?.shots, 10);
+  return Number.isFinite(candidate) ? candidate : NaN;
+}
+
+function normalizeAmmoEntry(entry) {
+  const quantity = parseInt(entry?.quantity, 10);
+  const normalizedQuantity = Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
+  const fallbackShots = AMMO_DEFAULT_SHOTS_PER_UNIT[entry?.type] || 1;
+  const rawShots = pickAmmoShots(entry);
+  const normalizedShots = Number.isFinite(rawShots) && rawShots > 0 ? rawShots : fallbackShots;
+  return {
+    ...entry,
+    type: entry?.type || '',
+    quantity: normalizedQuantity,
+    shotsPerUnit: normalizedShots,
+  };
+}
 
 function StartingEquipmentSection({ character }) {
   const [open, setOpen] = useState(false);
@@ -85,7 +108,7 @@ function StartingEquipmentSection({ character }) {
 
 export default function GearTab({ character, updateField }) {
   const [items, setItems] = useState(() => parseInventory(character.inventory));
-  const [ammoList, setAmmoList] = useState(() => parseInventory(character.ammo_inventory));
+  const [ammoList, setAmmoList] = useState(() => parseInventory(character.ammo_inventory).map(normalizeAmmoEntry));
   const [caps, setCaps] = useState(character.caps || 0);
 
   const saveItems = (updated) => {
@@ -116,7 +139,19 @@ export default function GearTab({ character, updateField }) {
 
   const addAmmo = () => saveAmmo([...ammoList, { ...EMPTY_AMMO }]);
   const removeAmmo = (i) => saveAmmo(ammoList.filter((_, idx) => idx !== i));
-  const updateAmmo = (i, field, val) => saveAmmo(ammoList.map((a, idx) => idx === i ? { ...a, [field]: val } : a));
+  const updateAmmo = (i, field, val) => {
+    const updated = ammoList.map((a, idx) => {
+      if (idx !== i) return a;
+      if (field === 'type') {
+        const fallbackShots = AMMO_DEFAULT_SHOTS_PER_UNIT[val] || 1;
+        const currentShots = parseInt(a.shotsPerUnit, 10) || 1;
+        const shouldResetShots = !a.type || currentShots === (AMMO_DEFAULT_SHOTS_PER_UNIT[a.type] || 1);
+        return { ...a, type: val, shotsPerUnit: shouldResetShots ? fallbackShots : currentShots };
+      }
+      return { ...a, [field]: val };
+    });
+    saveAmmo(updated.map(normalizeAmmoEntry));
+  };
 
   const itemWeight = items.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
   const ammoWeight = ammoList.reduce((s, a) => {
@@ -152,15 +187,16 @@ export default function GearTab({ character, updateField }) {
           <p className="text-xs font-mono text-center py-2" style={{ color: '#4a6a8a' }}>No ammo tracked.</p>
         ) : (
           <>
-            <div className="grid gap-2 mb-1" style={{ gridTemplateColumns: '1fr 60px 28px' }}>
-              {['AMMO TYPE', 'QTY', ''].map((h, i) => (
+            <div className="grid gap-2 mb-1" style={{ gridTemplateColumns: '1fr 60px 70px 28px' }}>
+              {['AMMO TYPE', 'QTY', 'SHOTS', ''].map((h, i) => (
                 <span key={i} className="text-[10px]" style={{ color: '#4a6a8a' }}>{h}</span>
               ))}
             </div>
             {ammoList.map((a, i) => {
               const def = ALL_AMMO.find(x => x.label === a.type);
+              const totalShots = (parseInt(a.quantity, 10) || 0) * (parseInt(a.shotsPerUnit, 10) || 0);
               return (
-                <div key={i} className="grid gap-2 items-center py-1" style={{ gridTemplateColumns: '1fr 60px 28px', borderBottom: '1px solid #0d2137' }}>
+                <div key={i} className="grid gap-2 items-center py-1" style={{ gridTemplateColumns: '1fr 60px 70px 28px', borderBottom: '1px solid #0d2137' }}>
                   <div className="flex items-center gap-1">
                     {def && rarityDot(def.rarity)}
                     <select value={a.type} onChange={e => updateAmmo(i, 'type', e.target.value)}
@@ -180,6 +216,14 @@ export default function GearTab({ character, updateField }) {
                   <input type="number" value={a.quantity} onChange={e => updateAmmo(i, 'quantity', parseInt(e.target.value) || 0)}
                     style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px', textAlign: 'center' }}
                   />
+                  <div>
+                    <input type="number" value={a.shotsPerUnit} onChange={e => updateAmmo(i, 'shotsPerUnit', parseInt(e.target.value) || 1)}
+                      style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px', textAlign: 'center' }}
+                    />
+                    <div className="text-[9px] font-mono text-center mt-0.5" style={{ color: '#4a6a8a' }}>
+                      {totalShots} total
+                    </div>
+                  </div>
                   <button onClick={() => removeAmmo(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
                 </div>
               );

@@ -370,6 +370,13 @@ function safeQty(value, fallback = 1) {
   return Number.isFinite(qty) && qty > 0 ? qty : fallback;
 }
 
+function defaultShotsPerUnit(ammoName = '') {
+  const map = {
+    'fusion cell': 20,
+  };
+  return map[String(ammoName || '').trim().toLowerCase()] || 1;
+}
+
 function cleanPerkKeyLabel(key) {
   // Remove generated lookup suffixes like "_wc8tgvkf6ohfy9xr" from display labels.
   const normalized = String(key || '')
@@ -738,6 +745,7 @@ function buildAmmoItem(a) {
   const ref = findInLookup(AMMO_LOOKUP, [a.key, a.type, a.label, a.name]);
   const name = pickFirst(a.type, a.label, a.name, ref?.label, 'Ammo');
   const qty = safeQty(a.quantity, 1);
+  const shotsPerUnit = safeQty(a.shotsPerUnit ?? a.shots_per_unit ?? a.shots, defaultShotsPerUnit(name));
   const item = makeItemBase(null, name, 'ammo', ref?.foundryUuid ? 'systems/fallout/assets/icons/items/ammo.svg' : 'systems/fallout/assets/icons/items/ammo.webp');
   item.system = createSystemFromTemplate('ammo', {
     source:   ref?.foundryUuid ? 'core_rulebook' : 'custom',
@@ -751,8 +759,8 @@ function buildAmmoItem(a) {
   if (ref?.foundryUuid) {
     item._stats.compendiumSource = ref.foundryUuid;
   }
-  item.system.charges = { current: qty, max: qty };
-  item.system.shots   = { current: qty, max: qty };
+  item.system.charges = { current: shotsPerUnit, max: shotsPerUnit };
+  item.system.shots   = { current: shotsPerUnit, max: shotsPerUnit };
   return item;
 }
 
