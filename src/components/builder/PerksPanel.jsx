@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { RARE_BOOKS } from "../../lib/falloutData";
 import { CORE_PERKS } from "../../lib/sourceTruthData";
 import { Check, Lock } from "lucide-react";
@@ -81,6 +82,8 @@ function SourceBadge({ source }) {
 
 export default function PerksPanel({ character, selectedPerks, onPerksChange }) {
   const level = character.level || 1;
+  const [statFilter, setStatFilter] = useState('ALL');
+  const [availabilityFilter, setAvailabilityFilter] = useState('ALL');
 
   const meetsRequirements = (perk) => {
     const req = perk.requirement;
@@ -101,7 +104,19 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
   const maxPerks = 1 + Math.floor((level - 1) / 2) + rareBookPerks.length;
   const canAdd = selectedPerks.length < maxPerks;
 
-  const grouped = groupPerksBySpecial(DEDUPED_PERKS);
+  const filteredPerks = DEDUPED_PERKS
+    .filter(perk => {
+      if (statFilter === 'ALL') return true;
+      const primary = getPrimarySpecial(perk.rawReq || {}) || 'General';
+      return primary === statFilter;
+    })
+    .filter(perk => {
+      if (availabilityFilter === 'ALL') return true;
+      const available = meetsRequirements(perk);
+      return availabilityFilter === 'AVAILABLE' ? available : !available;
+    });
+
+  const grouped = groupPerksBySpecial(filteredPerks);
 
   return (
     <div className="space-y-5">
@@ -115,6 +130,35 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
       <p className="text-xs text-muted-foreground font-mono">
         Select perks your character has earned. Locked perks require higher level or attributes. Perks are grouped by primary SPECIAL attribute.
       </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 rounded-lg bg-muted border border-border">
+        <div>
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">Filter By Stat</p>
+          <select
+            value={statFilter}
+            onChange={(e) => setStatFilter(e.target.value)}
+            className="w-full h-8 px-2 text-xs font-mono bg-card border border-border rounded text-foreground outline-none"
+          >
+            <option value="ALL">All Stats</option>
+            {SPECIAL_ORDER.map(abbr => (
+              <option key={abbr} value={abbr}>{SPECIAL_LABELS[abbr]} ({abbr})</option>
+            ))}
+            <option value="General">General</option>
+          </select>
+        </div>
+        <div>
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">Filter By Requirements</p>
+          <select
+            value={availabilityFilter}
+            onChange={(e) => setAvailabilityFilter(e.target.value)}
+            className="w-full h-8 px-2 text-xs font-mono bg-card border border-border rounded text-foreground outline-none"
+          >
+            <option value="ALL">All Perks</option>
+            <option value="AVAILABLE">Available (Meets Requirements)</option>
+            <option value="UNAVAILABLE">Unavailable (Missing Requirements)</option>
+          </select>
+        </div>
+      </div>
 
       {/* Rare Book Perks */}
       {rareBookPerks.length > 0 && (
@@ -198,6 +242,12 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
           </div>
         );
       })}
+
+      {filteredPerks.length === 0 && (
+        <div className="p-4 rounded-lg border border-border bg-card">
+          <p className="text-xs font-mono text-muted-foreground">No perks match the current filters.</p>
+        </div>
+      )}
     </div>
   );
 }
