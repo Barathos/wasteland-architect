@@ -36,6 +36,8 @@ export const SKILLS = [
 
 export const SKILL_POINTS_INITIAL = 9; // 9 + tag skill bonuses
 export const TAG_SKILL_COUNT = 3;
+export const TAG_SKILL_BONUS = 2;
+const GOOD_NATURED_EXEMPT_SKILLS = ['speech', 'medicine', 'repair', 'science', 'barter'];
 
 export const ORIGINS = [
   {
@@ -272,6 +274,18 @@ export function isNightkinCharacter(character = {}) {
   const subOrigin = String(character.sub_origin || '').toLowerCase();
   if (origin === 'Nightkin') return true; // legacy records
   return origin === 'Super Mutant' && subOrigin === 'nightkin';
+}
+
+export function getSkillRankCapForCharacter(character = {}, skillKey = '') {
+  if (isNightkinCharacter(character) || character.origin === 'Super Mutant') return 4;
+  const traits = getActiveTraitEffects(character);
+  if (traits.hasGoodNatured && !GOOD_NATURED_EXEMPT_SKILLS.includes(skillKey)) return 4;
+  return 6;
+}
+
+export function getEffectiveSkillRank(baseRank = 0, isTag = false, cap = 6) {
+  const rank = Number(baseRank || 0) + (isTag ? TAG_SKILL_BONUS : 0);
+  return Math.min(cap, Math.max(0, rank));
 }
 
 const ROBOT_CARRY_WEIGHTS = { Protectron: 225, Robobrain: 150, Securitron: 150, 'Mister Handy': 150 };

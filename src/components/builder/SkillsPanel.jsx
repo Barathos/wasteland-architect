@@ -1,10 +1,9 @@
-import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES, getActiveTraitEffects, isNightkinCharacter } from "../../lib/falloutData";
+import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES, getActiveTraitEffects, getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter, TAG_SKILL_BONUS } from "../../lib/falloutData";
 import { Minus, Plus, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const GOOD_NATURED_EXEMPT = ['speech', 'medicine', 'repair', 'science', 'barter'];
 const CREATION_MAX_RANK = 3;
-const TAG_BONUS = 2;
 
 export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits, outcastTagSkill }) {
   const traits = getActiveTraitEffects(character);
@@ -21,18 +20,18 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   const tagLimit = TAG_SKILL_COUNT + traits.extraTagSkills;
   const tagCount = tagSkills.length;
 
-  const getAbsoluteMaxRank = (key) => {
-    if (isRankCapped) return 4;
-    if (hasGoodNatured && !GOOD_NATURED_EXEMPT.includes(key)) return 4;
-    return 6; // absolute cap (tag can push to 5, but 6 is the hard ceiling on sheet)
-  };
+  const getAbsoluteMaxRank = (key) => getSkillRankCapForCharacter(character, key);
 
   const handleSkillChange = (key, delta) => {
     const current = skills[key] || 0;
     const newVal = current + delta;
+    const isTagged = tagSkills.includes(key);
+    const absMax = getAbsoluteMaxRank(key);
+    const nextEffective = getEffectiveSkillRank(newVal, isTagged, absMax);
     // enforce creation cap: can't spend points beyond CREATION_MAX_RANK
     if (delta > 0 && newVal > CREATION_MAX_RANK) return;
     if (delta > 0 && isRankCapped && newVal > CREATION_MAX_RANK) return;
+    if (delta > 0 && nextEffective > absMax) return;
     if (newVal < 0) return;
     if (delta > 0 && remaining <= 0) return;
     onSkillsChange({ ...skills, [key]: newVal });
@@ -42,6 +41,12 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
     if (tagSkills.includes(key)) {
       onTagSkillsChange(tagSkills.filter(s => s !== key));
     } else if (tagCount < tagLimit) {
+      const absMax = getAbsoluteMaxRank(key);
+      const current = Number(skills[key] || 0);
+      const maxBaseWithTag = Math.max(0, absMax - TAG_SKILL_BONUS);
+      if (current > maxBaseWithTag) {
+        onSkillsChange({ ...skills, [key]: maxBaseWithTag });
+      }
       onTagSkillsChange([...tagSkills, key]);
     }
   };
@@ -88,11 +93,12 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
           const isTag = tagSkills.includes(skill.key);
           const attrAttr = SPECIAL_ATTRIBUTES.find(a => a.key === skill.attribute);
           const attrVal = getAttributeValue(skill.attribute);
-          const targetNumber = value + attrVal + (isTag ? TAG_BONUS : 0);
+          const effectiveRank = getEffectiveSkillRank(value, isTag, absMax);
+          const targetNumber = attrVal + effectiveRank;
 
           // Creation cap: manual points capped at 3, tag bonus can push displayed TN higher
           const atCreationCap = value >= CREATION_MAX_RANK;
-          const canIncrease = !atCreationCap && remaining > 0 && value < absMax;
+          const canIncrease = !atCreationCap && remaining > 0 && getEffectiveSkillRank(value + 1, isTag, absMax) <= absMax;
           const canDecrease = value > 0;
 
           return (
@@ -120,7 +126,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
                     {isGoodNaturedCapped && <span className="ml-1 text-[9px] font-mono px-1 rounded" style={{ color: '#f97316', background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.3)' }}>MAX 4</span>}
                   </span>
                   <span className="text-[10px] font-mono text-muted-foreground">
-                    {attrAttr?.abbr} {attrVal} + {value}{isTag ? ` +${TAG_BONUS} tag` : ""} = <span className="text-secondary font-bold">{targetNumber}</span>
+                    {attrAttr?.abbr} {attrVal} + {effectiveRank}{isTag ? ` (${value}+${TAG_SKILL_BONUS} tag)` : ""} = <span className="text-secondary font-bold">{targetNumber}</span>
                   </span>
                 </div>
               </div>
@@ -135,7 +141,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
                 >
                   <Minus className="w-3 h-3" />
                 </Button>
-                <span className="font-heading font-bold text-sm w-6 text-center">{value}</span>
+                <span className="font-heading font-bold text-sm w-6 text-center">{effectiveRank}</span>
                 <Button
                   variant="ghost"
                   size="icon"

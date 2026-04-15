@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CORE_CHEMS, CORE_PERKS } from "../../lib/sourceTruthData";
-import { SPECIAL_ATTRIBUTES, SKILLS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, isRobotCharacter } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, getEffectiveSkillRank, getSkillRankCapForCharacter, TAG_SKILL_BONUS, isRobotCharacter } from "../../lib/falloutData";
 
 const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
 const ALL_PERKS = CORE_PERKS.map((p) => ({
@@ -173,8 +173,10 @@ export default function AbilitiesTab({ character, updateField }) {
             {SKILLS.map(skill => {
               const value = skills[skill.key] || 0;
               const isTag = tagSkills.includes(skill.key);
+              const skillCap = getSkillRankCapForCharacter(character, skill.key);
+              const effectiveRank = getEffectiveSkillRank(value, isTag, skillCap);
               const attrVal = character[skill.attribute] || 5;
-              const target = value + attrVal + (isTag ? 2 : 0);
+              const target = effectiveRank + attrVal;
               const attrAttr = SPECIAL_ATTRIBUTES.find(a => a.key === skill.attribute);
               const isOpen = openSkill === skill.key;
 
@@ -196,7 +198,7 @@ export default function AbilitiesTab({ character, updateField }) {
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <span className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>
-                        {attrAttr?.abbr} {attrVal}+{value}{isTag ? '+2' : ''}
+                        {attrAttr?.abbr} {attrVal}+{effectiveRank}{isTag ? ` (${value}+${TAG_SKILL_BONUS})` : ''}
                       </span>
                       <span className="font-heading font-bold text-sm w-6 text-right" style={{ color: isTag ? '#f5c518' : '#e8e8e8' }}>
                         {target}

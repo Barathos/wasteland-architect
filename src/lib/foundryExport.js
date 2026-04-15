@@ -12,7 +12,7 @@ import {
   CORE_POWER_ARMOR,
   CORE_WEAPONS,
 } from "./sourceTruthData.js";
-import { isNightkinCharacter } from "./falloutData.js";
+import { getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter } from "./falloutData.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Embedded template fragments (sourced from Foundry system template.json)
@@ -575,13 +575,16 @@ function buildSkillItems(character) {
 
   return Object.entries(SKILL_DEFAULTS).map(([skillName, defaultAttr]) => {
     const appSkill = skillLookup[skillName] || { rank: 0, tag: false };
+    const appSkillKey = SKILL_KEY_MAP[skillName] || skillName;
+    const cap = getSkillRankCapForCharacter(character, appSkillKey);
+    const effectiveRank = getEffectiveSkillRank(appSkill.rank || 0, appSkill.tag || false, cap);
     const item = makeItemBase(SKILL_IDS[skillName], skillName, 'skill', 'systems/fallout/assets/icons/items/skill.webp');
     item.system = createSystemFromTemplate('skill', {
       description: SKILL_DESCRIPTIONS[skillName] || '',
       source: 'core_rulebook',
       defaultAttribute: defaultAttr,
       tag: appSkill.tag || false,
-      value: appSkill.rank || 0,
+      value: effectiveRank,
     });
     return item;
   });
