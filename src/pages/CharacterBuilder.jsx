@@ -152,6 +152,15 @@ export default function CharacterBuilder() {
   const currentStepIndex = STEPS.findIndex(s => s.id === activeTab);
   const goNext = () => { if (currentStepIndex < STEPS.length - 1) setActiveTab(STEPS[currentStepIndex + 1].id); };
   const goPrev = () => { if (currentStepIndex > 0) setActiveTab(STEPS[currentStepIndex - 1].id); };
+  const isFinalStep = currentStepIndex === STEPS.length - 1;
+
+  const handleSaveAndNext = () => {
+    if (isFinalStep) {
+      handleSave();
+      return;
+    }
+    goNext();
+  };
 
   const handleSave = async () => {
     if (!character.name.trim()) { toast.error("Please enter a character name"); setActiveTab("details"); return; }
@@ -269,7 +278,7 @@ export default function CharacterBuilder() {
             <Button variant="ghost" onClick={goPrev} disabled={currentStepIndex === 0} className="font-mono text-sm gap-1.5">
               <ChevronLeft className="w-4 h-4" /> Back
             </Button>
-            {currentStepIndex < STEPS.length - 1 ? (
+            {!isFinalStep ? (
               <Button onClick={goNext} className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-mono text-sm gap-1.5">
                 Next <ChevronRight className="w-4 h-4" />
               </Button>
@@ -282,6 +291,17 @@ export default function CharacterBuilder() {
         </div>
 
         <div className="space-y-4">
+          <div className="sticky top-4 z-20">
+            <Button
+              onClick={handleSaveAndNext}
+              disabled={saving}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold gap-2 shadow-[0_0_20px_hsl(120_60%_35%/0.15)]"
+            >
+              <Save className="w-4 h-4" />
+              {isFinalStep ? (saving ? "Saving..." : "Save Character") : "Save & Next"}
+              {!isFinalStep && <ChevronRight className="w-4 h-4" />}
+            </Button>
+          </div>
           <DerivedStats character={character} />
           <div className="border border-border rounded-lg bg-card p-4">
             <h3 className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">Character Preview</h3>

@@ -225,7 +225,7 @@ export default function DetailsPanel({ character, onChange, ncrTraits, onNcrTrai
 
           {/* LEFT: compact selectable list */}
           <div className="sm:w-[32%] flex-shrink-0 overflow-y-auto" style={{ maxHeight: '520px', borderRight: '1px solid #1e3a5f' }}>
-            {ORIGINS.map((origin) => {
+            {[...ORIGINS].sort((a, b) => a.label.localeCompare(b.label)).map((origin) => {
               const isSelected = character.origin === origin.label;
               return (
                 <button
