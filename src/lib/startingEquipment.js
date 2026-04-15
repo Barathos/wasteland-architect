@@ -193,6 +193,46 @@ function parseWeaponOption(optionStr) {
   return { weaponName, ammoName, ammoQty };
 }
 
+function applyChoiceGrantToInventory(grant, state) {
+  if (!grant || typeof grant !== 'object') return;
+  const quantity = resolveItemQuantity(grant);
+  const name = grant.name || '';
+  const base = { name, quantity, source: 'starting_equipment', note: grant.note || '' };
+
+  switch (grant.type) {
+    case 'weapon': {
+      const { weaponName, ammoName, ammoQty } = parseWeaponOption(name);
+      state.weapons.push(buildWeaponEntry(weaponName, quantity));
+      if (ammoName) state.ammo.push({ type: ammoName, quantity: ammoQty, source: 'starting_equipment' });
+      break;
+    }
+    case 'ammo':
+      state.ammo.push({ type: name, quantity, source: 'starting_equipment', note: grant.note || '' });
+      break;
+    case 'apparel':
+    case 'robot_armor':
+      state.armor.push({ name, physRes: 0, enerRes: 0, radRes: 0, locations: [], source: 'starting_equipment', type: grant.type === 'robot_armor' ? 'Robot Armor' : '' });
+      break;
+    case 'consumable':
+      state.chems.push({ ...base, label: name });
+      break;
+    case 'food':
+      state.food.push({ ...base, label: name });
+      break;
+    case 'miscellany':
+      state.misc.push(base);
+      break;
+    case 'robot_mod':
+      state.robotMods.push({ name, source: 'starting_equipment' });
+      break;
+    case 'currency':
+      state.caps += quantity;
+      break;
+    default:
+      break;
+  }
+}
+
 // ─── Main export: buildStartingEquipment ─────────────────────────────────────
 
 export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
@@ -307,41 +347,20 @@ export function resolveEquipmentChoice(character, choiceKey, chosenValue) {
   const robotMods = safeJson(character.robot_mods, []);
   let caps = parseInt(character.caps) || 0;
 
-  const base = { name: chosenValue, quantity: choice.quantity || 1, source: 'starting_equipment' };
-
-  switch (choice.type) {
-    case 'weapon': {
-      // Split compound option strings, e.g. "Laser Pistol + Fusion Cell (10+5CD shots)"
-      const { weaponName, ammoName, ammoQty } = parseWeaponOption(chosenValue);
-      weapons.push(buildWeaponEntry(weaponName, 1));
-      if (ammoName) {
-        ammo.push({ type: ammoName, quantity: ammoQty, source: 'starting_equipment' });
-      }
-      break;
-    }
-    case 'ammo':
-      ammo.push({ type: chosenValue, quantity: choice.quantity || 1, source: 'starting_equipment', note: choice.note || '' });
-      break;
-    case 'apparel':
-    case 'robot_armor':
-      armor.push({ name: chosenValue, physRes: 0, enerRes: 0, radRes: 0, locations: [], source: 'starting_equipment' });
-      break;
-    case 'consumable':
-      chems.push({ ...base, label: chosenValue });
-      break;
-    case 'food':
-      food.push({ ...base, label: chosenValue });
-      break;
-    case 'miscellany':
-      misc.push(base);
-      break;
-    case 'robot_mod':
-      robotMods.push({ name: chosenValue, source: 'starting_equipment' });
-      break;
-    case 'currency':
-      caps += choice.quantity || 0;
-      break;
+  const state = { weapons, ammo, armor, chems, food, misc, robotMods, caps };
+  const mappedGrants = choice.optionItems?.[chosenValue];
+  if (Array.isArray(mappedGrants) && mappedGrants.length > 0) {
+    mappedGrants.forEach(grant => applyChoiceGrantToInventory(grant, state));
+  } else if ((choice.type === 'apparel' || choice.type === 'robot_armor') && String(chosenValue || '').includes(' + ')) {
+    String(chosenValue)
+      .split(' + ')
+      .map(part => part.trim())
+      .filter(Boolean)
+      .forEach(part => applyChoiceGrantToInventory({ type: choice.type, name: part, quantity: choice.quantity || 1, note: choice.note || '' }, state));
+  } else {
+    applyChoiceGrantToInventory({ type: choice.type, name: chosenValue, quantity: choice.quantity || 1, note: choice.note || '' }, state);
   }
+  caps = state.caps;
 
   const updated = pending.map((c, i) =>
     i === choiceIdx ? { ...c, resolved: true, resolvedValue: chosenValue } : c

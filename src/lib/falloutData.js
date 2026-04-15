@@ -1382,6 +1382,28 @@ export const ORIGIN_PACKS = {
   'Ghoul': [
     { key: 'ghoul_mercenary', label: 'Mercenary', description: 'A hired gun, fighting for whoever pays. You live by a code when times are good.', equipment: [
       { type: 'apparel', name: 'Tough Clothing', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'ghoul_merc_armor',
+        optionLabel: 'Choose leather armor',
+        options: [
+          'Leather Chest Piece',
+          'Leather Left Arm + Leather Left Leg',
+          'Leather Left Arm + Leather Right Leg',
+          'Leather Right Arm + Leather Left Leg',
+          'Leather Right Arm + Leather Right Leg',
+        ],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Left Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Melee Weapon', quantity: 1, optional: true, optionKey: 'mercenary_melee', optionLabel: 'Choose melee', options: ['Machete', 'Baseball Bat', 'Tire Iron'] },
       { type: 'weapon', name: 'Ranged Weapon', quantity: 1, optional: true, optionKey: 'mercenary_ranged', optionLabel: 'Choose ranged', options: ['10mm Pistol', '.44 Pistol', 'Hunting Rifle', 'Pipe Bolt-Action'] },
       { type: 'ammo', name: 'Ammo (for chosen weapon)', quantity: 10, note: '+5CD' },
@@ -1390,11 +1412,36 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'ghoul_raider', label: 'Raider', description: 'Might makes right. You take what you need.', equipment: [
       { type: 'apparel', name: 'Harness', quantity: 1 },
-      { type: 'apparel', name: 'Raider Chest Piece', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Raider Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'ghoul_raider_armor',
+        optionLabel: 'Choose raider armor',
+        options: ['Raider Chest Piece + Raider Left Arm', 'Raider Chest Piece + Raider Right Arm'],
+        optionItems: {
+          'Raider Chest Piece + Raider Left Arm': [{ type: 'apparel', name: 'Raider Chest Piece', quantity: 1 }, { type: 'apparel', name: 'Raider Left Arm', quantity: 1 }],
+          'Raider Chest Piece + Raider Right Arm': [{ type: 'apparel', name: 'Raider Chest Piece', quantity: 1 }, { type: 'apparel', name: 'Raider Right Arm', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Melee Weapon', quantity: 1, optional: true, optionKey: 'raider_melee', optionLabel: 'Choose melee', options: ['Lead Pipe', 'Pool Cue', 'Tire Iron'] },
       { type: 'weapon', name: 'Pipe Gun', quantity: 1 },
       { type: 'ammo', name: '.38', quantity: 10, note: '+5CD rounds' },
       { type: 'consumable', name: 'Chem', quantity: 1, optional: true, optionKey: 'raider_chem', optionLabel: 'Choose chem', options: ['Jet', 'RadAway'] },
+      {
+        type: 'miscellany',
+        name: 'Raider Throwables',
+        quantity: 1,
+        optional: true,
+        optionKey: 'ghoul_raider_throwable',
+        optionLabel: 'Choose bonus item',
+        options: ['Molotov Cocktail', 'Stimpak'],
+        optionItems: {
+          'Molotov Cocktail': [{ type: 'weapon', name: 'Molotov Cocktail', quantity: 1 }],
+          'Stimpak': [{ type: 'consumable', name: 'Stimpak', quantity: 1 }],
+        },
+      },
       { type: 'currency', name: 'Caps', quantity: 15 },
     ]},
     { key: 'ghoul_settler', label: 'Settler', description: 'You carved out something like a home in the wasteland.', equipment: [
@@ -1407,6 +1454,28 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'ghoul_trader', label: 'Trader', description: 'A travelling merchant with brahmin and wares.', equipment: [
       { type: 'apparel', name: 'Tough Clothing', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'ghoul_trader_armor',
+        optionLabel: 'Choose leather armor',
+        options: [
+          'Leather Chest Piece',
+          'Leather Left Arm + Leather Left Leg',
+          'Leather Left Arm + Leather Right Leg',
+          'Leather Right Arm + Leather Left Leg',
+          'Leather Right Arm + Leather Right Leg',
+        ],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Left Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Pipe Gun', quantity: 1 },
       { type: 'ammo', name: '.38', quantity: 8, note: '+4CD rounds' },
       { type: 'miscellany', name: 'Personal Trinket', quantity: 1 },
@@ -1445,8 +1514,8 @@ export const ORIGIN_PACKS = {
       { type: 'ammo', name: 'Fusion Cell', quantity: 8, note: '+6CD shots' },
       { type: 'weapon', name: 'Bumper Sword', quantity: 1 },
       { type: 'apparel', name: 'Raider Chest Piece', quantity: 1 },
-      { type: 'apparel', name: 'Raider Arm', quantity: 1, note: 'Choice of arm' },
-      { type: 'apparel', name: 'Raider Leg', quantity: 1, note: 'Choice of leg' },
+      { type: 'apparel', name: 'Raider Arm', quantity: 1, optional: true, optionKey: 'nightkin_arm', optionLabel: 'Choose raider arm', options: ['Raider Left Arm', 'Raider Right Arm'] },
+      { type: 'apparel', name: 'Raider Leg', quantity: 1, optional: true, optionKey: 'nightkin_leg', optionLabel: 'Choose raider leg', options: ['Raider Left Leg', 'Raider Right Leg'] },
       { type: 'consumable', name: 'Stealth Boy', quantity: 1 },
     ]},
   ],
@@ -1485,6 +1554,28 @@ export const ORIGIN_PACKS = {
   'Survivor': [
     { key: 'surv_mercenary', label: 'Mercenary', description: 'A hired gun living by a code when times allow.', equipment: [
       { type: 'apparel', name: 'Tough Clothing', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'surv_merc_armor',
+        optionLabel: 'Choose leather armor',
+        options: [
+          'Leather Chest Piece',
+          'Leather Left Arm + Leather Left Leg',
+          'Leather Left Arm + Leather Right Leg',
+          'Leather Right Arm + Leather Left Leg',
+          'Leather Right Arm + Leather Right Leg',
+        ],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Left Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Melee Weapon', quantity: 1, optional: true, optionKey: 'surv_merc_melee', optionLabel: 'Choose melee', options: ['Machete', 'Baseball Bat', 'Tire Iron'] },
       { type: 'weapon', name: 'Ranged Weapon', quantity: 1, optional: true, optionKey: 'surv_merc_ranged', optionLabel: 'Choose ranged', options: ['10mm Pistol', '.44 Pistol', 'Hunting Rifle', 'Pipe Bolt-Action'] },
       { type: 'ammo', name: 'Ammo (for chosen weapon)', quantity: 10, note: '+5CD' },
@@ -1493,11 +1584,36 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'surv_raider', label: 'Raider', description: 'Might makes right — you take what you need.', equipment: [
       { type: 'apparel', name: 'Harness', quantity: 1 },
-      { type: 'apparel', name: 'Raider Chest Piece', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Raider Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'surv_raider_armor',
+        optionLabel: 'Choose raider armor',
+        options: ['Raider Chest Piece + Raider Left Arm', 'Raider Chest Piece + Raider Right Arm'],
+        optionItems: {
+          'Raider Chest Piece + Raider Left Arm': [{ type: 'apparel', name: 'Raider Chest Piece', quantity: 1 }, { type: 'apparel', name: 'Raider Left Arm', quantity: 1 }],
+          'Raider Chest Piece + Raider Right Arm': [{ type: 'apparel', name: 'Raider Chest Piece', quantity: 1 }, { type: 'apparel', name: 'Raider Right Arm', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Melee Weapon', quantity: 1, optional: true, optionKey: 'surv_raider_melee', optionLabel: 'Choose melee', options: ['Lead Pipe', 'Pool Cue', 'Tire Iron'] },
       { type: 'weapon', name: 'Pipe Gun', quantity: 1 },
       { type: 'ammo', name: '.38', quantity: 10, note: '+5CD rounds' },
       { type: 'consumable', name: 'Chem', quantity: 1, optional: true, optionKey: 'surv_raider_chem', optionLabel: 'Choose chem', options: ['Jet', 'RadAway'] },
+      {
+        type: 'miscellany',
+        name: 'Raider Throwables',
+        quantity: 1,
+        optional: true,
+        optionKey: 'surv_raider_throwable',
+        optionLabel: 'Choose bonus item',
+        options: ['Molotov Cocktail', 'Stimpak'],
+        optionItems: {
+          'Molotov Cocktail': [{ type: 'weapon', name: 'Molotov Cocktail', quantity: 1 }],
+          'Stimpak': [{ type: 'consumable', name: 'Stimpak', quantity: 1 }],
+        },
+      },
       { type: 'currency', name: 'Caps', quantity: 15 },
     ]},
     { key: 'surv_settler', label: 'Settler', description: 'Carved out a home in the wasteland through hard work.', equipment: [
@@ -1510,6 +1626,28 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'surv_trader', label: 'Trader', description: 'A travelling caravan merchant.', equipment: [
       { type: 'apparel', name: 'Tough Clothing', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'surv_trader_armor',
+        optionLabel: 'Choose leather armor',
+        options: [
+          'Leather Chest Piece',
+          'Leather Left Arm + Leather Left Leg',
+          'Leather Left Arm + Leather Right Leg',
+          'Leather Right Arm + Leather Left Leg',
+          'Leather Right Arm + Leather Right Leg',
+        ],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Left Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Pipe Gun', quantity: 1 },
       { type: 'ammo', name: '.38', quantity: 8, note: '+4CD rounds' },
       { type: 'miscellany', name: 'Personal Trinket', quantity: 1 },
@@ -1553,6 +1691,20 @@ export const ORIGIN_PACKS = {
     { key: 'mm_rifleman', label: 'Rifleman', description: "Core militia, trained in marksmanship and responding at a moment's notice.", equipment: [
       { type: 'apparel', name: 'Casual Clothing', quantity: 1 },
       { type: 'apparel', name: 'Casual Hat', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'mm_rif_armor',
+        optionLabel: 'Choose leather armor',
+        options: ['Leather Chest Piece', 'Leather Left Arm', 'Leather Right Arm'],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }],
+          'Leather Right Arm': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Primary Weapon', quantity: 1, optional: true, optionKey: 'mm_rif_weapon', optionLabel: 'Choose weapon', options: ['Laser Musket', 'Hunting Rifle'] },
       { type: 'ammo', name: 'Fusion Cell', quantity: 14, note: '+7CD (if Laser Musket)', conditional: 'Laser Musket' },
       { type: 'ammo', name: '.308', quantity: 6, note: '+3CD (if Hunting Rifle)', conditional: 'Hunting Rifle' },
@@ -1589,6 +1741,28 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'ncr_caravaneer', label: 'Crimson Caravaneer', description: 'A convoy driver making money on routes less traveled.', equipment: [
       { type: 'apparel', name: 'Tough Clothing', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'ncr_car_armor',
+        optionLabel: 'Choose leather armor',
+        options: [
+          'Leather Chest Piece',
+          'Leather Left Arm + Leather Left Leg',
+          'Leather Left Arm + Leather Right Leg',
+          'Leather Right Arm + Leather Left Leg',
+          'Leather Right Arm + Leather Right Leg',
+        ],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Left Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Primary Weapon', quantity: 1, optional: true, optionKey: 'ncr_car_weapon', optionLabel: 'Choose weapon', options: ['Double-Barrel Shotgun', '.44 Pistol'] },
       { type: 'weapon', name: 'Melee', quantity: 1, optional: true, optionKey: 'ncr_car_melee', optionLabel: 'Choose melee', options: ['Combat Knife', 'Knuckles'] },
       { type: 'miscellany', name: 'Pack Brahmin', quantity: 1 },
@@ -1609,7 +1783,7 @@ export const ORIGIN_PACKS = {
     { key: 'prot_fire', label: 'Fire Brigadier', description: 'Built to suppress fires and identify hazards.', equipment: [
       { type: 'robot_armor', name: 'Standard Plating', quantity: 1 },
       { type: 'ammo', name: 'Cryo Cell', quantity: 14, note: '+7CD shots' },
-      { type: 'robot_mod', name: 'Hazard Detection Mod', quantity: 1 },
+      { type: 'robot_mod', name: 'Protectron Sensors', quantity: 1, optional: true, optionKey: 'prot_fire_sensor', optionLabel: 'Choose sensor mod', options: ['Hazard Detection Mod', 'Sensor Array'] },
       { type: 'consumable', name: 'Stimpak', quantity: 1 },
       { type: 'currency', name: 'Caps', quantity: 10 },
     ]},
@@ -1624,6 +1798,7 @@ export const ORIGIN_PACKS = {
     { key: 'rb_servomech', label: 'Servomech', description: 'Salvaged from a factory model, jury-rigged and more personable.', equipment: [
       { type: 'ammo', name: 'Fusion Cell', quantity: 14, note: '+7CD shots' },
       { type: 'consumable', name: 'Robot Repair Kit', quantity: 2 },
+      { type: 'apparel', name: 'Hat', quantity: 1, optional: true, optionKey: 'rb_servomech_hat', optionLabel: 'Choose hat', options: ['Casual Hat', 'Formal Hat'] },
       { type: 'miscellany', name: 'Personal Trinket', quantity: 1 },
     ]},
     { key: 'rb_us_army', label: 'U.S. Army Model', description: 'Standard military configuration.', equipment: [
@@ -1655,6 +1830,28 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'synth_seeker', label: 'Synth Seeker', description: 'Designed to travel the Commonwealth seeking resources and fugitives.', equipment: [
       { type: 'apparel', name: 'Tough Clothing', quantity: 1 },
+      {
+        type: 'apparel',
+        name: 'Leather Armor Choice',
+        quantity: 1,
+        optional: true,
+        optionKey: 'synth_seeker_armor',
+        optionLabel: 'Choose leather armor',
+        options: [
+          'Leather Chest Piece',
+          'Leather Left Arm + Leather Left Leg',
+          'Leather Left Arm + Leather Right Leg',
+          'Leather Right Arm + Leather Left Leg',
+          'Leather Right Arm + Leather Right Leg',
+        ],
+        optionItems: {
+          'Leather Chest Piece': [{ type: 'apparel', name: 'Leather Chest Piece', quantity: 1 }],
+          'Leather Left Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Left Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Left Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Left Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Left Leg', quantity: 1 }],
+          'Leather Right Arm + Leather Right Leg': [{ type: 'apparel', name: 'Leather Right Arm', quantity: 1 }, { type: 'apparel', name: 'Leather Right Leg', quantity: 1 }],
+        },
+      },
       { type: 'weapon', name: 'Melee', quantity: 1, optional: true, optionKey: 'ss_melee', optionLabel: 'Choose melee', options: ['Knuckles', 'Lead Pipe'] },
       { type: 'weapon', name: 'Ranged', quantity: 1, optional: true, optionKey: 'ss_ranged', optionLabel: 'Choose ranged', options: ['10mm Pistol', 'Flare Gun', 'Hunting Rifle'] },
       { type: 'ammo', name: 'Ammo (for chosen ranged)', quantity: 3, note: '+3CD' },
@@ -1663,6 +1860,7 @@ export const ORIGIN_PACKS = {
   'Assaultron': [
     { key: 'ass_military', label: 'U.S. Military Model', description: 'Built for rapid close-range engagement.', equipment: [
       { type: 'robot_armor', name: 'Standard Plating', quantity: 1 },
+      { type: 'robot_armor', name: 'Actuated Frame', quantity: 1, optional: true, optionKey: 'ass_military_frame', optionLabel: 'Choose actuated frame fit', options: ['Actuated Frame Body', 'Actuated Frame Arm + Actuated Frame Leg'] },
       { type: 'ammo', name: 'Fusion Cell', quantity: 8, note: '+7CD shots' },
       { type: 'robot_mod', name: 'Recon Sensors', quantity: 1 },
       { type: 'currency', name: 'Caps', quantity: 15 },
@@ -1674,6 +1872,7 @@ export const ORIGIN_PACKS = {
     ]},
     { key: 'ass_devil', label: 'Assaultron Devil', description: "Rebuilt by the Rust Devils — every part designed for violence.", equipment: [
       { type: 'robot_armor', name: 'Serrated Plate', quantity: 1 },
+      { type: 'robot_armor', name: 'Serrated Plating Fit', quantity: 1, optional: true, optionKey: 'ass_devil_plate_fit', optionLabel: 'Choose serrated plate fit', options: ['Serrated Plate Body', 'Serrated Plate Arm + Serrated Plate Leg'] },
       { type: 'robot_mod', name: 'Hazard Detection Mod', quantity: 1 },
       { type: 'ammo', name: 'Fusion Cell', quantity: 6, note: '+6CD shots' },
       { type: 'consumable', name: 'Robot Repair Kit', quantity: 1 },
@@ -1716,7 +1915,7 @@ export const ORIGIN_PACKS = {
     { key: 'tribal_modernist', label: 'Modernist', description: 'Embraces old-world relics and repurposes pre-War equipment.', equipment: [
       { type: 'weapon', name: 'Primary Weapon', quantity: 1, optional: true, optionKey: 'trib_mod_weapon', optionLabel: 'Choose weapon', options: ['9mm Pistol', 'Pump-Action Shotgun'] },
       { type: 'apparel', name: 'Underarmor Suit', quantity: 1 },
-      { type: 'apparel', name: 'Combat Chest Piece', quantity: 1 },
+      { type: 'apparel', name: 'Combat Armor Choice', quantity: 1, optional: true, optionKey: 'trib_mod_armor', optionLabel: 'Choose combat armor', options: ['Combat Chest Piece', 'Combat Left Arm + Combat Left Leg', 'Combat Left Arm + Combat Right Leg', 'Combat Right Arm + Combat Left Leg', 'Combat Right Arm + Combat Right Leg'], optionItems: { 'Combat Chest Piece': [{ type: 'apparel', name: 'Combat Chest Piece', quantity: 1 }], 'Combat Left Arm + Combat Left Leg': [{ type: 'apparel', name: 'Combat Left Arm', quantity: 1 }, { type: 'apparel', name: 'Combat Left Leg', quantity: 1 }], 'Combat Left Arm + Combat Right Leg': [{ type: 'apparel', name: 'Combat Left Arm', quantity: 1 }, { type: 'apparel', name: 'Combat Right Leg', quantity: 1 }], 'Combat Right Arm + Combat Left Leg': [{ type: 'apparel', name: 'Combat Right Arm', quantity: 1 }, { type: 'apparel', name: 'Combat Left Leg', quantity: 1 }], 'Combat Right Arm + Combat Right Leg': [{ type: 'apparel', name: 'Combat Right Arm', quantity: 1 }, { type: 'apparel', name: 'Combat Right Leg', quantity: 1 }] } },
       { type: 'miscellany', name: 'Multitool', quantity: 1 },
     ]},
     { key: 'tribal_ritualist', label: 'Ritualist', description: 'Carries equipment tied to tribal customs and traditions.', equipment: [
@@ -1732,6 +1931,8 @@ export const ORIGIN_PACKS = {
       { type: 'weapon', name: 'Combat Knife', quantity: 1 },
       { type: 'apparel', name: "Hunter's Pelt Outfit", quantity: 1 },
       { type: 'apparel', name: "Hunter's Hood", quantity: 1 },
+      { type: 'apparel', name: 'Wood Armor Chest Piece', quantity: 1 },
+      { type: 'apparel', name: 'Wood Armor Side Piece', quantity: 1, optional: true, optionKey: 'trib_nat_wood_side', optionLabel: 'Choose wood armor side piece', options: ['Wood Armor Arm', 'Wood Armor Leg'] },
     ]},
   ],
 };
