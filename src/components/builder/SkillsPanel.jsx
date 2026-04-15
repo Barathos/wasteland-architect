@@ -10,11 +10,12 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   const hasGoodNatured = traits.hasGoodNatured || (ncrTraits || []).includes('good_natured');
   const isNightkin = isNightkinCharacter(character);
   const isSuperMutant = character.origin === 'Super Mutant' && !isNightkin;
-  const isRankCapped = isNightkin || isSuperMutant; // max rank 4
 
   const totalSkillPoints = 9 + (character.intelligence || 5);
   const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
   const remaining = totalSkillPoints - usedPoints;
+  const level = Number(character.level || 1);
+  const isCreationCapped = level < 3;
 
   // Tag limit: base 3 + educated + vault/bos/outcast origin bonuses
   const tagLimit = TAG_SKILL_COUNT + traits.extraTagSkills;
@@ -28,9 +29,8 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
     const isTagged = tagSkills.includes(key);
     const absMax = getAbsoluteMaxRank(key);
     const nextEffective = getEffectiveSkillRank(newVal, isTagged, absMax);
-    // enforce creation cap: can't spend points beyond CREATION_MAX_RANK
-    if (delta > 0 && newVal > CREATION_MAX_RANK) return;
-    if (delta > 0 && isRankCapped && newVal > CREATION_MAX_RANK) return;
+    // Core rules: during character creation, cannot increase any skill above rank 3 (unless starting level 3+).
+    if (delta > 0 && isCreationCapped && nextEffective > CREATION_MAX_RANK) return;
     if (delta > 0 && nextEffective > absMax) return;
     if (newVal < 0) return;
     if (delta > 0 && remaining <= 0) return;
@@ -75,7 +75,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
       </div>
 
       <p className="text-xs text-muted-foreground font-mono">
-        Tag {tagLimit} skills for bonus expertise. Max <strong>3 ranks</strong> purchasable at creation (tag bonus adds +2 on top).
+        Tag {tagLimit} skills for bonus expertise. During character creation (Level 1-2), no skill can exceed <strong>rank 3</strong>; starting at Level 3+, skills can increase normally up to their caps.
         {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
         {isSuperMutant && <span className="block mt-1" style={{ color: '#cc4444' }}>⚠ Super Mutant: All skills capped at rank 4 (Forced Evolution).</span>}
         {traits.extraTagSkills > 0 && <span className="block mt-1" style={{ color: '#22cc22' }}>✦ +{traits.extraTagSkills} extra Tag skill(s) from trait/origin.</span>}
@@ -96,9 +96,10 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
           const effectiveRank = getEffectiveSkillRank(value, isTag, absMax);
           const targetNumber = attrVal + effectiveRank;
 
-          // Creation cap: manual points capped at 3, tag bonus can push displayed TN higher
-          const atCreationCap = value >= CREATION_MAX_RANK;
-          const canIncrease = !atCreationCap && remaining > 0 && getEffectiveSkillRank(value + 1, isTag, absMax) <= absMax;
+          const atCreationCap = isCreationCapped && effectiveRank >= CREATION_MAX_RANK;
+          const canIncrease = remaining > 0
+            && getEffectiveSkillRank(value + 1, isTag, absMax) <= absMax
+            && (!isCreationCapped || getEffectiveSkillRank(value + 1, isTag, absMax) <= CREATION_MAX_RANK);
           const canDecrease = value > 0;
 
           return (
@@ -148,7 +149,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
                   className="w-6 h-6 rounded hover:bg-primary/20 hover:text-primary"
                   onClick={() => handleSkillChange(skill.key, 1)}
                   disabled={!canIncrease}
-                  title={atCreationCap ? "Max 3 ranks purchasable at creation" : undefined}
+                  title={atCreationCap ? "Character creation cap: skill rank 3 max (Level 1-2)" : undefined}
                 >
                   <Plus className="w-3 h-3" />
                 </Button>

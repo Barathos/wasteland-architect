@@ -8,7 +8,7 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, getOriginSpecialAdjustment, getSpecialAttributeBounds } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, TAG_SKILL_ITEMS, getOriginSpecialAdjustment, getSpecialAttributeBounds } from "../lib/falloutData";
 import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
 import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
@@ -20,6 +20,21 @@ const STEPS = [
   { id: "skills", label: "Skills", icon: BookOpen },
   { id: "perks", label: "Perks", icon: Star },
 ];
+
+function toDisplayName(key = "") {
+  return String(key).replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function formatTagBonusItem(item) {
+  if (!item) return "";
+  if (item.optional && Array.isArray(item.options)) {
+    return `Choose: ${item.options.join(" or ")}`;
+  }
+  const qty = item.quantityDice ? item.quantityDice : (item.quantity && item.quantity > 1 ? `${item.quantity}x ` : "");
+  const label = item.name || "Item";
+  const note = item.note ? ` (${item.note})` : "";
+  return `${qty}${label}${note}`;
+}
 
 export default function CharacterBuilder() {
   const navigate = useNavigate();
@@ -153,6 +168,13 @@ export default function CharacterBuilder() {
   const goNext = () => { if (currentStepIndex < STEPS.length - 1) setActiveTab(STEPS[currentStepIndex + 1].id); };
   const goPrev = () => { if (currentStepIndex > 0) setActiveTab(STEPS[currentStepIndex - 1].id); };
   const isFinalStep = currentStepIndex === STEPS.length - 1;
+  const tagSkillBonusPreview = tagSkills
+    .map(skillKey => {
+      const displayName = toDisplayName(skillKey);
+      const items = TAG_SKILL_ITEMS[displayName] || TAG_SKILL_ITEMS[skillKey] || [];
+      return { skillKey, displayName, items: items.map(formatTagBonusItem).filter(Boolean) };
+    })
+    .filter(entry => entry.items.length > 0);
 
   const handleSaveAndNext = () => {
     if (isFinalStep) {
@@ -320,6 +342,19 @@ export default function CharacterBuilder() {
                   <div className="flex flex-wrap gap-1 mt-1">
                     {tagSkills.map(s => (
                       <span key={s} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-primary/15 text-primary">{s.replace(/_/g, ' ')}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {activeTab === "skills" && tagSkillBonusPreview.length > 0 && (
+                <div>
+                  <p className="text-[10px] font-mono text-muted-foreground">TAG BONUS ITEMS</p>
+                  <div className="mt-1 space-y-1.5">
+                    {tagSkillBonusPreview.map(entry => (
+                      <div key={entry.skillKey}>
+                        <p className="text-[10px] font-mono text-primary">{entry.displayName}</p>
+                        <p className="text-[10px] font-mono text-muted-foreground">{entry.items.join(" • ")}</p>
+                      </div>
                     ))}
                   </div>
                 </div>
