@@ -370,6 +370,15 @@ function safeQty(value, fallback = 1) {
   return Number.isFinite(qty) && qty > 0 ? qty : fallback;
 }
 
+function cleanPerkKeyLabel(key) {
+  // Remove generated lookup suffixes like "_wc8tgvkf6ohfy9xr" from display labels.
+  const normalized = String(key || '')
+    .replace(/_[a-z0-9]{10,}$/i, '')
+    .replace(/_/g, ' ')
+    .trim();
+  return normalized.replace(/\b\w/g, c => c.toUpperCase());
+}
+
 const WEAPON_LOOKUP = buildLookup(CORE_WEAPONS);
 const AMMO_LOOKUP = buildLookup(CORE_AMMO);
 const APPAREL_LOOKUP = buildLookup([...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR]);
@@ -698,10 +707,10 @@ function buildPerkItem(p) {
   const key = typeof p === 'string' ? p : p?.key;
   const ref = findInLookup(PERK_LOOKUP, [key, p?.label, p?.name]);
   const label       = pickFirst(
-    typeof p === 'string' ? p.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : undefined,
+    ref?.label,
     p?.label,
     p?.name,
-    ref?.label,
+    typeof p === 'string' ? cleanPerkKeyLabel(p) : undefined,
     'Perk'
   );
   const description = pickFirst(p?.description, ref?.description, '');
