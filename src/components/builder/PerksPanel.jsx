@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RARE_BOOKS } from "../../lib/falloutData";
+import { RARE_BOOKS, getEffectiveSpecialStats } from "../../lib/falloutData";
 import { CORE_PERKS } from "../../lib/sourceTruthData";
 import { Check, Lock } from "lucide-react";
 
@@ -82,6 +82,7 @@ function SourceBadge({ source }) {
 
 export default function PerksPanel({ character, selectedPerks, onPerksChange }) {
   const level = character.level || 1;
+  const effectiveSpecial = getEffectiveSpecialStats(character);
   const [statFilter, setStatFilter] = useState('ALL');
   const [availabilityFilter, setAvailabilityFilter] = useState('ALL');
 
@@ -90,7 +91,7 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
     if ((req.level || 1) > level) return false;
     for (const [key, val] of Object.entries(req)) {
       if (key === 'level') continue;
-      if ((character[key] || 5) < val) return false;
+      if ((effectiveSpecial[key] || 5) < val) return false;
     }
     return true;
   };

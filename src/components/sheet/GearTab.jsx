@@ -1,13 +1,14 @@
 import { useState } from "react";
 import ConsumablesPanel from "./ConsumablesPanel";
-import { SETTLERS_AMMO, WANDERERS_AMMO } from "../../lib/falloutData";
 import { CORE_AMMO } from "../../lib/sourceTruthData";
 
-const ALL_AMMO = [
-  ...CORE_AMMO,
-  ...SETTLERS_AMMO,
-  ...WANDERERS_AMMO,
-];
+const ALL_AMMO = [...CORE_AMMO];
+const AMMO_BY_SOURCE = ALL_AMMO.reduce((acc, ammo) => {
+  const key = ammo?.source || 'Core';
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(ammo);
+  return acc;
+}, {});
 
 const AMMO_DEFAULT_SHOTS_PER_UNIT = {
   'Fusion Cell': 20,
@@ -202,15 +203,11 @@ export default function GearTab({ character, updateField }) {
                     <select value={a.type} onChange={e => updateAmmo(i, 'type', e.target.value)}
                       style={{ flex: 1, background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px' }}>
                       <option value="">— select —</option>
-                      <optgroup label="Core">
-                        {CORE_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
-                      </optgroup>
-                      <optgroup label="Settlers Supplement">
-                        {SETTLERS_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}</option>)}
-                      </optgroup>
-                      <optgroup label="Wanderers Supplement">
-                        {WANDERERS_AMMO.map(am => <option key={am.key} value={am.label}>{am.label}{am.note ? ` — ${am.note}` : ''}</option>)}
-                      </optgroup>
+                      {Object.entries(AMMO_BY_SOURCE).map(([source, rows]) => (
+                        <optgroup key={source} label={source}>
+                          {rows.map(am => <option key={am.key} value={am.label}>{am.label}{am.note ? ` — ${am.note}` : ''}</option>)}
+                        </optgroup>
+                      ))}
                     </select>
                   </div>
                   <input type="number" value={a.quantity} onChange={e => updateAmmo(i, 'quantity', parseInt(e.target.value) || 0)}

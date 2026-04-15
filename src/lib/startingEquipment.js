@@ -1,6 +1,7 @@
 // Starting equipment application logic
 import { ORIGIN_PACKS, TAG_SKILL_ITEMS } from './falloutData';
 import { CORE_WEAPONS } from './sourceTruthData';
+import { CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from './sourceTruthData';
 
 function safeJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
@@ -52,6 +53,13 @@ const LEGACY_WEAPON_NAME_MAP = {
   'molotov cocktails': 'molotov cocktail',
   'baseball grenades': 'baseball grenade',
 };
+const LEGACY_APPAREL_NAME_MAP = {
+  "brotherhood scribe's armor": 'brotherhood scribes armor',
+  "brotherhood scribe's hat": 'brotherhood scribes hat',
+  'vault-tec security armor': 'vault tec security armor',
+  'vault-tec security helmet': 'vault tec security helmet',
+};
+const ALL_APPAREL = [...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR];
 
 function parseQuantityPrefix(rawName = '') {
   const text = String(rawName || '').trim();
@@ -67,6 +75,18 @@ function normalizeLookupName(rawName = '') {
     .trim()
     .toLowerCase();
   return LEGACY_WEAPON_NAME_MAP[base] || base;
+}
+
+function normalizeApparelLookupName(rawName = '') {
+  const base = String(rawName || '')
+    .split('+')[0]
+    .split('(')[0]
+    .trim()
+    .toLowerCase()
+    .replace(/[']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+  return LEGACY_APPAREL_NAME_MAP[base] || base;
 }
 
 function findWeaponByName(name) {
@@ -104,6 +124,43 @@ function findWeaponByName(name) {
   return result;
 }
 
+function findApparelByName(name) {
+  const clean = normalizeApparelLookupName(name);
+  let best = null;
+  let bestScore = -1;
+
+  for (const apparel of ALL_APPAREL) {
+    const label = normalizeApparelLookupName(apparel?.label || apparel?.name || '');
+    const aliases = Array.isArray(apparel?.aliases)
+      ? apparel.aliases.map(a => normalizeApparelLookupName(a))
+      : [];
+    let score = -1;
+
+    if (label === clean) score = 100;
+    else if (aliases.includes(clean)) score = 95;
+    else if (label.includes(clean)) score = 80;
+    else if (aliases.some(a => a.includes(clean))) score = 75;
+    else if (clean.includes(label)) score = 60;
+    else if (aliases.some(a => clean.includes(a))) score = 55;
+
+    if (score < 0) continue;
+
+    const currentSpecificity = Math.max(label.length, ...aliases.map(a => a.length), 0);
+    const bestLabel = normalizeApparelLookupName(best?.label || best?.name || '');
+    const bestAliases = Array.isArray(best?.aliases)
+      ? best.aliases.map(a => normalizeApparelLookupName(a))
+      : [];
+    const bestSpecificity = Math.max(bestLabel.length, ...bestAliases.map(a => a.length), 0);
+
+    if (score > bestScore || (score === bestScore && currentSpecificity > bestSpecificity)) {
+      best = apparel;
+      bestScore = score;
+    }
+  }
+
+  return best;
+}
+
 function buildWeaponEntry(itemName, quantity = 1) {
   const parsed = parseQuantityPrefix(itemName);
   const resolvedQuantity = Math.max(1, Number(quantity || 1)) * Math.max(1, parsed.quantity || 1);
@@ -129,23 +186,25 @@ function buildWeaponEntry(itemName, quantity = 1) {
       note: found.note || '',
     };
   }
-  // Fallback stub
-  const cleanName = parsed.name.split('+')[0].split('(')[0].trim();
-  return {
-    id: Date.now() + Math.random(),
-    name: cleanName,
-    damage: '',
-    damageType: 'Physical',
-    damageEffect: '',
-    type: '',
-    range: 'Melee',
-    qualities: '',
-    weight: 0,
-    ammo: '',
-    fireModes: [],
-    quantity: resolvedQuantity,
-    source: 'starting_equipment',
-  };
+  return null;
+}
+
+function buildApparelEntry(itemName, explicitType = 'apparel') {
+  const found = findApparelByName(itemName);
+  if (found) {
+    return {
+      name: found.label || itemName,
+      physRes: Number(found.physRes || 0),
+      enerRes: Number(found.enerRes || 0),
+      radRes: Number(found.radRes || 0),
+      locations: Array.isArray(found.locations) ? found.locations.join(', ') : (found.locations || ''),
+      special: found.special || '',
+      hp: found.hp || null,
+      source: found.source || 'Core',
+      type: explicitType === 'robot_armor' ? 'Robot Armor' : (found.type || found.set || ''),
+    };
+  }
+  return null;
 }
 
 function findAmmoTypeForSmallGuns(weapons = [], ammoInventory = []) {
@@ -202,7 +261,17 @@ function applyChoiceGrantToInventory(grant, state) {
   switch (grant.type) {
     case 'weapon': {
       const { weaponName, ammoName, ammoQty } = parseWeaponOption(name);
-      state.weapons.push(buildWeaponEntry(weaponName, quantity));
+      const weaponEntry = buildWeaponEntry(weaponName, quantity);
+      if (weaponEntry) {
+        state.weapons.push(weaponEntry);
+      } else {
+        state.misc.push({
+          name: `Unresolved weapon: ${weaponName}`,
+          quantity,
+          source: 'starting_equipment',
+          note: grant.note || 'This starting weapon did not match source reference data.',
+        });
+      }
       if (ammoName) state.ammo.push({ type: ammoName, quantity: ammoQty, source: 'starting_equipment' });
       break;
     }
@@ -211,7 +280,19 @@ function applyChoiceGrantToInventory(grant, state) {
       break;
     case 'apparel':
     case 'robot_armor':
-      state.armor.push({ name, physRes: 0, enerRes: 0, radRes: 0, locations: [], source: 'starting_equipment', type: grant.type === 'robot_armor' ? 'Robot Armor' : '' });
+      {
+        const apparelEntry = buildApparelEntry(name, grant.type);
+        if (apparelEntry) {
+          state.armor.push(apparelEntry);
+        } else {
+          state.misc.push({
+            name: `Unresolved armor: ${name}`,
+            quantity,
+            source: 'starting_equipment',
+            note: grant.note || 'This starting armor did not match source reference data.',
+          });
+        }
+      }
       break;
     case 'consumable':
       state.chems.push({ ...base, label: name });
@@ -266,7 +347,19 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
     const base = { name: item.name, quantity, source: 'starting_equipment', note: item.note || '' };
     switch (item.type) {
       case 'weapon':
-        weapons.push(buildWeaponEntry(item.name, quantity));
+        {
+          const weaponEntry = buildWeaponEntry(item.name, quantity);
+          if (weaponEntry) {
+            weapons.push(weaponEntry);
+          } else {
+            misc.push({
+              name: `Unresolved weapon: ${item.name}`,
+              quantity,
+              source: 'starting_equipment',
+              note: item.note || 'This starting weapon did not match source reference data.',
+            });
+          }
+        }
         break;
       case 'ammo':
         if (String(item.name || '').toLowerCase() === 'small guns ammo') {
@@ -292,7 +385,19 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
         break;
       case 'apparel':
       case 'robot_armor':
-        armor.push({ name: item.name, physRes: 0, enerRes: 0, radRes: 0, locations: [], source: 'starting_equipment', type: item.type === 'robot_armor' ? 'Robot Armor' : '' });
+        {
+          const apparelEntry = buildApparelEntry(item.name, item.type);
+          if (apparelEntry) {
+            armor.push(apparelEntry);
+          } else {
+            misc.push({
+              name: `Unresolved armor: ${item.name}`,
+              quantity,
+              source: 'starting_equipment',
+              note: item.note || 'This starting armor did not match source reference data.',
+            });
+          }
+        }
         break;
       case 'consumable':
         chems.push({ ...base, label: item.name });

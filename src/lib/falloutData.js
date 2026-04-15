@@ -593,7 +593,12 @@ export const WANDERERS_PERKS = [
 ];
 
 function safeParseJSON(str, fallback) {
-  try { return JSON.parse(str || ''); } catch { return fallback; }
+  if (Array.isArray(str)) return str;
+  if (str && typeof str === 'object') return str;
+  if (typeof str === 'string') {
+    try { return JSON.parse(str || ''); } catch { return fallback; }
+  }
+  return fallback;
 }
 
 export function getActiveTraitEffects(character) {
@@ -611,6 +616,25 @@ export function getActiveTraitEffects(character) {
     canAim: !survivorTraits.includes('fast_shot'),
     hasGoodNatured: survivorTraits.includes('good_natured') || safeParseJSON(character.ncr_traits, []).includes('good_natured'),
   };
+}
+
+export function getEffectiveSpecialStats(character = {}) {
+  const effective = {};
+  for (const attr of SPECIAL_ATTRIBUTES) {
+    effective[attr.key] = Number(character[attr.key] || 5);
+  }
+
+  const traits = getActiveTraitEffects(character);
+  if (traits.hasGifted && Array.isArray(traits.giftedBonuses)) {
+    const uniqueBonuses = new Set(
+      traits.giftedBonuses
+        .map((key) => String(key || '').toLowerCase())
+        .filter((key) => key in effective)
+    );
+    for (const key of uniqueBonuses) effective[key] += 1;
+  }
+
+  return effective;
 }
 
 export function getSpecialAttributeBounds(character = {}) {
@@ -643,11 +667,12 @@ export function getSpecialAttributeBounds(character = {}) {
 }
 
 export function calculateDerivedStats(character) {
-  const str = character.strength || 5;
-  const end = character.endurance || 5;
-  const agi = character.agility || 5;
-  const lck = character.luck || 5;
-  const per = character.perception || 5;
+  const special = getEffectiveSpecialStats(character);
+  const str = special.strength;
+  const end = special.endurance;
+  const agi = special.agility;
+  const lck = special.luck;
+  const per = special.perception;
 
   const traits = getActiveTraitEffects(character);
   const meleeBonus = Math.max(0, Math.floor((str - 5) / 2)) + traits.meleeDamageBonus;
@@ -664,7 +689,8 @@ export function calculateDerivedStats(character) {
 }
 
 export function calculateBodyPartHP(character) {
-  const end = character.endurance || 5;
+  const special = getEffectiveSpecialStats(character);
+  const end = special.endurance;
   return {
     head:      { max: 2,       label: 'Head',      range: '1-2'   },
     torso:     { max: end + 2, label: 'Torso',     range: '3-8'   },

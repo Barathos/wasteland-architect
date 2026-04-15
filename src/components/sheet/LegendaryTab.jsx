@@ -2,12 +2,14 @@ import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import {
   LEGENDARY_WEAPON_PROPERTIES, LEGENDARY_ARMOR_PROPERTIES,
-  RARE_BOOKS, SETTLERS_WEAPONS, WANDERERS_WEAPONS, WANDERERS_ARMOR
+  RARE_BOOKS
 } from "../../lib/falloutData";
+import { CORE_WEAPONS, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/sourceTruthData";
 
 const WEAPON_TYPES = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Melee', 'Unarmed'];
 const ARMOR_SLOTS = ['Head', 'Arm', 'Torso', 'Leg'];
-const ALL_WEAPON_REF = [...SETTLERS_WEAPONS, ...WANDERERS_WEAPONS];
+const ALL_WEAPON_REF = [...CORE_WEAPONS];
+const ALL_ARMOR_REF = [...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR];
 
 function parse(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
@@ -50,7 +52,7 @@ function WeaponRefModal({ onSelect, onClose }) {
 function ArmorRefModal({ onSelect, onClose }) {
   const [filter, setFilter] = useState('');
   const lower = filter.toLowerCase();
-  const filtered = WANDERERS_ARMOR.filter(a => !lower || a.label.toLowerCase().includes(lower));
+  const filtered = ALL_ARMOR_REF.filter(a => !lower || a.label.toLowerCase().includes(lower));
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.8)' }} onClick={onClose}>
       <div className="w-full max-w-xl max-h-[75vh] flex flex-col m-4" style={{ background: '#0d2137', border: '2px solid #f5c518' }} onClick={e => e.stopPropagation()}>

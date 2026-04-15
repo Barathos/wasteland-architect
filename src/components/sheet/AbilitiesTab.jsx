@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CORE_CHEMS, CORE_PERKS } from "../../lib/sourceTruthData";
-import { SPECIAL_ATTRIBUTES, SKILLS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, getEffectiveSkillRank, getSkillRankCapForCharacter, TAG_SKILL_BONUS, isRobotCharacter } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, getEffectiveSkillRank, getSkillRankCapForCharacter, TAG_SKILL_BONUS, isRobotCharacter, getEffectiveSpecialStats } from "../../lib/falloutData";
 
 const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
 const ALL_PERKS = CORE_PERKS.map((p) => ({
@@ -97,6 +97,7 @@ export default function AbilitiesTab({ character, updateField }) {
   const [openSkill, setOpenSkill] = useState(null);
 
   const derived = calculateDerivedStats(character);
+  const effectiveSpecial = getEffectiveSpecialStats(character);
   const apMax = derived.action_points ?? 2;
   const apCurrent = character.action_points_current ?? apMax;
   const spendAP = () => updateField({ action_points_current: Math.max(0, apCurrent - 1) });
@@ -137,7 +138,7 @@ export default function AbilitiesTab({ character, updateField }) {
           </div>
           <div className="p-3 space-y-3">
             {SPECIAL_ATTRIBUTES.map(attr => {
-              const value = character[attr.key] || 5;
+              const value = effectiveSpecial[attr.key] || 5;
               const colors = STAT_COLORS[attr.key];
               const pct = ((value - 4) / 8) * 100;
               return (
@@ -175,7 +176,7 @@ export default function AbilitiesTab({ character, updateField }) {
               const isTag = tagSkills.includes(skill.key);
               const skillCap = getSkillRankCapForCharacter(character, skill.key);
               const effectiveRank = getEffectiveSkillRank(value, isTag, skillCap);
-              const attrVal = character[skill.attribute] || 5;
+              const attrVal = effectiveSpecial[skill.attribute] || 5;
               const target = effectiveRank + attrVal;
               const attrAttr = SPECIAL_ATTRIBUTES.find(a => a.key === skill.attribute);
               const isOpen = openSkill === skill.key;

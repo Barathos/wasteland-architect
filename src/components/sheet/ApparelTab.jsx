@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { getArmorForSlot, SLOT_LABELS } from "../../lib/armorSlotUtils";
+import { getArmorForSlot } from "../../lib/armorSlotUtils";
 import { getTotalApparelDR } from "../../lib/apparelArmorResolver";
-import { SETTLERS_AMMO, WANDERERS_AMMO, WANDERERS_ARMOR } from "../../lib/falloutData";
-import { CORE_AMMO, CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/sourceTruthData";
+import { CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from "../../lib/sourceTruthData";
 
 const SLOTS = [
   { key: 'head',        label: 'Head' },
@@ -16,18 +15,21 @@ const SLOTS = [
 
 const EMPTY_SLOT = { name: '', physDR: 0, energyDR: 0, radDR: 0, worn: false, linkedArmorName: null };
 
-const ARMOR_TYPE_ORDER = ['Headgear', 'Clothing', 'Outfit', 'Dog Armor', 'Raider', 'Leather', 'Metal', 'Combat', 'Synth', 'Vault-Tec Security', 'Raider Power', 'T-45', 'T-51', 'T-60', 'X-01', 'Power Armor (Wanderers)'];
-const POWER_ARMOR_SETS = new Set(['Raider Power', 'T-45', 'T-51', 'T-60', 'X-01', 'Power Armor (Wanderers)']);
+const ARMOR_TYPE_ORDER = ['Headgear', 'Clothing', 'Outfit', 'Dog Armor', 'Raider', 'Leather', 'Metal', 'Combat', 'Synth', 'Vault-Tec Security', 'Raider Power', 'T-45', 'T-51', 'T-60', 'X-01', 'Power Armor'];
+const POWER_ARMOR_SETS = new Set(['Raider Power', 'T-45', 'T-51', 'T-60', 'X-01', 'Power Armor']);
 
 const ALL_ARMOR_GROUPS = (() => {
   const groups = {};
   const add = (key, item) => { if (!groups[key]) groups[key] = []; groups[key].push(item); };
   CORE_APPAREL.forEach(a => add(a.type, a));
-  CORE_ARMOR.forEach(a => add(a.set, a));
-  CORE_POWER_ARMOR.forEach(a => add(a.set === 'Frame' ? 'T-45' : a.set, a));
-  WANDERERS_ARMOR.forEach(a => add(a.type === 'Power Armor' ? 'Power Armor (Wanderers)' : a.type, a));
+  CORE_ARMOR.forEach(a => add(a.set || a.type || 'Armor', a));
+  CORE_POWER_ARMOR.forEach(a => add(a.set === 'Frame' ? 'Power Armor' : (a.set || 'Power Armor'), a));
   return groups;
 })();
+const ARMOR_TYPE_KEYS = [
+  ...ARMOR_TYPE_ORDER,
+  ...Object.keys(ALL_ARMOR_GROUPS).filter(key => !ARMOR_TYPE_ORDER.includes(key)).sort(),
+];
 
 function parseJ(str, fb) { try { return JSON.parse(str || ''); } catch { return fb; } }
 
@@ -52,7 +54,7 @@ function ArmorRefModal({ onSelect, onClose }) {
           </div>
         </div>
         <div className="overflow-y-auto flex-1">
-          {ARMOR_TYPE_ORDER.map(type => {
+          {ARMOR_TYPE_KEYS.map(type => {
             const items = (ALL_ARMOR_GROUPS[type] || []).filter(a => !lower || a.label.toLowerCase().includes(lower));
             if (!items.length) return null;
             const isPowerArmor = POWER_ARMOR_SETS.has(type);

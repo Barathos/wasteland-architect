@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { User, Zap, Heart, Shield, ChevronRight } from "lucide-react";
-import { ORIGINS, calculateDerivedStats } from "../lib/falloutData";
+import { ORIGINS, calculateDerivedStats, getEffectiveSpecialStats } from "../lib/falloutData";
 
 export default function CharacterCard({ character }) {
   const origin = ORIGINS.find(o => o.label === character.origin);
   const derived = calculateDerivedStats(character);
-  const totalSpecial = (character.strength || 5) + (character.perception || 5) + (character.endurance || 5) +
-    (character.charisma || 5) + (character.intelligence || 5) + (character.agility || 5) + (character.luck || 5);
+  const effectiveSpecial = getEffectiveSpecialStats(character);
+  const totalSpecial = effectiveSpecial.strength + effectiveSpecial.perception + effectiveSpecial.endurance +
+    effectiveSpecial.charisma + effectiveSpecial.intelligence + effectiveSpecial.agility + effectiveSpecial.luck;
 
   return (
     <Link
@@ -67,13 +68,13 @@ export default function CharacterCard({ character }) {
         <div className="px-4 sm:px-5 pb-4 sm:pb-5">
           <div className="flex gap-1">
             {[
-              { v: character.strength, c: 'bg-red-500' },
-              { v: character.perception, c: 'bg-orange-500' },
-              { v: character.endurance, c: 'bg-yellow-500' },
-              { v: character.charisma, c: 'bg-green-500' },
-              { v: character.intelligence, c: 'bg-blue-500' },
-              { v: character.agility, c: 'bg-indigo-500' },
-              { v: character.luck, c: 'bg-purple-500' },
+              { v: effectiveSpecial.strength, c: 'bg-red-500' },
+              { v: effectiveSpecial.perception, c: 'bg-orange-500' },
+              { v: effectiveSpecial.endurance, c: 'bg-yellow-500' },
+              { v: effectiveSpecial.charisma, c: 'bg-green-500' },
+              { v: effectiveSpecial.intelligence, c: 'bg-blue-500' },
+              { v: effectiveSpecial.agility, c: 'bg-indigo-500' },
+              { v: effectiveSpecial.luck, c: 'bg-purple-500' },
             ].map((stat, i) => (
               <div key={i} className="flex-1 bg-muted rounded-full h-1.5 overflow-hidden">
                 <div

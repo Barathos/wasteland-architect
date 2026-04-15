@@ -1,4 +1,4 @@
-import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES, getActiveTraitEffects, getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter, TAG_SKILL_BONUS } from "../../lib/falloutData";
+import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES, getActiveTraitEffects, getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter, TAG_SKILL_BONUS, getEffectiveSpecialStats } from "../../lib/falloutData";
 import { Minus, Plus, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -7,11 +7,12 @@ const CREATION_MAX_RANK = 3;
 
 export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits, outcastTagSkill }) {
   const traits = getActiveTraitEffects(character);
+  const effectiveSpecial = getEffectiveSpecialStats(character);
   const hasGoodNatured = traits.hasGoodNatured || (ncrTraits || []).includes('good_natured');
   const isNightkin = isNightkinCharacter(character);
   const isSuperMutant = character.origin === 'Super Mutant' && !isNightkin;
 
-  const totalSkillPoints = 9 + (character.intelligence || 5);
+  const totalSkillPoints = 9 + (effectiveSpecial.intelligence || 5);
   const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
   const remaining = totalSkillPoints - usedPoints;
   const level = Number(character.level || 1);
@@ -51,7 +52,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
     }
   };
 
-  const getAttributeValue = (attrKey) => character[attrKey] || 5;
+  const getAttributeValue = (attrKey) => effectiveSpecial[attrKey] || 5;
 
   return (
     <div className="space-y-5">
