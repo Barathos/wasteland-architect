@@ -313,11 +313,22 @@ export default function CharacterBuilder() {
         </div>
 
         <div className="space-y-4">
-          <div className="sticky top-4 z-20">
+          <div className="lg:hidden">
             <Button
               onClick={handleSaveAndNext}
               disabled={saving}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold gap-2 shadow-[0_0_20px_hsl(120_60%_35%/0.15)]"
+            >
+              <Save className="w-4 h-4" />
+              {isFinalStep ? (saving ? "Saving..." : "Save Character") : "Save & Next"}
+              {!isFinalStep && <ChevronRight className="w-4 h-4" />}
+            </Button>
+          </div>
+          <div className="hidden lg:block fixed right-6 top-20 z-40 w-[280px]">
+            <Button
+              onClick={handleSaveAndNext}
+              disabled={saving}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-heading font-semibold gap-2 shadow-[0_0_20px_hsl(120_60%_35%/0.2)]"
             >
               <Save className="w-4 h-4" />
               {isFinalStep ? (saving ? "Saving..." : "Save Character") : "Save & Next"}
