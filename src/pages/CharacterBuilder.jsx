@@ -37,7 +37,10 @@ function formatTagBonusItem(item) {
 }
 
 function safeJson(str, fallback) {
-  try { return JSON.parse(str || ""); } catch { return fallback; }
+  try { return JSON.parse(str || ""); } catch (e) {
+    console.error("Failed to parse character field:", e);
+    return fallback;
+  }
 }
 
 export default function CharacterBuilder() {
@@ -84,18 +87,18 @@ export default function CharacterBuilder() {
         if (chars.length > 0) {
           const c = normalizeLegacyOrigin(chars[0]);
           setCharacter(c);
-          if (c.skills) { try { setSkills(JSON.parse(c.skills)); } catch {} }
-          if (c.tag_skills) { try { setTagSkills(JSON.parse(c.tag_skills)); } catch {} }
-          if (c.perks) { try { setSelectedPerks(JSON.parse(c.perks)); } catch {} }
-          if (c.ncr_traits) { try { setNcrTraits(JSON.parse(c.ncr_traits)); } catch {} }
-          if (c.tribal_traits) { try { setTribalTraits(JSON.parse(c.tribal_traits)); } catch {} }
+          setSkills(safeJson(c.skills, {}));
+          setTagSkills(safeJson(c.tag_skills, []));
+          setSelectedPerks(safeJson(c.perks, []));
+          setNcrTraits(safeJson(c.ncr_traits, []));
+          setTribalTraits(safeJson(c.tribal_traits, []));
           if (c.outcast_tag_skill) setOutcastTagSkill(c.outcast_tag_skill);
           if (c.brotherhood_tag_skill) setBrotherhoodTagSkill(c.brotherhood_tag_skill);
           if (c.vault_tag_skill) setVaultTagSkill(c.vault_tag_skill);
           if (c.vault_experiment) setVaultExperiment(c.vault_experiment);
           if (c.ghoul_vault_dweller) setGhoulVaultDweller(c.ghoul_vault_dweller);
-          if (c.survivor_traits) { try { setSurvivorTraits(JSON.parse(c.survivor_traits)); } catch {} }
-          if (c.mr_handy_arms) { try { setMrHandyArms(JSON.parse(c.mr_handy_arms)); } catch {} }
+          setSurvivorTraits(safeJson(c.survivor_traits, []));
+          setMrHandyArms(safeJson(c.mr_handy_arms, []));
         }
       });
     }
