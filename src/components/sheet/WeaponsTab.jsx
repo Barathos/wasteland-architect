@@ -2,7 +2,7 @@ import { useState } from "react";
 import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import WeaponEffectTags from "./WeaponEffectTags";
 import { MR_HANDY_ARMS } from "../../lib/falloutData";
-import { CORE_WEAPONS } from "../../lib/sourceTruthData";
+import { CORE_WEAPONS, CORE_WEAPON_MODS, CORE_WEAPON_MOD_COMPATIBILITY } from "../../lib/sourceTruthData";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/tooltip";
 
 const EMPTY_WEAPON = {
@@ -16,11 +16,16 @@ const FIRE_MODES = ['Single', 'Burst', 'Auto'];
 const RANGES = ['Melee', 'Close', 'Short', 'Medium', 'Long', 'Extreme'];
 
 const ALL_REF_WEAPONS = CORE_WEAPONS;
+const ALL_REF_WEAPON_MODS = CORE_WEAPON_MODS;
 
 const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Throwing', 'Explosive'];
 
 function normalizeLookup(value = '') {
   return String(value || '').trim().toLowerCase();
+}
+
+function normalizeLoose(value = '') {
+  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
 function findReferenceWeapon(weapon = {}) {
@@ -32,6 +37,36 @@ function findReferenceWeapon(weapon = {}) {
     const refLabel = normalizeLookup(ref.label);
     return (byKey && refKey === byKey) || (bySourceName && refLabel === bySourceName) || (byName && refLabel === byName);
   }) || null;
+}
+
+function findReferenceWeaponMod(input = {}) {
+  const byKey = normalizeLookup(input?.key || input?.value || '');
+  const byName = normalizeLoose(input?.name || input?.label || input?.value || '');
+  return ALL_REF_WEAPON_MODS.find((mod) => {
+    const modKey = normalizeLookup(mod?.key || '');
+    const modName = normalizeLoose(mod?.label || '');
+    return (byKey && modKey === byKey) || (byName && modName === byName);
+  }) || null;
+}
+
+function getWeaponCompatibilitySlots(weapon = {}, referenceWeapon = null) {
+  const candidates = [
+    referenceWeapon?.label,
+    weapon?.sourceName,
+    weapon?.name,
+  ].filter(Boolean);
+
+  for (const name of candidates) {
+    if (CORE_WEAPON_MOD_COMPATIBILITY[name]) return CORE_WEAPON_MOD_COMPATIBILITY[name];
+  }
+
+  const normalizedCandidates = candidates.map(normalizeLoose);
+  for (const [weaponName, slotMap] of Object.entries(CORE_WEAPON_MOD_COMPATIBILITY)) {
+    if (normalizedCandidates.includes(normalizeLoose(weaponName))) {
+      return slotMap;
+    }
+  }
+  return {};
 }
 
 function normalizeWeaponType(type = '') {
@@ -129,8 +164,83 @@ function WeaponReferenceModal({ onSelect, onClose }) {
   );
 }
 
-function WeaponRow({ weapon, index, onChange, onRemove }) {
+function WeaponModsModal({ weapon, referenceWeapon, ownedWeaponMods, onChange, onClose }) {
+  const slotMap = getWeaponCompatibilitySlots(weapon, referenceWeapon);
+  const slotKeys = Object.keys(slotMap).sort((a, b) => a.localeCompare(b));
+  const installedMods = weapon.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
+
+  const updateSlot = (slotKey, value) => {
+    const next = { ...installedMods };
+    if (!value) delete next[slotKey];
+    else next[slotKey] = value;
+    onChange({ ...weapon, installedMods: next });
+  };
+
+  const selectedForSlot = (slotKey) => {
+    const raw = installedMods[slotKey];
+    if (!raw) return null;
+    return ownedWeaponMods.find((mod) => mod.key === raw || normalizeLoose(mod.label) === normalizeLoose(raw))
+      || findReferenceWeaponMod({ value: raw });
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.8)' }} onClick={onClose}>
+      <div className="w-full max-w-2xl max-h-[85vh] flex flex-col m-4" style={{ background: '#0d2137', border: '2px solid #f5c518' }} onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
+          <div>
+            <p className="text-sm font-bold tracking-widest" style={{ color: '#f5c518' }}>WEAPON MODS</p>
+            <p className="text-[10px] font-mono" style={{ color: '#6a8a9a' }}>{referenceWeapon?.label || weapon.sourceName || weapon.name || 'Weapon'}</p>
+          </div>
+          <button onClick={onClose} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>✕</button>
+        </div>
+
+        <div className="overflow-y-auto p-4 flex-1 space-y-3">
+          {slotKeys.length === 0 ? (
+            <p className="text-xs font-mono" style={{ color: '#6a8a9a' }}>No mod slot data is available for this weapon.</p>
+          ) : (
+            slotKeys.map((slotKey) => {
+              const allowedNames = new Set((slotMap[slotKey] || []).map((name) => normalizeLoose(name)));
+              const options = ownedWeaponMods
+                .filter((mod) => normalizeLoose(mod.modType) === normalizeLoose(slotKey))
+                .filter((mod) => allowedNames.size === 0 || allowedNames.has(normalizeLoose(mod.label)));
+              const selected = selectedForSlot(slotKey);
+
+              return (
+                <div key={slotKey} className="p-2.5" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <p className="text-xs font-bold tracking-widest" style={{ color: '#a8c8d8' }}>{slotKey.toUpperCase()}</p>
+                    {selected && <span className="text-[10px] font-mono" style={{ color: '#22cc22' }}>{selected.label}</span>}
+                  </div>
+                  <select
+                    value={installedMods[slotKey] || ''}
+                    onChange={(e) => updateSlot(slotKey, e.target.value)}
+                    style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', fontSize: '11px', padding: '4px 6px' }}
+                  >
+                    <option value="">— none —</option>
+                    {options.map((mod) => (
+                      <option key={mod.key || mod.label} value={mod.key || mod.label}>
+                        {mod.label} (x{mod.quantity || 1})
+                      </option>
+                    ))}
+                  </select>
+                  {selected && (selected.effect || selected.summary || selected.perks) && (
+                    <p className="text-[10px] font-mono mt-1.5" style={{ color: '#6a8a9a' }}>
+                      {[selected.effect, selected.summary, selected.perks].filter(Boolean).join(' • ')}
+                    </p>
+                  )}
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WeaponRow({ weapon, index, onChange, onRemove, ownedWeaponMods }) {
   const [editingAlias, setEditingAlias] = useState(false);
+  const [showMods, setShowMods] = useState(false);
   const referenceWeapon = findReferenceWeapon(weapon);
 
   const toggleMode = (mode) => {
@@ -153,6 +263,10 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
   const displayName = weapon.name || weapon.sourceName || referenceWeapon?.label || 'Unnamed Weapon';
   const description = weapon.note || referenceWeapon?.note || '';
   const sourceDisplay = weapon.sourceName || referenceWeapon?.label || '';
+  const installedMods = weapon.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
+  const installedModRefs = Object.values(installedMods)
+    .map((value) => ownedWeaponMods.find((mod) => mod.key === value || normalizeLoose(mod.label) === normalizeLoose(value)) || findReferenceWeaponMod({ value }))
+    .filter(Boolean);
 
   return (
     <div className="p-3 mb-2" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
@@ -224,6 +338,14 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
           >
             {editingAlias ? 'Done' : 'Alias'}
           </button>
+          <button
+            type="button"
+            onClick={() => setShowMods(true)}
+            className="text-[10px] px-1.5 py-0.5 font-bold"
+            style={{ background: 'rgba(34,204,34,0.08)', border: '1px solid rgba(34,204,34,0.35)', color: '#22cc22', cursor: 'pointer' }}
+          >
+            Mods
+          </button>
         </div>
         <div className="flex items-center gap-1">
           {field('damage', weapon.damage, { width: '55px' })}
@@ -276,6 +398,25 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
           {field('weight', weapon.weight, { width: '40px' })}
         </div>
       </div>
+      {installedModRefs.length > 0 && (
+        <div className="mt-2 pt-2" style={{ borderTop: '1px solid #1e3a5f' }}>
+          <p className="text-[10px] font-bold tracking-widest mb-1" style={{ color: '#22cc22' }}>INSTALLED MODS</p>
+          {installedModRefs.map((mod, idx) => (
+            <p key={`${mod.key || mod.label}-${idx}`} className="text-[10px] font-mono" style={{ color: '#6a8a9a' }}>
+              {mod.label}{mod.modType ? ` [${mod.modType}]` : ''}{mod.effect ? ` — ${mod.effect}` : ''}
+            </p>
+          ))}
+        </div>
+      )}
+      {showMods && (
+        <WeaponModsModal
+          weapon={weapon}
+          referenceWeapon={referenceWeapon}
+          ownedWeaponMods={ownedWeaponMods}
+          onChange={onChange}
+          onClose={() => setShowMods(false)}
+        />
+      )}
     </div>
   );
 }
@@ -299,6 +440,25 @@ export default function WeaponsTab({ character, updateField }) {
   const selectedMrHandyArms = MR_HANDY_ARMS.filter(a => mrHandyArmKeys.includes(a.key));
   const capacitorLevel = character.assaultron_capacitor || 'Mk III';
   const capacitorInfo = CAPACITOR_OPTIONS.find(c => c.label === capacitorLevel) || CAPACITOR_OPTIONS[0];
+  const ownedWeaponMods = (() => {
+    let raw = [];
+    try { raw = JSON.parse(character.gear_mods || '[]'); } catch { raw = []; }
+    return raw
+      .filter((entry) => (entry?.modCategory || 'weapon') !== 'apparel')
+      .filter((entry) => (parseInt(entry?.quantity, 10) || 0) > 0)
+      .map((entry) => {
+        const ref = findReferenceWeaponMod(entry);
+        return {
+          key: entry?.key || ref?.key || '',
+          label: entry?.name || ref?.label || 'Weapon Mod',
+          modType: entry?.modType || ref?.modType || '',
+          quantity: parseInt(entry?.quantity, 10) || 1,
+          effect: entry?.effect || ref?.effect || '',
+          summary: entry?.summary || ref?.summary || '',
+          perks: entry?.perks || ref?.perks || '',
+        };
+      });
+  })();
 
   const save = (updated) => {
     setWeapons(updated);
@@ -432,7 +592,7 @@ export default function WeaponsTab({ character, updateField }) {
           </div>
         ) : (
           weapons.map((w, i) => (
-            <WeaponRow key={i} weapon={w} index={i} onChange={d => updateWeapon(i, d)} onRemove={() => removeWeapon(i)} />
+            <WeaponRow key={i} weapon={w} index={i} onChange={d => updateWeapon(i, d)} onRemove={() => removeWeapon(i)} ownedWeaponMods={ownedWeaponMods} />
           ))
         )}
       </TooltipProvider>

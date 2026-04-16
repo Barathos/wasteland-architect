@@ -9203,3 +9203,12540 @@ export const SOURCE_MISCELLANY = [
   }
 ];
 
+export const SOURCE_WEAPON_MODS = [
+  {
+    "key": "308_receiver_ybnlopq9nztqgaur",
+    "label": ".308 Receiver",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 7,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ybNloPq9nZTqGAur"
+  },
+  {
+    "key": "38_receiver_oiw2vvxvdhggw4ol",
+    "label": ".38 Receiver",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 4",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 4,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.oiW2VvXVdhGgw4oL"
+  },
+  {
+    "key": "45_receiver_zpuwoy1blhyuxuvy",
+    "label": ".45 Receiver",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 19,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 4,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.zpUwoy1BLHyUXuvy"
+  },
+  {
+    "key": "50_receiver_xshtcpvsphrdhmbo",
+    "label": ".50 Receiver",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 8,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.XShTCPVSPhRDhMBo"
+  },
+  {
+    "key": "accelerated_barrel_rpkbc7yeii2c8h1n",
+    "label": "Accelerated Barrel",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 3",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 45,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 1,
+    "rangeDelta": -1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.RpKbC7YEiI2c8h1N"
+  },
+  {
+    "key": "advanced_p0r6b1dzwapl4wu5",
+    "label": "Advanced",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 3,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.p0r6B1DzWapL4wU5"
+  },
+  {
+    "key": "automatic_jyy3vdkqv7ycfvfz",
+    "label": "Automatic",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": -1,
+    "fireRateDelta": 2,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Burst"
+    ],
+    "removeEffects": [],
+    "addQualities": [
+      "Inaccurate"
+    ],
+    "removeQualities": [
+      "Accurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Jyy3vdkQv7YCfvFz"
+  },
+  {
+    "key": "automatic_barrel_wo7u8puv8h8oa0jy",
+    "label": "Automatic Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 24,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": -1,
+    "fireRateDelta": 1,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Close Quarters"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.wo7U8PuV8h8oa0JY"
+  },
+  {
+    "key": "automatic_piston_nggcu0nlelibc3pi",
+    "label": "Automatic Piston",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 75,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 2,
+    "rangeDelta": -1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.nGgcu0NLeLIbc3Pi"
+  },
+  {
+    "key": "barbed_sbipjodn1jwmengs",
+    "label": "Barbed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.SBiPJoDN1jWmENgs"
+  },
+  {
+    "key": "barbed_sem0jhmbndppkdjw",
+    "label": "Barbed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Sem0JhmbNdppKdJW"
+  },
+  {
+    "key": "barbed_bixeupjoktniv7p7",
+    "label": "Barbed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.bIxeUpjoKTniv7P7"
+  },
+  {
+    "key": "barbed_iqpxsxwvu0d13y7j",
+    "label": "Barbed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.iqpxSXwVu0d13y7j"
+  },
+  {
+    "key": "bayonet_cyodpo6jvopxwyw7",
+    "label": "Bayonet",
+    "modType": "Muzzle",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "Melee weapon, deals 4DC Piercing 1 physical damage",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.CYODpO6JvopXWYW7"
+  },
+  {
+    "key": "bayonet_pk8yypvkxuuatuni",
+    "label": "Bayonet",
+    "modType": "Muzzle",
+    "weaponType": "Big Guns",
+    "perks": "",
+    "effect": "Melee weapon Deals 4 CD Piercing 1 physical damage",
+    "summary": "",
+    "weight": 1,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.pk8yYPVKXuuatunI"
+  },
+  {
+    "key": "beam_focuser_it15fdgweelj1lyg",
+    "label": "Beam Focuser",
+    "modType": "Muzzle",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.IT15FDgwEelj1LYg"
+  },
+  {
+    "key": "beam_focuser_mzi2nnjcbhmenwie",
+    "label": "Beam Focuser",
+    "modType": "Muzzle",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.mzi2nNJcbhMEnWIE"
+  },
+  {
+    "key": "beam_splitter_fj6lsu2xzekbdrhq",
+    "label": "Beam Splitter",
+    "modType": "Muzzle",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": -1,
+    "fireRateDelta": -1,
+    "rangeDelta": -1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Inaccurate"
+    ],
+    "removeQualities": [
+      "Accurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.FJ6lsU2xzeKbDRhq"
+  },
+  {
+    "key": "beta_wave_tuner_hzqisjgqiimi1zp7",
+    "label": "Beta Wave Tuner",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.hzqISjGQIiMI1ZP7"
+  },
+  {
+    "key": "beta_wave_tuner_xg5fewwagdupedcl",
+    "label": "Beta Wave Tuner",
+    "modType": "Capacitor",
+    "weaponType": "Big Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 57,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.xg5FEwwagDUpedcL"
+  },
+  {
+    "key": "bladed_4hbefa5bvvfulmbo",
+    "label": "Bladed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.4hbEFa5bvVFUlMBO"
+  },
+  {
+    "key": "bladed_huhitqsxyrgw5tzs",
+    "label": "Bladed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.HuhiTQsXyRgw5tZS"
+  },
+  {
+    "key": "bladed_brs0allrfp0vq5ac",
+    "label": "Bladed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.brS0allrFP0vQ5Ac"
+  },
+  {
+    "key": "bladed_uowsnksbdqluohjn",
+    "label": "Bladed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.uOWSNksbDqlUOhJN"
+  },
+  {
+    "key": "bladed_xbtuynq88d6dgqgl",
+    "label": "Bladed",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.xBtUynQ88d6dGQgL"
+  },
+  {
+    "key": "boosted_capacitor_ulmvhbqiqumgng1o",
+    "label": "Boosted Capacitor",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 94,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": -1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ULmvHBqIQuMGNg1o"
+  },
+  {
+    "key": "boosted_capacitor_no1q1ohqfqk9u6su",
+    "label": "Boosted Capacitor",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 94,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": -1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.nO1q1OhQfQk9u6su"
+  },
+  {
+    "key": "bracketed_long_barrel_g1qwroic6mwsgnnp",
+    "label": "Bracketed Long Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "Allows the weapon to take a Muzzle mod",
+    "summary": "",
+    "weight": 2,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Close Quarters"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.G1qWroic6MwSgnnp"
+  },
+  {
+    "key": "bracketed_short_barrel_8keop1jqbdqkbgxu",
+    "label": "Bracketed Short Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "Allows the weapon to take a Muzzle mod",
+    "summary": "",
+    "weight": 0,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.8kEOp1jQBdQkbGXu"
+  },
+  {
+    "key": "bull_barrel_adxdsogk2fihtbne",
+    "label": "Bull Barrel",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 3",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Reliable"
+    ],
+    "removeQualities": [
+      "Unreliable"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.aDXdsogK2fIHtBNE"
+  },
+  {
+    "key": "calibrated_4c34bzfvex4ykga3",
+    "label": "Calibrated",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.4c34BzfVex4YKgA3"
+  },
+  {
+    "key": "capactor_boosting_coil_6hh0evmfv0n8kx81",
+    "label": "Capactor Boosting Coil",
+    "modType": "Capacitor",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 4; Science! 3",
+    "effect": "+1 CD damage Gain Vicious",
+    "summary": "",
+    "weight": 2,
+    "cost": 82,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.6hh0Evmfv0N8kX81"
+  },
+  {
+    "key": "chain_wrapped_dguafqvrt3fpovuf",
+    "label": "Chain-Wrapped",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.dgUAFqVrT3FPOVUf"
+  },
+  {
+    "key": "chain_wrapped_yk9zc6hphk1irq01",
+    "label": "Chain-Wrapped",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.yK9zc6hPHk1IRq01"
+  },
+  {
+    "key": "charging_barrels_vmmdaoy4sbwdljax",
+    "label": "Charging Barrels",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Science! 4",
+    "effect": "",
+    "summary": "",
+    "weight": 10,
+    "cost": 357,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 4,
+    "fireRateDelta": -3,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.VMMDaoy4SbwdLJaX"
+  },
+  {
+    "key": "comfort_grip_noh6vl5rcdm73qux",
+    "label": "Comfort Grip",
+    "modType": "Grip",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Noh6VL5rCdM73QuX"
+  },
+  {
+    "key": "compensator_egil4wuvntmhhlqr",
+    "label": "Compensator",
+    "modType": "Muzzle",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.egIL4wuvntMHhlqr"
+  },
+  {
+    "key": "compression_nozzle_s1tjg5b9ugwuvzjg",
+    "label": "Compression Nozzle",
+    "modType": "Nozzle",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 22,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.s1TJG5B9uGwUVZJg"
+  },
+  {
+    "key": "curved_blade_tqn26hjy3pxpkrzt",
+    "label": "Curved Blade",
+    "modType": "Melee",
+    "weaponType": "Big Guns",
+    "perks": "",
+    "effect": "On successful attack, spend 2 AP to disarm opponent, knocking one held weapon away",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.TQN26Hjy3pxpkrzT"
+  },
+  {
+    "key": "deep_dish_20d7blwbnesrwxc9",
+    "label": "Deep Dish",
+    "modType": "Dish",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 4",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 72,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.20d7BlwbNESRwXC9"
+  },
+  {
+    "key": "electric_signal_carrier_antennae_rda0goilcampeqwx",
+    "label": "Electric Signal Carrier Antennae",
+    "modType": "Muzzle",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 4",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 7,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Radioactive"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.rdA0goilCAmpEqWx"
+  },
+  {
+    "key": "electrification_module_uts1tgsmfthrb5dw",
+    "label": "Electrification Module",
+    "modType": "Muzzle",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2; Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 70,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.UtS1TgSmfTHRb5dW"
+  },
+  {
+    "key": "electrified_t2dedqrzxpzyn9ux",
+    "label": "Electrified",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.t2DeDQRZXpZyN9ux"
+  },
+  {
+    "key": "electrified_blade_vd2lblbajxhwijay",
+    "label": "Electrified Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.vd2lBLBAJXhwijay"
+  },
+  {
+    "key": "electrified_serrated_blade_dzjyqzgfhcmkpyrg",
+    "label": "Electrified Serrated Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 3, Science! 1",
+    "effect": "Persistent (Physical)",
+    "summary": "",
+    "weight": 0,
+    "cost": 75,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.DzJyQzGFhcMKPyRG"
+  },
+  {
+    "key": "extended_blade_bit0ziivg6suyyne",
+    "label": "Extended Blade",
+    "modType": "Melee",
+    "weaponType": "Big Guns",
+    "perks": "Blacksmith 3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.bIT0zIivG6SUyyne"
+  },
+  {
+    "key": "extra_claw_vxocorbl9h7nkxfx",
+    "label": "Extra Claw",
+    "modType": "Melee",
+    "weaponType": "Unarmed",
+    "perks": "",
+    "effect": "On a successful attack, spend 2 AP to disarm opponent, knocking one held weapon away.",
+    "summary": "",
+    "weight": 2,
+    "cost": 22,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.VxocOrbl9H7nkXfx"
+  },
+  {
+    "key": "extra_flame_jets_d00joa8hc0xcvnlc",
+    "label": "Extra Flame Jets",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.d00JoA8hC0XcVnlc"
+  },
+  {
+    "key": "extra_heavy_j4qjrw5gkcdmirdr",
+    "label": "Extra Heavy",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 22,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 3,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.J4QJRw5GkCdMirdr"
+  },
+  {
+    "key": "finned_acmbnhf2jilkz2zg",
+    "label": "Finned",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.aCMBNHf2jilKz2Zg"
+  },
+  {
+    "key": "five_crank_capacitor_ihegx2ame6p1ww82",
+    "label": "Five-Crank Capacitor",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 3,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ihEGX2Ame6p1WW82"
+  },
+  {
+    "key": "flamer_barrel_uww6yc9zzjbhnlrz",
+    "label": "Flamer Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": -2,
+    "fireRateDelta": 2,
+    "rangeDelta": -1,
+    "addEffects": [
+      "Burst"
+    ],
+    "removeEffects": [],
+    "addQualities": [
+      "Inaccurate"
+    ],
+    "removeQualities": [
+      "Accurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.uWW6Yc9ZzjBHnlrz"
+  },
+  {
+    "key": "four_crank_capacitor_5et7jnrbqdbsvqmn",
+    "label": "Four-Crank Capacitor",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 8,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.5eT7jnRBQdbsVQmN"
+  },
+  {
+    "key": "full_capacitors_bs7zxjkza2jahpv8",
+    "label": "Full Capacitors",
+    "modType": "Capacitor",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 3; Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 37,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.bS7ZxJKZA2JAhPV8"
+  },
+  {
+    "key": "full_stock_8nhc8z4vey4yx7bm",
+    "label": "Full Stock",
+    "modType": "Stock",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.8nHC8z4vEY4yX7bM"
+  },
+  {
+    "key": "full_stock_brv8rxkptju6mz9y",
+    "label": "Full Stock",
+    "modType": "Stock",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.bRV8rXkptjU6mz9Y"
+  },
+  {
+    "key": "gunner_sight_5gxczxtj4e9blg97",
+    "label": "Gunner Sight",
+    "modType": "Sight",
+    "weaponType": "Big Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 68,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.5gXCZXtJ4E9Blg97"
+  },
+  {
+    "key": "gunner_sight_dqwdlcs54hwqqaza",
+    "label": "Gunner Sight",
+    "modType": "Sight",
+    "weaponType": "Big Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 68,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.DQwdlCs54hWqQaZa"
+  },
+  {
+    "key": "gyro_compensating_lens_oir7yaczlnrum8oq",
+    "label": "Gyro Compensating Lens",
+    "modType": "Muzzle",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.OIr7YaCzlNRUM8Oq"
+  },
+  {
+    "key": "hair_trigger_groqd2poqkix32n4",
+    "label": "Hair Trigger",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.GROQd2poQkix32N4"
+  },
+  {
+    "key": "hardened_wwjvfufknzoxxjlt",
+    "label": "Hardened",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.wWjvfUfknZOxxJlt"
+  },
+  {
+    "key": "heating_coil_mvrqv0wg5fe6j7tr",
+    "label": "Heating Coil",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 180,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.MvrQv0wg5FE6j7TR"
+  },
+  {
+    "key": "heating_coil_hvd46uqaqinb4f57",
+    "label": "Heating Coil",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 180,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.hVD46UqAqiNB4f57"
+  },
+  {
+    "key": "heavy_d8hf1rjpomvhjlhp",
+    "label": "Heavy",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 9,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.D8hF1RjpOMVHjlHp"
+  },
+  {
+    "key": "heavy_vjorfcwfphdnmp18",
+    "label": "Heavy",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 11,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.VJOrfCwfPhDnMP18"
+  },
+  {
+    "key": "heavy_wqspwsdrmfyqpamo",
+    "label": "Heavy",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 9,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.wQSPWsdrMfYqPAMO"
+  },
+  {
+    "key": "hooked_as0amn04utnwjogg",
+    "label": "Hooked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "An successful attack, spend 2 AP to disarm opponent, knocking one held weapon away",
+    "summary": "",
+    "weight": 0,
+    "cost": 9,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.AS0Amn04UTnwJOgG"
+  },
+  {
+    "key": "huge_tank_zgyzl9nmjix36tgh",
+    "label": "Huge Tank",
+    "modType": "Propellanttank",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 6,
+    "cost": 34,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 2,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.zGyzL9NMjix36tgh"
+  },
+  {
+    "key": "ignition_module_bcjrlqcht0typqhi",
+    "label": "Ignition Module",
+    "modType": "Muzzle",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 3; Science! 1",
+    "effect": "Persistent (Energy)",
+    "summary": "",
+    "weight": 1,
+    "cost": 130,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.bCJRlQcht0typqhI"
+  },
+  {
+    "key": "improved_barrel_qovb0xmqa91his8s",
+    "label": "Improved Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 26,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.QOvb0xmQA91HIs8S"
+  },
+  {
+    "key": "large_magazine_dh2r5smlhgbmduau",
+    "label": "Large Magazine",
+    "modType": "Magazine",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 8,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Unreliable"
+    ],
+    "removeQualities": [
+      "Reliable"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.dh2R5SMlhGBmDuAU"
+  },
+  {
+    "key": "large_quick_eject_mag_x7xskzm5iyisd9la",
+    "label": "Large Quick-Eject Mag",
+    "modType": "Magazine",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 23,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.x7XsKzM5Iyisd9lA"
+  },
+  {
+    "key": "large_tank_vq2psttsdfuudpn2",
+    "label": "Large Tank",
+    "modType": "Propellanttank",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 28,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.vQ2PsttSdFUUDpN2"
+  },
+  {
+    "key": "lead_lining_0rvrmyyemok3vkol",
+    "label": "Lead Lining",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.0RvRMyyemOK3vkOl"
+  },
+  {
+    "key": "long_ryggzv9pwkchzjwb",
+    "label": "Long",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.RyggZv9PwKChzJwB"
+  },
+  {
+    "key": "long_barrel_mimskuavfshkey8x",
+    "label": "Long Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Close Quarters"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.MIMSkUavfShkeY8x"
+  },
+  {
+    "key": "long_barrel_bhpef2zreaacz7ni",
+    "label": "Long Barrel",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 28,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.bhpEF2ZReAacz7NI"
+  },
+  {
+    "key": "long_barrel_cs76cklmxyazhnhb",
+    "label": "Long Barrel",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.cs76CKLMxYAzhNhb"
+  },
+  {
+    "key": "long_night_vision_scope_nbqq6mtdf40kles5",
+    "label": "Long Night Vision Scope",
+    "modType": "Sight",
+    "weaponType": "Small Guns",
+    "perks": "Science! 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Night Vision"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.nBQq6MTdf40kleS5"
+  },
+  {
+    "key": "long_night_vision_scope_wvsssznt8gdmdoua",
+    "label": "Long Night Vision Scope",
+    "modType": "Sight",
+    "weaponType": "Small Guns",
+    "perks": "Science! 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Night Vision"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.wvsSsznT8GDmdoUa"
+  },
+  {
+    "key": "long_scope_u3fjycyndsxrr2or",
+    "label": "Long Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 29,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.U3fJYCYnDsxrr2Or"
+  },
+  {
+    "key": "long_scope_sg1efjrr3s307xpy",
+    "label": "Long Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 29,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.sg1EfJrr3S307XPy"
+  },
+  {
+    "key": "marksman_s_stock_q6vur8ae7rf7woha",
+    "label": "Marksman's Stock",
+    "modType": "Stock",
+    "weaponType": "Energy Weapons",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Q6VUr8ae7Rf7WOhA"
+  },
+  {
+    "key": "marksman_s_stock_zbzoom7wsprtm8pj",
+    "label": "Marksman's Stock",
+    "modType": "Stock",
+    "weaponType": "Energy Weapons",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Close Quarters",
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.zbzoOm7wspRTM8PJ"
+  },
+  {
+    "key": "muzzle_break_2aqyism1nriyhgoa",
+    "label": "Muzzle Break",
+    "modType": "Muzzle",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.2aqYiSm1nrIYHgoA"
+  },
+  {
+    "key": "napalm_caqagnqybpsc4wgm",
+    "label": "Napalm",
+    "modType": "Fuel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 7,
+    "cost": 59,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.cAqagnqyBpSC4wgM"
+  },
+  {
+    "key": "night_vision_scope_hpa4nwlg4pcbm3e2",
+    "label": "Night Vision Scope",
+    "modType": "Sight",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 4; Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 6,
+    "cost": 248,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Night Vision"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.hPa4NWlG4PcbM3E2"
+  },
+  {
+    "key": "photon_agitator_5tezv1cmuzirxrku",
+    "label": "Photon Agitator",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.5TezV1CMuZiRXrKU"
+  },
+  {
+    "key": "photon_agitator_x7m3lii0wjlkv7l3",
+    "label": "Photon Agitator",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.X7M3lII0wjlKV7l3"
+  },
+  {
+    "key": "photon_exciter_inrcfrhdriqrexf1",
+    "label": "Photon Exciter",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.inrCFrHdrIQrEXf1"
+  },
+  {
+    "key": "photon_exciter_mcjlbsmowiiinovw",
+    "label": "Photon Exciter",
+    "modType": "Capacitor",
+    "weaponType": "Big Guns",
+    "perks": "Science! 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 19,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.mcjlBsMoWIiiNoVw"
+  },
+  {
+    "key": "ported_ac56ox5nvhcj8pia",
+    "label": "Ported",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 4",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Ac56Ox5nVHcJ8PIA"
+  },
+  {
+    "key": "powerful_41rymx7pm90tz0v8",
+    "label": "Powerful",
+    "modType": "Receiver",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.41rymX7pm90tz0V8"
+  },
+  {
+    "key": "puncturing_49zfofotginm01u8",
+    "label": "Puncturing",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 18,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.49zfOfotginM01u8"
+  },
+  {
+    "key": "puncturing_7ozouphril9tzrod",
+    "label": "Puncturing",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 4,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.7OZouPhriL9tzrOD"
+  },
+  {
+    "key": "puncturing_fa2rbttgci73smrf",
+    "label": "Puncturing",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 13,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Fa2RBTtGci73smRF"
+  },
+  {
+    "key": "puncturing_lanb6wzho8piesxk",
+    "label": "Puncturing",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 45,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.LANB6wzhO8pIEsxK"
+  },
+  {
+    "key": "puncturing_soqixvkzsughfofi",
+    "label": "Puncturing",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 4,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.SoqIXVkZsUGhfofi"
+  },
+  {
+    "key": "puncturing_ol8d48kna9vev1kv",
+    "label": "Puncturing",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 18,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ol8d48kNa9veV1kv"
+  },
+  {
+    "key": "quad_barrel_3gi1tf4vkxsitrwj",
+    "label": "Quad Barrel",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 3",
+    "effect": "",
+    "summary": "",
+    "weight": 20,
+    "cost": 218,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 2,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.3GI1TF4vKxSitRWJ"
+  },
+  {
+    "key": "quick_eject_mag_067vemdtethvisla",
+    "label": "Quick-Eject Mag",
+    "modType": "Magazine",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 8,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Reliable"
+    ],
+    "removeQualities": [
+      "Unreliable"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.067VeMDTeThvISLa"
+  },
+  {
+    "key": "recoil_compensating_stock_h5uajczl8micywfy",
+    "label": "Recoil Compensating Stock",
+    "modType": "Stock",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 3",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.H5uajcZl8MICYwfy"
+  },
+  {
+    "key": "recoil_compensating_stock_pkyznmgx0jpkquic",
+    "label": "Recoil Compensating Stock",
+    "modType": "Stock",
+    "weaponType": "Big Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.pkYZNmGx0JPKquIC"
+  },
+  {
+    "key": "recoil_compensating_stock_pxflsyihn3fjkgyq",
+    "label": "Recoil Compensating Stock",
+    "modType": "Stock",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 3",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.pxflsyihN3fjKgYq"
+  },
+  {
+    "key": "recon_scope_m5ox31qif67xbc0m",
+    "label": "Recon Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 59,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Recon"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.M5ox31Qif67xBC0m"
+  },
+  {
+    "key": "recon_scope_dgwysop4iq9p2uyo",
+    "label": "Recon Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 59,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Recon"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.dgWySoP4IQ9p2uyO"
+  },
+  {
+    "key": "reflex_sight_amoeo5rxltjzm8kz",
+    "label": "Reflex Sight",
+    "modType": "Sight",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "May re-roll hit location die",
+    "summary": "",
+    "weight": 0,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.AMOEO5RXltJZM8kz"
+  },
+  {
+    "key": "reflex_sight_qaslwkphosmgn97l",
+    "label": "Reflex Sight",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "May re-roll hit location die",
+    "summary": "",
+    "weight": 0,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.qASlWkpHosmgn97l"
+  },
+  {
+    "key": "reflex_sight_rh3gtwkomznqps1h",
+    "label": "Reflex Sight",
+    "modType": "Sight",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "May re-roll hit location die",
+    "summary": "",
+    "weight": 0,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.rh3GtWKomZnQpS1H"
+  },
+  {
+    "key": "sawed_off_iec8kciehqck886z",
+    "label": "Sawed-Off",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": -2,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Close Quarters"
+    ],
+    "removeQualities": [
+      "Two-Handed"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.Iec8KCIeHqCk886z"
+  },
+  {
+    "key": "scope_wd7u8h2fsh35rd8t",
+    "label": "Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 6,
+    "cost": 143,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.WD7u8h2fsH35rD8t"
+  },
+  {
+    "key": "serrated_blade_7hxh0xrnmyflfbjp",
+    "label": "Serrated Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.7hxh0xRNMyflfbJp"
+  },
+  {
+    "key": "serrated_blade_gfjp4trdraoqooe8",
+    "label": "Serrated Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.GFJP4TRDRaOQoOe8"
+  },
+  {
+    "key": "serrated_blade_uuiwz6pvomdku6ye",
+    "label": "Serrated Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 0,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.uUiwz6PvOMdkU6yE"
+  },
+  {
+    "key": "serrated_blade_vq6ocwfkhscfr26x",
+    "label": "Serrated Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.vq6OcwFKhScFr26X"
+  },
+  {
+    "key": "sharp_eujw4xp1frt5hdcy",
+    "label": "Sharp",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.EuJw4xP1fRt5hdCy"
+  },
+  {
+    "key": "sharp_m2tl0fvg6lzg9wtj",
+    "label": "Sharp",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.M2Tl0fVG6LzG9wtj"
+  },
+  {
+    "key": "sharp_ftmm3iipqcnu6tm4",
+    "label": "Sharp",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.fTMm3IipqcnU6tm4"
+  },
+  {
+    "key": "sharp_hfiuerxoh8ryrfrv",
+    "label": "Sharp",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.hfiueRXOH8ryrfrv"
+  },
+  {
+    "key": "sharp_uaoxqjwoub6zmudc",
+    "label": "Sharp",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.uaOXQJwoub6ZmUdc"
+  },
+  {
+    "key": "sharpshooter_s_grip_4sou5mfxcdluvlup",
+    "label": "Sharpshooter's Grip",
+    "modType": "Grip",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.4sOu5mfXcDlUVlUP"
+  },
+  {
+    "key": "sharpshooter_s_grip_zalw93hamyh8nwp2",
+    "label": "Sharpshooter's Grip",
+    "modType": "Grip",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.zAlW93haMYH8Nwp2"
+  },
+  {
+    "key": "shielded_barrel_iif3omvvtgvv5lop",
+    "label": "Shielded Barrel",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 3",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 37,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.iiF3omvvTgVv5LoP"
+  },
+  {
+    "key": "short_night_vision_scope_vyesqvmrobpdsnpo",
+    "label": "Short Night Vision Scope",
+    "modType": "Sight",
+    "weaponType": "Small Guns",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 38,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Night Vision"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.vyesQvmRObpdSNpO"
+  },
+  {
+    "key": "short_night_vision_scope_wud5pta33zrh1aww",
+    "label": "Short Night Vision Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 38,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate",
+      "Night Vision"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.wUd5pTA33zRH1AWW"
+  },
+  {
+    "key": "short_scope_txosscfknibk2a85",
+    "label": "Short Scope",
+    "modType": "Sight",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 11,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.TxOsscfkniBk2a85"
+  },
+  {
+    "key": "short_scope_fyaqkfsxyexqzc0u",
+    "label": "Short Scope",
+    "modType": "Sight",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 11,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Accurate"
+    ],
+    "removeQualities": [
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.fyaQkFSXyexqZc0u"
+  },
+  {
+    "key": "shredder_efy7drbyypo1zgoh",
+    "label": "Shredder",
+    "modType": "Muzzle",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2",
+    "effect": "Melee weapon, Deals CD of Physical damage equal to Fire Rate",
+    "summary": "",
+    "weight": 5,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.EFY7drbYyPo1zGOh"
+  },
+  {
+    "key": "signal_repeater_ozbpt70ceklpm7ah",
+    "label": "Signal Repeater",
+    "modType": "Muzzle",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 4",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 60,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Burst"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Blast"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ozBpt70cekLpM7aH"
+  },
+  {
+    "key": "six_crank_capacitor_ztdgncl17xwzin9p",
+    "label": "Six-Crank Capacitor",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 3",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 16,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 4,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ztDgncL17xwZiN9p"
+  },
+  {
+    "key": "sniper_barrel_jfcffp1zj7awhwpn",
+    "label": "Sniper Barrel",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": -1,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [
+      "Close Quarters"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.jFCFFp1zj7awhWpN"
+  },
+  {
+    "key": "snubnose_qguharjjhqoxbp7u",
+    "label": "Snubnose",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": -1,
+    "cost": 0,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Inaccurate"
+    ],
+    "removeQualities": [
+      "Accurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.QgUHARJjhqOXBP7u"
+  },
+  {
+    "key": "spiked_5radqbfymo7zjdsi",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.5rADQbFyMO7zjDSi"
+  },
+  {
+    "key": "spiked_bx0ox0zdwjbdnsvl",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.BX0Ox0ZdWJBDNsVl"
+  },
+  {
+    "key": "spiked_cfl42fhuv4ntokcp",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.CFl42Fhuv4nToKcP"
+  },
+  {
+    "key": "spiked_cmvhmx7fgvsi9szj",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.CMVHMX7fGVSi9SzJ"
+  },
+  {
+    "key": "spiked_aknqi2ppzyd6qlge",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.aKnqi2PPZyD6qLGe"
+  },
+  {
+    "key": "spiked_e1ycqywvjdktlxvu",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 4,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.e1ycQYWvjDktlxvu"
+  },
+  {
+    "key": "spiked_eakjcz2nedjgiwwp",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.eakJcz2neDjGIWWP"
+  },
+  {
+    "key": "spiked_frkj2bs1fvy8ny3o",
+    "label": "Spiked",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.frKj2bS1FVy8Ny3O"
+  },
+  {
+    "key": "splitter_qostvnnhmrln7mhi",
+    "label": "Splitter",
+    "modType": "Barrel",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 31,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": -1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Spread"
+    ],
+    "removeEffects": [],
+    "addQualities": [
+      "Inaccurate"
+    ],
+    "removeQualities": [
+      "Accurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.QostVNNHMRLN7mhi"
+  },
+  {
+    "key": "stabilizer_dqtxjqnamlbhja3v",
+    "label": "Stabilizer",
+    "modType": "Muzzle",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 60,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Piercing 1"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.DqTXjqNAMlbHJa3V"
+  },
+  {
+    "key": "standard_stock_op1voojgnziz2s8v",
+    "label": "Standard Stock",
+    "modType": "Stock",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Two-Handed"
+    ],
+    "removeQualities": [
+      "Close Quarters",
+      "Inaccurate"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.op1VoOjGnziZ2S8V"
+  },
+  {
+    "key": "stealth_blade_vvtzfuz7hzmu3eaq",
+    "label": "Stealth Blade",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2",
+    "effect": "+2 CD on Sneak Attacks",
+    "summary": "",
+    "weight": 0,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Persistent"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.VvTZfUz7HZMu3eAq"
+  },
+  {
+    "key": "stun_pack_2bv9b55mk73yptcz",
+    "label": "Stun Pack",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 3, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Stun"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.2bv9B55Mk73ypTCZ"
+  },
+  {
+    "key": "stun_pack_g6fj1gegis2553in",
+    "label": "Stun Pack",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 2, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 3,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Stun"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.G6FJ1gEgiS2553IN"
+  },
+  {
+    "key": "stun_pack_s8t6wx5awzl3rxqt",
+    "label": "Stun Pack",
+    "modType": "Melee",
+    "weaponType": "Melee",
+    "perks": "Blacksmith 3, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 360,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Stun"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": true,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.S8t6WX5aWZl3rXqT"
+  },
+  {
+    "key": "suppressor_dzh7tfph917if3uo",
+    "label": "Suppressor",
+    "modType": "Muzzle",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 45,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Suppressed"
+    ],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.dZh7tFPH917IF3UO"
+  },
+  {
+    "key": "targeting_computer_rtldo0wub9euip9t",
+    "label": "Targeting Computer",
+    "modType": "Sight",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2; Science! 2",
+    "effect": "When you Aim at a target, the target does not benefit from being in cover, and the bonus for aiming applies to the next attack on any subsequent turn during the scene.",
+    "summary": "",
+    "weight": 7,
+    "cost": 293,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.rTLDO0WUB9euiP9T"
+  },
+  {
+    "key": "three_crank_capacitor_uemdfforxggfnuyb",
+    "label": "Three-Crank Capacitor",
+    "modType": "Capacitor",
+    "weaponType": "Energy Weapons",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 4,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.ueMDFFORXGGfNuYb"
+  },
+  {
+    "key": "tri_barrel_6ow2tdryzdu0klw4",
+    "label": "Tri-Barrel",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 4",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 75,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 2,
+    "fireRateDelta": -2,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.6oW2tdrYzdu0klW4"
+  },
+  {
+    "key": "triple_barrel_kkrxsfbftl89h3ra",
+    "label": "Triple Barrel",
+    "modType": "Barrel",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 16,
+    "cost": 143,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 0,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.KkRxsFbFTL89H3Ra"
+  },
+  {
+    "key": "vaporization_nozzle_xhkctkvzwtowzx9k",
+    "label": "Vaporization Nozzle",
+    "modType": "Nozzle",
+    "weaponType": "Big Guns",
+    "perks": "Gun Nut 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 47,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 1,
+    "fireRateDelta": 0,
+    "rangeDelta": 0,
+    "addEffects": [
+      "Vicious"
+    ],
+    "removeEffects": [],
+    "addQualities": [],
+    "removeQualities": [],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.xhKCtkvzwtowzx9K"
+  },
+  {
+    "key": "vented_yxsf6qdbdo4fyaqb",
+    "label": "Vented",
+    "modType": "Barrel",
+    "weaponType": "Small Guns",
+    "perks": "Gun Nut 4",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 36,
+    "rarity": 0,
+    "source": "Core",
+    "damageDelta": 0,
+    "fireRateDelta": 1,
+    "rangeDelta": 1,
+    "addEffects": [],
+    "removeEffects": [],
+    "addQualities": [
+      "Reliable"
+    ],
+    "removeQualities": [
+      "Unreliable"
+    ],
+    "damageTypeFlags": {
+      "physical": false,
+      "energy": false,
+      "radiation": false,
+      "poison": false
+    },
+    "note": "",
+    "foundryUuid": "Compendium.fallout.weapon_mods.Item.yxSF6qdbdO4FYaQb"
+  }
+];
+
+export const SOURCE_APPAREL_MODS = [
+  {
+    "key": "aerodynamic_oo7frtqfoenu9yl8",
+    "label": "Aerodynamic",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Arms",
+    "perks": "Armorer 3",
+    "effect": "May spend up to 4 AP on bonus damage for melee attacks",
+    "summary": "",
+    "weight": 0,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.oO7frtQFoeNU9yl8"
+  },
+  {
+    "key": "alloyed_metal_pljecolsgjivzf69",
+    "label": "Alloyed Metal",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.plJeCoLSGJIVzF69"
+  },
+  {
+    "key": "alloyed_metal_torso_hzkbfpbv401smtxa",
+    "label": "Alloyed Metal (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 6,
+    "cost": 60,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.HzkbfPbv401sMTXA"
+  },
+  {
+    "key": "asbestos_lining_e7yshkxmm9o7aovi",
+    "label": "Asbestos Lining",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "Ignore Energy damage from the Persistent damage effect",
+    "summary": "",
+    "weight": 4,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.e7ySHkXMm9o7Aovi"
+  },
+  {
+    "key": "ballistic_weave_r0oekxulrthf0j8f",
+    "label": "Ballistic Weave",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Ballistic polymer weave is an armor mod which improves the defensive abilities of some clothing items. A layer of this tough artificial fabric can be used as a lining in a variety of garments, giving them a limited ability to resist impacts, bullets, and energy blasts. Knowledge of this recipe is possessed only by a few, and they share these secrets only occasionally. All ballistic weave mods are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.R0OekXuLrtHf0j8f"
+  },
+  {
+    "key": "ballistic_weave_mk_ii_8jid23vwodxqwesb",
+    "label": "Ballistic Weave Mk II",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Ballistic polymer weave is an armor mod which improves the defensive abilities of some clothing items. A layer of this tough artificial fabric can be used as a lining in a variety of garments, giving them a limited ability to resist impacts, bullets, and energy blasts. Knowledge of this recipe is possessed only by a few, and they share these secrets only occasionally. All ballistic weave mods are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.8JID23VwOdXqwESb"
+  },
+  {
+    "key": "ballistic_weave_mk_iii_krumvjqk0tr5azdy",
+    "label": "Ballistic Weave Mk III",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 2",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Ballistic polymer weave is an armor mod which improves the defensive abilities of some clothing items. A layer of this tough artificial fabric can be used as a lining in a variety of garments, giving them a limited ability to resist impacts, bullets, and energy blasts. Knowledge of this recipe is possessed only by a few, and they share these secrets only occasionally. All ballistic weave mods are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.kRuMVjqK0tr5aZDY"
+  },
+  {
+    "key": "ballistic_weave_mk_iv_fgvlq6ku80a5ctsg",
+    "label": "Ballistic Weave Mk IV",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 3",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 5,
+      "energy": 5,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Ballistic polymer weave is an armor mod which improves the defensive abilities of some clothing items. A layer of this tough artificial fabric can be used as a lining in a variety of garments, giving them a limited ability to resist impacts, bullets, and energy blasts. Knowledge of this recipe is possessed only by a few, and they share these secrets only occasionally. All ballistic weave mods are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.fGvLq6Ku80a5cTSg"
+  },
+  {
+    "key": "ballistic_weave_mk_v_ew9m8xt2gbnwcheu",
+    "label": "Ballistic Weave Mk V",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 4",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 60,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 6,
+      "energy": 6,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Ballistic polymer weave is an armor mod which improves the defensive abilities of some clothing items. A layer of this tough artificial fabric can be used as a lining in a variety of garments, giving them a limited ability to resist impacts, bullets, and energy blasts. Knowledge of this recipe is possessed only by a few, and they share these secrets only occasionally. All ballistic weave mods are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ew9m8xT2GbnWCHeu"
+  },
+  {
+    "key": "biocommmesh_qxgvevm7ttp4ufps",
+    "label": "BioCommMesh",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 4, Science! 2",
+    "effect": "Chems last twice as long",
+    "summary": "",
+    "weight": 2,
+    "cost": 9,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.QXgVEVm7Ttp4UFpS"
+  },
+  {
+    "key": "blood_cleanser_fov5iu0cbgduzuuo",
+    "label": "Blood Cleanser",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 1",
+    "effect": "Re-roll addiction roll for addictive chems while armor is powered",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Fov5IU0CbgDuZUuO"
+  },
+  {
+    "key": "boiled_leather_swsqlivepwlggtty",
+    "label": "Boiled Leather",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.sWsqLIvepWlGgTtY"
+  },
+  {
+    "key": "boiled_leather_torso_beh1dyktdptkwnhx",
+    "label": "Boiled Leather (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.BEH1dYkTDpTKwNHX"
+  },
+  {
+    "key": "braced_wchyh9lxoauthykt",
+    "label": "Braced",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Arms",
+    "perks": "Armorer 1",
+    "effect": "+2 to all damage resistances vs melee attacks",
+    "summary": "",
+    "weight": 1,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.wchyh9LXoAUTHYKT"
+  },
+  {
+    "key": "brawling_3d0refqygowlr08d",
+    "label": "Brawling",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Arms",
+    "perks": "Armorer 1",
+    "effect": "Unarmed attacks inflict +1 CD damage",
+    "summary": "",
+    "weight": 1,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.3d0refqygOWlr08D"
+  },
+  {
+    "key": "buttressed_gdi7grgyrmxepm99",
+    "label": "Buttressed",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.GDI7gRGYrMxEpm99"
+  },
+  {
+    "key": "buttressed_torso_ttjb1mpeas5mpm8o",
+    "label": "Buttressed (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 6,
+    "cost": 24,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ttjB1mPeas5mpm8O"
+  },
+  {
+    "key": "calibrated_shocks_rrhtybphjtensf6w",
+    "label": "Calibrated Shocks",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "Science! 2",
+    "effect": "Your carry weight is increased by +50",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.RrhtyBPhjtENsF6w"
+  },
+  {
+    "key": "core_assembly_t2wgft9gqqzs3qt9",
+    "label": "Core Assembly",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 3",
+    "effect": "While armor is powered, if you begin your turn and there is no AP in the group pool, add +1 AP",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.t2wGFT9GqqzS3Qt9"
+  },
+  {
+    "key": "cushioned_rvh2r9epaetwzfsp",
+    "label": "Cushioned",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Legs",
+    "perks": "Armorer 1",
+    "effect": "+2 to Physical damage resistance vs falling damage",
+    "summary": "",
+    "weight": 0,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.RvH2R9EpAEtwzfsp"
+  },
+  {
+    "key": "deep_pocketed_fyscg1sws7sabve7",
+    "label": "Deep Pocketed",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "All Locations",
+    "perks": "Armorer 1",
+    "effect": "+20 Carry Weight",
+    "summary": "",
+    "weight": 2,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.FySCG1SWS7SABvE7"
+  },
+  {
+    "key": "deep_pocketed_torso_4ptjwyy1rpnnvexc",
+    "label": "Deep Pocketed (Torso)",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "+20 Carry Weight",
+    "summary": "",
+    "weight": 4,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.4PtjwYY1RpNnvExC"
+  },
+  {
+    "key": "dense_xyvankqte6tuivzs",
+    "label": "Dense",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 3",
+    "effect": "+4 to all damage resistances vs Blast weapons",
+    "summary": "",
+    "weight": 4,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.XYvAnkqTE6TUIvzs"
+  },
+  {
+    "key": "emergency_protocols_dcye8deu6qi7gare",
+    "label": "Emergency Protocols",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 4",
+    "effect": "While armor is powered, if your current HP is below 1/4 of your maximum, add +1 to Defense and +3 to all damage resistances",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.dCYE8deU6qI7GARe"
+  },
+  {
+    "key": "emp_shielding_143i7sjrcqbq9sht",
+    "label": "EMP Shielding",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.143I7SjRcQBq9sht"
+  },
+  {
+    "key": "emp_shielding_torso_9wnvnlyy7epjkydj",
+    "label": "EMP Shielding (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.9WnVnLYY7epjkydJ"
+  },
+  {
+    "key": "enameled_metal_d0avgvgtdfsoecmp",
+    "label": "Enameled Metal",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.d0avgvGTDFSOEcMP"
+  },
+  {
+    "key": "enameled_metal_torso_jhwkqaodudoyep7d",
+    "label": "Enameled Metal (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.JhWkQaODUdoyEp7d"
+  },
+  {
+    "key": "explosive_shielding_7irkk1elj5irfanw",
+    "label": "Explosive Shielding",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Science! 1",
+    "effect": "+2 to all damage resistances vs Blast weapons.",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.7iRkK1Elj5iRfANw"
+  },
+  {
+    "key": "explosive_shielding_torso_vzs57hcebc9iovur",
+    "label": "Explosive Shielding (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 1",
+    "effect": "+2 to all damage resistances vs Blast weapons.",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.vZs57HCeBc9iOVUR"
+  },
+  {
+    "key": "explosive_vent_jpgzrbzujtlieurj",
+    "label": "Explosive Vent",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "Science! 3",
+    "effect": "While the armor is powered, when you land from a height, you inflict 4 CD damage to all creatures and damageable objects within Close range",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.JpGZrBzUJTLieuRJ"
+  },
+  {
+    "key": "fiberglass_gw3k5z7mfrzobdqa",
+    "label": "Fiberglass",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.gW3K5z7MFRZoBDQa"
+  },
+  {
+    "key": "fiberglass_torso_b3yii203jyniqg7v",
+    "label": "Fiberglass (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 60,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.b3YiI203jynIQG7V"
+  },
+  {
+    "key": "girded_leather_nkmowl7fin0nil1g",
+    "label": "Girded Leather",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.NKMOWl7fiN0nIl1G"
+  },
+  {
+    "key": "girded_leather_torso_67crgv7xkulj0j9j",
+    "label": "Girded Leather (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.67Crgv7xKULJ0j9J"
+  },
+  {
+    "key": "hardened_gi1rymmsxnpoqctb",
+    "label": "Hardened",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 9,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.gI1rYMmsXnPOqctB"
+  },
+  {
+    "key": "hardened_torso_yorblyiznty0vwgt",
+    "label": "Hardened (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 18,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.yoRbLyIzNTy0VwGT"
+  },
+  {
+    "key": "hydraulic_bracers_cmfqxrn9zrdiu23y",
+    "label": "Hydraulic Bracers",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "Blacksmith 3",
+    "effect": "While armor is powered, your unarmed attacks inflict +2 CD damage",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.cMFQXRN9ZrDIU23Y"
+  },
+  {
+    "key": "insulated_lining_p0dwgxyf9lqkdtd2",
+    "label": "Insulated Lining",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 0,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.p0DwgxYf9LqKdtD2"
+  },
+  {
+    "key": "internal_database_zalob7glxndathjj",
+    "label": "Internal Database",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "Science! 2",
+    "effect": "Re-roll 1d20 on all INT tests while armor is powered",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.zALOB7gLXndAThjj"
+  },
+  {
+    "key": "jetpack_hdcx4nu2zkydf9hg",
+    "label": "Jetpack",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Armorer 4, Science! 4",
+    "effect": "When you move you may activate a jetpack by spending 1 charge; this allows you to move one additional zone (horizontally or vertically) or gain enough height for an impact landing",
+    "summary": "",
+    "weight": 1,
+    "cost": 500,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.HdcX4nu2ZKYDf9hG"
+  },
+  {
+    "key": "kinetic_dynamo_fi4soovtpfcklbvs",
+    "label": "Kinetic Dynamo",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 4",
+    "effect": "While armor is powered, when you suffer any damage (after reductions for damage resistances), add +1 to the group AP pool",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Fi4sOOvTpfCKlBVS"
+  },
+  {
+    "key": "laminated_9flkdawesedxbcmp",
+    "label": "Laminated",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.9FlKDaWEsEDXBCMP"
+  },
+  {
+    "key": "laminated_torso_zhrilzpyh7l9kkqd",
+    "label": "Laminated (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ZhrilZpyh7l9kkQD"
+  },
+  {
+    "key": "lead_lined_lrwdket2a4fxbzpq",
+    "label": "Lead Lined",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "All Locations",
+    "perks": "Armorer 3, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 3
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.lRwdket2A4FxBzpQ"
+  },
+  {
+    "key": "lead_lined_torso_szgwmjhewwoxu1pr",
+    "label": "Lead Lined (Torso)",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 3, Science! 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 3
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.SZGWmJhEwwoXU1PR"
+  },
+  {
+    "key": "lead_plating_8fvllrbwjodf6bce",
+    "label": "Lead Plating",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 2
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.8fvlLrbWjODf6BCe"
+  },
+  {
+    "key": "lead_plating_torso_7io8gcf1f2bck4a0",
+    "label": "Lead Plating (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 2
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.7IO8gCf1f2bCK4a0"
+  },
+  {
+    "key": "lighter_build_vczarlcyen25awf3",
+    "label": "Lighter Build",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "All Locations",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": -1,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.vCzArLcyEN25Awf3"
+  },
+  {
+    "key": "lighter_build_torso_6auqz8lwvub7ufdy",
+    "label": "Lighter Build (Torso)",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": -2,
+    "cost": 2,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.6Auqz8lwvuB7UFdy"
+  },
+  {
+    "key": "medic_pump_gcqrocvacrax9ukk",
+    "label": "Medic Pump",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 4",
+    "effect": "While armor is powered, when yourHP are reduced to below 1/2 of your maximum, you immediately use a Stimpak, regaining 3 HP or treating one Injury.",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.gCQROCvacrax9ukk"
+  },
+  {
+    "key": "microcarbon_lx3jrbjlh0myyqjd",
+    "label": "Microcarbon",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.lX3JRbJLh0mYyQJd"
+  },
+  {
+    "key": "microcarbon_torso_subvv0xnuqzecfoh",
+    "label": "Microcarbon (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.SUBvV0XNUQzeCfOH"
+  },
+  {
+    "key": "mk_ii_arm_qwu5vy4f3vsx4i6z",
+    "label": "Mk II Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.qwU5VY4f3vsx4i6z"
+  },
+  {
+    "key": "mk_ii_chest_piece_f2tjfww2vfmqrmay",
+    "label": "Mk II Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.f2TJFwW2vfMqrmAY"
+  },
+  {
+    "key": "mk_ii_helm_qio7j6pyi4ocpi9h",
+    "label": "Mk II Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.qIO7j6PYi4ocPi9h"
+  },
+  {
+    "key": "mk_ii_leg_suu2pnzco5kyuf9n",
+    "label": "Mk II Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.suU2pnzcO5KYUF9N"
+  },
+  {
+    "key": "mk_iii_arm_yswtxgeapixbjdl6",
+    "label": "Mk III Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.YswtxgeapixbJdL6"
+  },
+  {
+    "key": "mk_iii_chest_piece_4s9r2wqowqkgj3q5",
+    "label": "Mk III Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 28,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.4S9R2wqowQKgJ3q5"
+  },
+  {
+    "key": "mk_iii_helm_jqn0cvqroplznwi5",
+    "label": "Mk III Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.jQN0cvQRoPLzNwi5"
+  },
+  {
+    "key": "mk_iii_leg_ysly9bvbtp056yn7",
+    "label": "Mk III Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.YsLy9bVbtP056YN7"
+  },
+  {
+    "key": "mk_iv_arm_r6z0qp7ipfezr0lp",
+    "label": "Mk IV Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.R6Z0Qp7iPfeZr0lp"
+  },
+  {
+    "key": "mk_iv_chestpiece_pclos69pzvlt1gum",
+    "label": "Mk IV ChestPiece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 42,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.PCloS69pzVlT1gUM"
+  },
+  {
+    "key": "mk_iv_helm_20fkglk8lkb8a1c0",
+    "label": "Mk IV Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 21,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.20FKglk8LkB8A1c0"
+  },
+  {
+    "key": "mk_iv_leg_lqgtyf4mpgnq8bi7",
+    "label": "Mk IV Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.LQGTYf4MpGnQ8bi7"
+  },
+  {
+    "key": "mk_v_arm_ae5urfgjtuvqw7c6",
+    "label": "Mk V Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ae5urfGJTUVqw7C6"
+  },
+  {
+    "key": "mk_v_chest_piece_kcei3v2j23v89jgt",
+    "label": "Mk V Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 56,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.kcEI3V2j23v89jGT"
+  },
+  {
+    "key": "mk_v_helm_su9jhsobdvtpsmd8",
+    "label": "Mk V Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 28,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Su9jHSoBdvTPSMD8"
+  },
+  {
+    "key": "mk_v_leg_nrkgx6ccemqudub1",
+    "label": "Mk V Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.nrkgX6ccemqUDUb1"
+  },
+  {
+    "key": "mk_vi_arm_vwq6f7jz0j0trgus",
+    "label": "Mk VI Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.VWq6f7jz0J0TRGUS"
+  },
+  {
+    "key": "mk_vi_chestpiece_1qsjzncdxrx59ouf",
+    "label": "Mk VI ChestPiece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "5",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 70,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 5,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.1QSjzncDxrx59OUf"
+  },
+  {
+    "key": "mk_vi_helm_aqhxp38udkbj1ej0",
+    "label": "Mk VI Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Aqhxp38UDkBJ1EJ0"
+  },
+  {
+    "key": "mk_vi_leg_zt3r2qkvtmgv3wlh",
+    "label": "Mk VI Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.zt3R2qkvtmgV3WLH"
+  },
+  {
+    "key": "motion_assist_servos_vuyszewei174mwlc",
+    "label": "Motion-Assist Servos",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 3",
+    "effect": "Increase STR of armor frame to 13 while armor is powered",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.vuySzeWEI174mwLc"
+  },
+  {
+    "key": "muffled_gqvtons1khcwopii",
+    "label": "Muffled",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Legs",
+    "perks": "Armorer 2",
+    "effect": "Re-roll 1d20 on Stealth tests",
+    "summary": "",
+    "weight": 0,
+    "cost": 2,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.GQvToNs1kHcwOPII"
+  },
+  {
+    "key": "nanofilament_twp01abvj2p3dpak",
+    "label": "Nanofilament",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.tWP01ABVj2P3dPak"
+  },
+  {
+    "key": "nanofilament_torso_cvxi6jy2z5hevm4v",
+    "label": "Nanofilament (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 6,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.cVxi6JY2Z5HeVM4v"
+  },
+  {
+    "key": "optimized_bracers_zsgbpst9kf1lvrfw",
+    "label": "Optimized Bracers",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "Blacksmith 1",
+    "effect": "While armor is powered, you may spend up to 4 AP on bonus damage for melee attacks",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ZsGBPsT9kf1lVrFw"
+  },
+  {
+    "key": "overdrive_servos_pz2fiyhkvul7ept0",
+    "label": "Overdrive Servos",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "Science! 3",
+    "effect": "While armor is powered, when you Sprint, you may spend +2 AP to move one additional zone",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.pZ2FIyhKvuL7EPT0"
+  },
+  {
+    "key": "padded_q48esita3u4tmuxt",
+    "label": "Padded",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "+2 to all damage resistances vs Blast weapons",
+    "summary": "",
+    "weight": 4,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.q48esitA3U4tmuXT"
+  },
+  {
+    "key": "painted_metal_l0rhqyci1tg5viug",
+    "label": "Painted Metal",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.l0RhqycI1tg5viug"
+  },
+  {
+    "key": "painted_metal_torso_yo6haigzpgiuuemd",
+    "label": "Painted Metal (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.yo6HaIGzpgIuuEMD"
+  },
+  {
+    "key": "photovoltaic_plating_dxewsx1oopkonpps",
+    "label": "Photovoltaic Plating",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Science! 3",
+    "effect": "+1 AP at the start of a scene if in direct sunlight (only applies once)",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.DxewSX1ooPKoNPPs"
+  },
+  {
+    "key": "photovoltaic_plating_torso_lqvdgq6axrjbfnoe",
+    "label": "Photovoltaic Plating (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 3",
+    "effect": "+1 AP at the start of a scene if in direct sunlight (only applies once)",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.lqvdGQ6axRjBfNoe"
+  },
+  {
+    "key": "pneumatic_8f9g1cg2omluabg1",
+    "label": "Pneumatic",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 4",
+    "effect": "Stun damage effect requires 2+ Effects to be rolled to affect you",
+    "summary": "",
+    "weight": 2,
+    "cost": 9,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.8F9G1Cg2OmluAbG1"
+  },
+  {
+    "key": "pocketed_krukj0er46zycdgm",
+    "label": "Pocketed",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "All Locations",
+    "perks": "Armorer 1",
+    "effect": "+10 Carry Weight",
+    "summary": "",
+    "weight": 1,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.KRuKJ0eR46ZycdGM"
+  },
+  {
+    "key": "pocketed_torso_5squ0kdqbhyacsdu",
+    "label": "Pocketed (Torso)",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "+10 Carry Weight",
+    "summary": "",
+    "weight": 2,
+    "cost": 2,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.5sQU0kdQbhyacSdu"
+  },
+  {
+    "key": "polished_metal_gysess8tqqfig1qh",
+    "label": "Polished Metal",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 2",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.gySESs8tqQfig1qH"
+  },
+  {
+    "key": "polished_metal_torso_kt14lmmm7zn0v5w2",
+    "label": "Polished Metal (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 2",
+    "effect": "",
+    "summary": "",
+    "weight": 8,
+    "cost": 80,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Kt14LMMm7zn0V5w2"
+  },
+  {
+    "key": "polymer_frpz5ud3tz7hmjir",
+    "label": "Polymer",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 45,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.FRPz5uD3tZ7hMjir"
+  },
+  {
+    "key": "polymer_torso_lab83lvky6vsxuuh",
+    "label": "Polymer (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 90,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.LAb83LVky6vSxUuH"
+  },
+  {
+    "key": "prism_shielding_wkklumse0xucxfmc",
+    "label": "Prism Shielding",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.WKklumSE0xUCXFmc"
+  },
+  {
+    "key": "prism_shielding_torso_jan0jzohkmyi3u1w",
+    "label": "Prism Shielding (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.JAN0jzOhkMyI3U1w"
+  },
+  {
+    "key": "protective_lining_gvttvlde6xqmbv5k",
+    "label": "Protective Lining",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 4; Science! 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 2,
+      "radiation": 2
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.gVTTVLDe6xQMbv5K"
+  },
+  {
+    "key": "rad_scrubber_2sqnqghd7d3y4o5e",
+    "label": "Rad Scrubber",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "Science! 2",
+    "effect": "Ignore radiation from Irradiated food or drink consumed while armor is powered",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.2SqnqGHd7D3y4O5E"
+  },
+  {
+    "key": "raider_ii_arm_8cthjfdxtrheblxp",
+    "label": "Raider II Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.8ctHjfdxTRHeBlXp"
+  },
+  {
+    "key": "raider_ii_chest_piece_4oo36cksvvcxj9o6",
+    "label": "Raider II Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.4Oo36CKsvvcXj9o6"
+  },
+  {
+    "key": "raider_ii_helm_hzzpdrbclyd6mzhk",
+    "label": "Raider II Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 5,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.hZZpdrBclyd6MzHk"
+  },
+  {
+    "key": "raider_ii_leg_6qonvqbws9mgnwz2",
+    "label": "Raider II Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.6qONvqbWs9mgnwZ2"
+  },
+  {
+    "key": "reactive_plates_jcala9jiwlsgpdig",
+    "label": "Reactive Plates",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Armorer 4",
+    "effect": "While armor is powered, when you suffer damage from a melee or unarmed attack, you inflict Physical damage back to the attacker equal to half the damage total rolled",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.JCala9JIwLsgpDig"
+  },
+  {
+    "key": "reinforced_dsrje3suq5wyymyp",
+    "label": "Reinforced",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.DSrje3suQ5wYyMYp"
+  },
+  {
+    "key": "reinforced_torso_wcywftr7tswswcpm",
+    "label": "Reinforced (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.WCywfTr7TSWsWCPm"
+  },
+  {
+    "key": "resin_hwuuqfc4h82qxpec",
+    "label": "Resin",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.hWUuQFc4H82qxPec"
+  },
+  {
+    "key": "resin_torso_sw0mozujhhmyjjrr",
+    "label": "Resin (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.SW0MOzUjhhMYjJrr"
+  },
+  {
+    "key": "resistant_lining_6hktmjmw1gkhhudw",
+    "label": "Resistant Lining",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 2,
+      "radiation": 1
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.6HktMjmw1GkHhudw"
+  },
+  {
+    "key": "rusty_knuckles_zx0aufac1hnsevzo",
+    "label": "Rusty Knuckles",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "Blacksmith 1",
+    "effect": "Your unarmed attacks gain the Persistent damage effect",
+    "summary": "",
+    "weight": 1,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.zX0aUfac1HnsEvZO"
+  },
+  {
+    "key": "sensor_array_en57mq3hn0dkchjy",
+    "label": "Sensor Array",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "Science! 3",
+    "effect": "Re-roll 1d20 on all PER tests while armor is powered",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.En57MQ3hn0DkcHJy"
+  },
+  {
+    "key": "shadowed_ebktneyu3usezhgt",
+    "label": "Shadowed",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": true,
+    "note": "Shadowed Armor Many of the armor types listed in this section can be modified to become Shadowed . Shadowed armor has a darker, less-reflective surface to make it harder to see the wearer in dim light or darkness. If you are wearing one or two pieces of Shadowed armor, you may ignore the first complication rolled on a Sneak test you attempt while in dim light or darkness. If you are wearing three or more pieces of Shadowed armor, you may re-roll a single d20 on one Sneak test you attempt each scene while in dim light or darkness. If you are wearing five or more pieces of Shadowed armor, you may re-roll a single d20 on any Sneak test you attempt while in dim light or darkness. Torso armor counts as two pieces towards this. Shadowed armor does not provide any bonus if you are in a suit of Power Armor.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.EBkTneYU3Usezhgt"
+  },
+  {
+    "key": "shadowed_torso_i5ocwmr1tq96nsi7",
+    "label": "Shadowed (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": true,
+    "note": "Shadowed Armor Many of the armor types listed in this section can be modified to become Shadowed . Shadowed armor has a darker, less-reflective surface to make it harder to see the wearer in dim light or darkness. If you are wearing one or two pieces of Shadowed armor, you may ignore the first complication rolled on a Sneak test you attempt while in dim light or darkness. If you are wearing three or more pieces of Shadowed armor, you may re-roll a single d20 on one Sneak test you attempt each scene while in dim light or darkness. If you are wearing five or more pieces of Shadowed armor, you may re-roll a single d20 on any Sneak test you attempt while in dim light or darkness. Torso armor counts as two pieces towards this. Shadowed armor does not provide any bonus if you are in a suit of Power Armor.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.i5ocwMr1TQ96nsi7"
+  },
+  {
+    "key": "shadowed_leather_cy6pofbbu0qelshg",
+    "label": "Shadowed Leather",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": true,
+    "note": "Shadowed Armor Many of the armor types listed in this section can be modified to become Shadowed . Shadowed armor has a darker, less-reflective surface to make it harder to see the wearer in dim light or darkness. If you are wearing one or two pieces of Shadowed armor, you may ignore the first complication rolled on a Sneak test you attempt while in dim light or darkness. If you are wearing three or more pieces of Shadowed armor, you may re-roll a single d20 on one Sneak test you attempt each scene while in dim light or darkness. If you are wearing five or more pieces of Shadowed armor, you may re-roll a single d20 on any Sneak test you attempt while in dim light or darkness. Torso armor counts as two pieces towards this. Shadowed armor does not provide any bonus if you are in a suit of Power Armor.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.CY6POFBbU0qeLsHG"
+  },
+  {
+    "key": "shadowed_leather_torso_au7oeiqasymmxqnp",
+    "label": "Shadowed Leather (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 40,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": true,
+    "note": "Shadowed Armor Many of the armor types listed in this section can be modified to become Shadowed . Shadowed armor has a darker, less-reflective surface to make it harder to see the wearer in dim light or darkness. If you are wearing one or two pieces of Shadowed armor, you may ignore the first complication rolled on a Sneak test you attempt while in dim light or darkness. If you are wearing three or more pieces of Shadowed armor, you may re-roll a single d20 on one Sneak test you attempt each scene while in dim light or darkness. If you are wearing five or more pieces of Shadowed armor, you may re-roll a single d20 on any Sneak test you attempt while in dim light or darkness. Torso armor counts as two pieces towards this. Shadowed armor does not provide any bonus if you are in a suit of Power Armor.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Au7oeIQaSymmXqnP"
+  },
+  {
+    "key": "shadowed_metal_eynqabnyteokkeop",
+    "label": "Shadowed Metal",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": true,
+    "note": "Shadowed Armor Many of the armor types listed in this section can be modified to become Shadowed . Shadowed armor has a darker, less-reflective surface to make it harder to see the wearer in dim light or darkness. If you are wearing one or two pieces of Shadowed armor, you may ignore the first complication rolled on a Sneak test you attempt while in dim light or darkness. If you are wearing three or more pieces of Shadowed armor, you may re-roll a single d20 on one Sneak test you attempt each scene while in dim light or darkness. If you are wearing five or more pieces of Shadowed armor, you may re-roll a single d20 on any Sneak test you attempt while in dim light or darkness. Torso armor counts as two pieces towards this. Shadowed armor does not provide any bonus if you are in a suit of Power Armor.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.EYNQabnyteOkkeoP"
+  },
+  {
+    "key": "shadowed_metal_torso_dap4x9pvikfde56r",
+    "label": "Shadowed Metal (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": true,
+    "note": "Shadowed Armor Many of the armor types listed in this section can be modified to become Shadowed . Shadowed armor has a darker, less-reflective surface to make it harder to see the wearer in dim light or darkness. If you are wearing one or two pieces of Shadowed armor, you may ignore the first complication rolled on a Sneak test you attempt while in dim light or darkness. If you are wearing three or more pieces of Shadowed armor, you may re-roll a single d20 on one Sneak test you attempt each scene while in dim light or darkness. If you are wearing five or more pieces of Shadowed armor, you may re-roll a single d20 on any Sneak test you attempt while in dim light or darkness. Torso armor counts as two pieces towards this. Shadowed armor does not provide any bonus if you are in a suit of Power Armor.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.dAP4X9pvIKfDE56r"
+  },
+  {
+    "key": "shielded_lining_vmzxtew6vjqcziik",
+    "label": "Shielded Lining",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 4; Science! 4",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 3,
+      "radiation": 3
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.VMzxtew6VJQCzIIk"
+  },
+  {
+    "key": "stabilized_zhnh96ic3qivpj25",
+    "label": "Stabilized",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Arms",
+    "perks": "Armorer 2",
+    "effect": "When you aim and make a ranged attack, +1 CD to the attack's damage",
+    "summary": "",
+    "weight": 1,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ZHnH96ic3qiVPJ25"
+  },
+  {
+    "key": "stealth_boy_hlzvumrkmkwsx0gt",
+    "label": "Stealth Boy",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 4",
+    "effect": "You may activate a Stealth Boy (p.171) once per scene by spending 1 charge",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.HlZVuMrkMKwSx0gT"
+  },
+  {
+    "key": "studded_leather_iihwrw2s19a9hrev",
+    "label": "Studded Leather",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.IIhwRw2S19A9hrEV"
+  },
+  {
+    "key": "studded_leather_torso_yyvoh87qticx6j8q",
+    "label": "Studded Leather (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 50,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 4,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.yYvoh87QTiCX6J8Q"
+  },
+  {
+    "key": "t_45b_arm_6oy0yuh32cpkccuh",
+    "label": "T-45b Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.6OY0YUH32cpkcCuH"
+  },
+  {
+    "key": "t_45b_chest_piece_myf3miucrgr3jujb",
+    "label": "T-45b Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.MYF3miuCrGR3jUjb"
+  },
+  {
+    "key": "t_45b_helm_7kurz8ogigdt6yxk",
+    "label": "T-45b Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.7KURZ8oGIgDt6YxK"
+  },
+  {
+    "key": "t_45b_leg_akhf3amqhuvz1stc",
+    "label": "T-45b Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.AKhF3AMqHuvZ1STc"
+  },
+  {
+    "key": "t_45c_arm_rr7vs2f9fjxrk7nq",
+    "label": "T-45c Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.RR7Vs2f9fJxRK7nq"
+  },
+  {
+    "key": "t_45c_chest_piece_wlafi7wpiibefin9",
+    "label": "T-45c Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.wLaFI7WPiiBEFiN9"
+  },
+  {
+    "key": "t_45c_helm_qh24odpdutny87vp",
+    "label": "T-45c Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.qH24ODPdUtNy87vp"
+  },
+  {
+    "key": "t_45c_leg_gujeg9kdg5dmausy",
+    "label": "T-45c Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.gujEG9KDg5dMAUsY"
+  },
+  {
+    "key": "t_45d_arm_dtpoagbxzka9ypyj",
+    "label": "T-45d Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.DtPOAGbxzkA9Ypyj"
+  },
+  {
+    "key": "t_45d_chest_piece_g1bevsrbcroliksf",
+    "label": "T-45d Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 21,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 5,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.G1BevsRBcrOLIkSf"
+  },
+  {
+    "key": "t_45d_helm_8z8lfxud9r26hhkz",
+    "label": "T-45d Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 9,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.8Z8lfXud9r26HHkZ"
+  },
+  {
+    "key": "t_45d_leg_qp17f82dyxar8fgw",
+    "label": "T-45d Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.qp17f82dYxaR8fGw"
+  },
+  {
+    "key": "t_45e_arm_pfh0zvuksvl49ael",
+    "label": "T-45e Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Pfh0zvUkSVL49AeL"
+  },
+  {
+    "key": "t_45e_chest_piece_qwlzayv7iemeqrmu",
+    "label": "T-45e Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 28,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 7,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.qWlZAyV7iemeqrmU"
+  },
+  {
+    "key": "t_45e_helm_3wspeqbgcaysqqaq",
+    "label": "T-45e Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.3wSPEqbGcAysqqaq"
+  },
+  {
+    "key": "t_45e_leg_27sls5dfztafqigf",
+    "label": "T-45e Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.27Sls5dfZTAfQIgf"
+  },
+  {
+    "key": "t_45f_arm_v6y7ypbdjxorv8ek",
+    "label": "T-45f Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.v6Y7ypBdjXorV8ek"
+  },
+  {
+    "key": "t_45f_chest_piece_j49aeipibtjvbgbo",
+    "label": "T-45f Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "5",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 8,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.j49aEIpiBTjvbGbO"
+  },
+  {
+    "key": "t_45f_helm_7b2xh72n9xpe5hv0",
+    "label": "T-45f Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.7B2xH72N9Xpe5HV0"
+  },
+  {
+    "key": "t_45f_leg_xm3noi9phqcaoiar",
+    "label": "T-45f Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 4,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Xm3NOI9pHqcAOiar"
+  },
+  {
+    "key": "t_51b_arm_ysexvlkztyvbq0f4",
+    "label": "T-51b Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.YSEXVlKztyVBQ0f4"
+  },
+  {
+    "key": "t_51b_chest_piece_dzdw4kj5wz3y01lh",
+    "label": "T-51b Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 9,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.dZdw4Kj5WZ3Y01Lh"
+  },
+  {
+    "key": "t_51b_helm_vl3dthbwetyr8kjb",
+    "label": "T-51b Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 4,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.VL3DtHbWeTyr8Kjb"
+  },
+  {
+    "key": "t_51b_leg_hyslgbijzcpnqqdh",
+    "label": "T-51b Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.HYslGbiJZcpnqQdh"
+  },
+  {
+    "key": "t_51c_arm_r1vfai9qqhzihxia",
+    "label": "T-51c Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 13,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.r1vFai9QqhzIhXiA"
+  },
+  {
+    "key": "t_51c_chest_piece_bgnnlag7qgvnrlmt",
+    "label": "T-51c Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 18,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.bGnNLaG7QGVNRLmT"
+  },
+  {
+    "key": "t_51c_helm_itccb3lrhedwuoku",
+    "label": "T-51c Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 8,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ItcCB3lRheDwUokU"
+  },
+  {
+    "key": "t_51c_leg_19b26svjv3xomcc4",
+    "label": "T-51c Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 13,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.19b26SvJv3xOMCC4"
+  },
+  {
+    "key": "t_51d_arm_wq9fy8kjazyyoshd",
+    "label": "T-51d Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 19,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.WQ9FY8kJaZyYOshD"
+  },
+  {
+    "key": "t_51d_chest_piece_ji5elkyiop0sq33b",
+    "label": "T-51d Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 27,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.JI5elkyiOp0sq33b"
+  },
+  {
+    "key": "t_51d_helm_sx2oketlq733d01z",
+    "label": "T-51d Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.sX2oKETLQ733d01Z"
+  },
+  {
+    "key": "t_51d_leg_vsd1irqky71kjirx",
+    "label": "T-51d Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 19,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.vSd1iRQkY71KJirx"
+  },
+  {
+    "key": "t_51e_arm_egyc3cs5byfgmibh",
+    "label": "T-51e Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 26,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.EGyC3Cs5bYfGmIbh"
+  },
+  {
+    "key": "t_51e_chest_piece_rsbnli8xbr14jkwj",
+    "label": "T-51e Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 36,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 6,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.RsBNLi8xBR14JKwj"
+  },
+  {
+    "key": "t_51e_helm_owac6l9mm0h8rolf",
+    "label": "T-51e Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 16,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.owac6l9MM0H8RoLF"
+  },
+  {
+    "key": "t_51e_leg_lbxtsm7qhqmo4gnh",
+    "label": "T-51e Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 26,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.LBXtsM7QHqmo4gnH"
+  },
+  {
+    "key": "t_51f_arm_i4fioiibssxvtoiz",
+    "label": "T-51f Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 32,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.i4FIoiiBSSxvToiZ"
+  },
+  {
+    "key": "t_51f_chest_piece_5b56dvzdm2x2uex4",
+    "label": "T-51f Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "5",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 45,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 7,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.5b56DVzDm2X2ueX4"
+  },
+  {
+    "key": "t_51f_helm_i9ddesf3mxaejgez",
+    "label": "T-51f Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.i9dDeSF3mXAeJgEZ"
+  },
+  {
+    "key": "t_51f_leg_bcszzle3sxsa2e1g",
+    "label": "T-51f Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 32,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.bCszZlE3SxSa2e1G"
+  },
+  {
+    "key": "t_60b_arm_snqbemtkedfkewi7",
+    "label": "T-60b Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.SnqbemTKEDFKEwi7"
+  },
+  {
+    "key": "t_60b_chest_piece_xwgy9oa25drcpk1w",
+    "label": "T-60b Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 37,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.xwgy9oa25Drcpk1w"
+  },
+  {
+    "key": "t_60b_helm_gzr9xrgzdiwvxmla",
+    "label": "T-60b Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 32,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.GZr9XRGzDiWvXMla"
+  },
+  {
+    "key": "t_60b_leg_wbodl13dtvwir7kl",
+    "label": "T-60b Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 35,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.WBODl13DtVwIr7KL"
+  },
+  {
+    "key": "t_60c_arm_dvytln7ycoy2g97c",
+    "label": "T-60c Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 70,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.dVYTLN7YCoy2g97C"
+  },
+  {
+    "key": "t_60c_chest_piece_vhve3ysjanthlots",
+    "label": "T-60c Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 74,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.vHVe3ysJaNtHLOTS"
+  },
+  {
+    "key": "t_60c_helm_eoypjprpfi9zrdy5",
+    "label": "T-60c Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 64,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.EoYPJPrpfi9ZRDy5"
+  },
+  {
+    "key": "t_60c_leg_nbejxbz0lcczvmjp",
+    "label": "T-60c Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 70,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.nbeJXBz0LccZvmJP"
+  },
+  {
+    "key": "t_60d_arm_ycgcdwoylrpmoxhp",
+    "label": "T-60d Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 105,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.YcGcdWoYlrPMOXHP"
+  },
+  {
+    "key": "t_60d_chest_piece_lxudttgg54qdcwsx",
+    "label": "T-60d Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 111,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 5,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.LXuDtTGg54qdcwsX"
+  },
+  {
+    "key": "t_60d_helm_x0faswh4ae8aewjw",
+    "label": "T-60d Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 96,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.x0fAswh4AE8aeWJW"
+  },
+  {
+    "key": "t_60d_leg_igmcuhe1leq2npcp",
+    "label": "T-60d Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 105,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.igmcUhE1lEq2NPcP"
+  },
+  {
+    "key": "t_60e_arm_8cqvjwspeg2cqmhi",
+    "label": "T-60e Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 140,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.8CQVJWspeg2CQmHI"
+  },
+  {
+    "key": "t_60e_chest_piece_jdw4c8elbglnhyhp",
+    "label": "T-60e Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 148,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 7,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.jDw4c8ElBglnHYHP"
+  },
+  {
+    "key": "t_60e_helm_fheumfwo0w6c9ngf",
+    "label": "T-60e Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "2",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 128,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.FheuMFwO0W6c9nGf"
+  },
+  {
+    "key": "t_60e_leg_zinespvszjflvkvh",
+    "label": "T-60e Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 140,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 3,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.ZiNEsPVsZJflvKVh"
+  },
+  {
+    "key": "t_60f_arm_hqdb2zzf92hmun64",
+    "label": "T-60f Arm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 175,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.hqDB2ZzF92HmuN64"
+  },
+  {
+    "key": "t_60f_chest_piece_uqyf58g4puexovgs",
+    "label": "T-60f Chest Piece",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "5",
+    "effect": "",
+    "summary": "",
+    "weight": 5,
+    "cost": 185,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 8,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.uQYF58G4PuexOVGS"
+  },
+  {
+    "key": "t_60f_helm_iiifqhqgzapihtga",
+    "label": "T-60f Helm",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "3",
+    "effect": "",
+    "summary": "",
+    "weight": 3,
+    "cost": 160,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.iiIFQHQgzaPihtGA"
+  },
+  {
+    "key": "t_60f_leg_ep0k4kn5puwne7oe",
+    "label": "T-60f Leg",
+    "modType": "Upgrade",
+    "apparelType": "Powerarmor",
+    "location": "Leg",
+    "perks": "4",
+    "effect": "",
+    "summary": "",
+    "weight": 4,
+    "cost": 175,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 4,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.eP0k4kn5PUwNE7OE"
+  },
+  {
+    "key": "targeting_hud_42qe82qkbhubp9xu",
+    "label": "Targeting HUD",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Head",
+    "perks": "Science! 3",
+    "effect": "When you take the Aim minor action, you may take a second minor action for 0 AP while armor is powered",
+    "summary": "",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.42Qe82QKBhubp9xU"
+  },
+  {
+    "key": "tempered_oawiwwrdx2zu0xga",
+    "label": "Tempered",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Oawiwwrdx2ZU0xgA"
+  },
+  {
+    "key": "tempered_torso_ulzd28tmapybocdn",
+    "label": "Tempered (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 12,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 2,
+      "energy": 2,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.uLZD28tMAPybOcdn"
+  },
+  {
+    "key": "tesla_bracers_k63y4mckxr792xlb",
+    "label": "Tesla Bracers",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Arm",
+    "perks": "Blacksmith 3, Science! 1",
+    "effect": "While armor is powered, your unarmed attacks inflict +2 CD damage and now inflict Energy damage",
+    "summary": "",
+    "weight": 1,
+    "cost": 150,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.K63y4mcKxr792XLB"
+  },
+  {
+    "key": "tesla_coils_908vi94cq4wdtsai",
+    "label": "Tesla Coils",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Science! 3",
+    "effect": "While armor is powered, whenever an enemy makes a melee attack against you, they suffer 4 CD Energy damage",
+    "summary": "",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Science skill",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.908vI94cQ4wdtSaI"
+  },
+  {
+    "key": "titanium_plating_kgts8zq6lr4bkf9m",
+    "label": "Titanium Plating",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Armorer 3",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 1,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.kGts8ZQ6Lr4bkF9M"
+  },
+  {
+    "key": "titanium_plating_torso_hjdcokyapml78um8",
+    "label": "Titanium Plating (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Armorer 3",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 2,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill.",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.hJDcOKYapml78um8"
+  },
+  {
+    "key": "treated_leather_4or9fcah6xrrkpbo",
+    "label": "Treated Leather",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 15,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.4OR9FcaH6xrrKpBo"
+  },
+  {
+    "key": "treated_leather_torso_iblyk0sjkfks5bl3",
+    "label": "Treated Leather (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 30,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 3,
+      "energy": 3,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.IbLyK0Sjkfks5BL3"
+  },
+  {
+    "key": "treated_lining_ejrm4a5fgv7fiwgn",
+    "label": "Treated Lining",
+    "modType": "Lining",
+    "apparelType": "Clothing",
+    "location": "",
+    "perks": "Armorer 2",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 1,
+      "radiation": 1
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.eJRm4a5fGv7fIWgn"
+  },
+  {
+    "key": "ultra_light_build_iigja7sxwi1um5tb",
+    "label": "Ultra Light Build",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "Armorer 3",
+    "effect": "",
+    "summary": "",
+    "weight": -3,
+    "cost": 7,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.iigJa7Sxwi1um5tb"
+  },
+  {
+    "key": "ultra_light_build_torso_ywvt9clbkolwdbm1",
+    "label": "Ultra Light Build (Torso)",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "Armorer 3",
+    "effect": "",
+    "summary": "",
+    "weight": -6,
+    "cost": 14,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.yWvt9clbKolwdbm1"
+  },
+  {
+    "key": "weighted_vr2ifyqoygyvs3sn",
+    "label": "Weighted",
+    "modType": "Upgrade",
+    "apparelType": "Armor",
+    "location": "Arms",
+    "perks": "Armorer 4",
+    "effect": "Melee and Unarmed attacks gain Piercing 1",
+    "summary": "",
+    "weight": 1,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Armor Upgrades apply to all the types of armor except for Vault-Tec Security armor. All Armor Upgrades are installed with the Repair skill .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.Vr2IfyQOyGYvS3sn"
+  },
+  {
+    "key": "welded_0wivx8zuon56ldsb",
+    "label": "Welded",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 3,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.0wIVX8zUon56LDsB"
+  },
+  {
+    "key": "welded_torso_nq7npjvujcn7lgpz",
+    "label": "Welded (Torso)",
+    "modType": "Material",
+    "apparelType": "Armor",
+    "location": "Torso",
+    "perks": "",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 6,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 1,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.nq7nPjVuJCN7lGpz"
+  },
+  {
+    "key": "welded_rebar_r7msarmafbvpiuns",
+    "label": "Welded Rebar",
+    "modType": "System",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "Enemies who attack you with a melee or unarmed attack and suffer a complication suffer 2 CD damage",
+    "summary": "",
+    "weight": 2,
+    "cost": 25,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 0,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.R7MSARmaFbVPiunS"
+  },
+  {
+    "key": "winterized_coating_mgzavwt1tzt1qdor",
+    "label": "Winterized Coating",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Helm, Arms, Legs",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill. Cannot be installed on X-01 Power Armor .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.mgzavWT1TZT1qdoR"
+  },
+  {
+    "key": "winterized_coating_torso_faqvoa7izx90txnh",
+    "label": "Winterized Coating (Torso)",
+    "modType": "Plating",
+    "apparelType": "Powerarmor",
+    "location": "Torso",
+    "perks": "Armorer 1",
+    "effect": "",
+    "summary": "",
+    "weight": 2,
+    "cost": 20,
+    "rarity": 0,
+    "source": "Core",
+    "healthDelta": 0,
+    "resistanceDelta": {
+      "physical": 0,
+      "energy": 1,
+      "radiation": 0
+    },
+    "shadowed": false,
+    "note": "Installed with the Repair skill. Cannot be installed on X-01 Power Armor .",
+    "foundryUuid": "Compendium.fallout.apparel_mods.Item.faqvoA7iZx90tXnH"
+  }
+];
+
+export const SOURCE_WEAPON_MOD_COMPATIBILITY = {
+  "Walking Cane": {
+    "Melee": [
+      "Barbed",
+      "Spiked"
+    ]
+  },
+  "Submachine Gun": {
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Compensator",
+      "Muzzle Break",
+      "Suppressor"
+    ],
+    "Receiver": [
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Reflex Sight"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Syringer": {
+    "Barrel": [
+      "Long"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Minigun": {
+    "Barrel": [
+      "Accelerated Barrel",
+      "Tri-Barrel"
+    ],
+    "Muzzle": [
+      "Shredder"
+    ],
+    "Sight": [
+      "Gunner Sight"
+    ]
+  },
+  "Rolling Pin": {
+    "Melee": [
+      "Sharp",
+      "Spiked"
+    ]
+  },
+  "Combat Knife": {
+    "Melee": [
+      "Serrated Blade",
+      "Stealth Blade"
+    ]
+  },
+  "Pool Cue": {
+    "Melee": [
+      "Barbed",
+      "Sharp"
+    ]
+  },
+  "Shishkebab": {
+    "Melee": [
+      "Extra Flame Jets"
+    ]
+  },
+  "Super Sledge": {
+    "Melee": [
+      "Heating Coil",
+      "Stun Pack"
+    ]
+  },
+  "Board": {
+    "Melee": [
+      "Bladed",
+      "Puncturing",
+      "Spiked"
+    ]
+  },
+  "Combat Shotgun": {
+    "Barrel": [
+      "Long",
+      "Ported"
+    ],
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Compensator",
+      "Muzzle Break",
+      "Suppressor"
+    ],
+    "Receiver": [
+      "Advanced",
+      "Automatic",
+      "Calibrated",
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Junk Jet": {
+    "Barrel": [
+      "Long Barrel"
+    ],
+    "Muzzle": [
+      "Electrification Module",
+      "Ignition Module"
+    ],
+    "Sight": [
+      "Gunner Sight"
+    ],
+    "Stock": [
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Boxing Glove": {
+    "Melee": [
+      "Lead Lining",
+      "Puncturing",
+      "Spiked"
+    ]
+  },
+  "Gamma Gun": {
+    "Dish": [
+      "Deep Dish"
+    ],
+    "Muzzle": [
+      "Electric Signal Carrier Antennae",
+      "Signal Repeater"
+    ]
+  },
+  "Gauss Rifle": {
+    "Barrel": [
+      "Shielded Barrel"
+    ],
+    "Capacitor": [
+      "Capacitor Boosting Coil",
+      "Full Capacitors"
+    ],
+    "Muzzle": [
+      "Suppressor"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Ripper": {
+    "Melee": [
+      "Curved Blade",
+      "Extended Blade"
+    ]
+  },
+  "Plasma Gun": {
+    "Barrel": [
+      "Automatic Barrel",
+      "Flamer Barrel",
+      "Improved Barrel",
+      "Sniper Barrel",
+      "Splitter"
+    ],
+    "Capacitor": [
+      "Beta Wave Tuner",
+      "Boosted Capacitor",
+      "Photon Agitator",
+      "Photon Exciter"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Marksman's Stock",
+      "Recoil Compensating Stock",
+      "Standard Stock"
+    ]
+  },
+  "Sword": {
+    "Melee": [
+      "Electrified Blade",
+      "Electrified Serrated Blade",
+      "Serrated Blade",
+      "Stun Pack"
+    ]
+  },
+  "Laser Gun": {
+    "Barrel": [
+      "Automatic Barrel",
+      "Improved Barrel",
+      "Long Barrel",
+      "Sniper Barrel"
+    ],
+    "Capacitor": [
+      "Beta Wave Tuner",
+      "Boosted Capacitor",
+      "Photon Agitator",
+      "Photon Exciter"
+    ],
+    "Grip": [
+      "Sharpshooter's Grip"
+    ],
+    "Muzzle": [
+      "Beam Focuser",
+      "Beam Splitter",
+      "Gyro Compensating Lens"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Marksman's Stock",
+      "Recoil Compensating Stock",
+      "Standard Stock"
+    ]
+  },
+  "Tire Iron": {
+    "Melee": [
+      "Bladed"
+    ]
+  },
+  "Pipe Gun": {
+    "Barrel": [
+      "Finned",
+      "Long",
+      "Ported"
+    ],
+    "Grip": [
+      "Sharpshooter's Grip"
+    ],
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Compensator",
+      "Muzzle Break",
+      "Suppressor"
+    ],
+    "Receiver": [
+      ".45 Receiver",
+      "Automatic",
+      "Calibrated",
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Deathclaw Gauntlet": {
+    "Melee": [
+      "Extra Claw"
+    ]
+  },
+  "Lead Pipe": {
+    "Melee": [
+      "Heavy",
+      "Spiked"
+    ]
+  },
+  "Assault Rifle": {
+    "Barrel": [
+      "Long",
+      "Ported",
+      "Vented"
+    ],
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Compensator",
+      "Suppressor"
+    ],
+    "Receiver": [
+      "Advanced",
+      "Automatic",
+      "Calibrated",
+      "Hair Trigger",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Power Fist": {
+    "Melee": [
+      "Heating Coil",
+      "Puncturing"
+    ]
+  },
+  "Hunting Rifle": {
+    "Barrel": [
+      "Long",
+      "Ported",
+      "Vented"
+    ],
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Suppressor"
+    ],
+    "Receiver": [
+      ".38 Receiver",
+      ".50 Receiver",
+      "Calibrated",
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock"
+    ]
+  },
+  "Baseball Bat": {
+    "Melee": [
+      "Barbed",
+      "Bladed",
+      "Chain-Wrapped",
+      "Sharp",
+      "Spiked"
+    ]
+  },
+  "Pipe Wrench": {
+    "Melee": [
+      "Extra Heavy",
+      "Heavy",
+      "Hooked",
+      "Puncturing"
+    ]
+  },
+  "Institute Laser": {
+    "Barrel": [
+      "Automatic Barrel",
+      "Improved Barrel",
+      "Long Barrel"
+    ],
+    "Capacitor": [
+      "Beta Wave Tuner",
+      "Boosted Capacitor",
+      "Photon Agitator",
+      "Photon Exciter"
+    ],
+    "Muzzle": [
+      "Beam Focuser",
+      "Beam Splitter",
+      "Gyro Compensating Lens"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Standard Stock"
+    ]
+  },
+  "Railway Rifle": {
+    "Barrel": [
+      "Long"
+    ],
+    "Muzzle": [
+      "Bayonet"
+    ],
+    "Receiver": [
+      "Automatic Piston"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Switchblade": {
+    "Melee": [
+      "Serrated Blade"
+    ]
+  },
+  "Baton": {
+    "Melee": [
+      "Electrified",
+      "Stun Pack"
+    ]
+  },
+  "Pipe Revolver": {
+    "Barrel": [
+      "Finned",
+      "Long",
+      "Ported"
+    ],
+    "Grip": [
+      "Sharpshooter's Grip"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Compensator",
+      "Muzzle Break",
+      "Suppressor"
+    ],
+    "Receiver": [
+      ".308 Receiver",
+      ".38 Receiver",
+      "Calibrated",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "10mm Pistol": {
+    "Barrel": [
+      "Long",
+      "Ported"
+    ],
+    "Grip": [
+      "Comfort Grip",
+      "Sharpshooter's Grip"
+    ],
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Compensator",
+      "Suppressor"
+    ],
+    "Receiver": [
+      "Advanced",
+      "Automatic",
+      "Calibrated",
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Recon Scope",
+      "Reflex Sight"
+    ]
+  },
+  "Aluminum Baseball Bat": {
+    "Melee": [
+      "Barbed",
+      "Bladed",
+      "Chain-Wrapped",
+      "Sharp",
+      "Spiked"
+    ]
+  },
+  "Laser Musket": {
+    "Barrel": [
+      "Bracketed Long Barrel",
+      "Bracketed Short Barrel",
+      "Long Barrel"
+    ],
+    "Capacitor": [
+      "Five-Crank Capacitor",
+      "Four-Crank Capacitor",
+      "Six-Crank Capacitor",
+      "Three-Crank Capacitor"
+    ],
+    "Muzzle": [
+      "Beam Focuser",
+      "Beam Splitter",
+      "Gyro Compensating Lens"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock"
+    ]
+  },
+  "Pipe Bolt-Action": {
+    "Barrel": [
+      "Finned",
+      "Long",
+      "Ported"
+    ],
+    "Grip": [
+      "Sharpshooter's Grip"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Compensator",
+      "Muzzle Break",
+      "Suppressor"
+    ],
+    "Receiver": [
+      ".38 Receiver",
+      ".50 Receiver",
+      "Calibrated",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Flamer": {
+    "Barrel": [
+      "Long Barrel"
+    ],
+    "Fuel": [
+      "Napalm"
+    ],
+    "Nozzle": [
+      "Compression Nozzle",
+      "Vaporization Nozzle"
+    ],
+    "Propellanttank": [
+      "Huge Tank",
+      "Large Tank"
+    ]
+  },
+  "Combat Rifle": {
+    "Barrel": [
+      "Long",
+      "Ported",
+      "Vented"
+    ],
+    "Magazine": [
+      "Large Magazine",
+      "Large Quick-Eject Mag",
+      "Quick-Eject Mag"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Compensator",
+      "Suppressor"
+    ],
+    "Receiver": [
+      ".308 Receiver",
+      ".38 Receiver",
+      "Advanced",
+      "Automatic",
+      "Calibrated",
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Long Night Vision Scope",
+      "Long Scope",
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Night Vision Scope",
+      "Short Scope"
+    ],
+    "Stock": [
+      "Full Stock",
+      "Marksman's Stock",
+      "Recoil Compensating Stock"
+    ]
+  },
+  "Missile Launcher": {
+    "Barrel": [
+      "Quad Barrel",
+      "Triple Barrel"
+    ],
+    "Muzzle": [
+      "Bayonet",
+      "Stabilizer"
+    ],
+    "Sight": [
+      "Night Vision Scope",
+      "Scope",
+      "Targeting Computer"
+    ]
+  },
+  "Double-Barrel Shotgun": {
+    "Barrel": [
+      "Long",
+      "Sawed-Off"
+    ],
+    "Muzzle": [
+      "Muzzle Break"
+    ],
+    "Receiver": [
+      "Advanced",
+      "Hair Trigger",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Reflex Sight"
+    ],
+    "Stock": [
+      "Full Stock"
+    ]
+  },
+  "Machete": {
+    "Melee": [
+      "Serrated Blade"
+    ]
+  },
+  "Gatling Laser": {
+    "Barrel": [
+      "Charging Barrels"
+    ],
+    "Capacitor": [
+      "Beta Wave Tuner",
+      "Boosted Capacitor",
+      "Photon Agitator",
+      "Photon Exciter"
+    ],
+    "Nozzle": [
+      "Beam Focuser"
+    ],
+    "Sight": [
+      "Reflex Sight"
+    ]
+  },
+  ".44 Pistol": {
+    "Barrel": [
+      "Bull Barrel",
+      "Snubnose"
+    ],
+    "Grip": [
+      "Comfort Grip"
+    ],
+    "Receiver": [
+      "Advanced",
+      "Hardened",
+      "Powerful"
+    ],
+    "Sight": [
+      "Recon Scope",
+      "Reflex Sight",
+      "Short Scope"
+    ]
+  },
+  "Knuckles": {
+    "Melee": [
+      "Bladed",
+      "Puncturing",
+      "Sharp",
+      "Spiked"
+    ]
+  },
+  "Sledgehammer": {
+    "Melee": [
+      "Heavy",
+      "Puncturing"
+    ]
+  }
+};
+
+export const SOURCE_APPAREL_MOD_COMPATIBILITY = {
+  "Heavy Leather Right Leg": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Metal Right Arm": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Sturdy Leather Chest Piece": {
+    "Material": [
+      "Boiled Leather (Torso)",
+      "Girded Leather (Torso)",
+      "Shadowed Leather (Torso)",
+      "Studded Leather (Torso)",
+      "Treated Leather (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Heavy Raider Right Arm": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Brotherhood Scribe's Hat": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "T-45 Left Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "T-45b Leg",
+      "T-45c Leg",
+      "T-45d Leg",
+      "T-45e Leg",
+      "T-45f Leg"
+    ]
+  },
+  "Utility Coveralls": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "T-45 Chest Piece": {
+    "Plating": [
+      "Explosive Shielding (Torso)",
+      "Lead Plating (Torso)",
+      "Photovoltaic Plating (Torso)",
+      "Prism Shielding (Torso)",
+      "Titanium Plating (Torso)",
+      "Winterized Coating (Torso)"
+    ],
+    "System": [
+      "Blood Cleanser",
+      "Core Assembly",
+      "Emergency Protocols",
+      "Jetpack",
+      "Kinetic Dynamo",
+      "Medic Pump",
+      "Motion-Assist Servos",
+      "Reactive Plates",
+      "Stealth Boy",
+      "Tesla Coils"
+    ],
+    "Upgrade": [
+      "T-45b Chest Piece",
+      "T-45c Chest Piece",
+      "T-45d Chest Piece",
+      "T-45e Chest Piece",
+      "T-45f Chest Piece"
+    ]
+  },
+  "Heavy Leather Left Arm": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Sturdy Metal Right Arm": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "X-01 Chest Piece": {
+    "Plating": [
+      "EMP Shielding",
+      "Explosive Shielding (Torso)",
+      "Lead Plating (Torso)",
+      "Photovoltaic Plating (Torso)",
+      "Prism Shielding (Torso)",
+      "Titanium Plating (Torso)"
+    ],
+    "System": [
+      "Blood Cleanser",
+      "Core Assembly",
+      "Emergency Protocols",
+      "Jetpack",
+      "Kinetic Dynamo",
+      "Medic Pump",
+      "Motion-Assist Servos",
+      "Reactive Plates",
+      "Stealth Boy",
+      "Tesla Coils"
+    ],
+    "Upgrade": [
+      "Mk II Chest Piece",
+      "Mk III Chest Piece",
+      "Mk IV ChestPiece",
+      "Mk V Chest Piece",
+      "Mk VI ChestPiece"
+    ]
+  },
+  "Synth Armor": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Metal Left Arm": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Raider Armor": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "X-01 Right Arm": {
+    "Plating": [
+      "EMP Shielding",
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "Mk II Arm",
+      "Mk III Arm",
+      "Mk IV Arm",
+      "Mk V Arm",
+      "Mk VI Arm"
+    ]
+  },
+  "Heavy Metal Armor": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Combat Chest Piece": {
+    "Material": [
+      "Fiberglass (Torso)",
+      "Polymer (Torso)",
+      "Reinforced (Torso)",
+      "Shadowed (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Sturdy Leather Armor": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Synth Helmet": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Combat Chest Piece": {
+    "Material": [
+      "Fiberglass (Torso)",
+      "Polymer (Torso)",
+      "Reinforced (Torso)",
+      "Shadowed (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Heavy Combat Left Arm": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Hard Hat": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "T-51 Chest Piece": {
+    "Plating": [
+      "Explosive Shielding (Torso)",
+      "Lead Plating (Torso)",
+      "Photovoltaic Plating (Torso)",
+      "Prism Shielding (Torso)",
+      "Titanium Plating (Torso)",
+      "Winterized Coating (Torso)"
+    ],
+    "System": [
+      "Blood Cleanser",
+      "Core Assembly",
+      "Emergency Protocols",
+      "Jetpack",
+      "Kinetic Dynamo",
+      "Medic Pump",
+      "Motion-Assist Servos",
+      "Reactive Plates",
+      "Stealth Boy",
+      "Tesla Coils"
+    ],
+    "Upgrade": [
+      "T-51b Chest Piece",
+      "T-51c Chest Piece",
+      "T-51d Chest Piece",
+      "T-51e Chest Piece",
+      "T-51f Chest Piece"
+    ]
+  },
+  "Raider Right Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "Raider II Leg"
+    ]
+  },
+  "Raider Left Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "Raider II Arm"
+    ]
+  },
+  "Combat Left Arm": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Brotherhood of Steel Uniform": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Metal Chest Piece": {
+    "Material": [
+      "Alloyed Metal (Torso)",
+      "Enameled Metal (Torso)",
+      "Painted Metal (Torso)",
+      "Polished Metal (Torso)",
+      "Shadowed Metal (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Hood or Cowl": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Tough Clothing": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Sturdy Metal Helmet": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Metal Left Arm": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Heavy Synth Right Arm": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Raider Chest Piece": {
+    "Plating": [
+      "Explosive Shielding (Torso)",
+      "Lead Plating (Torso)",
+      "Photovoltaic Plating (Torso)",
+      "Prism Shielding (Torso)",
+      "Titanium Plating (Torso)",
+      "Winterized Coating (Torso)"
+    ],
+    "System": [
+      "Blood Cleanser",
+      "Core Assembly",
+      "Emergency Protocols",
+      "Jetpack",
+      "Kinetic Dynamo",
+      "Medic Pump",
+      "Motion-Assist Servos",
+      "Reactive Plates",
+      "Stealth Boy",
+      "Tesla Coils",
+      "Welded Rebar"
+    ],
+    "Upgrade": [
+      "Raider II Chest Piece"
+    ]
+  },
+  "Sturdy Combat Left Arm": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Heavy Combat Right Leg": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Leather Left Leg": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Metal Left Leg": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Leather Left Arm": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "T-45 Helm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Internal Database",
+      "Rad Scrubber",
+      "Sensor Array",
+      "Targeting HUD"
+    ],
+    "Upgrade": [
+      "T-45b Helm",
+      "T-45c Helm",
+      "T-45d Helm",
+      "T-45e Helm",
+      "T-45f Helm"
+    ]
+  },
+  "Raider Left Leg": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Combat Chest Piece": {
+    "Material": [
+      "Fiberglass (Torso)",
+      "Polymer (Torso)",
+      "Reinforced (Torso)",
+      "Shadowed (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Sturdy Synth Armor": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "T-45 Right Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "T-45b Arm",
+      "T-45c Arm",
+      "T-45d Arm",
+      "T-45e Arm",
+      "T-45f Arm"
+    ]
+  },
+  "Sturdy Combat Left Leg": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Raider Right Arm": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Hides": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Army Helmet": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Metal Right Leg": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Hazmat Suit": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Synth Right Arm": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Heavy Metal Left Leg": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "X-01 Helm": {
+    "Plating": [
+      "EMP Shielding",
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating"
+    ],
+    "System": [
+      "Internal Database",
+      "Rad Scrubber",
+      "Sensor Array",
+      "Targeting HUD"
+    ],
+    "Upgrade": [
+      "Mk II Helm",
+      "Mk III Helm",
+      "Mk IV Helm",
+      "Mk V Helm",
+      "Mk VI Helm"
+    ]
+  },
+  "Combat Right Arm": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Synth Chest Piece": {
+    "Material": [
+      "Laminated (Torso)",
+      "Microcarbon (Torso)",
+      "Nanofilament (Torso)",
+      "Resin (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Drifter Outfit": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Combat Armor": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Metal Helmet": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Leather Armor": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Combat Right Leg": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Formal Clothing": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Synth Helmet": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Leather Armor": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Leather Right Arm": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Sturdy Raider Chest Piece": {
+    "Material": [
+      "Buttressed (Torso)",
+      "Hardened (Torso)",
+      "Tempered (Torso)",
+      "Welded (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Sack Hood": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Raider Right Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "Raider II Arm"
+    ]
+  },
+  "Heavy Synth Left Arm": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Leather Left Arm": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Leather Right Leg": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Metal Armor": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Raider Left Arm": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Sturdy Synth Left Arm": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "T-51 Left Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "T-51b Leg",
+      "T-51c Leg",
+      "T-51d Leg",
+      "T-51e Leg",
+      "T-51f Leg"
+    ]
+  },
+  "T-60 Right Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "T-60b Arm",
+      "T-60c Arm",
+      "T-60d Arm",
+      "T-60e Arm",
+      "T-60f Arm"
+    ]
+  },
+  "Formal Hat": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Sturdy Metal Chest Piece": {
+    "Material": [
+      "Alloyed Metal (Torso)",
+      "Enameled Metal (Torso)",
+      "Painted Metal (Torso)",
+      "Polished Metal (Torso)",
+      "Shadowed Metal (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "T-51 Left Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "T-51b Arm",
+      "T-51c Arm",
+      "T-51d Arm",
+      "T-51e Arm",
+      "T-51f Arm"
+    ]
+  },
+  "Raider Helm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Internal Database",
+      "Rad Scrubber",
+      "Sensor Array",
+      "Targeting HUD"
+    ],
+    "Upgrade": [
+      "Raider II Helm"
+    ]
+  },
+  "X-01 Left Arm": {
+    "Plating": [
+      "EMP Shielding",
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "Mk II Arm",
+      "Mk III Arm",
+      "Mk IV Arm",
+      "Mk V Arm",
+      "Mk VI Arm"
+    ]
+  },
+  "Synth Left Leg": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Engineer's Armor": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Gas Mask": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "T-51 Right Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "T-51b Leg",
+      "T-51c Leg",
+      "T-51d Leg",
+      "T-51e Leg",
+      "T-51f Leg"
+    ]
+  },
+  "Heavy Raider Right Leg": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Metal Chest Piece": {
+    "Material": [
+      "Alloyed Metal (Torso)",
+      "Enameled Metal (Torso)",
+      "Painted Metal (Torso)",
+      "Polished Metal (Torso)",
+      "Shadowed Metal (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Harness": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "T-51 Helm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Internal Database",
+      "Rad Scrubber",
+      "Sensor Array",
+      "Targeting HUD"
+    ],
+    "Upgrade": [
+      "T-51b Helm",
+      "T-51c Helm",
+      "T-51d Helm",
+      "T-51e Helm",
+      "T-51f Helm"
+    ]
+  },
+  "Heavy Raider Left Arm": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Heavy Raider Chest Piece": {
+    "Material": [
+      "Buttressed (Torso)",
+      "Hardened (Torso)",
+      "Tempered (Torso)",
+      "Welded (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Vault Jumpsuit": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V",
+      "Insulated Lining",
+      "Protective Lining",
+      "Resistant Lining",
+      "Shielded Lining",
+      "Treated Lining"
+    ]
+  },
+  "Heavy Synth Left Leg": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Synth Armor": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Combat Helmet": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Lab Coat": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Combat Right Leg": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "T-60 Chest Piece": {
+    "Plating": [
+      "Explosive Shielding (Torso)",
+      "Lead Plating (Torso)",
+      "Photovoltaic Plating (Torso)",
+      "Prism Shielding (Torso)",
+      "Titanium Plating (Torso)",
+      "Winterized Coating (Torso)"
+    ],
+    "System": [
+      "Blood Cleanser",
+      "Core Assembly",
+      "Emergency Protocols",
+      "Jetpack",
+      "Kinetic Dynamo",
+      "Medic Pump",
+      "Motion-Assist Servos",
+      "Reactive Plates",
+      "Stealth Boy",
+      "Tesla Coils"
+    ],
+    "Upgrade": [
+      "T-60b Chest Piece",
+      "T-60c Chest Piece",
+      "T-60d Chest Piece",
+      "T-60e Chest Piece",
+      "T-60f Chest Piece"
+    ]
+  },
+  "Sturdy Raider Right Leg": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Leather Right Arm": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Combat Helmet": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Combat Left Leg": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Combat Right Arm": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "T-51 Right Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "T-51b Arm",
+      "T-51c Arm",
+      "T-51d Arm",
+      "T-51e Arm",
+      "T-51f Arm"
+    ]
+  },
+  "Sturdy Leather Right Leg": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "T-60 Helm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Internal Database",
+      "Rad Scrubber",
+      "Sensor Array",
+      "Targeting HUD"
+    ],
+    "Upgrade": [
+      "T-60b Helm",
+      "T-60c Helm",
+      "T-60d Helm",
+      "T-60e Helm",
+      "T-60f Helm"
+    ]
+  },
+  "Metal Armor": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Metal Right Arm": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Casual Hat": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Leather Chest Piece": {
+    "Material": [
+      "Boiled Leather (Torso)",
+      "Girded Leather (Torso)",
+      "Shadowed Leather (Torso)",
+      "Studded Leather (Torso)",
+      "Treated Leather (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Military Fatigues": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Synth Chest Piece": {
+    "Material": [
+      "Laminated (Torso)",
+      "Microcarbon (Torso)",
+      "Nanofilament (Torso)",
+      "Resin (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Sturdy Combat Armor": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "T-60 Left Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "T-60b Leg",
+      "T-60c Leg",
+      "T-60d Leg",
+      "T-60e Leg",
+      "T-60f Leg"
+    ]
+  },
+  "Brotherhood of Steel Fatigues": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "X-01 Left Leg": {
+    "Plating": [
+      "EMP Shielding",
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "Mk II Leg",
+      "Mk III Leg",
+      "Mk IV Leg",
+      "Mk V Leg",
+      "Mk VI Leg"
+    ]
+  },
+  "X-01 Right Leg": {
+    "Plating": [
+      "EMP Shielding",
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "Mk II Leg",
+      "Mk III Leg",
+      "Mk IV Leg",
+      "Mk V Leg",
+      "Mk VI Leg"
+    ]
+  },
+  "Sturdy Combat Helmet": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Spike Armor": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Brotherhood Scribe's Armor": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV"
+    ]
+  },
+  "Casual Clothing": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Metal Helmet": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Synth Right Leg": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Leather Left Leg": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Metal Left Arm": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Sturdy Leather Right Arm": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Heavy Synth Right Leg": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Synth Right Leg": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Raider Armor": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "T-45 Left Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "T-45b Arm",
+      "T-45c Arm",
+      "T-45d Arm",
+      "T-45e Arm",
+      "T-45f Arm"
+    ]
+  },
+  "Sturdy Metal Right Leg": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "T-45 Right Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "T-45b Leg",
+      "T-45c Leg",
+      "T-45d Leg",
+      "T-45e Leg",
+      "T-45f Leg"
+    ]
+  },
+  "Road Leathers": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Raider Left Leg": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Synth Helmet": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Synth Right Arm": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Sturdy Raider Left Leg": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Metal Right Leg": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Coat": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Sturdy Raider Armor": {
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Sturdy Synth Left Leg": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Leather Left Leg": {
+    "Material": [
+      "Boiled Leather",
+      "Girded Leather",
+      "Shadowed Leather",
+      "Studded Leather",
+      "Treated Leather"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Combat Armor": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Heavy Leather Chest Piece": {
+    "Material": [
+      "Boiled Leather (Torso)",
+      "Girded Leather (Torso)",
+      "Shadowed Leather (Torso)",
+      "Studded Leather (Torso)",
+      "Treated Leather (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "Cage Armor": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Brotherhood of Steel Hood": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Metal Left Leg": {
+    "Material": [
+      "Alloyed Metal",
+      "Enameled Metal",
+      "Painted Metal",
+      "Polished Metal",
+      "Shadowed Metal"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  },
+  "Welder's Visor": {
+    "Lining": [
+      "Ballistic Weave",
+      "Ballistic Weave Mk II",
+      "Ballistic Weave Mk III",
+      "Ballistic Weave Mk IV",
+      "Ballistic Weave Mk V"
+    ]
+  },
+  "Heavy Combat Right Arm": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "Synth Left Arm": {
+    "Material": [
+      "Laminated",
+      "Microcarbon",
+      "Nanofilament",
+      "Resin"
+    ],
+    "Upgrade": [
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
+    ]
+  },
+  "T-60 Left Arm": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Hydraulic Bracers",
+      "Optimized Bracers",
+      "Rusty Knuckles",
+      "Tesla Bracers"
+    ],
+    "Upgrade": [
+      "T-60b Arm",
+      "T-60c Arm",
+      "T-60d Arm",
+      "T-60e Arm",
+      "T-60f Arm"
+    ]
+  },
+  "Sturdy Synth Chest Piece": {
+    "Material": [
+      "Laminated (Torso)",
+      "Microcarbon (Torso)",
+      "Nanofilament (Torso)",
+      "Resin (Torso)"
+    ],
+    "Upgrade": [
+      "Asbestos Lining",
+      "BioCommMesh",
+      "Deep Pocketed (Torso)",
+      "Dense",
+      "Lead Lined (Torso)",
+      "Lighter Build (Torso)",
+      "Padded",
+      "Pneumatic",
+      "Pocketed (Torso)",
+      "Ultra Light Build (Torso)"
+    ]
+  },
+  "T-60 Right Leg": {
+    "Plating": [
+      "Explosive Shielding",
+      "Lead Plating",
+      "Photovoltaic Plating",
+      "Prism Shielding",
+      "Titanium Plating",
+      "Winterized Coating"
+    ],
+    "System": [
+      "Calibrated Shocks",
+      "Explosive Vent",
+      "Overdrive Servos"
+    ],
+    "Upgrade": [
+      "T-60b Leg",
+      "T-60c Leg",
+      "T-60d Leg",
+      "T-60e Leg",
+      "T-60f Leg"
+    ]
+  },
+  "Heavy Combat Left Leg": {
+    "Material": [
+      "Fiberglass",
+      "Polymer",
+      "Reinforced",
+      "Shadowed"
+    ],
+    "Upgrade": [
+      "Cushioned",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Muffled",
+      "Pocketed",
+      "Ultra Light Build"
+    ]
+  }
+};
+

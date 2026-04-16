@@ -152,6 +152,51 @@ const WEAPON_TYPE_MAP = {
   bow: 'Bow',
 };
 
+const MOD_EFFECT_MAP = {
+  arc: 'Arc',
+  breaking: 'Breaking',
+  burst: 'Burst',
+  freeze: 'Freeze',
+  persistent: 'Persistent',
+  piercing_x: 'Piercing',
+  radioactive: 'Radioactive',
+  spread: 'Spread',
+  stun: 'Stun',
+  tranquilize_x: 'Tranquilize',
+  vicious: 'Vicious',
+};
+
+const MOD_QUALITY_MAP = {
+  accurate: 'Accurate',
+  aquatic: 'Aquatic',
+  ammo_hungry_x: 'Ammo-Hungry',
+  blast: 'Blast',
+  bombard: 'Bombard',
+  close_quarters: 'Close Quarters',
+  concealed: 'Concealed',
+  debilitating: 'Debilitating',
+  delay_x: 'Delay',
+  fuel_x: 'Fuel',
+  gatling: 'Gatling',
+  inaccurate: 'Inaccurate',
+  limited: 'Limited',
+  mine: 'Mine',
+  night_vision: 'Night Vision',
+  parry: 'Parry',
+  placed: 'Placed',
+  recoil_x: 'Recoil',
+  recon: 'Recon',
+  reliable: 'Reliable',
+  slow_load: 'Slow Load',
+  suppressed: 'Suppressed',
+  surge: 'Surge',
+  thrown: 'Thrown',
+  two_handed: 'Two-Handed',
+  unreliable: 'Unreliable',
+  unstable_radiation: 'Unstable Radiation',
+  wrangle: 'Wrangle',
+};
+
 function buildDamageTypeString(dt) {
   if (!dt || typeof dt !== 'object') return 'Physical';
   const list = [];
@@ -395,12 +440,121 @@ function mapRobotMod(item) {
   };
 }
 
+function parseFlagChanges(flags, mapping) {
+  const add = [];
+  const remove = [];
+  if (!flags || typeof flags !== 'object') return { add, remove };
+  for (const [key, label] of Object.entries(mapping)) {
+    const entry = flags[key];
+    if (!entry) continue;
+    const value = Number(entry.value || 0);
+    if (!value) continue;
+    const suffix = key.endsWith('_x') ? ` ${Math.max(1, Number(entry.rank) || 1)}` : '';
+    const formatted = `${label}${suffix}`;
+    if (value > 0) add.push(formatted);
+    else if (value < 0) remove.push(formatted);
+  }
+  return { add, remove };
+}
+
+function mapWeaponMod(item) {
+  const system = item.system || {};
+  const modEffects = system.modEffects || {};
+  const damage = modEffects.damage || {};
+  const damageType = damage.damageType || {};
+  const { add: addEffects, remove: removeEffects } = parseFlagChanges(damage.damageEffect, MOD_EFFECT_MAP);
+  const { add: addQualities, remove: removeQualities } = parseFlagChanges(damage.weaponQuality, MOD_QUALITY_MAP);
+  return {
+    key: slugify(`${item.name}_${item._id}`),
+    label: item.name,
+    modType: toTitleCase(system.modType || 'Mod'),
+    weaponType: WEAPON_TYPE_MAP[system.weaponType] || toTitleCase(system.weaponType || 'Weapon'),
+    perks: stripHtml(system.perks || ''),
+    effect: stripHtml(modEffects.effect || system.effect || ''),
+    summary: stripHtml(modEffects.summary || system.summary || ''),
+    weight: Number(system.weight || 0),
+    cost: Number(system.cost || 0),
+    rarity: Number(system.rarity || 0),
+    source: sourceLabel(system.source),
+    damageDelta: Number(damage.rating || 0),
+    fireRateDelta: Number(modEffects.fireRate || 0),
+    rangeDelta: Number(modEffects.range || 0),
+    addEffects,
+    removeEffects,
+    addQualities,
+    removeQualities,
+    damageTypeFlags: {
+      physical: Boolean(damageType.physical),
+      energy: Boolean(damageType.energy),
+      radiation: Boolean(damageType.radiation),
+      poison: Boolean(damageType.poison),
+    },
+    note: stripHtml(system.description || ''),
+    foundryUuid: compendiumUuid('weapon_mods', item._id),
+  };
+}
+
+function mapApparelMod(item) {
+  const system = item.system || {};
+  return {
+    key: slugify(`${item.name}_${item._id}`),
+    label: item.name,
+    modType: toTitleCase(system.modType || 'Mod'),
+    apparelType: toTitleCase(system.apparelType || 'Armor'),
+    location: stripHtml(system.location || ''),
+    perks: stripHtml(system.perks || ''),
+    effect: stripHtml(system.effect || ''),
+    summary: stripHtml(system.summary || ''),
+    weight: Number(system.weight || 0),
+    cost: Number(system.cost || 0),
+    rarity: Number(system.rarity || 0),
+    source: sourceLabel(system.source),
+    healthDelta: Number(system.health?.value || 0),
+    resistanceDelta: {
+      physical: Number(system.resistance?.physical || 0),
+      energy: Number(system.resistance?.energy || 0),
+      radiation: Number(system.resistance?.radiation || 0),
+    },
+    shadowed: Boolean(system.shadowed),
+    note: stripHtml(system.description || ''),
+    foundryUuid: compendiumUuid('apparel_mods', item._id),
+  };
+}
+
+function extractCompatibilityMap(rows) {
+  const out = {};
+  for (const row of rows) {
+    const mods = row?.system?.mods;
+    if (!mods || typeof mods !== 'object') continue;
+    const slots = {};
+    for (const [key, value] of Object.entries(mods)) {
+      if (['current', 'installedMods', 'list', 'max', 'modded'].includes(key)) continue;
+      if (!value || typeof value !== 'object') continue;
+      const modName = String(value.name || '').trim();
+      const modTypeRaw = String(value.system?.modType || '').trim();
+      const modType = toTitleCase(modTypeRaw || 'Mod');
+      if (!modName) continue;
+      if (!slots[modType]) slots[modType] = [];
+      if (!slots[modType].includes(modName)) slots[modType].push(modName);
+    }
+    const sortedSlots = Object.fromEntries(
+      Object.entries(slots)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([slot, names]) => [slot, [...names].sort((a, b) => a.localeCompare(b))])
+    );
+    if (Object.keys(sortedSlots).length > 0) {
+      out[row.name] = sortedSlots;
+    }
+  }
+  return out;
+}
+
 function stableSortByLabel(a, b) {
   return String(a.label).localeCompare(String(b.label));
 }
 
 async function main() {
-  const [weaponsRaw, apparelRaw, ammoRaw, consumablesRaw, perksRaw, addictionsRaw, robotModsRaw, miscellanyRaw] = await Promise.all([
+  const [weaponsRaw, apparelRaw, ammoRaw, consumablesRaw, perksRaw, addictionsRaw, robotModsRaw, miscellanyRaw, weaponModsRaw, apparelModsRaw] = await Promise.all([
     readPackItems('weapons'),
     readPackItems('apparel'),
     readPackItems('ammunition'),
@@ -409,6 +563,8 @@ async function main() {
     readPackItems('addictions'),
     readPackItems('robot_modules'),
     readPackItems('miscellany'),
+    readPackItems('weapon_mods'),
+    readPackItems('apparel_mods'),
   ]);
 
   const addictionLookup = {};
@@ -446,6 +602,10 @@ async function main() {
   const sourceCorePerks = perksRaw.map(mapPerk).sort(stableSortByLabel);
   const sourceRobotMods = robotModsRaw.map(mapRobotMod).sort(stableSortByLabel);
   const sourceMiscellany = miscellanyRaw.map(mapMiscellany).sort(stableSortByLabel);
+  const sourceWeaponMods = weaponModsRaw.map(mapWeaponMod).sort(stableSortByLabel);
+  const sourceApparelMods = apparelModsRaw.map(mapApparelMod).sort(stableSortByLabel);
+  const sourceWeaponModCompatibility = extractCompatibilityMap(weaponsRaw);
+  const sourceApparelModCompatibility = extractCompatibilityMap(apparelRaw);
 
   const header = `// AUTO-GENERATED FILE. DO NOT EDIT BY HAND.\n// Generated from Foundry source-of-truth packs in ./Reference/packs\n\n`;
   const payload = {
@@ -460,6 +620,10 @@ async function main() {
     SOURCE_CORE_PERKS: sourceCorePerks,
     SOURCE_ROBOT_MODS: sourceRobotMods,
     SOURCE_MISCELLANY: sourceMiscellany,
+    SOURCE_WEAPON_MODS: sourceWeaponMods,
+    SOURCE_APPAREL_MODS: sourceApparelMods,
+    SOURCE_WEAPON_MOD_COMPATIBILITY: sourceWeaponModCompatibility,
+    SOURCE_APPAREL_MOD_COMPATIBILITY: sourceApparelModCompatibility,
   };
 
   let content = header;

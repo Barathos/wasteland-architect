@@ -142,6 +142,7 @@ export default function CharacterBuilder() {
         next.chems_inventory = '[]';
         next.food_inventory = '[]';
         next.robot_mods = '[]';
+        next.gear_mods = '[]';
         next.miscellany = '[]';
         next.caps = 0;
 
@@ -249,6 +250,7 @@ export default function CharacterBuilder() {
         chems_inventory: characterWithTagGear.chems_inventory || '[]',
         food_inventory: characterWithTagGear.food_inventory || '[]',
         robot_mods: characterWithTagGear.robot_mods || '[]',
+        gear_mods: characterWithTagGear.gear_mods || '[]',
         caps: characterWithTagGear.caps || 0,
         hp_current: derived.hp, hp_max: derived.hp,
         defense: derived.defense, initiative: derived.initiative,

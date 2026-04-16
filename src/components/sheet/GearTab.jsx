@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ConsumablesPanel from "./ConsumablesPanel";
-import { CORE_AMMO } from "../../lib/sourceTruthData";
+import { CORE_AMMO, CORE_WEAPON_MODS, CORE_APPAREL_MODS } from "../../lib/sourceTruthData";
 
 const ALL_AMMO = [...CORE_AMMO];
 const AMMO_BY_SOURCE = ALL_AMMO.reduce((acc, ammo) => {
@@ -33,6 +33,18 @@ function parseInventory(str) {
 
 const EMPTY_ITEM = { name: '', quantity: 1, weight: 0, notes: '' };
 const EMPTY_AMMO = { type: '', quantity: 1, shotsPerUnit: 1 };
+const EMPTY_MOD = { key: '', name: '', modCategory: 'weapon', modType: '', quantity: 1, weight: 0, source: 'Core', note: '', effect: '', perks: '' };
+
+function normalizeName(input = '') {
+  return String(input).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function sortByLabel(a, b) {
+  return String(a?.label || '').localeCompare(String(b?.label || ''));
+}
+
+const REF_WEAPON_MODS = [...CORE_WEAPON_MODS].sort(sortByLabel);
+const REF_APPAREL_MODS = [...CORE_APPAREL_MODS].sort(sortByLabel);
 
 function pickAmmoShots(entry) {
   const candidate = parseInt(entry?.shotsPerUnit ?? entry?.shots_per_unit ?? entry?.shots, 10);
@@ -53,6 +65,95 @@ function normalizeAmmoEntry(entry) {
   };
 }
 
+function ModsReferenceModal({ onSelect, onClose }) {
+  const [filter, setFilter] = useState('');
+  const [category, setCategory] = useState('weapon');
+  const lower = normalizeName(filter);
+
+  const rows = (category === 'weapon' ? REF_WEAPON_MODS : REF_APPAREL_MODS)
+    .filter((row) => {
+      if (!lower) return true;
+      return normalizeName(row.label).includes(lower)
+        || normalizeName(row.modType).includes(lower)
+        || normalizeName(row.source).includes(lower);
+    });
+
+  const grouped = rows.reduce((acc, row) => {
+    const key = row.modType || 'Mod';
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(row);
+    return acc;
+  }, {});
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.8)' }} onClick={onClose}>
+      <div
+        className="w-full max-w-3xl max-h-[85vh] flex flex-col m-4"
+        style={{ background: '#0d2137', border: '2px solid #f5c518' }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: '#06111f', borderBottom: '1px solid #1e3a5f' }}>
+          <p className="text-sm font-bold tracking-widest" style={{ color: '#f5c518' }}>MOD REFERENCE — Click to Add</p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCategory('weapon')}
+              className="text-[10px] px-2 py-1 font-bold"
+              style={{ background: category === 'weapon' ? 'rgba(68,136,255,0.2)' : '#0a1525', border: '1px solid #1e3a5f', color: category === 'weapon' ? '#6ab0ff' : '#6a8a9a' }}
+            >
+              Weapon Mods
+            </button>
+            <button
+              onClick={() => setCategory('apparel')}
+              className="text-[10px] px-2 py-1 font-bold"
+              style={{ background: category === 'apparel' ? 'rgba(34,204,34,0.2)' : '#0a1525', border: '1px solid #1e3a5f', color: category === 'apparel' ? '#22cc22' : '#6a8a9a' }}
+            >
+              Apparel Mods
+            </button>
+            <input
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Search..."
+              style={{ background: '#0a1525', border: '1px solid #1e3a5f', color: '#a8c8d8', outline: 'none', padding: '3px 8px', fontSize: '11px', width: '130px' }}
+            />
+            <button onClick={onClose} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>✕</button>
+          </div>
+        </div>
+
+        <div className="overflow-y-auto flex-1">
+          {Object.keys(grouped).sort((a, b) => a.localeCompare(b)).map((slotType) => (
+            <div key={slotType}>
+              <div className="px-4 py-1.5 sticky top-0" style={{ background: '#091525', borderBottom: '1px solid #1e3a5f', zIndex: 1 }}>
+                <p className="text-[10px] font-bold tracking-widest" style={{ color: '#4a6a8a' }}>{slotType.toUpperCase()}</p>
+              </div>
+              {grouped[slotType].map((mod) => (
+                <button
+                  key={mod.key}
+                  onClick={() => onSelect({ ...mod, modCategory: category })}
+                  className="w-full px-4 py-2 text-left hover:opacity-80 transition-opacity"
+                  style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="min-w-0">
+                      <p className="font-heading font-semibold text-sm truncate" style={{ color: '#e8e8e8' }}>{mod.label}</p>
+                      <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>{mod.perks || 'No perk requirement listed'}</p>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <span className="text-[10px] font-mono" style={{ color: '#6a9aba' }}>Wt {mod.weight ?? 0}</span>
+                      <span className="text-[9px] px-1.5 py-0.5 font-bold" style={{ background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.2)', color: '#f5c518' }}>
+                        {mod.source || 'Core'}
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function StartingEquipmentSection({ character }) {
   const [open, setOpen] = useState(false);
 
@@ -62,6 +163,7 @@ function StartingEquipmentSection({ character }) {
   const chems = parseInventory(character.chems_inventory).filter(i => i.source === 'starting_equipment');
   const food = parseInventory(character.food_inventory).filter(i => i.source === 'starting_equipment');
   const misc = parseInventory(character.miscellany).filter(i => i.source === 'starting_equipment');
+  const mods = parseInventory(character.gear_mods).filter(i => i.source === 'starting_equipment');
 
   const allItems = [
     ...weapons.map(i => ({ ...i, cat: 'Weapon' })),
@@ -70,6 +172,7 @@ function StartingEquipmentSection({ character }) {
     ...chems.map(i => ({ ...i, name: i.label || i.name, cat: 'Consumable' })),
     ...food.map(i => ({ ...i, name: i.label || i.name, cat: 'Food' })),
     ...misc.map(i => ({ ...i, cat: 'Misc' })),
+    ...mods.map(i => ({ ...i, cat: 'Mod' })),
   ];
 
   if (!character.sub_origin && allItems.length === 0) return null;
@@ -110,7 +213,15 @@ function StartingEquipmentSection({ character }) {
 export default function GearTab({ character, updateField }) {
   const [items, setItems] = useState(() => parseInventory(character.inventory));
   const [ammoList, setAmmoList] = useState(() => parseInventory(character.ammo_inventory).map(normalizeAmmoEntry));
+  const [modList, setModList] = useState(() => parseInventory(character.gear_mods));
   const [caps, setCaps] = useState(character.caps || 0);
+  const [showModsRef, setShowModsRef] = useState(false);
+
+  const modWeightTotal = (mods) => mods.reduce((sum, mod) => {
+    const weight = parseFloat(mod?.weight) || 0;
+    const qty = parseInt(mod?.quantity, 10) || 0;
+    return sum + (weight * qty);
+  }, 0);
 
   const saveItems = (updated) => {
     setItems(updated);
@@ -119,7 +230,7 @@ export default function GearTab({ character, updateField }) {
       const def = ALL_AMMO.find(x => x.label === a.type);
       return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
     }, 0);
-    updateField({ inventory: JSON.stringify(updated), encumbrance: parseFloat((w + ammoW).toFixed(1)) });
+    updateField({ inventory: JSON.stringify(updated), encumbrance: parseFloat((w + ammoW + modWeightTotal(modList)).toFixed(1)) });
   };
 
   const saveAmmo = (updated) => {
@@ -129,7 +240,17 @@ export default function GearTab({ character, updateField }) {
       return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
     }, 0);
     const itemW = items.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
-    updateField({ ammo_inventory: JSON.stringify(updated), encumbrance: parseFloat((itemW + ammoW).toFixed(1)) });
+    updateField({ ammo_inventory: JSON.stringify(updated), encumbrance: parseFloat((itemW + ammoW + modWeightTotal(modList)).toFixed(1)) });
+  };
+
+  const saveMods = (updated) => {
+    setModList(updated);
+    const ammoW = ammoList.reduce((s, a) => {
+      const def = ALL_AMMO.find(x => x.label === a.type);
+      return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
+    }, 0);
+    const itemW = items.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
+    updateField({ gear_mods: JSON.stringify(updated), encumbrance: parseFloat((itemW + ammoW + modWeightTotal(updated)).toFixed(1)) });
   };
 
   const saveCaps = (val) => { setCaps(val); updateField({ caps: val }); };
@@ -154,12 +275,45 @@ export default function GearTab({ character, updateField }) {
     saveAmmo(updated.map(normalizeAmmoEntry));
   };
 
+  const addMod = () => saveMods([...modList, { ...EMPTY_MOD }]);
+  const removeMod = (idx) => saveMods(modList.filter((_, i) => i !== idx));
+  const updateMod = (idx, field, value) => {
+    saveMods(modList.map((mod, i) => i === idx ? { ...mod, [field]: value } : mod));
+  };
+
+  const addModFromReference = (refMod) => {
+    const existingIdx = modList.findIndex((entry) => normalizeName(entry.key) === normalizeName(refMod.key));
+    if (existingIdx >= 0) {
+      const next = [...modList];
+      next[existingIdx] = { ...next[existingIdx], quantity: (parseInt(next[existingIdx].quantity, 10) || 1) + 1 };
+      saveMods(next);
+    } else {
+      saveMods([
+        ...modList,
+        {
+          key: refMod.key || '',
+          name: refMod.label || '',
+          modCategory: refMod.modCategory || 'weapon',
+          modType: refMod.modType || '',
+          quantity: 1,
+          weight: parseFloat(refMod.weight) || 0,
+          source: refMod.source || 'Core',
+          note: refMod.note || '',
+          effect: refMod.effect || '',
+          perks: refMod.perks || '',
+        }
+      ]);
+    }
+    setShowModsRef(false);
+  };
+
   const itemWeight = items.reduce((s, i) => s + (parseFloat(i.weight) || 0) * (parseInt(i.quantity) || 1), 0);
   const ammoWeight = ammoList.reduce((s, a) => {
     const def = ALL_AMMO.find(x => x.label === a.type);
     return s + ammoWeightNum(def?.weight) * (parseInt(a.quantity) || 0);
   }, 0);
-  const totalWeight = itemWeight + ammoWeight;
+  const modsWeight = modWeightTotal(modList);
+  const totalWeight = itemWeight + ammoWeight + modsWeight;
   const carryWeight = character.carry_weight || 150;
 
   return (
@@ -230,6 +384,73 @@ export default function GearTab({ character, updateField }) {
         )}
       </div>
 
+      {/* Mods Section */}
+      <div className="mb-5 p-3" style={{ background: '#0a1525', border: '1px solid #1e3a5f' }}>
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-bold tracking-widest" style={{ color: '#f5c518' }}>MODS ({modList.length})</p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowModsRef(true)}
+              className="text-xs px-3 py-1 font-bold"
+              style={{ background: '#0a1525', border: '1px solid #4a6a8a', color: '#a8c8d8', cursor: 'pointer' }}
+            >
+              📋 Add from Reference
+            </button>
+            <button
+              onClick={addMod}
+              className="text-xs px-3 py-1 font-bold"
+              style={{ background: '#0a2a0a', border: '1px solid #22aa22', color: '#22cc22', cursor: 'pointer' }}
+            >
+              + ADD BLANK
+            </button>
+          </div>
+        </div>
+
+        {modList.length === 0 ? (
+          <p className="text-xs font-mono text-center py-2" style={{ color: '#4a6a8a' }}>No weapon/armor mods in inventory.</p>
+        ) : (
+          <>
+            <div className="grid gap-2 mb-1" style={{ gridTemplateColumns: '1fr 90px 60px 45px 28px' }}>
+              {['MOD NAME', 'SLOT', 'CATEGORY', 'QTY', ''].map((h, i) => (
+                <span key={i} className="text-[10px]" style={{ color: '#4a6a8a' }}>{h}</span>
+              ))}
+            </div>
+            {modList.map((mod, i) => (
+              <div key={`${mod.key || mod.name || 'mod'}-${i}`} className="grid gap-2 items-center py-1" style={{ gridTemplateColumns: '1fr 90px 60px 45px 28px', borderBottom: '1px solid #0d2137' }}>
+                <input
+                  value={mod.name || ''}
+                  onChange={(e) => updateMod(i, 'name', e.target.value)}
+                  placeholder="Mod name"
+                  style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 6px', fontSize: '11px' }}
+                />
+                <input
+                  value={mod.modType || ''}
+                  onChange={(e) => updateMod(i, 'modType', e.target.value)}
+                  placeholder="Slot"
+                  style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#a8c8d8', outline: 'none', padding: '3px 6px', fontSize: '11px' }}
+                />
+                <select
+                  value={mod.modCategory || 'weapon'}
+                  onChange={(e) => updateMod(i, 'modCategory', e.target.value)}
+                  style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', fontSize: '11px', padding: '3px 4px' }}
+                >
+                  <option value="weapon">Weapon</option>
+                  <option value="apparel">Apparel</option>
+                </select>
+                <input
+                  type="number"
+                  value={mod.quantity ?? 1}
+                  onChange={(e) => updateMod(i, 'quantity', parseInt(e.target.value, 10) || 0)}
+                  style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 4px', fontSize: '11px', textAlign: 'center' }}
+                />
+                <button onClick={() => removeMod(i)} style={{ color: '#cc4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>✕</button>
+              </div>
+            ))}
+            <p className="text-[10px] font-mono mt-2" style={{ color: '#4a6a8a' }}>Mods weight: {modsWeight.toFixed(1)} lbs</p>
+          </>
+        )}
+      </div>
+
       {/* Consumables */}
       <ConsumablesPanel character={character} updateField={updateField} />
 
@@ -278,6 +499,7 @@ export default function GearTab({ character, updateField }) {
           </div>
         ))
       )}
+      {showModsRef && <ModsReferenceModal onSelect={addModFromReference} onClose={() => setShowModsRef(false)} />}
     </div>
   );
 }
