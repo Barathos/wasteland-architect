@@ -12,6 +12,8 @@ import {
   CORE_PERKS,
   CORE_POWER_ARMOR,
   CORE_ROBOT_MODS,
+  CORE_WEAPON_MODS,
+  CORE_WEAPON_MOD_COMPATIBILITY,
   CORE_WEAPONS,
 } from "./sourceTruthData.js";
 import { getEffectiveSkillRank, getSkillRankCapForCharacter, getMergedTagSkills, isNightkinCharacter } from "./falloutData.js";
@@ -187,6 +189,18 @@ const ITEM_TEMPLATES = {
     effect: '',
     perks: '',
     templates: ['base', 'physical', 'equipable', 'scrappable'],
+  },
+
+  weapon_mod: {
+    attachable: true,
+    attached: false,
+    modEffects: '@{ammo=; ammoPerShot=0; damage=; effect=; fireRate=0; info=; summary=; damageEffect=; damageRating=0}',
+    modType: '',
+    namePrefix: '',
+    perks: '',
+    qualities: '',
+    weaponType: 'meleeWeapons',
+    templates: ['base', 'physical'],
   },
 
   addiction: {
@@ -405,6 +419,7 @@ const FOOD_LOOKUP = buildLookup(CORE_FOOD);
 const OTHER_CONSUMABLE_LOOKUP = buildLookup(CORE_OTHER_CONSUMABLES);
 const PERK_LOOKUP = buildLookup(CORE_PERKS);
 const ROBOT_MOD_LOOKUP = buildLookup(CORE_ROBOT_MODS);
+const WEAPON_MOD_LOOKUP = buildLookup(CORE_WEAPON_MODS);
 const MISCELLANY_LOOKUP = buildLookup(CORE_MISCELLANY);
 const ROBOT_MOD_ALIAS_MAP = {
   'behavioral analysis module': 'Behavioral Analysis Mod',
@@ -542,12 +557,97 @@ function parseWeaponQualities(qualStr) {
 }
 
 function mapWeaponType(type) {
+  const direct = String(type || '').trim();
+  if (['smallGuns', 'energyWeapons', 'bigGuns', 'meleeWeapons', 'unarmed', 'throwing', 'explosives'].includes(direct)) {
+    return direct;
+  }
   const map = {
     'Small Guns': 'smallGuns', 'Energy Weapons': 'energyWeapons',
     'Big Guns': 'bigGuns', 'Melee': 'meleeWeapons', 'Unarmed': 'unarmed',
     'Throwing': 'throwing', 'Explosive': 'explosives', 'Bow': 'smallGuns',
   };
   return map[type] || 'meleeWeapons';
+}
+
+function mapWeaponModType(type = '') {
+  const t = String(type || '').trim().toLowerCase();
+  if (!t) return '';
+  if (t === 'melee') return 'melee';
+  return t.replace(/\s+/g, '_');
+}
+
+function findWeaponModReference(entry = {}, fallbackWeaponType = '') {
+  const candidates = [
+    entry?.key,
+    entry?.value,
+    entry?.name,
+    entry?.label,
+    entry?.sourceName,
+  ].filter(Boolean);
+
+  const direct = findInLookup(WEAPON_MOD_LOOKUP, candidates);
+  if (direct) return direct;
+
+  const wantedWeaponType = mapWeaponType(fallbackWeaponType || '');
+  const wantedLabel = normalizeName(entry?.value || entry?.name || entry?.label || '');
+  if (!wantedLabel) return null;
+
+  const matches = CORE_WEAPON_MODS.filter((mod) => normalizeName(mod?.label) === wantedLabel);
+  if (!matches.length) return null;
+  if (!wantedWeaponType) return matches[0];
+
+  return matches.find((mod) => mapWeaponType(mod?.weaponType) === wantedWeaponType) || matches[0];
+}
+
+function findWeaponCompatibilityMap(ref = null, weapon = {}) {
+  const candidates = [
+    ref?.label,
+    ref?.name,
+    weapon?.sourceName,
+    weapon?.name,
+    weapon?.label,
+  ].filter(Boolean);
+  const normalized = candidates.map((name) => normalizeName(name));
+  for (const [weaponName, slotMap] of Object.entries(CORE_WEAPON_MOD_COMPATIBILITY || {})) {
+    const key = normalizeName(weaponName);
+    if (normalized.includes(key)) return slotMap || {};
+  }
+  return {};
+}
+
+function buildWeaponModEffectsString(ref = {}, fallback = {}) {
+  const damageDelta = Number(ref?.damageDelta ?? fallback?.damageDelta ?? 0) || 0;
+  const fireRateDelta = Number(ref?.fireRateDelta ?? fallback?.fireRateDelta ?? 0) || 0;
+  const rangeDelta = Number(ref?.rangeDelta ?? fallback?.rangeDelta ?? 0) || 0;
+  const summary = pickFirst(ref?.summary, fallback?.summary, '');
+  const effect = pickFirst(ref?.effect, fallback?.effect, '');
+  const info = pickFirst(ref?.note, fallback?.note, '');
+  return `@{ammo=; ammoPerShot=0; damage=${damageDelta}; effect=${effect}; fireRate=${fireRateDelta}; info=${info}; range=${rangeDelta}; summary=${summary}; damageEffect=; damageRating=0}`;
+}
+
+function buildWeaponModItem(entry = {}, options = {}) {
+  const { attached = false, quantity = 1, fallbackWeaponType = '' } = options;
+  const ref = findWeaponModReference(entry, fallbackWeaponType);
+  const name = pickFirst(entry?.name, entry?.label, entry?.value, ref?.label, 'Weapon Mod');
+  const item = makeItemBase(null, name, 'weapon_mod', 'systems/fallout/assets/icons/items/weapon_mod.svg');
+  item.system = createSystemFromTemplate('weapon_mod', {
+    description: pickFirst(entry?.note, ref?.note, '') ? `<p>${stripHtml(pickFirst(entry?.note, ref?.note, ''))}</p>` : '',
+    source: ref?.foundryUuid ? 'core_rulebook' : 'custom',
+    cost: parseInt(pickFirst(entry?.cost, ref?.cost, 0), 10) || 0,
+    quantity: safeQty(entry?.quantity, quantity),
+    rarity: parseInt(pickFirst(entry?.rarity, ref?.rarity, 0), 10) || 0,
+    weight: parseFloat(pickFirst(entry?.weight, ref?.weight, 0)) || 0,
+    attachable: true,
+    attached: Boolean(attached),
+    modEffects: buildWeaponModEffectsString(ref, entry),
+    modType: mapWeaponModType(pickFirst(entry?.modType, ref?.modType, '')),
+    namePrefix: pickFirst(entry?.namePrefix, ref?.namePrefix, ''),
+    perks: pickFirst(entry?.perks, ref?.perks, ''),
+    qualities: pickFirst(entry?.qualities, ref?.qualities, ''),
+    weaponType: mapWeaponType(pickFirst(entry?.weaponType, ref?.weaponType, fallbackWeaponType || 'Melee')),
+  });
+  if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
+  return item;
 }
 
 function mapRange(range) {
@@ -714,6 +814,43 @@ function buildWeaponItem(w) {
   system.damage.damageType = { energy: isEnergy, physical: isPhysical, poison: isPoison, radiation: isRadiation };
   system.damage.damageEffect  = parseDamageEffects(resolved.damageEffect || '');
   system.damage.weaponQuality = parseWeaponQualities(resolved.qualities || '');
+
+  const compatibility = findWeaponCompatibilityMap(ref, w);
+  const installedRaw = w?.installedMods && typeof w.installedMods === 'object' ? w.installedMods : {};
+  const installedNames = [];
+  const modEntriesByName = new Map();
+  const addModEntry = (modRef, attached = false) => {
+    if (!modRef) return;
+    const key = normalizeName(modRef.label || modRef.name || '');
+    if (!key) return;
+    const existing = modEntriesByName.get(key);
+    if (existing) {
+      if (attached) existing.system.attached = true;
+      return;
+    }
+    modEntriesByName.set(key, buildWeaponModItem(modRef, { attached, quantity: 1, fallbackWeaponType: resolved.type }));
+  };
+
+  for (const modLabels of Object.values(compatibility || {})) {
+    for (const modLabel of Array.isArray(modLabels) ? modLabels : []) {
+      const modRef = findWeaponModReference({ label: modLabel, value: modLabel }, resolved.type);
+      if (modRef) addModEntry(modRef, false);
+    }
+  }
+  for (const value of Object.values(installedRaw || {})) {
+    const modRef = findWeaponModReference({ value, label: value, name: value }, resolved.type);
+    if (!modRef) continue;
+    addModEntry(modRef, true);
+    installedNames.push(modRef.label || modRef.name || String(value));
+  }
+  if (modEntriesByName.size > 0 || installedNames.length > 0) {
+    system.mods = { ...system.mods };
+    for (const modItem of modEntriesByName.values()) {
+      system.mods[modItem._id] = modItem;
+    }
+    system.mods.modded = installedNames.length > 0;
+    system.mods.installedMods = installedNames.join(', ');
+  }
 
   item.system = system;
   if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
@@ -948,6 +1085,44 @@ function buildEmbeddedItems(character) {
       items.push(buildWeaponItem(w));
     });
   }
+
+  // Weapon mods (inventory + installed)
+  const weaponModItemsByKey = new Map();
+  const upsertWeaponModItem = (entry, options = {}) => {
+    const item = buildWeaponModItem(entry, options);
+    const dedupeKey = `${normalizeName(item.name)}::${item.system?.attached ? 'attached' : 'inventory'}`;
+    const existing = weaponModItemsByKey.get(dedupeKey);
+    if (!existing) {
+      weaponModItemsByKey.set(dedupeKey, item);
+      return;
+    }
+    const existingQty = parseInt(existing.system?.quantity, 10) || 0;
+    const nextQty = parseInt(item.system?.quantity, 10) || 0;
+    existing.system.quantity = Math.max(existingQty, nextQty);
+  };
+
+  const appGearMods = safeParseJson(character.gear_mods, []);
+  if (Array.isArray(appGearMods)) {
+    appGearMods.forEach((mod) => {
+      if (!mod || typeof mod !== 'object') return;
+      const category = String(mod.modCategory || 'weapon').toLowerCase();
+      if (category === 'apparel') return;
+      const qty = parseInt(mod.quantity, 10) || 0;
+      if (qty <= 0) return;
+      upsertWeaponModItem(mod, { attached: false, quantity: qty, fallbackWeaponType: mod.weaponType || '' });
+    });
+  }
+  if (Array.isArray(appWeapons)) {
+    appWeapons.forEach((weapon) => {
+      if (!weapon || typeof weapon !== 'object') return;
+      const installed = weapon.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
+      Object.values(installed).forEach((value) => {
+        if (!value) return;
+        upsertWeaponModItem({ value, name: value, label: value }, { attached: true, quantity: 1, fallbackWeaponType: weapon.type || '' });
+      });
+    });
+  }
+  items.push(...weaponModItemsByKey.values());
 
   // Ammo
   const appAmmo = safeParseJson(character.ammo_inventory, []);
