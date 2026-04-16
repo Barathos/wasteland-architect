@@ -9207,6 +9207,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "308_receiver_ybnlopq9nztqgaur",
     "label": ".308 Receiver",
+    "namePrefix": ".308",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 4",
@@ -9235,6 +9236,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "38_receiver_oiw2vvxvdhggw4ol",
     "label": ".38 Receiver",
+    "namePrefix": ".38",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 4",
@@ -9263,6 +9265,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "45_receiver_zpuwoy1blhyuxuvy",
     "label": ".45 Receiver",
+    "namePrefix": ".45",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -9291,6 +9294,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "50_receiver_xshtcpvsphrdhmbo",
     "label": ".50 Receiver",
+    "namePrefix": ".50",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 4",
@@ -9319,6 +9323,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "accelerated_barrel_rpkbc7yeii2c8h1n",
     "label": "Accelerated Barrel",
+    "namePrefix": "High-Speed",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 3",
@@ -9347,6 +9352,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "advanced_p0r6b1dzwapl4wu5",
     "label": "Advanced",
+    "namePrefix": "Advanced",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -9375,6 +9381,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "automatic_jyy3vdkqv7ycfvfz",
     "label": "Automatic",
+    "namePrefix": "Auto",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -9409,6 +9416,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "automatic_barrel_wo7u8puv8h8oa0jy",
     "label": "Automatic Barrel",
+    "namePrefix": "Automatic",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -9439,6 +9447,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "automatic_piston_nggcu0nlelibc3pi",
     "label": "Automatic Piston",
+    "namePrefix": "Automatic",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -9467,6 +9476,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "barbed_sbipjodn1jwmengs",
     "label": "Barbed",
+    "namePrefix": "Barbed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -9497,6 +9507,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "barbed_sem0jhmbndppkdjw",
     "label": "Barbed",
+    "namePrefix": "Barbed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -9527,6 +9538,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "barbed_bixeupjoktniv7p7",
     "label": "Barbed",
+    "namePrefix": "Barbed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -9557,6 +9569,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "barbed_iqpxsxwvu0d13y7j",
     "label": "Barbed",
+    "namePrefix": "Barbed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -9587,6 +9600,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bayonet_cyodpo6jvopxwyw7",
     "label": "Bayonet",
+    "namePrefix": "Bayoneted",
     "modType": "Muzzle",
     "weaponType": "Small Guns",
     "perks": "",
@@ -9615,6 +9629,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bayonet_pk8yypvkxuuatuni",
     "label": "Bayonet",
+    "namePrefix": "Bayoneted Shredding",
     "modType": "Muzzle",
     "weaponType": "Big Guns",
     "perks": "",
@@ -9643,6 +9658,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "beam_focuser_it15fdgweelj1lyg",
     "label": "Beam Focuser",
+    "namePrefix": "Focused",
     "modType": "Muzzle",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -9671,6 +9687,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "beam_focuser_mzi2nnjcbhmenwie",
     "label": "Beam Focuser",
+    "namePrefix": "Focused",
     "modType": "Muzzle",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -9699,6 +9716,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "beam_splitter_fj6lsu2xzekbdrhq",
     "label": "Beam Splitter",
+    "namePrefix": "Scattered",
     "modType": "Muzzle",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -9731,6 +9749,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "beta_wave_tuner_hzqisjgqiimi1zp7",
     "label": "Beta Wave Tuner",
+    "namePrefix": "Incendiary",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -9761,6 +9780,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "beta_wave_tuner_xg5fewwagdupedcl",
     "label": "Beta Wave Tuner",
+    "namePrefix": "Incendiary",
     "modType": "Capacitor",
     "weaponType": "Big Guns",
     "perks": "",
@@ -9791,6 +9811,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bladed_4hbefa5bvvfulmbo",
     "label": "Bladed",
+    "namePrefix": "Bladed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -9821,6 +9842,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bladed_huhitqsxyrgw5tzs",
     "label": "Bladed",
+    "namePrefix": "Bladed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -9851,6 +9873,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bladed_brs0allrfp0vq5ac",
     "label": "Bladed",
+    "namePrefix": "Bladed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -9881,6 +9904,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bladed_uowsnksbdqluohjn",
     "label": "Bladed",
+    "namePrefix": "Bladed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -9911,6 +9935,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bladed_xbtuynq88d6dgqgl",
     "label": "Bladed",
+    "namePrefix": "Bladed",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -9941,6 +9966,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "boosted_capacitor_ulmvhbqiqumgng1o",
     "label": "Boosted Capacitor",
+    "namePrefix": "Boosted",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -9969,6 +9995,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "boosted_capacitor_no1q1ohqfqk9u6su",
     "label": "Boosted Capacitor",
+    "namePrefix": "Boosted",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -9997,6 +10024,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bracketed_long_barrel_g1qwroic6mwsgnnp",
     "label": "Bracketed Long Barrel",
+    "namePrefix": "",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -10027,6 +10055,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bracketed_short_barrel_8keop1jqbdqkbgxu",
     "label": "Bracketed Short Barrel",
+    "namePrefix": "",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -10055,6 +10084,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "bull_barrel_adxdsogk2fihtbne",
     "label": "Bull Barrel",
+    "namePrefix": "Bull Barrel",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 3",
@@ -10087,6 +10117,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "calibrated_4c34bzfvex4ykga3",
     "label": "Calibrated",
+    "namePrefix": "Calibrated",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "",
@@ -10117,6 +10148,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "capactor_boosting_coil_6hh0evmfv0n8kx81",
     "label": "Capactor Boosting Coil",
+    "namePrefix": "Maximum Capacity",
     "modType": "Capacitor",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 4; Science! 3",
@@ -10145,6 +10177,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "chain_wrapped_dguafqvrt3fpovuf",
     "label": "Chain-Wrapped",
+    "namePrefix": "Chain-Wrapped",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -10173,6 +10206,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "chain_wrapped_yk9zc6hphk1irq01",
     "label": "Chain-Wrapped",
+    "namePrefix": "Chain-Wrapped",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -10201,6 +10235,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "charging_barrels_vmmdaoy4sbwdljax",
     "label": "Charging Barrels",
+    "namePrefix": "Charging",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Science! 4",
@@ -10229,6 +10264,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "comfort_grip_noh6vl5rcdm73qux",
     "label": "Comfort Grip",
+    "namePrefix": "Comfort",
     "modType": "Grip",
     "weaponType": "Small Guns",
     "perks": "",
@@ -10259,6 +10295,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "compensator_egil4wuvntmhhlqr",
     "label": "Compensator",
+    "namePrefix": "Compensated",
     "modType": "Muzzle",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -10289,6 +10326,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "compression_nozzle_s1tjg5b9ugwuvzjg",
     "label": "Compression Nozzle",
+    "namePrefix": "Compressed",
     "modType": "Nozzle",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 1",
@@ -10317,6 +10355,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "curved_blade_tqn26hjy3pxpkrzt",
     "label": "Curved Blade",
+    "namePrefix": "Curved",
     "modType": "Melee",
     "weaponType": "Big Guns",
     "perks": "",
@@ -10345,6 +10384,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "deep_dish_20d7blwbnesrwxc9",
     "label": "Deep Dish",
+    "namePrefix": "Long",
     "modType": "Dish",
     "weaponType": "Energy Weapons",
     "perks": "Science! 4",
@@ -10373,6 +10413,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "electric_signal_carrier_antennae_rda0goilcampeqwx",
     "label": "Electric Signal Carrier Antennae",
+    "namePrefix": "Electrified",
     "modType": "Muzzle",
     "weaponType": "Energy Weapons",
     "perks": "Science! 4",
@@ -10403,6 +10444,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "electrification_module_uts1tgsmfthrb5dw",
     "label": "Electrification Module",
+    "namePrefix": "Electrified",
     "modType": "Muzzle",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2; Science! 1",
@@ -10433,6 +10475,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "electrified_t2dedqrzxpzyn9ux",
     "label": "Electrified",
+    "namePrefix": "Shock",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2, Science! 1",
@@ -10461,6 +10504,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "electrified_blade_vd2lblbajxhwijay",
     "label": "Electrified Blade",
+    "namePrefix": "Electrified",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2, Science! 1",
@@ -10489,6 +10533,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "electrified_serrated_blade_dzjyqzgfhcmkpyrg",
     "label": "Electrified Serrated Blade",
+    "namePrefix": "Electrified Serrated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 3, Science! 1",
@@ -10519,6 +10564,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "extended_blade_bit0ziivg6suyyne",
     "label": "Extended Blade",
+    "namePrefix": "Extended",
     "modType": "Melee",
     "weaponType": "Big Guns",
     "perks": "Blacksmith 3",
@@ -10549,6 +10595,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "extra_claw_vxocorbl9h7nkxfx",
     "label": "Extra Claw",
+    "namePrefix": "Large",
     "modType": "Melee",
     "weaponType": "Unarmed",
     "perks": "",
@@ -10577,6 +10624,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "extra_flame_jets_d00joa8hc0xcvnlc",
     "label": "Extra Flame Jets",
+    "namePrefix": "Searing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 3",
@@ -10607,6 +10655,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "extra_heavy_j4qjrw5gkcdmirdr",
     "label": "Extra Heavy",
+    "namePrefix": "Heavy",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -10635,6 +10684,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "finned_acmbnhf2jilkz2zg",
     "label": "Finned",
+    "namePrefix": "Finned",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -10663,6 +10713,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "five_crank_capacitor_ihegx2ame6p1ww82",
     "label": "Five-Crank Capacitor",
+    "namePrefix": "Five-Crank",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -10691,6 +10742,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "flamer_barrel_uww6yc9zzjbhnlrz",
     "label": "Flamer Barrel",
+    "namePrefix": "Thrower",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -10725,6 +10777,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "four_crank_capacitor_5et7jnrbqdbsvqmn",
     "label": "Four-Crank Capacitor",
+    "namePrefix": "Four-Crank",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -10753,6 +10806,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "full_capacitors_bs7zxjkza2jahpv8",
     "label": "Full Capacitors",
+    "namePrefix": "High Capacity",
     "modType": "Capacitor",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 3; Science! 2",
@@ -10783,6 +10837,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "full_stock_8nhc8z4vey4yx7bm",
     "label": "Full Stock",
+    "namePrefix": "",
     "modType": "Stock",
     "weaponType": "Small Guns",
     "perks": "",
@@ -10815,6 +10870,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "full_stock_brv8rxkptju6mz9y",
     "label": "Full Stock",
+    "namePrefix": "",
     "modType": "Stock",
     "weaponType": "Small Guns",
     "perks": "",
@@ -10847,6 +10903,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "gunner_sight_5gxczxtj4e9blg97",
     "label": "Gunner Sight",
+    "namePrefix": "Tactical",
     "modType": "Sight",
     "weaponType": "Big Guns",
     "perks": "",
@@ -10877,6 +10934,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "gunner_sight_dqwdlcs54hwqqaza",
     "label": "Gunner Sight",
+    "namePrefix": "Tactical",
     "modType": "Sight",
     "weaponType": "Big Guns",
     "perks": "",
@@ -10907,6 +10965,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "gyro_compensating_lens_oir7yaczlnrum8oq",
     "label": "Gyro Compensating Lens",
+    "namePrefix": "Targetting",
     "modType": "Muzzle",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -10937,6 +10996,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "hair_trigger_groqd2poqkix32n4",
     "label": "Hair Trigger",
+    "namePrefix": "Hair Trigger",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -10965,6 +11025,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "hardened_wwjvfufknzoxxjlt",
     "label": "Hardened",
+    "namePrefix": "Hardened",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "",
@@ -10993,6 +11054,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "heating_coil_mvrqv0wg5fe6j7tr",
     "label": "Heating Coil",
+    "namePrefix": "Heated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -11021,6 +11083,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "heating_coil_hvd46uqaqinb4f57",
     "label": "Heating Coil",
+    "namePrefix": "Heated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -11049,6 +11112,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "heavy_d8hf1rjpomvhjlhp",
     "label": "Heavy",
+    "namePrefix": "Heavy",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -11077,6 +11141,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "heavy_vjorfcwfphdnmp18",
     "label": "Heavy",
+    "namePrefix": "Heavy",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -11105,6 +11170,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "heavy_wqspwsdrmfyqpamo",
     "label": "Heavy",
+    "namePrefix": "Heavy",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -11133,6 +11199,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "hooked_as0amn04utnwjogg",
     "label": "Hooked",
+    "namePrefix": "Hooked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -11161,6 +11228,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "huge_tank_zgyzl9nmjix36tgh",
     "label": "Huge Tank",
+    "namePrefix": "Max. Capactiy",
     "modType": "Propellanttank",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2",
@@ -11189,6 +11257,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "ignition_module_bcjrlqcht0typqhi",
     "label": "Ignition Module",
+    "namePrefix": "Flaming",
     "modType": "Muzzle",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 3; Science! 1",
@@ -11219,6 +11288,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "improved_barrel_qovb0xmqa91his8s",
     "label": "Improved Barrel",
+    "namePrefix": "Improved",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -11247,6 +11317,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "large_magazine_dh2r5smlhgbmduau",
     "label": "Large Magazine",
+    "namePrefix": "High Capacity",
     "modType": "Magazine",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -11279,6 +11350,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "large_quick_eject_mag_x7xskzm5iyisd9la",
     "label": "Large Quick-Eject Mag",
+    "namePrefix": "Quick High Capacity",
     "modType": "Magazine",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -11307,6 +11379,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "large_tank_vq2psttsdfuudpn2",
     "label": "Large Tank",
+    "namePrefix": "High Capacity",
     "modType": "Propellanttank",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 1",
@@ -11335,6 +11408,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "lead_lining_0rvrmyyemok3vkol",
     "label": "Lead Lining",
+    "namePrefix": "Lead-Lined",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -11363,6 +11437,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_ryggzv9pwkchzjwb",
     "label": "Long",
+    "namePrefix": "Long",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -11391,6 +11466,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_barrel_mimskuavfshkey8x",
     "label": "Long Barrel",
+    "namePrefix": "Long",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -11421,6 +11497,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_barrel_bhpef2zreaacz7ni",
     "label": "Long Barrel",
+    "namePrefix": "Long",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 1",
@@ -11451,6 +11528,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_barrel_cs76cklmxyazhnhb",
     "label": "Long Barrel",
+    "namePrefix": "Long",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 1",
@@ -11479,6 +11557,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_night_vision_scope_nbqq6mtdf40kles5",
     "label": "Long Night Vision Scope",
+    "namePrefix": "Night Vision",
     "modType": "Sight",
     "weaponType": "Small Guns",
     "perks": "Science! 3",
@@ -11512,6 +11591,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_night_vision_scope_wvsssznt8gdmdoua",
     "label": "Long Night Vision Scope",
+    "namePrefix": "Night Vision",
     "modType": "Sight",
     "weaponType": "Small Guns",
     "perks": "Science! 3",
@@ -11545,6 +11625,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_scope_u3fjycyndsxrr2or",
     "label": "Long Scope",
+    "namePrefix": "Scoped",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -11577,6 +11658,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "long_scope_sg1efjrr3s307xpy",
     "label": "Long Scope",
+    "namePrefix": "Scoped",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -11609,6 +11691,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "marksman_s_stock_q6vur8ae7rf7woha",
     "label": "Marksman's Stock",
+    "namePrefix": "Marksman's",
     "modType": "Stock",
     "weaponType": "Energy Weapons",
     "perks": "Gun Nut 2",
@@ -11642,6 +11725,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "marksman_s_stock_zbzoom7wsprtm8pj",
     "label": "Marksman's Stock",
+    "namePrefix": "Marksman's",
     "modType": "Stock",
     "weaponType": "Energy Weapons",
     "perks": "Gun Nut 2",
@@ -11676,6 +11760,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "muzzle_break_2aqyism1nriyhgoa",
     "label": "Muzzle Break",
+    "namePrefix": "Muzzled",
     "modType": "Muzzle",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -11706,6 +11791,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "napalm_caqagnqybpsc4wgm",
     "label": "Napalm",
+    "namePrefix": "Napalmer",
     "modType": "Fuel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 1",
@@ -11734,6 +11820,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "night_vision_scope_hpa4nwlg4pcbm3e2",
     "label": "Night Vision Scope",
+    "namePrefix": "Night Vision",
     "modType": "Sight",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 4; Science! 1",
@@ -11767,6 +11854,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "photon_agitator_5tezv1cmuzirxrku",
     "label": "Photon Agitator",
+    "namePrefix": "Agitated",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -11797,6 +11885,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "photon_agitator_x7m3lii0wjlkv7l3",
     "label": "Photon Agitator",
+    "namePrefix": "Agitated",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -11827,6 +11916,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "photon_exciter_inrcfrhdriqrexf1",
     "label": "Photon Exciter",
+    "namePrefix": "Excited",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -11857,6 +11947,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "photon_exciter_mcjlbsmowiiinovw",
     "label": "Photon Exciter",
+    "namePrefix": "Excited",
     "modType": "Capacitor",
     "weaponType": "Big Guns",
     "perks": "Science! 3",
@@ -11887,6 +11978,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "ported_ac56ox5nvhcj8pia",
     "label": "Ported",
+    "namePrefix": "Ported",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 4",
@@ -11915,6 +12007,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "powerful_41rymx7pm90tz0v8",
     "label": "Powerful",
+    "namePrefix": "Powerful",
     "modType": "Receiver",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -11943,6 +12036,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "puncturing_49zfofotginm01u8",
     "label": "Puncturing",
+    "namePrefix": "Puncturing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -11973,6 +12067,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "puncturing_7ozouphril9tzrod",
     "label": "Puncturing",
+    "namePrefix": "Puncturing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -12003,6 +12098,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "puncturing_fa2rbttgci73smrf",
     "label": "Puncturing",
+    "namePrefix": "Puncturing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -12033,6 +12129,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "puncturing_lanb6wzho8piesxk",
     "label": "Puncturing",
+    "namePrefix": "Puncturing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -12063,6 +12160,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "puncturing_soqixvkzsughfofi",
     "label": "Puncturing",
+    "namePrefix": "Puncturing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -12093,6 +12191,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "puncturing_ol8d48kna9vev1kv",
     "label": "Puncturing",
+    "namePrefix": "Puncturing",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -12123,6 +12222,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "quad_barrel_3gi1tf4vkxsitrwj",
     "label": "Quad Barrel",
+    "namePrefix": "Quad Barrel",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 3",
@@ -12151,6 +12251,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "quick_eject_mag_067vemdtethvisla",
     "label": "Quick-Eject Mag",
+    "namePrefix": "Quick",
     "modType": "Magazine",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -12183,6 +12284,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "recoil_compensating_stock_h5uajczl8micywfy",
     "label": "Recoil Compensating Stock",
+    "namePrefix": "Recoil Compensated",
     "modType": "Stock",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 3",
@@ -12215,6 +12317,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "recoil_compensating_stock_pkyznmgx0jpkquic",
     "label": "Recoil Compensating Stock",
+    "namePrefix": "Recoil Compensated",
     "modType": "Stock",
     "weaponType": "Big Guns",
     "perks": "",
@@ -12243,6 +12346,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "recoil_compensating_stock_pxflsyihn3fjkgyq",
     "label": "Recoil Compensating Stock",
+    "namePrefix": "Recoil Compensated",
     "modType": "Stock",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 3",
@@ -12275,6 +12379,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "recon_scope_m5ox31qif67xbc0m",
     "label": "Recon Scope",
+    "namePrefix": "Recon",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "Science! 3",
@@ -12308,6 +12413,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "recon_scope_dgwysop4iq9p2uyo",
     "label": "Recon Scope",
+    "namePrefix": "Recon",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "Science! 3",
@@ -12341,6 +12447,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "reflex_sight_amoeo5rxltjzm8kz",
     "label": "Reflex Sight",
+    "namePrefix": "Tactical",
     "modType": "Sight",
     "weaponType": "Small Guns",
     "perks": "",
@@ -12369,6 +12476,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "reflex_sight_qaslwkphosmgn97l",
     "label": "Reflex Sight",
+    "namePrefix": "Tactical",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -12397,6 +12505,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "reflex_sight_rh3gtwkomznqps1h",
     "label": "Reflex Sight",
+    "namePrefix": "Tactical",
     "modType": "Sight",
     "weaponType": "Small Guns",
     "perks": "",
@@ -12425,6 +12534,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sawed_off_iec8kciehqck886z",
     "label": "Sawed-Off",
+    "namePrefix": "Sawed Off",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "",
@@ -12457,6 +12567,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "scope_wd7u8h2fsh35rd8t",
     "label": "Scope",
+    "namePrefix": "Scoped",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "Gun Nut 2",
@@ -12489,6 +12600,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "serrated_blade_7hxh0xrnmyflfbjp",
     "label": "Serrated Blade",
+    "namePrefix": "Serrated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -12519,6 +12631,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "serrated_blade_gfjp4trdraoqooe8",
     "label": "Serrated Blade",
+    "namePrefix": "Serrated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -12549,6 +12662,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "serrated_blade_uuiwz6pvomdku6ye",
     "label": "Serrated Blade",
+    "namePrefix": "Serrated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -12579,6 +12693,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "serrated_blade_vq6ocwfkhscfr26x",
     "label": "Serrated Blade",
+    "namePrefix": "Serrated",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -12609,6 +12724,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharp_eujw4xp1frt5hdcy",
     "label": "Sharp",
+    "namePrefix": "Sharp",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -12639,6 +12755,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharp_m2tl0fvg6lzg9wtj",
     "label": "Sharp",
+    "namePrefix": "Sharp",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -12669,6 +12786,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharp_ftmm3iipqcnu6tm4",
     "label": "Sharp",
+    "namePrefix": "Sharp",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -12699,6 +12817,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharp_hfiuerxoh8ryrfrv",
     "label": "Sharp",
+    "namePrefix": "Sharp",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -12729,6 +12848,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharp_uaoxqjwoub6zmudc",
     "label": "Sharp",
+    "namePrefix": "Sharp",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 1",
@@ -12759,6 +12879,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharpshooter_s_grip_4sou5mfxcdluvlup",
     "label": "Sharpshooter's Grip",
+    "namePrefix": "Sharpshooter's",
     "modType": "Grip",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -12791,6 +12912,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sharpshooter_s_grip_zalw93hamyh8nwp2",
     "label": "Sharpshooter's Grip",
+    "namePrefix": "Sharpshooter's",
     "modType": "Grip",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 1",
@@ -12823,6 +12945,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "shielded_barrel_iif3omvvtgvv5lop",
     "label": "Shielded Barrel",
+    "namePrefix": "Shielded",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 3",
@@ -12851,6 +12974,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "short_night_vision_scope_vyesqvmrobpdsnpo",
     "label": "Short Night Vision Scope",
+    "namePrefix": "Night Vision",
     "modType": "Sight",
     "weaponType": "Small Guns",
     "perks": "Science! 2",
@@ -12884,6 +13008,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "short_night_vision_scope_wud5pta33zrh1aww",
     "label": "Short Night Vision Scope",
+    "namePrefix": "Night Vision",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "Science! 2",
@@ -12917,6 +13042,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "short_scope_txosscfknibk2a85",
     "label": "Short Scope",
+    "namePrefix": "Scoped",
     "modType": "Sight",
     "weaponType": "Small Guns",
     "perks": "",
@@ -12949,6 +13075,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "short_scope_fyaqkfsxyexqzc0u",
     "label": "Short Scope",
+    "namePrefix": "Scoped",
     "modType": "Sight",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -12981,6 +13108,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "shredder_efy7drbyypo1zgoh",
     "label": "Shredder",
+    "namePrefix": "Bayoneted Shredding",
     "modType": "Muzzle",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2",
@@ -13009,6 +13137,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "signal_repeater_ozbpt70ceklpm7ah",
     "label": "Signal Repeater",
+    "namePrefix": "Automatic",
     "modType": "Muzzle",
     "weaponType": "Energy Weapons",
     "perks": "Science! 4",
@@ -13041,6 +13170,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "six_crank_capacitor_ztdgncl17xwzin9p",
     "label": "Six-Crank Capacitor",
+    "namePrefix": "Six-Crank",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "Science! 3",
@@ -13069,6 +13199,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "sniper_barrel_jfcffp1zj7awhwpn",
     "label": "Sniper Barrel",
+    "namePrefix": "Sniper",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "Science! 1",
@@ -13099,6 +13230,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "snubnose_qguharjjhqoxbp7u",
     "label": "Snubnose",
+    "namePrefix": "Snubnosed",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "",
@@ -13131,6 +13263,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_5radqbfymo7zjdsi",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13161,6 +13294,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_bx0ox0zdwjbdnsvl",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13191,6 +13325,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_cfl42fhuv4ntokcp",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13221,6 +13356,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_cmvhmx7fgvsi9szj",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13251,6 +13387,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_aknqi2ppzyd6qlge",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13281,6 +13418,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_e1ycqywvjdktlxvu",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13311,6 +13449,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_eakjcz2nedjgiwwp",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13341,6 +13480,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "spiked_frkj2bs1fvy8ny3o",
     "label": "Spiked",
+    "namePrefix": "Spiked",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "",
@@ -13371,6 +13511,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "splitter_qostvnnhmrln7mhi",
     "label": "Splitter",
+    "namePrefix": "Scattergun",
     "modType": "Barrel",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -13405,6 +13546,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "stabilizer_dqtxjqnamlbhja3v",
     "label": "Stabilizer",
+    "namePrefix": "Muzzled",
     "modType": "Muzzle",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2",
@@ -13435,6 +13577,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "standard_stock_op1voojgnziz2s8v",
     "label": "Standard Stock",
+    "namePrefix": "",
     "modType": "Stock",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -13468,6 +13611,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "stealth_blade_vvtzfuz7hzmu3eaq",
     "label": "Stealth Blade",
+    "namePrefix": "Stealth",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2",
@@ -13498,6 +13642,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "stun_pack_2bv9b55mk73yptcz",
     "label": "Stun Pack",
+    "namePrefix": "Stunning",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 3, Science! 1",
@@ -13528,6 +13673,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "stun_pack_g6fj1gegis2553in",
     "label": "Stun Pack",
+    "namePrefix": "Stun",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 2, Science! 1",
@@ -13558,6 +13704,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "stun_pack_s8t6wx5awzl3rxqt",
     "label": "Stun Pack",
+    "namePrefix": "Stunning",
     "modType": "Melee",
     "weaponType": "Melee",
     "perks": "Blacksmith 3, Science! 1",
@@ -13588,6 +13735,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "suppressor_dzh7tfph917if3uo",
     "label": "Suppressor",
+    "namePrefix": "Suppressed",
     "modType": "Muzzle",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 2",
@@ -13618,6 +13766,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "targeting_computer_rtldo0wub9euip9t",
     "label": "Targeting Computer",
+    "namePrefix": "Targeting",
     "modType": "Sight",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2; Science! 2",
@@ -13646,6 +13795,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "three_crank_capacitor_uemdfforxggfnuyb",
     "label": "Three-Crank Capacitor",
+    "namePrefix": "Three-Crank",
     "modType": "Capacitor",
     "weaponType": "Energy Weapons",
     "perks": "",
@@ -13674,6 +13824,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "tri_barrel_6ow2tdryzdu0klw4",
     "label": "Tri-Barrel",
+    "namePrefix": "High-Powered",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 4",
@@ -13702,6 +13853,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "triple_barrel_kkrxsfbftl89h3ra",
     "label": "Triple Barrel",
+    "namePrefix": "Triple Barrel",
     "modType": "Barrel",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2",
@@ -13730,6 +13882,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "vaporization_nozzle_xhkctkvzwtowzx9k",
     "label": "Vaporization Nozzle",
+    "namePrefix": "Vaporizing",
     "modType": "Nozzle",
     "weaponType": "Big Guns",
     "perks": "Gun Nut 2",
@@ -13760,6 +13913,7 @@ export const SOURCE_WEAPON_MODS = [
   {
     "key": "vented_yxsf6qdbdo4fyaqb",
     "label": "Vented",
+    "namePrefix": "Vented",
     "modType": "Barrel",
     "weaponType": "Small Guns",
     "perks": "Gun Nut 4",

@@ -467,6 +467,7 @@ function mapWeaponMod(item) {
   return {
     key: slugify(`${item.name}_${item._id}`),
     label: item.name,
+    namePrefix: stripHtml(system.namePrefix || ''),
     modType: toTitleCase(system.modType || 'Mod'),
     weaponType: WEAPON_TYPE_MAP[system.weaponType] || toTitleCase(system.weaponType || 'Weapon'),
     perks: stripHtml(system.perks || ''),
