@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { calculateBodyPartHP } from "../lib/falloutData";
@@ -36,8 +36,10 @@ export default function CharacterSheet() {
   const navigate = useNavigate();
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [activeTab, setActiveTab] = useState('STATUS');
   const [showCombat, setShowCombat] = useState(false);
+  const lastSavedRef = useRef(null);
 
   useEffect(() => { loadCharacter(); }, [id]);
 
@@ -52,8 +54,11 @@ export default function CharacterSheet() {
           if (initialized[`hp_${part}`] == null) initialized[`hp_${part}`] = data.max;
         });
         setCharacter(initialized);
+        lastSavedRef.current = initialized;
       }
-    } catch {
+    } catch (e) {
+      console.error("Failed to load character:", e);
+      setError(true);
       toast.error("Failed to load character.");
     } finally {
       setLoading(false);
@@ -61,12 +66,16 @@ export default function CharacterSheet() {
   };
 
   const updateField = async (updates) => {
-    const prev = character;
     setCharacter(p => ({ ...p, ...updates }));
     try {
       await base44.entities.Character.update(id, updates);
-    } catch {
-      setCharacter(prev);
+      setCharacter(current => {
+        lastSavedRef.current = current;
+        return current;
+      });
+    } catch (e) {
+      console.error("Failed to save character update:", e);
+      if (lastSavedRef.current) setCharacter(lastSavedRef.current);
       toast.error("Failed to save changes.");
     }
   };
@@ -84,6 +93,20 @@ export default function CharacterSheet() {
   if (loading) return (
     <div className="flex items-center justify-center min-h-screen" style={{ background: '#0d2137' }}>
       <Radiation className="w-10 h-10 animate-spin" style={{ color: '#f5c518' }} />
+    </div>
+  );
+
+  if (error) return (
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4" style={{ background: '#0d2137', color: '#a8c8d8' }}>
+      <p className="font-mono">Failed to load character data.</p>
+      <button
+        onClick={() => { setError(false); setLoading(true); loadCharacter(); }}
+        style={{ color: '#f5c518' }}
+        className="font-mono text-sm hover:underline"
+      >
+        Retry
+      </button>
+      <Link to="/" style={{ color: '#a8c8d8' }} className="font-mono text-sm hover:underline">Return to dashboard</Link>
     </div>
   );
 
