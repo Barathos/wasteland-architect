@@ -230,7 +230,16 @@ export default function ApparelTab({ character, updateField }) {
                     </div>
                   </div>
                   {(a.locations || a.special) && (
-                    <p className="text-[10px] font-mono mt-0.5" style={{ color: '#4a6a8a' }}>
+                    <p
+                      className="font-mono mt-1 px-2 py-1 rounded-sm"
+                      style={{
+                        color: '#a8c8d8',
+                        fontSize: '12px',
+                        lineHeight: 1.45,
+                        background: 'rgba(6,15,28,0.55)',
+                        border: '1px solid rgba(30,58,95,0.7)',
+                      }}
+                    >
                       {a.locations}{a.special ? ` — ${a.special}` : ''}
                     </p>
                   )}
