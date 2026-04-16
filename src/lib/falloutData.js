@@ -1968,7 +1968,19 @@ export const TAG_SKILL_ITEMS = {
   'Barter':          [{ type: 'currency', name: 'Caps', quantityDice: '2d20', note: 'additional caps' }],
   'Big Guns':        [{ type: 'ammo', name: 'Flamer Fuel', quantity: 4, note: '+2 DC shots' }],
   'Energy Weapons':  [{ type: 'ammo', name: 'Fusion Cell', quantity: 6, note: '+3 DC shots' }],
-  'Explosives':      [{ type: 'weapon', name: 'Explosive', quantity: 2, optional: true, optionKey: 'tag_exp', optionLabel: 'Choose explosive', options: ['2 Molotov Cocktails', '2 Baseball Grenades'] }],
+  'Explosives':      [{
+    type: 'weapon',
+    name: 'Explosive',
+    quantity: 1,
+    optional: true,
+    optionKey: 'tag_exp',
+    optionLabel: 'Choose explosive',
+    options: ['2 Molotov Cocktails', '2 Baseball Grenades'],
+    optionItems: {
+      '2 Molotov Cocktails': [{ type: 'weapon', name: 'Molotov Cocktail', quantity: 2 }],
+      '2 Baseball Grenades': [{ type: 'weapon', name: 'Baseball Grenade', quantity: 2 }],
+    },
+  }],
   'Lockpick':        [{ type: 'miscellany', name: 'Bobby Pins', quantity: 4, note: '+2 DC bobby pins' }],
   'Medicine':        [{ type: 'miscellany', name: 'First Aid Kit', quantity: 1 }, { type: 'consumable', name: 'Stimpak', quantity: 1 }],
   'Melee Weapons':   [{ type: 'weapon', name: 'Melee Weapon', quantity: 1, optional: true, optionKey: 'tag_melee', optionLabel: 'Choose melee weapon', options: ['Machete', 'Baseball Bat'] }],
@@ -1979,7 +1991,19 @@ export const TAG_SKILL_ITEMS = {
   'Sneak':           [{ type: 'consumable', name: 'Calmex', quantity: 1 }],
   'Speech':          [{ type: 'apparel', name: 'Formal Hat', quantity: 1 }, { type: 'apparel', name: 'Formal Clothing', quantity: 1 }],
   'Survival':        [{ type: 'miscellany', name: 'Purified Water', quantity: 2 }, { type: 'food', name: 'Iguana on a Stick', quantity: 1 }],
-  'Throwing':        [{ type: 'weapon', name: 'Thrown Weapon', quantity: 1, optional: true, optionKey: 'tag_throw', optionLabel: 'Choose thrown weapon', options: ['4 Throwing Knives (+2 DC)', '2 Tomahawks (+1 DC)'] }],
+  'Throwing':        [{
+    type: 'weapon',
+    name: 'Thrown Weapon',
+    quantity: 1,
+    optional: true,
+    optionKey: 'tag_throw',
+    optionLabel: 'Choose thrown weapon',
+    options: ['4 Throwing Knives (+2 DC)', '2 Tomahawks (+1 DC)'],
+    optionItems: {
+      '4 Throwing Knives (+2 DC)': [{ type: 'weapon', name: 'Throwing Knife', quantity: 4, note: '+2 DC' }],
+      '2 Tomahawks (+1 DC)': [{ type: 'weapon', name: 'Tomahawk', quantity: 2, note: '+1 DC' }],
+    },
+  }],
   'Unarmed':         [{ type: 'weapon', name: 'Knuckles', quantity: 1 }],
 };
 

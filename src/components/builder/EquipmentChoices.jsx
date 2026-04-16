@@ -29,6 +29,18 @@ export default function EquipmentChoices({ character, onResolve }) {
             <div key={choice.optionKey}>
               <p className="text-[10px] font-mono mb-1.5" style={{ color: '#a8c8d8' }}>{choice.optionLabel}:</p>
               <div className="flex flex-wrap gap-2">
+                {Array.isArray(choice.options) && choice.options.length > 1 && (
+                  <button
+                    onClick={() => {
+                      const idx = Math.floor(Math.random() * choice.options.length);
+                      onResolve(choice.optionKey, choice.options[idx]);
+                    }}
+                    className="text-xs font-mono px-3 py-1.5 transition-all hover:opacity-80"
+                    style={{ background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.35)', color: '#f5c518', cursor: 'pointer' }}
+                  >
+                    Roll Random
+                  </button>
+                )}
                 {(choice.options || []).map(opt => (
                   <button
                     key={opt}

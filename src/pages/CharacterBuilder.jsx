@@ -36,6 +36,10 @@ function formatTagBonusItem(item) {
   return `${qty}${label}${note}`;
 }
 
+function safeJson(str, fallback) {
+  try { return JSON.parse(str || ""); } catch { return fallback; }
+}
+
 export default function CharacterBuilder() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -164,6 +168,30 @@ export default function CharacterBuilder() {
     const updates = resolveEquipmentChoice(character, choiceKey, chosenValue);
     if (updates) setCharacter(prev => ({ ...prev, ...updates }));
   };
+
+  const rebuildStartingEquipmentWithTags = (baseCharacter, updatedTags) => {
+    if (!baseCharacter?.sub_origin) return baseCharacter;
+    const built = buildStartingEquipment(baseCharacter, baseCharacter.sub_origin, updatedTags);
+    if (!built) return baseCharacter;
+
+    const previousPending = safeJson(baseCharacter.pending_equipment_choices, []);
+    const resolvedChoices = previousPending
+      .filter(choice => choice?.resolved && choice?.optionKey && choice?.resolvedValue)
+      .map(choice => ({ optionKey: choice.optionKey, resolvedValue: choice.resolvedValue }));
+
+    let next = { ...baseCharacter, ...built.updates };
+    for (const { optionKey, resolvedValue } of resolvedChoices) {
+      const resolvedUpdates = resolveEquipmentChoice(next, optionKey, resolvedValue);
+      if (resolvedUpdates) next = { ...next, ...resolvedUpdates };
+    }
+    return next;
+  };
+
+  const handleTagSkillsChange = (updatedTags) => {
+    setTagSkills(updatedTags);
+    setCharacter(prev => rebuildStartingEquipmentWithTags(prev, updatedTags));
+  };
+
   const currentStepIndex = STEPS.findIndex(s => s.id === activeTab);
   const goNext = () => { if (currentStepIndex < STEPS.length - 1) setActiveTab(STEPS[currentStepIndex + 1].id); };
   const goPrev = () => { if (currentStepIndex > 0) setActiveTab(STEPS[currentStepIndex - 1].id); };
@@ -194,10 +222,11 @@ export default function CharacterBuilder() {
 
     setSaving(true);
     try {
-      const fullChar = { ...character, survivor_traits: JSON.stringify(survivorTraits) };
+      const characterWithTagGear = rebuildStartingEquipmentWithTags(character, tagSkills);
+      const fullChar = { ...characterWithTagGear, survivor_traits: JSON.stringify(survivorTraits) };
       const derived = calculateDerivedStats(fullChar);
       const charData = {
-        ...character,
+        ...characterWithTagGear,
         skills: JSON.stringify(skills),
         tag_skills: JSON.stringify(tagSkills),
         perks: JSON.stringify(selectedPerks),
@@ -210,22 +239,23 @@ export default function CharacterBuilder() {
         ghoul_vault_dweller: ghoulVaultDweller,
         survivor_traits: JSON.stringify(survivorTraits),
         mr_handy_arms: JSON.stringify(mrHandyArms),
-        sub_origin: character.sub_origin || '',
-        gifted_bonuses: character.gifted_bonuses || '[]',
-        pending_equipment_choices: character.pending_equipment_choices || '[]',
-        miscellany: character.miscellany || '[]',
-        equipment: character.equipment || '[]',
-        ammo_inventory: character.ammo_inventory || '[]',
-        armor_equipped: character.armor_equipped || '[]',
-        chems_inventory: character.chems_inventory || '[]',
-        food_inventory: character.food_inventory || '[]',
-        robot_mods: character.robot_mods || '[]',
-        caps: character.caps || 0,
+        sub_origin: characterWithTagGear.sub_origin || '',
+        gifted_bonuses: characterWithTagGear.gifted_bonuses || '[]',
+        pending_equipment_choices: characterWithTagGear.pending_equipment_choices || '[]',
+        miscellany: characterWithTagGear.miscellany || '[]',
+        equipment: characterWithTagGear.equipment || '[]',
+        ammo_inventory: characterWithTagGear.ammo_inventory || '[]',
+        armor_equipped: characterWithTagGear.armor_equipped || '[]',
+        chems_inventory: characterWithTagGear.chems_inventory || '[]',
+        food_inventory: characterWithTagGear.food_inventory || '[]',
+        robot_mods: characterWithTagGear.robot_mods || '[]',
+        caps: characterWithTagGear.caps || 0,
         hp_current: derived.hp, hp_max: derived.hp,
         defense: derived.defense, initiative: derived.initiative,
         melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
         luck_points: derived.luck_points,
       };
+      setCharacter(prev => ({ ...prev, ...characterWithTagGear }));
 
       if (editId) {
         await base44.entities.Character.update(editId, charData);
@@ -289,7 +319,8 @@ export default function CharacterBuilder() {
               <SpecialStats character={character} onChange={updateCharacter} />
             </TabsContent>
             <TabsContent value="skills" className="mt-0">
-              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={setSkills} onTagSkillsChange={setTagSkills} ncrTraits={ncrTraits} outcastTagSkill={outcastTagSkill} />
+              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={setSkills} onTagSkillsChange={handleTagSkillsChange} ncrTraits={ncrTraits} outcastTagSkill={outcastTagSkill} />
+              <EquipmentChoices character={character} onResolve={handleResolveChoice} />
             </TabsContent>
             <TabsContent value="perks" className="mt-0">
               <PerksPanel character={character} selectedPerks={selectedPerks} onPerksChange={setSelectedPerks} />
