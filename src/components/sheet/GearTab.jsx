@@ -65,6 +65,11 @@ function normalizeAmmoEntry(entry) {
   };
 }
 
+function getModDescription(mod = {}) {
+  const parts = [mod.effect, mod.summary, mod.note].filter((value) => String(value || '').trim().length > 0);
+  return parts.join(' ').trim();
+}
+
 function ModsReferenceModal({ onSelect, onClose }) {
   const [filter, setFilter] = useState('');
   const [category, setCategory] = useState('weapon');
@@ -131,11 +136,18 @@ function ModsReferenceModal({ onSelect, onClose }) {
                   onClick={() => onSelect({ ...mod, modCategory: category })}
                   className="w-full px-4 py-2 text-left hover:opacity-80 transition-opacity"
                   style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #091525', cursor: 'pointer' }}
+                  title={getModDescription(mod) || 'No description available yet'}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="font-heading font-semibold text-sm truncate" style={{ color: '#e8e8e8' }}>{mod.label}</p>
                       <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>{mod.perks || 'No perk requirement listed'}</p>
+                      <p
+                        className="text-[10px] font-mono mt-0.5"
+                        style={{ color: '#8fb3c7', lineHeight: 1.35, whiteSpace: 'normal' }}
+                      >
+                        {getModDescription(mod) || 'No description available yet'}
+                      </p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <span className="text-[10px] font-mono" style={{ color: '#6a9aba' }}>Wt {mod.weight ?? 0}</span>
