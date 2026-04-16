@@ -153,7 +153,6 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
   const displayName = weapon.name || weapon.sourceName || referenceWeapon?.label || 'Unnamed Weapon';
   const description = weapon.note || referenceWeapon?.note || '';
   const sourceDisplay = weapon.sourceName || referenceWeapon?.label || '';
-  const linkedToReference = Boolean(weapon.key || weapon.sourceName || referenceWeapon);
 
   return (
     <div className="p-3 mb-2" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
@@ -209,11 +208,6 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
           >
             {editingAlias ? 'Done' : 'Alias'}
           </button>
-          {linkedToReference && !editingAlias && (
-            <span className="text-[9px] px-1.5 py-0.5 font-bold" style={{ background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.25)', color: '#f5c518' }}>
-              Ref
-            </span>
-          )}
         </div>
         <div className="flex items-center gap-1">
           {field('damage', weapon.damage, { width: '55px' })}
