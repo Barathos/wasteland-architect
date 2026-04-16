@@ -96,6 +96,18 @@ function normalizeApparelLookupName(rawName = '') {
   return LEGACY_APPAREL_NAME_MAP[base] || base;
 }
 
+function isPowerArmorText(value = '') {
+  return /power\s*armor|powerarmor/.test(String(value || '').toLowerCase());
+}
+
+function isPowerArmorApparel(item = {}) {
+  return (
+    isPowerArmorText(item.type) ||
+    isPowerArmorText(item.set) ||
+    isPowerArmorText(item.label)
+  );
+}
+
 function findWeaponByName(name) {
   const clean = normalizeLookupName(name);
   let best = null;
@@ -133,10 +145,14 @@ function findWeaponByName(name) {
 
 function findApparelByName(name) {
   const clean = normalizeApparelLookupName(name);
+  const wantsPowerArmor = isPowerArmorText(name);
   let best = null;
   let bestScore = -1;
 
   for (const apparel of ALL_APPAREL) {
+    const isPower = isPowerArmorApparel(apparel);
+    if (isPower !== wantsPowerArmor) continue;
+
     const label = normalizeApparelLookupName(apparel?.label || apparel?.name || '');
     const aliases = Array.isArray(apparel?.aliases)
       ? apparel.aliases.map(a => normalizeApparelLookupName(a))
@@ -165,7 +181,15 @@ function findApparelByName(name) {
     }
   }
 
-  return best;
+  if (best) return best;
+
+  // Fallback pass if strict power/non-power filtering found nothing.
+  for (const apparel of ALL_APPAREL) {
+    const label = normalizeApparelLookupName(apparel?.label || apparel?.name || '');
+    if (label === clean) return apparel;
+  }
+
+  return null;
 }
 
 function normalizeRobotModLookupName(rawName = '') {

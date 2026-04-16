@@ -399,6 +399,7 @@ function robotModLookupCandidates(entry = {}) {
 const WEAPON_LOOKUP = buildLookup(CORE_WEAPONS);
 const AMMO_LOOKUP = buildLookup(CORE_AMMO);
 const APPAREL_LOOKUP = buildLookup([...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR]);
+const ALL_APPAREL_ITEMS = [...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR];
 const CHEM_LOOKUP = buildLookup(CORE_CHEMS);
 const FOOD_LOOKUP = buildLookup(CORE_FOOD);
 const OTHER_CONSUMABLE_LOOKUP = buildLookup(CORE_OTHER_CONSUMABLES);
@@ -412,6 +413,43 @@ const ROBOT_MOD_ALIAS_MAP = {
   'recon sensors': 'Recon Sensors',
   'protectron sensors': 'Sensor Array',
 };
+
+function isPowerArmorText(value = '') {
+  return /power\s*armor|powerarmor/.test(String(value || '').toLowerCase());
+}
+
+function isPowerArmorRef(item = {}) {
+  return (
+    isPowerArmorText(item.type) ||
+    isPowerArmorText(item.set) ||
+    isPowerArmorText(item.label)
+  );
+}
+
+function findBestApparelReference(entry = {}) {
+  const candidates = [entry.key, entry.name, entry.label, entry.linkedArmorName].filter(Boolean);
+  if (!candidates.length) return null;
+
+  const wantedPower = candidates.some(isPowerArmorText) || isPowerArmorText(entry.type);
+  const normalizedCandidates = candidates.map((c) => normalizeName(c));
+  const matched = [];
+
+  for (const item of ALL_APPAREL_ITEMS) {
+    const itemLabel = normalizeName(item?.label || item?.name || '');
+    const itemKey = normalizeKey(item?.key || '');
+    const hasMatch = normalizedCandidates.some((c) => itemLabel === c || itemKey === normalizeKey(c));
+    if (hasMatch) matched.push(item);
+  }
+  if (!matched.length) return null;
+
+  const filtered = matched.filter((item) => isPowerArmorRef(item) === wantedPower);
+  if (filtered.length === 1) return filtered[0];
+  if (filtered.length > 1) {
+    return filtered.sort((a, b) => (String(a.label || '').length - String(b.label || '').length))[0];
+  }
+  if (matched.length === 1) return matched[0];
+  return matched.sort((a, b) => (String(a.label || '').length - String(b.label || '').length))[0];
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Metadata builders
@@ -683,7 +721,7 @@ function buildWeaponItem(w) {
 }
 
 function buildApparelItem(a) {
-  const ref = findInLookup(APPAREL_LOOKUP, [a.key, a.name, a.label, a.linkedArmorName]);
+  const ref = findBestApparelReference(a) || findInLookup(APPAREL_LOOKUP, [a.key, a.name, a.label, a.linkedArmorName]);
   const source = {
     name: pickFirst(a.name, a.label, a.linkedArmorName, ref?.label, 'Apparel'),
     type: pickFirst(a.type, ref?.type, 'Armor'),

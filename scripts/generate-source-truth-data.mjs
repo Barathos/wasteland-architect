@@ -218,7 +218,7 @@ function inferArmorSet(name) {
   if (/^T-51\b/i.test(name)) return 'T-51';
   if (/^T-60\b/i.test(name)) return 'T-60';
   if (/^X-01\b/i.test(name)) return 'X-01';
-  if (/^Raider\b/i.test(name)) return 'Raider Power';
+  if (/^Raider\s+Power\b/i.test(name)) return 'Raider Power';
   if (/^Armor Frame\b/i.test(name)) return 'Frame';
   if (/\bVault-Tec Security\b/i.test(name)) return 'Vault-Tec Security';
   if (/\bSynth\b/i.test(name)) return 'Synth';
