@@ -102,6 +102,8 @@ function applyWeaponModsToWeapon(weapon = {}, refs = []) {
   const previousAutoName = weapon.autoName || baseName;
   const currentName = String(weapon.name || '').trim();
   const isCustomAlias = Boolean(currentName) && normalizeLoose(currentName) !== normalizeLoose(previousAutoName);
+  const aliasBase = isCustomAlias ? String(weapon.aliasBase || currentName || baseName).trim() : '';
+  const prefixedAlias = `${prefixes.join(' ')} ${aliasBase}`.trim();
 
   rangeStep = Math.min(RANGES.length - 1, Math.max(0, rangeStep));
 
@@ -119,7 +121,8 @@ function applyWeaponModsToWeapon(weapon = {}, refs = []) {
     fireRate: Math.max(0, fireRate),
     autoName: nextAutoName,
     baseName,
-    name: isCustomAlias ? weapon.name : nextAutoName,
+    aliasBase: isCustomAlias ? aliasBase : '',
+    name: isCustomAlias ? (prefixedAlias || aliasBase) : nextAutoName,
   };
 }
 
@@ -368,7 +371,7 @@ function WeaponRow({ weapon, index, onChange, onRemove, onAssignSlot, ownedWeapo
             <input
               type="text"
               value={weapon.name ?? ''}
-              onChange={e => onChange({ ...weapon, name: e.target.value })}
+              onChange={e => onChange({ ...weapon, name: e.target.value, aliasBase: e.target.value })}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') setEditingAlias(false);
                 if (e.key === 'Escape') setEditingAlias(false);
@@ -671,6 +674,7 @@ export default function WeaponsTab({ character, updateField }) {
       modsMax: Number(refWeapon.modsMax || 0),
       baseName: refWeapon.label,
       autoName: refWeapon.label,
+      aliasBase: '',
     };
     save([...weapons, w]);
     setShowRef(false);
