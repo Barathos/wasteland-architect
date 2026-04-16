@@ -136,7 +136,7 @@ function ArmorRefModal({ onSelect, onClose }) {
   );
 }
 
-function ApparelModsModal({ armorItem, ownedApparelMods, onInstall, onClose }) {
+function ApparelModsModal({ armorItem, ownedApparelMods, onAssignSlot, onClose }) {
   const slotMap = getApparelModSlots(armorItem?.name || '');
   const slotKeys = Object.keys(slotMap).sort((a, b) => a.localeCompare(b));
   const installedMods = armorItem?.installedMods && typeof armorItem.installedMods === 'object' ? armorItem.installedMods : {};
@@ -146,13 +146,6 @@ function ApparelModsModal({ armorItem, ownedApparelMods, onInstall, onClose }) {
     if (!raw) return null;
     return ownedApparelMods.find((mod) => mod.key === raw || normalizeName(mod.label) === normalizeName(raw))
       || findRefApparelMod({ key: raw, name: raw, label: raw });
-  };
-
-  const onChangeSlot = (slotKey, value) => {
-    const next = { ...installedMods };
-    if (!value) delete next[slotKey];
-    else next[slotKey] = value;
-    onInstall(next);
   };
 
   return (
@@ -176,6 +169,9 @@ function ApparelModsModal({ armorItem, ownedApparelMods, onInstall, onClose }) {
                 .filter((mod) => normalizeName(mod.modType) === normalizeName(slotKey))
                 .filter((mod) => allowedNames.size === 0 || allowedNames.has(normalizeName(mod.label)));
               const selected = selectedForSlot(slotKey);
+              const optionsWithSelected = selected && !options.find((mod) => (mod.key || mod.label) === (selected.key || selected.label))
+                ? [...options, { ...selected, quantity: 0 }]
+                : options;
 
               return (
                 <div key={slotKey} className="p-2.5" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
@@ -185,11 +181,11 @@ function ApparelModsModal({ armorItem, ownedApparelMods, onInstall, onClose }) {
                   </div>
                   <select
                     value={installedMods[slotKey] || ''}
-                    onChange={(e) => onChangeSlot(slotKey, e.target.value)}
+                    onChange={(e) => onAssignSlot(slotKey, e.target.value)}
                     style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', fontSize: '11px', padding: '4px 6px' }}
                   >
                     <option value="">- none -</option>
-                    {options.map((mod) => (
+                    {optionsWithSelected.map((mod) => (
                       <option key={mod.key || mod.label} value={mod.key || mod.label}>
                         {mod.label} (x{mod.quantity || 1})
                       </option>
@@ -213,12 +209,12 @@ function ApparelModsModal({ armorItem, ownedApparelMods, onInstall, onClose }) {
 export default function ApparelTab({ character, updateField }) {
   const [apparel, setApparel] = useState(() => parseJ(character.apparel, {}));
   const [armorList, setArmorList] = useState(() => parseJ(character.armor_equipped, []));
+  const [gearMods, setGearMods] = useState(() => parseJ(character.gear_mods, []));
   const [showRef, setShowRef] = useState(false);
   const [activeModArmorIndex, setActiveModArmorIndex] = useState(null);
 
   const ownedApparelMods = (() => {
-    const raw = parseJ(character.gear_mods, []);
-    return raw
+    return gearMods
       .filter((entry) => (entry?.modCategory || 'weapon') === 'apparel')
       .filter((entry) => (parseInt(entry?.quantity, 10) || 0) > 0)
       .map((entry) => {
@@ -240,9 +236,13 @@ export default function ApparelTab({ character, updateField }) {
     updateField({ apparel: JSON.stringify(updated) });
   };
 
-  const saveArmorList = (updated) => {
-    setArmorList(updated);
-    updateField({ armor_equipped: JSON.stringify(updated) });
+  const saveArmorList = (updatedArmor, updatedMods = gearMods) => {
+    setArmorList(updatedArmor);
+    setGearMods(updatedMods);
+    updateField({
+      armor_equipped: JSON.stringify(updatedArmor),
+      gear_mods: JSON.stringify(updatedMods),
+    });
   };
 
   const addFromRef = (a) => {
@@ -276,9 +276,68 @@ export default function ApparelTab({ character, updateField }) {
     if (changed) saveApparel(newApparel);
   };
 
-  const installArmorMods = (idx, installedMods) => {
-    const updated = armorList.map((item, i) => (i === idx ? { ...item, installedMods } : item));
-    saveArmorList(updated);
+  const updateModQuantity = (mods, modValue, delta, fallbackRef = null) => {
+    if (!modValue || !delta) return mods;
+    const next = [...mods];
+    const idx = next.findIndex((entry) =>
+      String(entry?.key || '').toLowerCase() === String(modValue || '').toLowerCase()
+      || normalizeName(entry?.name) === normalizeName(modValue)
+    );
+
+    if (idx >= 0) {
+      const current = parseInt(next[idx]?.quantity, 10) || 0;
+      next[idx] = { ...next[idx], quantity: Math.max(0, current + delta) };
+      return next;
+    }
+
+    if (delta > 0) {
+      const ref = fallbackRef || findRefApparelMod({ value: modValue, key: modValue, name: modValue, label: modValue });
+      next.push({
+        key: ref?.key || '',
+        name: ref?.label || String(modValue),
+        modCategory: 'apparel',
+        modType: ref?.modType || '',
+        quantity: delta,
+        weight: parseFloat(ref?.weight) || 0,
+        source: ref?.source || 'Core',
+        note: ref?.note || '',
+        effect: ref?.effect || '',
+        summary: ref?.summary || '',
+        perks: ref?.perks || '',
+      });
+    }
+    return next;
+  };
+
+  const installArmorMods = (idx, slotKey, nextValueRaw) => {
+    const armor = armorList[idx];
+    if (!armor) return;
+    const nextValue = nextValueRaw || '';
+    const currentInstalled = armor.installedMods && typeof armor.installedMods === 'object' ? armor.installedMods : {};
+    const prevValue = currentInstalled[slotKey] || '';
+    if (prevValue === nextValue) return;
+
+    let nextMods = [...gearMods];
+    if (prevValue) {
+      const prevRef = findRefApparelMod({ value: prevValue, key: prevValue, name: prevValue, label: prevValue });
+      nextMods = updateModQuantity(nextMods, prevValue, +1, prevRef);
+    }
+    if (nextValue) {
+      const availableEntry = nextMods.find((entry) =>
+        String(entry?.key || '').toLowerCase() === String(nextValue || '').toLowerCase()
+        || normalizeName(entry?.name) === normalizeName(nextValue)
+      );
+      if ((parseInt(availableEntry?.quantity, 10) || 0) <= 0) return;
+      const nextRef = findRefApparelMod({ value: nextValue, key: nextValue, name: nextValue, label: nextValue });
+      nextMods = updateModQuantity(nextMods, nextValue, -1, nextRef);
+    }
+
+    const nextInstalled = { ...currentInstalled };
+    if (!nextValue) delete nextInstalled[slotKey];
+    else nextInstalled[slotKey] = nextValue;
+
+    const updated = armorList.map((item, i) => (i === idx ? { ...item, installedMods: nextInstalled } : item));
+    saveArmorList(updated, nextMods);
   };
 
   const getSlotData = (key) => {
@@ -483,7 +542,7 @@ export default function ApparelTab({ character, updateField }) {
         <ApparelModsModal
           armorItem={armorList[activeModArmorIndex]}
           ownedApparelMods={ownedApparelMods}
-          onInstall={(installedMods) => installArmorMods(activeModArmorIndex, installedMods)}
+          onAssignSlot={(slotKey, value) => installArmorMods(activeModArmorIndex, slotKey, value)}
           onClose={() => setActiveModArmorIndex(null)}
         />
       )}

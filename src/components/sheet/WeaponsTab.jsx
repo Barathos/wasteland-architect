@@ -28,6 +28,85 @@ function normalizeLoose(value = '') {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
+function parseTagList(value = '') {
+  return String(value || '')
+    .split(',')
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+function formatTagList(values = []) {
+  return values.join(', ');
+}
+
+function parseDamageCd(value = '') {
+  const n = parseInt(String(value || '').replace(/[^0-9-]/g, ''), 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function formatDamageCd(value = 0) {
+  return `${Math.max(0, Number(value) || 0)} CD`;
+}
+
+function applyWeaponModsToWeapon(weapon = {}, refs = []) {
+  const baseDamage = weapon.baseDamage ?? weapon.damage ?? '';
+  const baseQualities = weapon.baseQualities ?? weapon.qualities ?? '';
+  const baseDamageEffect = weapon.baseDamageEffect ?? weapon.damageEffect ?? '';
+  const baseRange = weapon.baseRange ?? weapon.range ?? 'Close';
+  const baseFireRate = Number.isFinite(Number(weapon.baseFireRate)) ? Number(weapon.baseFireRate) : Number(weapon.fireRate || 0);
+
+  let damage = parseDamageCd(baseDamage);
+  let fireRate = baseFireRate;
+  let rangeStep = Math.max(0, RANGES.indexOf(baseRange));
+  const qualities = parseTagList(baseQualities);
+  const effects = parseTagList(baseDamageEffect);
+
+  const applyAddRemove = (arr, add = [], remove = []) => {
+    const removeSet = new Set(remove.map(normalizeLoose));
+    let next = arr.filter((v) => !removeSet.has(normalizeLoose(v)));
+    const existing = new Set(next.map(normalizeLoose));
+    add.forEach((v) => {
+      if (!existing.has(normalizeLoose(v))) {
+        next.push(v);
+        existing.add(normalizeLoose(v));
+      }
+    });
+    return next;
+  };
+
+  refs.forEach((mod) => {
+    if (!mod) return;
+    damage += Number(mod.damageDelta || 0);
+    fireRate += Number(mod.fireRateDelta || 0);
+    rangeStep += Number(mod.rangeDelta || 0);
+  });
+
+  const finalQualities = refs.reduce(
+    (acc, mod) => applyAddRemove(acc, mod?.addQualities || [], mod?.removeQualities || []),
+    qualities
+  );
+  const finalEffects = refs.reduce(
+    (acc, mod) => applyAddRemove(acc, mod?.addEffects || [], mod?.removeEffects || []),
+    effects
+  );
+
+  rangeStep = Math.min(RANGES.length - 1, Math.max(0, rangeStep));
+
+  return {
+    ...weapon,
+    baseDamage,
+    baseQualities,
+    baseDamageEffect,
+    baseRange,
+    baseFireRate,
+    damage: formatDamageCd(damage),
+    qualities: formatTagList(finalQualities),
+    damageEffect: formatTagList(finalEffects),
+    range: RANGES[rangeStep] || baseRange,
+    fireRate: Math.max(0, fireRate),
+  };
+}
+
 function findReferenceWeapon(weapon = {}) {
   const byKey = normalizeLookup(weapon.key);
   const bySourceName = normalizeLookup(weapon.sourceName);
@@ -164,17 +243,10 @@ function WeaponReferenceModal({ onSelect, onClose }) {
   );
 }
 
-function WeaponModsModal({ weapon, referenceWeapon, ownedWeaponMods, onChange, onClose }) {
+function WeaponModsModal({ weapon, referenceWeapon, ownedWeaponMods, onAssignSlot, onClose }) {
   const slotMap = getWeaponCompatibilitySlots(weapon, referenceWeapon);
   const slotKeys = Object.keys(slotMap).sort((a, b) => a.localeCompare(b));
   const installedMods = weapon.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
-
-  const updateSlot = (slotKey, value) => {
-    const next = { ...installedMods };
-    if (!value) delete next[slotKey];
-    else next[slotKey] = value;
-    onChange({ ...weapon, installedMods: next });
-  };
 
   const selectedForSlot = (slotKey) => {
     const raw = installedMods[slotKey];
@@ -204,6 +276,9 @@ function WeaponModsModal({ weapon, referenceWeapon, ownedWeaponMods, onChange, o
                 .filter((mod) => normalizeLoose(mod.modType) === normalizeLoose(slotKey))
                 .filter((mod) => allowedNames.size === 0 || allowedNames.has(normalizeLoose(mod.label)));
               const selected = selectedForSlot(slotKey);
+              const optionsWithSelected = selected && !options.find((mod) => (mod.key || mod.label) === (selected.key || selected.label))
+                ? [...options, { ...selected, quantity: 0 }]
+                : options;
 
               return (
                 <div key={slotKey} className="p-2.5" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
@@ -213,11 +288,11 @@ function WeaponModsModal({ weapon, referenceWeapon, ownedWeaponMods, onChange, o
                   </div>
                   <select
                     value={installedMods[slotKey] || ''}
-                    onChange={(e) => updateSlot(slotKey, e.target.value)}
+                    onChange={(e) => onAssignSlot(slotKey, e.target.value)}
                     style={{ width: '100%', background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', fontSize: '11px', padding: '4px 6px' }}
                   >
                     <option value="">— none —</option>
-                    {options.map((mod) => (
+                    {optionsWithSelected.map((mod) => (
                       <option key={mod.key || mod.label} value={mod.key || mod.label}>
                         {mod.label} (x{mod.quantity || 1})
                       </option>
@@ -238,7 +313,7 @@ function WeaponModsModal({ weapon, referenceWeapon, ownedWeaponMods, onChange, o
   );
 }
 
-function WeaponRow({ weapon, index, onChange, onRemove, ownedWeaponMods }) {
+function WeaponRow({ weapon, index, onChange, onRemove, onAssignSlot, ownedWeaponMods }) {
   const [editingAlias, setEditingAlias] = useState(false);
   const [showMods, setShowMods] = useState(false);
   const referenceWeapon = findReferenceWeapon(weapon);
@@ -413,7 +488,7 @@ function WeaponRow({ weapon, index, onChange, onRemove, ownedWeaponMods }) {
           weapon={weapon}
           referenceWeapon={referenceWeapon}
           ownedWeaponMods={ownedWeaponMods}
-          onChange={onChange}
+          onAssignSlot={onAssignSlot}
           onClose={() => setShowMods(false)}
         />
       )}
@@ -432,6 +507,9 @@ export default function WeaponsTab({ character, updateField }) {
   const [weapons, setWeapons] = useState(() => {
     try { return JSON.parse(character.equipment || '[]'); } catch { return []; }
   });
+  const [gearMods, setGearMods] = useState(() => {
+    try { return JSON.parse(character.gear_mods || '[]'); } catch { return []; }
+  });
   const [showRef, setShowRef] = useState(false);
   const [laserShots, setLaserShots] = useState(0);
   const isAssaultron = character.origin === 'Assaultron';
@@ -441,9 +519,7 @@ export default function WeaponsTab({ character, updateField }) {
   const capacitorLevel = character.assaultron_capacitor || 'Mk III';
   const capacitorInfo = CAPACITOR_OPTIONS.find(c => c.label === capacitorLevel) || CAPACITOR_OPTIONS[0];
   const ownedWeaponMods = (() => {
-    let raw = [];
-    try { raw = JSON.parse(character.gear_mods || '[]'); } catch { raw = []; }
-    return raw
+    return gearMods
       .filter((entry) => (entry?.modCategory || 'weapon') !== 'apparel')
       .filter((entry) => (parseInt(entry?.quantity, 10) || 0) > 0)
       .map((entry) => {
@@ -460,9 +536,92 @@ export default function WeaponsTab({ character, updateField }) {
       });
   })();
 
-  const save = (updated) => {
-    setWeapons(updated);
-    updateField({ equipment: JSON.stringify(updated) });
+  const save = (updatedWeapons, updatedGearMods = gearMods) => {
+    setWeapons(updatedWeapons);
+    setGearMods(updatedGearMods);
+    updateField({
+      equipment: JSON.stringify(updatedWeapons),
+      gear_mods: JSON.stringify(updatedGearMods),
+    });
+  };
+
+  const updateModQuantity = (mods, modValue, delta, fallbackRef = null) => {
+    if (!modValue || !delta) return mods;
+    const next = [...mods];
+    const idx = next.findIndex((entry) => {
+      const keyMatch = normalizeLookup(entry?.key) === normalizeLookup(modValue);
+      const nameMatch = normalizeLoose(entry?.name) === normalizeLoose(modValue);
+      return keyMatch || nameMatch;
+    });
+
+    if (idx >= 0) {
+      const current = parseInt(next[idx]?.quantity, 10) || 0;
+      next[idx] = { ...next[idx], quantity: Math.max(0, current + delta) };
+      return next;
+    }
+
+    if (delta > 0) {
+      const ref = fallbackRef || findReferenceWeaponMod({ value: modValue });
+      next.push({
+        key: ref?.key || '',
+        name: ref?.label || String(modValue),
+        modCategory: 'weapon',
+        modType: ref?.modType || '',
+        quantity: delta,
+        weight: parseFloat(ref?.weight) || 0,
+        source: ref?.source || 'Core',
+        note: ref?.note || '',
+        effect: ref?.effect || '',
+        summary: ref?.summary || '',
+        perks: ref?.perks || '',
+      });
+    }
+    return next;
+  };
+
+  const recalculateWeaponFromInstalledMods = (weapon) => {
+    const installed = weapon?.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
+    const refs = Object.values(installed)
+      .map((value) => findReferenceWeaponMod({ value }))
+      .filter(Boolean);
+    return applyWeaponModsToWeapon(weapon, refs);
+  };
+
+  const assignWeaponMod = (weaponIndex, slotKey, nextValueRaw) => {
+    const weapon = weapons[weaponIndex];
+    if (!weapon) return;
+    const nextValue = nextValueRaw || '';
+    const currentInstalled = weapon.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
+    const prevValue = currentInstalled[slotKey] || '';
+    if (prevValue === nextValue) return;
+
+    let nextMods = [...gearMods];
+    if (prevValue) {
+      const prevRef = findReferenceWeaponMod({ value: prevValue });
+      nextMods = updateModQuantity(nextMods, prevValue, +1, prevRef);
+    }
+    if (nextValue) {
+      const candidate = nextMods.find((entry) =>
+        normalizeLookup(entry?.key) === normalizeLookup(nextValue)
+        || normalizeLoose(entry?.name) === normalizeLoose(nextValue)
+      );
+      const available = parseInt(candidate?.quantity, 10) || 0;
+      if (available <= 0) return;
+      const nextRef = findReferenceWeaponMod({ value: nextValue });
+      nextMods = updateModQuantity(nextMods, nextValue, -1, nextRef);
+    }
+
+    const nextInstalled = { ...currentInstalled };
+    if (!nextValue) delete nextInstalled[slotKey];
+    else nextInstalled[slotKey] = nextValue;
+
+    const updatedWeapon = recalculateWeaponFromInstalledMods({
+      ...weapon,
+      installedMods: nextInstalled,
+    });
+
+    const updatedWeapons = weapons.map((w, idx) => (idx === weaponIndex ? updatedWeapon : w));
+    save(updatedWeapons, nextMods);
   };
 
   const addWeapon = () => {
@@ -485,6 +644,11 @@ export default function WeaponsTab({ character, updateField }) {
       weight: refWeapon.weight ? String(refWeapon.weight) : '',
       ammoType: refWeapon.ammo || '',
       note: refWeapon.note || '',
+      baseDamage: refWeapon.damage || '',
+      baseDamageEffect: refWeapon.damageEffect || '',
+      baseQualities: refWeapon.qualities || '',
+      baseRange: refWeapon.range || 'Short',
+      baseFireRate: Number(refWeapon.fireRate || 0),
     };
     save([...weapons, w]);
     setShowRef(false);
@@ -592,7 +756,15 @@ export default function WeaponsTab({ character, updateField }) {
           </div>
         ) : (
           weapons.map((w, i) => (
-            <WeaponRow key={i} weapon={w} index={i} onChange={d => updateWeapon(i, d)} onRemove={() => removeWeapon(i)} ownedWeaponMods={ownedWeaponMods} />
+            <WeaponRow
+              key={i}
+              weapon={w}
+              index={i}
+              onChange={d => updateWeapon(i, d)}
+              onRemove={() => removeWeapon(i)}
+              onAssignSlot={(slotKey, value) => assignWeaponMod(i, slotKey, value)}
+              ownedWeaponMods={ownedWeaponMods}
+            />
           ))
         )}
       </TooltipProvider>
