@@ -66,8 +66,53 @@ function normalizeAmmoEntry(entry) {
 }
 
 function getModDescription(mod = {}) {
-  const parts = [mod.effect, mod.summary, mod.note].filter((value) => String(value || '').trim().length > 0);
-  return parts.join(' ').trim();
+  const textParts = [mod.effect, mod.summary, mod.note].filter((value) => String(value || '').trim().length > 0);
+  if (textParts.length > 0) return textParts.join(' ').trim();
+
+  const parts = [];
+
+  const pushSigned = (value, label) => {
+    const num = Number(value || 0);
+    if (!Number.isFinite(num) || num === 0) return;
+    const sign = num > 0 ? '+' : '';
+    parts.push(`${sign}${num} ${label}`);
+  };
+
+  if (Array.isArray(mod.addQualities) && mod.addQualities.length > 0) {
+    parts.push(`Adds qualities: ${mod.addQualities.join(', ')}`);
+  }
+  if (Array.isArray(mod.removeQualities) && mod.removeQualities.length > 0) {
+    parts.push(`Removes qualities: ${mod.removeQualities.join(', ')}`);
+  }
+  if (Array.isArray(mod.addEffects) && mod.addEffects.length > 0) {
+    parts.push(`Adds effects: ${mod.addEffects.join(', ')}`);
+  }
+  if (Array.isArray(mod.removeEffects) && mod.removeEffects.length > 0) {
+    parts.push(`Removes effects: ${mod.removeEffects.join(', ')}`);
+  }
+
+  // Weapon mod mechanical fields
+  pushSigned(mod.damageDelta, 'CD damage');
+  pushSigned(mod.fireRateDelta, 'fire rate');
+  pushSigned(mod.rangeDelta, 'range step');
+
+  const damageTypeFlags = mod.damageTypeFlags || {};
+  const enabledDamageTypes = Object.entries(damageTypeFlags)
+    .filter(([, enabled]) => Boolean(enabled))
+    .map(([type]) => type.charAt(0).toUpperCase() + type.slice(1));
+  if (enabledDamageTypes.length > 0) {
+    parts.push(`Damage type: ${enabledDamageTypes.join('/')}`);
+  }
+
+  // Apparel mod mechanical fields
+  pushSigned(mod.healthDelta, 'armor HP');
+  const resist = mod.resistanceDelta || {};
+  pushSigned(resist.physical, 'Physical DR');
+  pushSigned(resist.energy, 'Energy DR');
+  pushSigned(resist.radiation, 'Radiation DR');
+  if (mod.shadowed) parts.push('Grants Shadowed');
+
+  return parts.join(' | ').trim();
 }
 
 function ModsReferenceModal({ onSelect, onClose }) {
