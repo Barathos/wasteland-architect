@@ -690,13 +690,25 @@ function buildWeaponModEffects(ref = {}, fallback = {}) {
   };
 }
 
+function deriveWeaponModNamePrefix(entry = {}, ref = {}) {
+  const explicit = String(pickFirst(entry?.namePrefix, ref?.namePrefix, '') || '').trim();
+  if (explicit) return explicit;
+
+  const label = normalizeName(pickFirst(entry?.name, entry?.label, entry?.value, ref?.label, ''));
+  const modType = normalizeName(pickFirst(entry?.modType, ref?.modType, ''));
+
+  if (modType === 'sight' || label.includes('scope') || label.includes('sight')) return 'Scoped';
+  if (label.includes('suppressor') || label.includes('silencer')) return 'Suppressed';
+  return '';
+}
+
 function buildWeaponModItem(entry = {}, options = {}) {
   const { attached = false, quantity = 1, fallbackWeaponType = '' } = options;
   const ref = findWeaponModReference(entry, fallbackWeaponType);
   const name = pickFirst(entry?.name, entry?.label, entry?.value, ref?.label, 'Weapon Mod');
   const description = String(pickFirst(entry?.note, ref?.note, '') || '');
   const modType = String(pickFirst(entry?.modType, ref?.modType, '') || '');
-  const namePrefix = String(pickFirst(entry?.namePrefix, ref?.namePrefix, '') || '');
+  const namePrefix = deriveWeaponModNamePrefix(entry, ref);
   const perks = String(pickFirst(entry?.perks, ref?.perks, '') || '');
   const qualities = String(pickFirst(entry?.qualities, ref?.qualities, '') || '');
   const item = makeItemBase(null, name, 'weapon_mod', 'systems/fallout/assets/icons/items/weapon_mod.svg');
