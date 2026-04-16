@@ -8,6 +8,7 @@ import {
   SOURCE_CHEMS,
   SOURCE_OTHER_CONSUMABLES,
   SOURCE_CORE_PERKS,
+  SOURCE_ROBOT_MODS,
 } from './sourceTruthData.generated.js';
 import {
   PDF_WEAPONS,
@@ -111,3 +112,4 @@ export const CORE_FOOD = mergeByLabel(SOURCE_FOOD, PDF_FOOD);
 export const CORE_CHEMS = mergeByLabel(SOURCE_CHEMS, PDF_CHEMS);
 export const CORE_OTHER_CONSUMABLES = mergeByLabel(SOURCE_OTHER_CONSUMABLES, PDF_OTHER_CONSUMABLES);
 export const CORE_PERKS = mergeByLabel(SOURCE_CORE_PERKS, [...PDF_PERK_CANDIDATES, ...SUPPLEMENT_PERKS]);
+export const CORE_ROBOT_MODS = [...SOURCE_ROBOT_MODS];

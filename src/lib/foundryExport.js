@@ -10,6 +10,7 @@ import {
   CORE_OTHER_CONSUMABLES,
   CORE_PERKS,
   CORE_POWER_ARMOR,
+  CORE_ROBOT_MODS,
   CORE_WEAPONS,
 } from "./sourceTruthData.js";
 import { getEffectiveSkillRank, getSkillRankCapForCharacter, getMergedTagSkills, isNightkinCharacter } from "./falloutData.js";
@@ -393,6 +394,7 @@ const CHEM_LOOKUP = buildLookup(CORE_CHEMS);
 const FOOD_LOOKUP = buildLookup(CORE_FOOD);
 const OTHER_CONSUMABLE_LOOKUP = buildLookup(CORE_OTHER_CONSUMABLES);
 const PERK_LOOKUP = buildLookup(CORE_PERKS);
+const ROBOT_MOD_LOOKUP = buildLookup(CORE_ROBOT_MODS);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Metadata builders
@@ -822,20 +824,25 @@ function buildMiscellanyItem(entry) {
 }
 
 function buildRobotModItem(entry) {
-  const name = pickFirst(entry.name, entry.label, 'Robot Mod');
+  const ref = findInLookup(ROBOT_MOD_LOOKUP, [entry.key, entry.name, entry.label]);
+  const name = pickFirst(entry.name, entry.label, ref?.label, 'Robot Mod');
   const qty = safeQty(entry.quantity, 1);
-  const effect = pickFirst(entry.effect, entry.note, entry.notes, '');
+  const effect = pickFirst(entry.effect, ref?.effect, entry.note, entry.notes, '');
+  const description = pickFirst(entry.note, entry.notes, ref?.note, '');
   const item = makeItemBase(null, name, 'robot_mod', 'systems/fallout/assets/icons/items/robot_mod.svg');
   item.system = createSystemFromTemplate('robot_mod', {
-    description: effect ? `<p>${stripHtml(effect)}</p>` : '',
-    source: 'custom',
-    cost: parseInt(entry.cost, 10) || 0,
+    description: description ? `<p>${stripHtml(description)}</p>` : (effect ? `<p>${stripHtml(effect)}</p>` : ''),
+    source: ref ? 'core_rulebook' : pickFirst(entry.source, 'custom'),
+    cost: parseInt(pickFirst(entry.cost, ref?.cost, 0), 10) || 0,
     quantity: qty,
-    rarity: parseInt(entry.rarity, 10) || 0,
-    weight: parseFloat(entry.weight) || 0,
+    rarity: parseInt(pickFirst(entry.rarity, ref?.rarity, 0), 10) || 0,
+    weight: parseFloat(pickFirst(entry.weight, ref?.weight, 0)) || 0,
     effect: effect || '',
-    perks: entry.perks || '',
+    perks: pickFirst(entry.perks, ref?.perks, ''),
   });
+  if (ref?.foundryUuid) {
+    item._stats.compendiumSource = ref.foundryUuid;
+  }
   return item;
 }
 

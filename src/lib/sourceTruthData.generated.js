@@ -8810,3 +8810,162 @@ export const SOURCE_CORE_PERKS = [
   }
 ];
 
+export const SOURCE_ROBOT_MODS = [
+  {
+    "key": "behavioral_analysis_mod_vdsrqwbeklvgq57p",
+    "label": "Behavioral Analysis Mod",
+    "effect": "Reduce the difficulty of Speech tests by 1 (min. 0)",
+    "perks": "Robotics Expert 1",
+    "weight": 0,
+    "cost": 50,
+    "rarity": 3,
+    "source": "Core",
+    "note": "Employed to aid Miss Nanny model robots in their childcare duties, these behavioral analysis modules were a successful offshoot from a U.S. Military designed to engineer robots that could assist in interrogations by interpreting behavior and determining truthfulness. The fate of the original project is unknown, but the offshoot used in Miss Nanny robots was well-received.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.vDsRqWBeKLVgq57P"
+  },
+  {
+    "key": "diagnosis_mod_j6x12iwc3tuybb64",
+    "label": "Diagnosis Mod",
+    "effect": "Reduce the difficulty of Medicine tests by 1 (min. 0)",
+    "perks": "Robotics Expert 1",
+    "weight": 0,
+    "cost": 50,
+    "rarity": 3,
+    "source": "Core",
+    "note": "Designed to allow Mister Handy robots to be repurposed as nurses and field medics during a crisis, the diagnosis module allows the robot to discern the nature of injuries and illnesses on a patient and devise the correct treatment quickly. Proper bedside manner, however, was not included in the module.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.J6X12IWC3TuYbb64"
+  },
+  {
+    "key": "hacking_mod_haxybqo6qgu0kogj",
+    "label": "Hacking Mod",
+    "effect": "Reduces the difficulty of Science tests to hack into locked computer systems by 1 (min. 0)",
+    "perks": "",
+    "weight": 0,
+    "cost": 25,
+    "rarity": 2,
+    "source": "Core",
+    "note": "In addition to a library of decryption software and known software flaws, the hacking module fits the robot with an external interface jack, allowing them to connect directly to a computer and interface with it directly. Ideal for robots whose manipulator claws are poorly suited to operating a keyboard.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.haxyBQO6QGu0KOGj"
+  },
+  {
+    "key": "hazard_detection_mod_zgoppc2xyniym1bg",
+    "label": "Hazard Detection Mod",
+    "effect": "Reduce the difficulty of Survival tests to detect and disable traps and similar hazards by 1 (min. 0)",
+    "perks": "",
+    "weight": 0,
+    "cost": 25,
+    "rarity": 2,
+    "source": "Core",
+    "note": "Developed for cheap, disposable trap-clearance robots to accompany soldiers in enemy territory, this hazard detection and analysis system modifies the robot's sensory awareness to identify and categorize potential environmental threats and hazards. Repurposed for the Miss Nanny to spot dangers to children in the household, the system's developers never fully removed the urge to go towards hazards to investigate them more closely.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.ZgOppC2XynIyM1bg"
+  },
+  {
+    "key": "integral_boiler_mod_bzuxvww6glp5zgnq",
+    "label": "Integral Boiler Mod",
+    "effect": "Once per scene out of combat, turn 2 dirty waters into 1 purified water in ten minutes",
+    "perks": "",
+    "weight": -10,
+    "cost": 15,
+    "rarity": 1,
+    "source": "Core",
+    "note": "A standard part of the domestic model Mister Handy, the internal boiler was to be used to provide hot tea and coffee in the morning for the robot's owners, as well as a ready source of hot water for food preparation and household cleaning purposes. Post-War, Mister Handy units with a functional boiler are sought-after companions, as thoroughly boiling water is one way to clean it and make it safe to drink. A self-cleaning mechanism keeps it from becoming contaminated between uses, though this does take some time to work",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.bzUxVWw6gLP5ZgNq"
+  },
+  {
+    "key": "lockpick_module_vwsi4akt5mdnccci",
+    "label": "Lockpick Module",
+    "effect": "Reduce the difficulty of Lockpick tests by 1 (min. 0), Does not need bobby pins or other lockpicking tools",
+    "perks": "",
+    "weight": -5,
+    "cost": 5,
+    "rarity": 2,
+    "source": "Core",
+    "note": "In addition to a catalogue of locking mechanisms and their known weaknesses and configurations, this module refits a manipulator claw with a hidden set of locksmith's tools in an articulated mount, allowing the robot to pick locks without needing to handle tools directly.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.VWsI4akT5mdNCcci"
+  },
+  {
+    "key": "radiation_coils_mylklpsjf9nqnptn",
+    "label": "Radiation Coils",
+    "effect": "Can turn on or off at the start of a turn. While on, all creatures within Reach suffer 3CD Radiation damage at the end of the robot's turn",
+    "perks": "Robotics Expert 1",
+    "weight": -10,
+    "cost": 50,
+    "rarity": 3,
+    "source": "Core",
+    "note": "A series of antennae placed on the surface of the robot projects deadly radiation over a short distance to harm and repel intruders. An internal switch allows the robot to disable the coils if allies stray too near, as the radiation is just as harmful to friends (at least, if those friends are normal humans).",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.myLKlpSjf9nqNpTN"
+  },
+  {
+    "key": "recon_sensors_a1r1rtanufddmees",
+    "label": "Recon Sensors",
+    "effect": "Reduce difficulty of tests to detect hidden opponents by 1 (min. 0), Enemies visible to you who attempt to hide add +1 to the difficulty of their Sneak tests",
+    "perks": "Robotics Expert 1",
+    "weight": -5,
+    "cost": 50,
+    "rarity": 3,
+    "source": "Core",
+    "note": "Designed to aid with target acquisition and patrol efficiency in Mister Gutsy military robots, these recon sensors allow the robot to not only detect foes more easily (and more quickly determine friend from foe, after a number of early friendly-fire incidents) but also to track and predict the movements of enemies who were no longer visible, making it harder for enemies to escape.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.a1R1RTaNUfdDmEeS"
+  },
+  {
+    "key": "regeneration_field_o3dqsgilsywssx0n",
+    "label": "Regeneration Field",
+    "effect": "Outside of combat, allies regain 2 HP at the start of each scene you are present within",
+    "perks": "Robotics Expert 2, Science! 2",
+    "weight": -25,
+    "cost": 125,
+    "rarity": 5,
+    "source": "Core",
+    "note": "An experimental technology designed to provide aid to injured people where extensive medical care is in short supply, the robot is fitted with a device which projects a restorative signal over a short distance which stimulates the human body's natural healing processes.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.O3dQsgilsyWSSX0n"
+  },
+  {
+    "key": "resistance_field_hk5gdwosxyvsudxg",
+    "label": "Resistance Field",
+    "effect": "Allies within Close range receive +2 Physical damage resistance",
+    "perks": "Robotics Expert 1, Science! 1",
+    "weight": -20,
+    "cost": 75,
+    "rarity": 4,
+    "source": "Core",
+    "note": "An unusual technology intended to provide soldiers with additional protection from enemy fire. The robot emits a magnetic field directed towards the enemy which disrupts the flight path of bullets and other projectiles, causing them to lose momentum and efficacy.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.hk5GDwOsxYVsudxG"
+  },
+  {
+    "key": "sensor_array_jvm19nhhpkdowa8w",
+    "label": "Sensor Array",
+    "effect": "Re-roll 1d20 on all PER tests, May attempt PER tests to detect things which cannot normally be detected by the naked eye, such as radiation",
+    "perks": "Robotics Expert 1",
+    "weight": -15,
+    "cost": 50,
+    "rarity": 3,
+    "source": "Core",
+    "note": "Additional sensor modules and sensory processing systems accompany the robot's normal optical and auditory sensors, allowing it to perceive the world in more detail and in more ways than normal eyes and ears can.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.jvM19NhHpkDowa8W"
+  },
+  {
+    "key": "stealth_field_tyxeerpgmtdiab9t",
+    "label": "Stealth Field",
+    "effect": "Allies within Close range may re-roll 1d20 on Stealth tests",
+    "perks": "Robotics Expert 1",
+    "weight": -20,
+    "cost": 50,
+    "rarity": 3,
+    "source": "Core",
+    "note": "Based on the same technology as the Stealth Boy, the robot produces a low-level refraction field which bends and displaces light, camouflaging itself and those nearby. The lower intensity camouflage allows the field to last far longer without burning out the components of the device or draining the robot's power supply, but it cannot provide true invisibility.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.tYXeeRpgmtDiaB9t"
+  },
+  {
+    "key": "tesla_coils_lz3myiqbdm43erbv",
+    "label": "Tesla Coils",
+    "effect": "Can turn on or off at the start of a turn, While on, all enemies within Reach suffer 4CD Piercing 1, Stun Energy damage at the end of the robot's turn",
+    "perks": "Robotics Expert 2, Science! 1",
+    "weight": -25,
+    "cost": 100,
+    "rarity": 5,
+    "source": "Core",
+    "note": "A collection of antennae on the robot's outer surface allow it to direct electrical discharges over a short distance to nearby aggressors. The partially directed nature of these discharges mean that allies are not at risk of more than a mild shock, while enemies may suffer severe electrical burns.",
+    "foundryUuid": "Compendium.fallout.robot_modules.Item.Lz3mYiqbDM43eRBV"
+  }
+];
+

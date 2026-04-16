@@ -364,18 +364,35 @@ function mapPerk(item) {
   };
 }
 
+function mapRobotMod(item) {
+  const system = item.system || {};
+  return {
+    key: slugify(`${item.name}_${item._id}`),
+    label: item.name,
+    effect: stripHtml(system.effect || ''),
+    perks: stripHtml(system.perks || ''),
+    weight: Number(system.weight || 0),
+    cost: Number(system.cost || 0),
+    rarity: Number(system.rarity || 0),
+    source: sourceLabel(system.source),
+    note: stripHtml(system.description || ''),
+    foundryUuid: compendiumUuid('robot_modules', item._id),
+  };
+}
+
 function stableSortByLabel(a, b) {
   return String(a.label).localeCompare(String(b.label));
 }
 
 async function main() {
-  const [weaponsRaw, apparelRaw, ammoRaw, consumablesRaw, perksRaw, addictionsRaw] = await Promise.all([
+  const [weaponsRaw, apparelRaw, ammoRaw, consumablesRaw, perksRaw, addictionsRaw, robotModsRaw] = await Promise.all([
     readPackItems('weapons'),
     readPackItems('apparel'),
     readPackItems('ammunition'),
     readPackItems('consumables'),
     readPackItems('perks'),
     readPackItems('addictions'),
+    readPackItems('robot_modules'),
   ]);
 
   const addictionLookup = {};
@@ -411,6 +428,7 @@ async function main() {
   const sourceOtherConsumables = consumables.filter((c) => c.group === 'other').map((c) => c.value).sort(stableSortByLabel);
 
   const sourceCorePerks = perksRaw.map(mapPerk).sort(stableSortByLabel);
+  const sourceRobotMods = robotModsRaw.map(mapRobotMod).sort(stableSortByLabel);
 
   const header = `// AUTO-GENERATED FILE. DO NOT EDIT BY HAND.\n// Generated from Foundry source-of-truth packs in ./Reference/packs\n\n`;
   const payload = {
@@ -423,6 +441,7 @@ async function main() {
     SOURCE_CHEMS: sourceChems,
     SOURCE_OTHER_CONSUMABLES: sourceOtherConsumables,
     SOURCE_CORE_PERKS: sourceCorePerks,
+    SOURCE_ROBOT_MODS: sourceRobotMods,
   };
 
   let content = header;
