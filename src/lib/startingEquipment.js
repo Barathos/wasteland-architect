@@ -3,6 +3,7 @@ import { ORIGIN_PACKS, TAG_SKILL_ITEMS } from './falloutData';
 import { CORE_WEAPONS } from './sourceTruthData';
 import { CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from './sourceTruthData';
 import { CORE_ROBOT_MODS } from './sourceTruthData';
+import { CORE_CHEMS, CORE_FOOD, CORE_MISCELLANY, CORE_OTHER_CONSUMABLES } from './sourceTruthData';
 
 function safeJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
@@ -65,8 +66,22 @@ const LEGACY_ROBOT_MOD_NAME_MAP = {
   'recon sensors mod': 'recon sensors',
   'protectron sensors': 'sensor array',
 };
+const LEGACY_CHEM_NAME_MAP = {
+  'stimpacks': 'stimpak',
+};
+const LEGACY_FOOD_NAME_MAP = {
+  'iguana on a stick': 'iguana bits',
+};
+const LEGACY_MISC_NAME_MAP = {
+  'multitool': 'multi-tool',
+  'brotherhood holotags': 'holotags',
+  'purified water': 'purified water',
+};
 const ALL_APPAREL = [...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR];
 const ALL_ROBOT_MODS = [...CORE_ROBOT_MODS];
+const ALL_CHEMS = [...CORE_CHEMS];
+const ALL_FOOD = [...CORE_FOOD];
+const ALL_MISCELLANY = [...CORE_MISCELLANY, ...CORE_OTHER_CONSUMABLES];
 
 function parseQuantityPrefix(rawName = '') {
   const text = String(rawName || '').trim();
@@ -204,6 +219,46 @@ function normalizeRobotModLookupName(rawName = '') {
   return LEGACY_ROBOT_MOD_NAME_MAP[base] || base;
 }
 
+function normalizeGenericLookupName(rawName = '', legacyMap = {}) {
+  const base = String(rawName || '')
+    .split('+')[0]
+    .split('(')[0]
+    .trim()
+    .toLowerCase()
+    .replace(/[']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+  return legacyMap[base] || base;
+}
+
+function findByLabel(collection = [], name = '', legacyMap = {}) {
+  const clean = normalizeGenericLookupName(name, legacyMap);
+  let best = null;
+  let bestScore = -1;
+
+  for (const entry of collection) {
+    const label = normalizeGenericLookupName(entry?.label || entry?.name || '', legacyMap);
+    const aliases = Array.isArray(entry?.aliases)
+      ? entry.aliases.map((a) => normalizeGenericLookupName(a, legacyMap))
+      : [];
+    let score = -1;
+
+    if (label === clean) score = 100;
+    else if (aliases.includes(clean)) score = 95;
+    else if (label.includes(clean)) score = 80;
+    else if (aliases.some((a) => a.includes(clean))) score = 75;
+    else if (clean.includes(label)) score = 60;
+    else if (aliases.some((a) => clean.includes(a))) score = 55;
+
+    if (score > bestScore) {
+      best = entry;
+      bestScore = score;
+    }
+  }
+
+  return best;
+}
+
 function findRobotModByName(name) {
   const clean = normalizeRobotModLookupName(name);
   let best = null;
@@ -249,6 +304,45 @@ function buildRobotModEntry(itemName, quantity = 1) {
     cost: Number(found.cost || 0),
     weight: Number(found.weight || 0),
     key: found.key || '',
+  };
+}
+
+function buildChemEntry(itemName, quantity = 1, note = '') {
+  const parsed = parseQuantityPrefix(itemName);
+  const resolvedQuantity = Math.max(1, Number(quantity || 1)) * Math.max(1, parsed.quantity || 1);
+  const found = findByLabel(ALL_CHEMS, parsed.name, LEGACY_CHEM_NAME_MAP);
+  return {
+    name: found?.label || parsed.name,
+    label: found?.label || parsed.name,
+    quantity: resolvedQuantity,
+    source: 'starting_equipment',
+    note: note || found?.note || '',
+  };
+}
+
+function buildFoodEntry(itemName, quantity = 1, note = '') {
+  const parsed = parseQuantityPrefix(itemName);
+  const resolvedQuantity = Math.max(1, Number(quantity || 1)) * Math.max(1, parsed.quantity || 1);
+  const found = findByLabel(ALL_FOOD, parsed.name, LEGACY_FOOD_NAME_MAP);
+  return {
+    name: found?.label || parsed.name,
+    label: found?.label || parsed.name,
+    quantity: resolvedQuantity,
+    source: 'starting_equipment',
+    note: note || found?.note || '',
+  };
+}
+
+function buildMiscEntry(itemName, quantity = 1, note = '') {
+  const parsed = parseQuantityPrefix(itemName);
+  const resolvedQuantity = Math.max(1, Number(quantity || 1)) * Math.max(1, parsed.quantity || 1);
+  const found = findByLabel(ALL_MISCELLANY, parsed.name, LEGACY_MISC_NAME_MAP);
+  return {
+    name: found?.label || parsed.name,
+    quantity: resolvedQuantity,
+    source: 'starting_equipment',
+    note: note || found?.note || '',
+    effect: found?.effect || '',
   };
 }
 
@@ -347,7 +441,6 @@ function applyChoiceGrantToInventory(grant, state) {
   if (!grant || typeof grant !== 'object') return;
   const quantity = resolveItemQuantity(grant);
   const name = grant.name || '';
-  const base = { name, quantity, source: 'starting_equipment', note: grant.note || '' };
 
   switch (grant.type) {
     case 'weapon': {
@@ -386,13 +479,13 @@ function applyChoiceGrantToInventory(grant, state) {
       }
       break;
     case 'consumable':
-      state.chems.push({ ...base, label: name });
+      state.chems.push(buildChemEntry(name, quantity, grant.note || ''));
       break;
     case 'food':
-      state.food.push({ ...base, label: name });
+      state.food.push(buildFoodEntry(name, quantity, grant.note || ''));
       break;
     case 'miscellany':
-      state.misc.push(base);
+      state.misc.push(buildMiscEntry(name, quantity, grant.note || ''));
       break;
     case 'robot_mod':
       {
@@ -442,7 +535,6 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
 
   autoItems.forEach(item => {
     const quantity = resolveItemQuantity(item);
-    const base = { name: item.name, quantity, source: 'starting_equipment', note: item.note || '' };
     switch (item.type) {
       case 'weapon':
         {
@@ -498,10 +590,10 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
         }
         break;
       case 'consumable':
-        chems.push({ ...base, label: item.name });
+        chems.push(buildChemEntry(item.name, quantity, item.note || ''));
         break;
       case 'food':
-        food.push({ ...base, label: item.name });
+        food.push(buildFoodEntry(item.name, quantity, item.note || ''));
         break;
       case 'robot_mod':
         {
@@ -514,7 +606,7 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
         }
         break;
       case 'miscellany':
-        misc.push(base);
+        misc.push(buildMiscEntry(item.name, quantity, item.note || ''));
         break;
       case 'currency':
         caps += quantity;

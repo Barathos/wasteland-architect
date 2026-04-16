@@ -22,7 +22,6 @@ import {
   PDF_OTHER_CONSUMABLES,
   PDF_PERK_CANDIDATES,
 } from './pdfSupplementData.generated.js';
-import { PERKS, WANDERERS_PERKS } from './falloutData.js';
 
 function mergeByLabel(baseRows = [], supplementRows = []) {
   const map = new Map();
@@ -77,32 +76,6 @@ function withWeaponNotes(weapons = []) {
   });
 }
 
-function normalizeLegacySupplementPerks() {
-  const settlersPerks = PERKS
-    .filter((perk) => String(perk?.source || '').toLowerCase() === 'settlers')
-    .map((perk) => ({
-      key: perk.key,
-      label: perk.label,
-      ranks: perk.maxRanks || perk.ranks || 1,
-      requirements: perk.requirements || perk.requirement || {},
-      source: perk.source || 'Settlers',
-      description: perk.description || '',
-    }));
-
-  const wanderersPerks = WANDERERS_PERKS.map((perk) => ({
-    key: perk.key,
-    label: perk.label,
-    ranks: perk.ranks || perk.maxRanks || 1,
-    requirements: perk.requirements || perk.requirement || {},
-    source: perk.source || 'Wanderers',
-    description: perk.description || '',
-  }));
-
-  return [...settlersPerks, ...wanderersPerks];
-}
-
-const SUPPLEMENT_PERKS = normalizeLegacySupplementPerks();
-
 // Canonical data exported from the Foundry VTT Reference system.
 export const CORE_WEAPONS = withWeaponNotes(mergeByLabel(SOURCE_WEAPONS, PDF_WEAPONS));
 export const CORE_AMMO = mergeByLabel(SOURCE_AMMO, PDF_AMMO);
@@ -112,6 +85,6 @@ export const CORE_POWER_ARMOR = mergeByLabel(SOURCE_POWER_ARMOR, PDF_POWER_ARMOR
 export const CORE_FOOD = mergeByLabel(SOURCE_FOOD, PDF_FOOD);
 export const CORE_CHEMS = mergeByLabel(SOURCE_CHEMS, PDF_CHEMS);
 export const CORE_OTHER_CONSUMABLES = mergeByLabel(SOURCE_OTHER_CONSUMABLES, PDF_OTHER_CONSUMABLES);
-export const CORE_PERKS = mergeByLabel(SOURCE_CORE_PERKS, [...PDF_PERK_CANDIDATES, ...SUPPLEMENT_PERKS]);
+export const CORE_PERKS = mergeByLabel(SOURCE_CORE_PERKS, PDF_PERK_CANDIDATES);
 export const CORE_ROBOT_MODS = [...SOURCE_ROBOT_MODS];
 export const CORE_MISCELLANY = [...SOURCE_MISCELLANY];
