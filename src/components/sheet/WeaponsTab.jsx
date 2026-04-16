@@ -89,6 +89,19 @@ function applyWeaponModsToWeapon(weapon = {}, refs = []) {
     (acc, mod) => applyAddRemove(acc, mod?.addEffects || [], mod?.removeEffects || []),
     effects
   );
+  const baseName = weapon.sourceName || weapon.baseName || weapon.name || 'Weapon';
+  const prefixes = [];
+  refs.forEach((mod) => {
+    const prefix = String(mod?.namePrefix || '').trim();
+    if (!prefix) return;
+    if (!prefixes.find((p) => normalizeLoose(p) === normalizeLoose(prefix))) {
+      prefixes.push(prefix);
+    }
+  });
+  const nextAutoName = `${prefixes.join(' ')} ${baseName}`.trim();
+  const previousAutoName = weapon.autoName || baseName;
+  const currentName = String(weapon.name || '').trim();
+  const isCustomAlias = Boolean(currentName) && normalizeLoose(currentName) !== normalizeLoose(previousAutoName);
 
   rangeStep = Math.min(RANGES.length - 1, Math.max(0, rangeStep));
 
@@ -104,6 +117,9 @@ function applyWeaponModsToWeapon(weapon = {}, refs = []) {
     damageEffect: formatTagList(finalEffects),
     range: RANGES[rangeStep] || baseRange,
     fireRate: Math.max(0, fireRate),
+    autoName: nextAutoName,
+    baseName,
+    name: isCustomAlias ? weapon.name : nextAutoName,
   };
 }
 
@@ -653,6 +669,8 @@ export default function WeaponsTab({ character, updateField }) {
       creatureSkill: refWeapon.creatureSkill || '',
       creatureAttribute: refWeapon.creatureAttribute || '',
       modsMax: Number(refWeapon.modsMax || 0),
+      baseName: refWeapon.label,
+      autoName: refWeapon.label,
     };
     save([...weapons, w]);
     setShowRef(false);
