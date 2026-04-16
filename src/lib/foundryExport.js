@@ -615,23 +615,93 @@ function findWeaponCompatibilityMap(ref = null, weapon = {}) {
   return {};
 }
 
-function buildWeaponModEffectsString(ref = {}, fallback = {}) {
+function mapWeaponQualityKey(label = '') {
+  const norm = normalizeName(label);
+  const map = {
+    accurate: 'accurate',
+    aquatic: 'aquatic',
+    'ammo hungry': 'ammo_hungry_x',
+    blast: 'blast',
+    bombard: 'bombard',
+    'close quarters': 'close_quarters',
+    concealed: 'concealed',
+    debilitating: 'debilitating',
+    delay: 'delay_x',
+    gatling: 'gatling',
+    'fuel': 'fuel_x',
+    inaccurate: 'inaccurate',
+    limited: 'limited',
+    mine: 'mine',
+    'night vision': 'night_vision',
+    parry: 'parry',
+    placed: 'placed',
+    recoil: 'recoil_x',
+    recon: 'recon',
+    reliable: 'reliable',
+    'slow load': 'slow_load',
+    suppressed: 'suppressed',
+    surge: 'surge',
+    thrown: 'thrown',
+    'two handed': 'two_handed',
+    unreliable: 'unreliable',
+    'unstable radiation': 'unstable_radiation',
+    wrangle: 'wrangle',
+  };
+  return map[norm] || null;
+}
+
+function buildWeaponModEffects(ref = {}, fallback = {}) {
   const damageDelta = Number(ref?.damageDelta ?? fallback?.damageDelta ?? 0) || 0;
   const fireRateDelta = Number(ref?.fireRateDelta ?? fallback?.fireRateDelta ?? 0) || 0;
   const rangeDelta = Number(ref?.rangeDelta ?? fallback?.rangeDelta ?? 0) || 0;
-  const summary = pickFirst(ref?.summary, fallback?.summary, '');
-  const effect = pickFirst(ref?.effect, fallback?.effect, '');
-  const info = pickFirst(ref?.note, fallback?.note, '');
-  return `@{ammo=; ammoPerShot=0; damage=${damageDelta}; effect=${effect}; fireRate=${fireRateDelta}; info=${info}; range=${rangeDelta}; summary=${summary}; damageEffect=; damageRating=0}`;
+  const summary = String(ref?.summary ?? fallback?.summary ?? '');
+  const effect = String(ref?.effect ?? fallback?.effect ?? '');
+  const info = String(ref?.note ?? fallback?.note ?? '');
+  const quality = deepClone(ITEM_TEMPLATES.weapon.damage.weaponQuality);
+
+  const addQualities = Array.isArray(ref?.addQualities) ? ref.addQualities : [];
+  const removeQualities = Array.isArray(ref?.removeQualities) ? ref.removeQualities : [];
+  for (const q of addQualities) {
+    const key = mapWeaponQualityKey(q);
+    if (key && quality[key]) quality[key].value = 1;
+  }
+  for (const q of removeQualities) {
+    const key = mapWeaponQualityKey(q);
+    if (key && quality[key]) quality[key].value = -1;
+  }
+
+  return {
+    ammo: '',
+    ammoPerShot: 0,
+    damage: {
+      damageEffect: deepClone(ITEM_TEMPLATES.weapon.damage.damageEffect),
+      damageType: { energy: false, physical: false, poison: false, radiation: false },
+      overrideDamage: 'modify',
+      rating: damageDelta,
+      weaponQuality: quality,
+    },
+    effect,
+    fireRate: fireRateDelta,
+    info,
+    range: rangeDelta,
+    summary,
+    damageEffect: '',
+    damageRating: 0,
+  };
 }
 
 function buildWeaponModItem(entry = {}, options = {}) {
   const { attached = false, quantity = 1, fallbackWeaponType = '' } = options;
   const ref = findWeaponModReference(entry, fallbackWeaponType);
   const name = pickFirst(entry?.name, entry?.label, entry?.value, ref?.label, 'Weapon Mod');
+  const description = String(pickFirst(entry?.note, ref?.note, '') || '');
+  const modType = String(pickFirst(entry?.modType, ref?.modType, '') || '');
+  const namePrefix = String(pickFirst(entry?.namePrefix, ref?.namePrefix, '') || '');
+  const perks = String(pickFirst(entry?.perks, ref?.perks, '') || '');
+  const qualities = String(pickFirst(entry?.qualities, ref?.qualities, '') || '');
   const item = makeItemBase(null, name, 'weapon_mod', 'systems/fallout/assets/icons/items/weapon_mod.svg');
   item.system = createSystemFromTemplate('weapon_mod', {
-    description: pickFirst(entry?.note, ref?.note, '') ? `<p>${stripHtml(pickFirst(entry?.note, ref?.note, ''))}</p>` : '',
+    description: description ? `<p>${stripHtml(description)}</p>` : '',
     source: ref?.foundryUuid ? 'core_rulebook' : 'custom',
     cost: parseInt(pickFirst(entry?.cost, ref?.cost, 0), 10) || 0,
     quantity: safeQty(entry?.quantity, quantity),
@@ -639,11 +709,11 @@ function buildWeaponModItem(entry = {}, options = {}) {
     weight: parseFloat(pickFirst(entry?.weight, ref?.weight, 0)) || 0,
     attachable: true,
     attached: Boolean(attached),
-    modEffects: buildWeaponModEffectsString(ref, entry),
-    modType: mapWeaponModType(pickFirst(entry?.modType, ref?.modType, '')),
-    namePrefix: pickFirst(entry?.namePrefix, ref?.namePrefix, ''),
-    perks: pickFirst(entry?.perks, ref?.perks, ''),
-    qualities: pickFirst(entry?.qualities, ref?.qualities, ''),
+    modEffects: buildWeaponModEffects(ref, entry),
+    modType: mapWeaponModType(modType),
+    namePrefix,
+    perks,
+    qualities,
     weaponType: mapWeaponType(pickFirst(entry?.weaponType, ref?.weaponType, fallbackWeaponType || 'Melee')),
   });
   if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
