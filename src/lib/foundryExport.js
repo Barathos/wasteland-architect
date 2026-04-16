@@ -656,7 +656,10 @@ function buildWeaponModEffects(ref = {}, fallback = {}) {
   const rangeDelta = Number(ref?.rangeDelta ?? fallback?.rangeDelta ?? 0) || 0;
   const summary = String(ref?.summary ?? fallback?.summary ?? '');
   const effect = String(ref?.effect ?? fallback?.effect ?? '');
-  const info = String(ref?.note ?? fallback?.note ?? '');
+  const info = String(ref?.info ?? fallback?.info ?? ref?.note ?? fallback?.note ?? '');
+  const overrideDamage = String(ref?.overrideDamage ?? fallback?.overrideDamage ?? 'modify') || 'modify';
+  const ammoOverride = String(ref?.ammoOverride ?? fallback?.ammoOverride ?? '');
+  const ammoPerShotOverride = Number(ref?.ammoPerShotOverride ?? fallback?.ammoPerShotOverride ?? 0) || 0;
   const quality = deepClone(ITEM_TEMPLATES.weapon.damage.weaponQuality);
 
   const addQualities = Array.isArray(ref?.addQualities) ? ref.addQualities : [];
@@ -671,12 +674,12 @@ function buildWeaponModEffects(ref = {}, fallback = {}) {
   }
 
   return {
-    ammo: '',
-    ammoPerShot: 0,
+    ammo: ammoOverride,
+    ammoPerShot: ammoPerShotOverride,
     damage: {
       damageEffect: deepClone(ITEM_TEMPLATES.weapon.damage.damageEffect),
       damageType: { energy: false, physical: false, poison: false, radiation: false },
-      overrideDamage: 'modify',
+      overrideDamage,
       rating: damageDelta,
       weaponQuality: quality,
     },
@@ -862,6 +865,11 @@ function buildWeaponItem(w) {
     weight: pickFirst(w.weight, ref?.weight, 0),
     quantity: safeQty(w.quantity, 1),
     notes: pickFirst(w.note, w.notes, ref?.note, ''),
+    ammoPerShot: pickFirst(w.ammoPerShot, w.ammo_per_shot, ref?.ammoPerShot, 1),
+    creatureSkill: pickFirst(w.creatureSkill, ref?.creatureSkill, null),
+    creatureAttribute: pickFirst(w.creatureAttribute, ref?.creatureAttribute, ''),
+    modsMax: pickFirst(w.modsMax, ref?.modsMax, 0),
+    skill: pickFirst(w.skill, ref?.skill, ''),
   };
 
   const isMelee     = ['Melee', 'Unarmed'].includes(resolved.type);
@@ -883,13 +891,17 @@ function buildWeaponItem(w) {
     rarity:           parseInt(resolved.rarity, 10) || 0,
     weight:           parseFloat(resolved.weight) || 0,
     ammo:             resolved.ammo || '',
-    ammoPerShot:      1,
-    creatureSkill:    isMelee ? 'melee' : 'guns',
+    ammoPerShot:      Math.max(1, parseInt(resolved.ammoPerShot, 10) || 1),
+    creatureSkill:    resolved.creatureSkill || (isMelee ? 'melee' : 'guns'),
+    creatureAttribute: resolved.creatureAttribute || '',
     fireRate:         parseInt(resolved.fireRate, 10) || 0,
     melee:            isMelee,
     range:            mapRange(resolved.range),
+    skill:            resolved.skill || '',
     weaponType:       mapWeaponType(resolved.type),
   });
+  system.originalAmmoPerShot = Math.max(1, parseInt(resolved.ammoPerShot, 10) || 1);
+  system.mods.max = Math.max(0, parseInt(resolved.modsMax, 10) || 0);
 
   // Patch damage sub-object individually (nested merge)
   system.damage.rating = damageRating;
@@ -954,6 +966,9 @@ function buildApparelItem(a) {
     radRes: pickFirst(a.radRes, a.radDR, ref?.radRes, 0),
     hp: pickFirst(a.hp, ref?.hp, 0),
     locations: pickFirst(a.locations, ref?.locations, []),
+    shadowed: Boolean(pickFirst(a.shadowed, ref?.shadowed, false)),
+    modsMax: pickFirst(a.modsMax, ref?.modsMax, 0),
+    powerArmor: pickFirst(a.powerArmor, ref?.powerArmor, {}),
   };
 
   const locationsRaw = source.locations
@@ -971,7 +986,7 @@ function buildApparelItem(a) {
     rarity:       parseInt(source.rarity, 10) || 0,
     weight:       parseFloat(source.weight) || 0,
     apparelType:  mapApparelType(source.type || ''),
-    shadowed:     false,
+    shadowed:     source.shadowed,
   });
 
   // Patch nested objects
@@ -982,6 +997,14 @@ function buildApparelItem(a) {
     physical: parseInt(source.physRes, 10) || 0,
     radiation: parseInt(source.radRes, 10) || 0,
   };
+  if (itemType === 'apparel') {
+    system.mods.max = Math.max(0, parseInt(source.modsMax, 10) || 0);
+    system.powerArmor = {
+      ...system.powerArmor,
+      isFrame: Boolean(source.powerArmor?.isFrame),
+      powered: Boolean(source.powerArmor?.powered),
+    };
+  }
 
   item.system = system;
   if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
@@ -1000,6 +1023,7 @@ function buildPerkItem(p) {
   );
   const description = pickFirst(p?.description, ref?.description, '');
   const requirements = pickFirst(p?.requirements, ref?.requirements, {});
+  const requirementFlags = pickFirst(p?.requirementFlags, ref?.requirementFlags, {});
   const rankMax = parseInt(pickFirst(p?.ranks, p?.maxRanks, ref?.ranks, 1), 10) || 1;
 
   const item = makeItemBase(null, label, 'perk', 'systems/fallout/assets/icons/items/perk.webp');
@@ -1011,6 +1035,14 @@ function buildPerkItem(p) {
   item.system.rank.value = 1;
   item.system.rank.max = rankMax;
   item.system.requirementsEx.level = parseInt(requirements.level, 10) || 1;
+  item.system.requirementsEx.levelIncrease = parseInt(requirementFlags.levelIncrease, 10) || 0;
+  item.system.requirementsEx.notGhoul = Boolean(requirementFlags.notGhoul);
+  item.system.requirementsEx.notHuman = Boolean(requirementFlags.notHuman);
+  item.system.requirementsEx.notRobot = Boolean(requirementFlags.notRobot);
+  item.system.requirementsEx.notSupermutant = Boolean(requirementFlags.notSupermutant);
+  item.system.requirementsEx.notRadiationImmune = Boolean(requirementFlags.notRadiationImmune);
+  item.system.requirementsEx.isCompanion = Boolean(requirementFlags.isCompanion);
+  item.system.requirementsEx.magazineUuids = Array.isArray(requirementFlags.magazineUuids) ? requirementFlags.magazineUuids : [];
   const attrMap = { STR: 'str', PER: 'per', END: 'end', CHA: 'cha', INT: 'int', AGI: 'agi', LCK: 'luc' };
   for (const [abbr, field] of Object.entries(attrMap)) {
     const req = parseInt(requirements[abbr], 10);
@@ -1024,7 +1056,8 @@ function buildAmmoItem(a) {
   const ref = findInLookup(AMMO_LOOKUP, [a.key, a.type, a.label, a.name]);
   const name = pickFirst(a.type, a.label, a.name, ref?.label, 'Ammo');
   const qty = safeQty(a.quantity, 1);
-  const shotsPerUnit = safeQty(a.shotsPerUnit ?? a.shots_per_unit ?? a.shots, defaultShotsPerUnit(name));
+  const shotsPerUnit = safeQty(a.shotsPerUnit ?? a.shots_per_unit ?? a.shots ?? ref?.shotsPerUnit, defaultShotsPerUnit(name));
+  const charges = safeQty(a.charges ?? ref?.charges ?? shotsPerUnit, shotsPerUnit);
   const item = makeItemBase(null, name, 'ammo', ref?.foundryUuid ? 'systems/fallout/assets/icons/items/ammo.svg' : 'systems/fallout/assets/icons/items/ammo.webp');
   item.system = createSystemFromTemplate('ammo', {
     source:   ref?.foundryUuid ? 'core_rulebook' : 'custom',
@@ -1033,12 +1066,12 @@ function buildAmmoItem(a) {
     rarity:   parseInt(pickFirst(a.rarity, ref?.rarity, 1), 10) || 1,
     weight:   parseFloat(pickFirst(a.weight, ref?.weight, 0.1)) || 0.1,
     effect:   pickFirst(a.effect, ref?.effect, ''),
-    fusionCore: false,
+    fusionCore: Boolean(pickFirst(a.fusionCore, ref?.fusionCore, false)),
   });
   if (ref?.foundryUuid) {
     item._stats.compendiumSource = ref.foundryUuid;
   }
-  item.system.charges = { current: shotsPerUnit, max: shotsPerUnit };
+  item.system.charges = { current: charges, max: charges };
   item.system.shots   = { current: shotsPerUnit, max: shotsPerUnit };
   return item;
 }
@@ -1057,6 +1090,14 @@ function buildConsumableItem(c, type = 'chem') {
   const duration = pickFirst(c.duration, ref?.duration, type === 'food' ? 'instant' : 'lasting');
   const consumableType = type === 'food' ? 'food' : type === 'chem' ? 'chem' : 'other';
   const irradiated = Boolean(pickFirst(c.irradiated, ref?.irradiated, false));
+  const alcoholic = Boolean(pickFirst(c.alcoholic, ref?.alcoholic, false));
+  const prepared = Boolean(pickFirst(c.prepared, ref?.prepared, false));
+  const butchery = Boolean(pickFirst(c.butchery, ref?.butchery, false));
+  const providesCap = Boolean(pickFirst(c.providesCap, ref?.providesCap, false));
+  const thirstReduction = parseInt(pickFirst(c.thirstReduction, ref?.thirstReduction, 0), 10) || 0;
+  const radiation = parseInt(pickFirst(c.radiation, ref?.radiation, 0), 10) || 0;
+  const radiationDamage = parseInt(pickFirst(c.radiationDamage, ref?.radiationDamage, 1), 10) || 1;
+  const consumableGroup = pickFirst(c.consumableGroup, ref?.consumableGroup, '');
   const desc = type === 'food'
     ? `<p>Heals ${hp} HP.${effectText ? ` ${effectText}` : ''}</p>`
     : (effectText ? `<p>${effectText}</p>` : '');
@@ -1075,6 +1116,14 @@ function buildConsumableItem(c, type = 'chem') {
     hp,
     addictive:       isAddictive,
     irradiated,
+    alcoholic,
+    prepared,
+    butchery,
+    providesCap,
+    thirstReduction,
+    radiation,
+    radiationDamage,
+    consumableGroup: consumableGroup || '',
   });
 
   const addictionRating = parseInt(pickFirst(c.addictionNumber, ref?.addictionNumber, c.addiction, 0), 10);

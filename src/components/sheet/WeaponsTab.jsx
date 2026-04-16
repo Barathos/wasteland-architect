@@ -8,7 +8,7 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/
 const EMPTY_WEAPON = {
   name: '', damage: '', damageEffect: '', damageType: 'Physical',
   fireModes: [], range: 'Short', qualities: '', weight: '', ammoType: '', ammoCurrent: '',
-  sourceName: '', key: ''
+  sourceName: '', key: '', ammoPerShot: 1, creatureSkill: '', creatureAttribute: '', modsMax: 0
 };
 
 const DAMAGE_TYPES = ['Physical', 'Energy', 'Energy/Radiation', 'Radiation', 'Poison'];
@@ -649,6 +649,10 @@ export default function WeaponsTab({ character, updateField }) {
       baseQualities: refWeapon.qualities || '',
       baseRange: refWeapon.range || 'Short',
       baseFireRate: Number(refWeapon.fireRate || 0),
+      ammoPerShot: Number(refWeapon.ammoPerShot || 1),
+      creatureSkill: refWeapon.creatureSkill || '',
+      creatureAttribute: refWeapon.creatureAttribute || '',
+      modsMax: Number(refWeapon.modsMax || 0),
     };
     save([...weapons, w]);
     setShowRef(false);
