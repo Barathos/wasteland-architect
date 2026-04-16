@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "sonner"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -11,7 +12,12 @@ import CharacterBuilder from './pages/CharacterBuilder';
 import CharacterSheet from './pages/CharacterSheet';
 
 const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+  const { isAuthenticated, isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+  useEffect(() => {
+    if (!isLoadingPublicSettings && !isLoadingAuth && !authError && !isAuthenticated) {
+      navigateToLogin();
+    }
+  }, [isLoadingPublicSettings, isLoadingAuth, authError, isAuthenticated, navigateToLogin]);
 
   // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
@@ -32,6 +38,8 @@ const AuthenticatedApp = () => {
       return null;
     }
   }
+
+  if (!isAuthenticated) return null;
 
   // Render the main app
   return (

@@ -1,8 +1,10 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { Users, Plus, Radiation } from "lucide-react";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function Layout() {
   const location = useLocation();
+  const { logout, user } = useAuth();
 
   const navItems = [
     { to: "/", label: "Characters", icon: Users },
@@ -53,6 +55,13 @@ export default function Layout() {
                   </Link>
                 );
               })}
+              <button
+                onClick={() => logout(true)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-xs sm:text-sm font-mono transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-muted"
+                title={user?.email ? `Signed in as ${user.email}` : "Sign out"}
+              >
+                Sign Out
+              </button>
             </nav>
           </div>
         </div>

@@ -8,6 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
   const [isLoadingPublicSettings, setIsLoadingPublicSettings] = useState(true);
   const [authError, setAuthError] = useState(null);
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }) => {
         } else {
           setIsLoadingAuth(false);
           setIsAuthenticated(false);
+          setAuthChecked(true);
         }
         setIsLoadingPublicSettings(false);
       } catch (appError) {
@@ -84,6 +86,7 @@ export const AuthProvider = ({ children }) => {
       });
       setIsLoadingPublicSettings(false);
       setIsLoadingAuth(false);
+      setAuthChecked(true);
     }
   };
 
@@ -95,10 +98,12 @@ export const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setIsAuthenticated(true);
       setIsLoadingAuth(false);
+      setAuthChecked(true);
     } catch (error) {
       console.error('User auth check failed:', error);
       setIsLoadingAuth(false);
       setIsAuthenticated(false);
+      setAuthChecked(true);
       
       // If user auth fails, it might be an expired token
       if (error.status === 401 || error.status === 403) {
@@ -113,6 +118,7 @@ export const AuthProvider = ({ children }) => {
   const logout = (shouldRedirect = true) => {
     setUser(null);
     setIsAuthenticated(false);
+    setAuthChecked(true);
     
     if (shouldRedirect) {
       // Use the SDK's logout method which handles token cleanup and redirect
@@ -132,13 +138,15 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{ 
       user, 
       isAuthenticated, 
+      authChecked,
       isLoadingAuth,
       isLoadingPublicSettings,
       authError,
       appPublicSettings,
       logout,
       navigateToLogin,
-      checkAppState
+      checkAppState,
+      checkUserAuth
     }}>
       {children}
     </AuthContext.Provider>
