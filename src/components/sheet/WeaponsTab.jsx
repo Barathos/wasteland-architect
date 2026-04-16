@@ -3,10 +3,12 @@ import CombatDiceDisplay from "../ui/CombatDiceDisplay";
 import WeaponEffectTags from "./WeaponEffectTags";
 import { MR_HANDY_ARMS } from "../../lib/falloutData";
 import { CORE_WEAPONS } from "../../lib/sourceTruthData";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/tooltip";
 
 const EMPTY_WEAPON = {
   name: '', damage: '', damageEffect: '', damageType: 'Physical',
-  fireModes: [], range: 'Short', qualities: '', weight: '', ammoType: '', ammoCurrent: ''
+  fireModes: [], range: 'Short', qualities: '', weight: '', ammoType: '', ammoCurrent: '',
+  sourceName: '', key: ''
 };
 
 const DAMAGE_TYPES = ['Physical', 'Energy', 'Energy/Radiation', 'Radiation', 'Poison'];
@@ -113,6 +115,8 @@ function WeaponReferenceModal({ onSelect, onClose }) {
 }
 
 function WeaponRow({ weapon, index, onChange, onRemove }) {
+  const [editingAlias, setEditingAlias] = useState(false);
+
   const toggleMode = (mode) => {
     const modes = weapon.fireModes || [];
     const updated = modes.includes(mode) ? modes.filter(m => m !== mode) : [...modes, mode];
@@ -130,11 +134,72 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
     />
   );
 
+  const displayName = weapon.name || weapon.sourceName || 'Unnamed Weapon';
+  const description = weapon.note || '';
+  const sourceDisplay = weapon.sourceName || '';
+  const linkedToReference = Boolean(weapon.key || weapon.sourceName);
+
   return (
     <div className="p-3 mb-2" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <span className="text-[10px] font-bold w-4" style={{ color: '#f5c518' }}>#{index + 1}</span>
-        {field('name', weapon.name, { flex: 1, minWidth: '120px' })}
+        <div className="flex items-center gap-1" style={{ flex: 1, minWidth: '120px' }}>
+          {editingAlias ? (
+            <input
+              type="text"
+              value={weapon.name ?? ''}
+              onChange={e => onChange({ ...weapon, name: e.target.value })}
+              onBlur={() => setEditingAlias(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') setEditingAlias(false);
+                if (e.key === 'Escape') setEditingAlias(false);
+              }}
+              autoFocus
+              style={{ background: '#060f1c', border: '1px solid #1e3a5f', color: '#e8e8e8', outline: 'none', padding: '3px 6px', fontSize: '11px', flex: 1, minWidth: '80px' }}
+            />
+          ) : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  style={{
+                    background: '#060f1c',
+                    border: '1px solid #1e3a5f',
+                    color: '#e8e8e8',
+                    padding: '3px 6px',
+                    fontSize: '11px',
+                    textAlign: 'left',
+                    flex: 1,
+                    minWidth: '80px',
+                    cursor: description ? 'help' : 'default',
+                  }}
+                >
+                  {displayName}
+                </button>
+              </TooltipTrigger>
+              {description && (
+                <TooltipContent side="top" align="start" style={{ maxWidth: '420px', background: '#060f1c', border: '1px solid #1e3a5f', color: '#a8c8d8' }}>
+                  {sourceDisplay && <p className="text-[10px] font-bold mb-1" style={{ color: '#f5c518' }}>{sourceDisplay}</p>}
+                  <p className="text-[10px] font-mono whitespace-pre-wrap">{description}</p>
+                </TooltipContent>
+              )}
+            </Tooltip>
+          )}
+          <button
+            type="button"
+            onClick={() => setEditingAlias(v => !v)}
+            title={editingAlias ? 'Finish alias edit' : 'Edit weapon alias'}
+            className="text-[10px] px-1.5 py-0.5 font-bold"
+            style={{ background: 'rgba(106,154,186,0.08)', border: '1px solid rgba(106,154,186,0.35)', color: '#6a9aba', cursor: 'pointer' }}
+          >
+            {editingAlias ? 'Done' : 'Alias'}
+          </button>
+          {linkedToReference && !editingAlias && (
+            <span className="text-[9px] px-1.5 py-0.5 font-bold" style={{ background: 'rgba(245,197,24,0.08)', border: '1px solid rgba(245,197,24,0.25)', color: '#f5c518' }}>
+              Ref
+            </span>
+          )}
+        </div>
         <div className="flex items-center gap-1">
           {field('damage', weapon.damage, { width: '55px' })}
           <span className="text-xs font-mono flex-shrink-0" style={{ minWidth: '30px' }}><CombatDiceDisplay value={weapon.damage} /></span>
@@ -225,6 +290,8 @@ export default function WeaponsTab({ character, updateField }) {
     const w = {
       ...EMPTY_WEAPON,
       name: refWeapon.label,
+      sourceName: refWeapon.label,
+      key: refWeapon.key || '',
       damage: refWeapon.damage || '',
       damageEffect: refWeapon.damageEffect || '',
       damageType: refWeapon.damageType || 'Physical',
@@ -232,6 +299,7 @@ export default function WeaponsTab({ character, updateField }) {
       qualities: refWeapon.qualities || '',
       weight: refWeapon.weight ? String(refWeapon.weight) : '',
       ammoType: refWeapon.ammo || '',
+      note: refWeapon.note || '',
     };
     save([...weapons, w]);
     setShowRef(false);
@@ -332,15 +400,17 @@ export default function WeaponsTab({ character, updateField }) {
           )}
         </div>
       </div>
-      {weapons.length === 0 ? (
-        <div className="text-center py-8" style={{ color: '#4a6a8a' }}>
-          <p className="font-mono text-sm">No weapons equipped.</p>
-        </div>
-      ) : (
-        weapons.map((w, i) => (
-          <WeaponRow key={i} weapon={w} index={i} onChange={d => updateWeapon(i, d)} onRemove={() => removeWeapon(i)} />
-        ))
-      )}
+      <TooltipProvider delayDuration={150}>
+        {weapons.length === 0 ? (
+          <div className="text-center py-8" style={{ color: '#4a6a8a' }}>
+            <p className="font-mono text-sm">No weapons equipped.</p>
+          </div>
+        ) : (
+          weapons.map((w, i) => (
+            <WeaponRow key={i} weapon={w} index={i} onChange={d => updateWeapon(i, d)} onRemove={() => removeWeapon(i)} />
+          ))
+        )}
+      </TooltipProvider>
       {showRef && <WeaponReferenceModal onSelect={addFromRef} onClose={() => setShowRef(false)} />}
     </div>
   );
