@@ -234,12 +234,17 @@ function mapWeapon(item) {
     damageEffect: keyedFlagsToString(dmg.damageEffect, DAMAGE_EFFECT_MAP),
     damageType: buildDamageTypeString(dmg.damageType),
     fireRate: Number(system.fireRate ?? 0),
+    ammoPerShot: Number(system.ammoPerShot ?? 1),
     range: toTitleCase(system.range || 'Close'),
     qualities: keyedFlagsToString(dmg.weaponQuality, WEAPON_QUALITY_MAP),
     weight: Number(system.weight || 0),
     cost: Number(system.cost || 0),
     rarity: Number(system.rarity || 0),
     ammo: system.ammo || '',
+    skill: stripHtml(system.skill || ''),
+    creatureSkill: stripHtml(system.creatureSkill || ''),
+    creatureAttribute: stripHtml(system.creatureAttribute || ''),
+    modsMax: Number(system.mods?.max || 0),
     source: sourceLabel(system.source),
     note: stripHtml(system.description || ''),
     foundryUuid: compendiumUuid('weapons', item._id),
@@ -291,9 +296,15 @@ function mapApparel(item) {
     weight: Number(system.weight || 0),
     cost: Number(system.cost || 0),
     rarity: Number(system.rarity || 0),
+    modsMax: Number(system.mods?.max || 0),
+    shadowed: Boolean(system.shadowed),
     source: sourceLabel(system.source),
     special: stripHtml(system.description || ''),
     isPower,
+    powerArmor: {
+      isFrame: Boolean(system.powerArmor?.isFrame),
+      powered: Boolean(system.powerArmor?.powered),
+    },
     foundryType: item.type,
     foundryUuid: compendiumUuid('apparel', item._id),
   };
@@ -311,6 +322,9 @@ function mapAmmo(item) {
     cost: Number(system.cost || 0),
     rarity: Number(system.rarity || 0),
     effect: stripHtml(system.effect || ''),
+    shotsPerUnit: Number(system.shots?.max || system.shots?.current || 0),
+    charges: Number(system.charges?.max || system.charges?.current || 0),
+    fusionCore: Boolean(system.fusionCore),
     source: sourceLabel(system.source),
     foundryUuid: compendiumUuid('ammunition', item._id),
   };
@@ -353,6 +367,14 @@ function mapConsumable(item, addictionLookup) {
     cost: Number(system.cost || 0),
     rarity: Number(system.rarity || 0),
     source: sourceLabel(system.source),
+    alcoholic: Boolean(system.alcoholic),
+    prepared: Boolean(system.prepared),
+    butchery: Boolean(system.butchery),
+    providesCap: Boolean(system.providesCap),
+    thirstReduction: Number(system.thirstReduction || 0),
+    radiation: Number(system.radiation || 0),
+    radiationDamage: Number(system.radiationDamage || 0),
+    consumableGroup: stripHtml(system.consumableGroup || ''),
     foundryUuid: compendiumUuid('consumables', item._id),
   };
 
@@ -418,6 +440,16 @@ function mapPerk(item) {
     label: item.name,
     ranks: Number(system.rank?.max || 1),
     requirements,
+    requirementFlags: {
+      levelIncrease: Number(reqEx.levelIncrease || 0),
+      notGhoul: Boolean(reqEx.notGhoul),
+      notHuman: Boolean(reqEx.notHuman),
+      notRobot: Boolean(reqEx.notRobot),
+      notSupermutant: Boolean(reqEx.notSupermutant),
+      notRadiationImmune: Boolean(reqEx.notRadiationImmune),
+      isCompanion: Boolean(reqEx.isCompanion),
+      magazineUuids: Array.isArray(reqEx.magazineUuids) ? reqEx.magazineUuids : [],
+    },
     source: sourceLabel(system.source),
     description: stripHtml(system.description || ''),
     foundryUuid: compendiumUuid('perks', item._id),
@@ -473,11 +505,15 @@ function mapWeaponMod(item) {
     perks: stripHtml(system.perks || ''),
     effect: stripHtml(modEffects.effect || system.effect || ''),
     summary: stripHtml(modEffects.summary || system.summary || ''),
+    info: stripHtml(modEffects.info || ''),
     weight: Number(system.weight || 0),
     cost: Number(system.cost || 0),
     rarity: Number(system.rarity || 0),
     source: sourceLabel(system.source),
     damageDelta: Number(damage.rating || 0),
+    overrideDamage: String(damage.overrideDamage || 'modify'),
+    ammoOverride: stripHtml(modEffects.ammo || ''),
+    ammoPerShotOverride: Number(modEffects.ammoPerShot || 0),
     fireRateDelta: Number(modEffects.fireRate || 0),
     rangeDelta: Number(modEffects.range || 0),
     addEffects,
@@ -511,6 +547,7 @@ function mapApparelMod(item) {
     rarity: Number(system.rarity || 0),
     source: sourceLabel(system.source),
     healthDelta: Number(system.health?.value || 0),
+    healthOverride: Number(system.health?.max || 0),
     resistanceDelta: {
       physical: Number(system.resistance?.physical || 0),
       energy: Number(system.resistance?.energy || 0),
@@ -635,7 +672,10 @@ async function main() {
   fs.writeFileSync(OUT_FILE, content, 'utf8');
 
   console.log('Generated source truth data:');
-  Object.entries(payload).forEach(([k, v]) => console.log(`- ${k}: ${v.length}`));
+  Object.entries(payload).forEach(([k, v]) => {
+    const count = Array.isArray(v) ? v.length : Object.keys(v || {}).length;
+    console.log(`- ${k}: ${count}`);
+  });
 }
 
 main().catch((err) => {
