@@ -28,6 +28,25 @@ function normalizeLoose(value = '') {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
+function stripKnownWeaponPrefixes(name = '') {
+  let current = String(name || '').trim();
+  if (!current) return '';
+  const known = new Set(
+    ALL_REF_WEAPON_MODS
+      .map((m) => String(m?.namePrefix || '').trim())
+      .filter(Boolean)
+      .map(normalizeLoose)
+  );
+  for (;;) {
+    const parts = current.split(/\s+/);
+    if (parts.length <= 1) break;
+    const head = normalizeLoose(parts[0]);
+    if (!known.has(head)) break;
+    current = parts.slice(1).join(' ').trim();
+  }
+  return current;
+}
+
 function parseTagList(value = '') {
   return String(value || '')
     .split(',')
@@ -129,11 +148,17 @@ function applyWeaponModsToWeapon(weapon = {}, refs = []) {
 function findReferenceWeapon(weapon = {}) {
   const byKey = normalizeLookup(weapon.key);
   const bySourceName = normalizeLookup(weapon.sourceName);
+  const byBaseName = normalizeLookup(weapon.baseName);
   const byName = normalizeLookup(weapon.name);
+  const byStrippedName = normalizeLookup(stripKnownWeaponPrefixes(weapon.name));
   return ALL_REF_WEAPONS.find((ref) => {
     const refKey = normalizeLookup(ref.key);
     const refLabel = normalizeLookup(ref.label);
-    return (byKey && refKey === byKey) || (bySourceName && refLabel === bySourceName) || (byName && refLabel === byName);
+    return (byKey && refKey === byKey)
+      || (bySourceName && refLabel === bySourceName)
+      || (byBaseName && refLabel === byBaseName)
+      || (byName && refLabel === byName)
+      || (byStrippedName && refLabel === byStrippedName);
   }) || null;
 }
 
@@ -151,6 +176,8 @@ function getWeaponCompatibilitySlots(weapon = {}, referenceWeapon = null) {
   const candidates = [
     referenceWeapon?.label,
     weapon?.sourceName,
+    weapon?.baseName,
+    stripKnownWeaponPrefixes(weapon?.name || ''),
     weapon?.name,
   ].filter(Boolean);
 

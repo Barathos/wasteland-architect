@@ -61,10 +61,18 @@ function findRefApparelMod(input = {}) {
 function getApparelModSlots(armorName = '') {
   if (CORE_APPAREL_MOD_COMPATIBILITY[armorName]) return CORE_APPAREL_MOD_COMPATIBILITY[armorName];
   const target = normalizeName(armorName);
+  let best = null;
+  let bestLen = 0;
   for (const [name, slotMap] of Object.entries(CORE_APPAREL_MOD_COMPATIBILITY)) {
-    if (normalizeName(name) === target) return slotMap;
+    const n = normalizeName(name);
+    if (n === target) return slotMap;
+    // Tolerate prefixed display names (e.g. "Pocketed Leather Left Arm")
+    if (target.endsWith(n) && n.length > bestLen) {
+      best = slotMap;
+      bestLen = n.length;
+    }
   }
-  return {};
+  return best || {};
 }
 
 function ArmorRefModal({ onSelect, onClose }) {
@@ -137,7 +145,9 @@ function ArmorRefModal({ onSelect, onClose }) {
 }
 
 function ApparelModsModal({ armorItem, ownedApparelMods, onAssignSlot, onClose }) {
-  const slotMap = getApparelModSlots(armorItem?.name || '');
+  const slotMap = getApparelModSlots(
+    armorItem?.sourceName || armorItem?.baseName || armorItem?.linkedArmorName || armorItem?.name || ''
+  );
   const slotKeys = Object.keys(slotMap).sort((a, b) => a.localeCompare(b));
   const installedMods = armorItem?.installedMods && typeof armorItem.installedMods === 'object' ? armorItem.installedMods : {};
 
@@ -248,6 +258,8 @@ export default function ApparelTab({ character, updateField }) {
   const addFromRef = (a) => {
     const item = {
       name: a.label,
+      sourceName: a.label,
+      baseName: a.label,
       physRes: a.physRes,
       enerRes: a.enerRes,
       radRes: a.radRes,
