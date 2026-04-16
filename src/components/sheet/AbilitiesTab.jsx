@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CORE_CHEMS, CORE_PERKS } from "../../lib/sourceTruthData";
-import { SPECIAL_ATTRIBUTES, SKILLS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, getEffectiveSkillRank, getSkillRankCapForCharacter, TAG_SKILL_BONUS, isRobotCharacter, getEffectiveSpecialStats } from "../../lib/falloutData";
+import { SPECIAL_ATTRIBUTES, SKILLS, NCR_TRAITS, WANDERERS_TRIBAL_TRAITS, SURVIVOR_TRAITS, ORIGIN_TRAIT_SUMMARIES, calculateDerivedStats, getEffectiveSkillRank, getSkillRankCapForCharacter, TAG_SKILL_BONUS, isRobotCharacter, getEffectiveSpecialStats, getMergedTagSkills } from "../../lib/falloutData";
 
 const SPECIAL_KEY_MAP = { STR: 'strength', PER: 'perception', END: 'endurance', CHA: 'charisma', INT: 'intelligence', AGI: 'agility', LCK: 'luck' };
 const ALL_PERKS = CORE_PERKS.map((p) => ({
@@ -104,7 +104,7 @@ export default function AbilitiesTab({ character, updateField }) {
 
   const isRobot = isRobotCharacter(character);
   const skills = parseJson(character.skills, {});
-  const tagSkills = parseJson(character.tag_skills, []);
+  const tagSkills = getMergedTagSkills(character, parseJson(character.tag_skills, []));
   const selectedPerks = parseJson(character.perks, []);
   const perkDetails = selectedPerks.map(pk => ALL_PERKS.find(p => p.key === pk)).filter(Boolean);
   const selectedNcrTraitKeys = parseJson(character.ncr_traits, []);

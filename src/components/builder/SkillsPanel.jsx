@@ -1,4 +1,4 @@
-import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES, getActiveTraitEffects, getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter, TAG_SKILL_BONUS, getEffectiveSpecialStats } from "../../lib/falloutData";
+import { SKILLS, TAG_SKILL_COUNT, SPECIAL_ATTRIBUTES, getActiveTraitEffects, getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter, TAG_SKILL_BONUS, getEffectiveSpecialStats, getMergedTagSkills, getOriginForcedTagSkills } from "../../lib/falloutData";
 import { Minus, Plus, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +11,9 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   const hasGoodNatured = traits.hasGoodNatured || (ncrTraits || []).includes('good_natured');
   const isNightkin = isNightkinCharacter(character);
   const isSuperMutant = character.origin === 'Super Mutant' && !isNightkin;
+  const forcedTagSkills = getOriginForcedTagSkills(character);
+  const allTagSkills = getMergedTagSkills(character, tagSkills);
+  const selectableTagCount = tagSkills.filter((key) => !forcedTagSkills.includes(key)).length;
 
   const totalSkillPoints = 9 + (effectiveSpecial.intelligence || 5);
   const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
@@ -20,14 +23,13 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
 
   // Tag limit: base 3 + educated + vault/bos/outcast origin bonuses
   const tagLimit = TAG_SKILL_COUNT + traits.extraTagSkills;
-  const tagCount = tagSkills.length;
 
   const getAbsoluteMaxRank = (key) => getSkillRankCapForCharacter(character, key);
 
   const handleSkillChange = (key, delta) => {
     const current = skills[key] || 0;
     const newVal = current + delta;
-    const isTagged = tagSkills.includes(key);
+    const isTagged = allTagSkills.includes(key);
     const absMax = getAbsoluteMaxRank(key);
     const nextEffective = getEffectiveSkillRank(newVal, isTagged, absMax);
     // Core rules: during character creation, cannot increase any skill above rank 3 (unless starting level 3+).
@@ -39,16 +41,18 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   };
 
   const toggleTagSkill = (key) => {
+    const isForcedTag = forcedTagSkills.includes(key);
+    if (isForcedTag) return;
     if (tagSkills.includes(key)) {
       onTagSkillsChange(tagSkills.filter(s => s !== key));
-    } else if (tagCount < tagLimit) {
+    } else if (selectableTagCount < tagLimit) {
       const absMax = getAbsoluteMaxRank(key);
       const current = Number(skills[key] || 0);
       const maxBaseWithTag = Math.max(0, absMax - TAG_SKILL_BONUS);
       if (current > maxBaseWithTag) {
         onSkillsChange({ ...skills, [key]: maxBaseWithTag });
       }
-      onTagSkillsChange([...tagSkills, key]);
+      onTagSkillsChange(Array.from(new Set([...tagSkills, key])));
     }
   };
 
@@ -68,8 +72,8 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
           <div className="w-px h-8 bg-border" />
           <div>
             <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block">Tag Skills</span>
-            <span className={`font-heading font-bold text-lg ${tagCount < tagLimit ? 'text-primary' : 'text-secondary'}`}>
-              {tagCount}/{tagLimit}
+            <span className={`font-heading font-bold text-lg ${selectableTagCount < tagLimit ? 'text-primary' : 'text-secondary'}`}>
+              {selectableTagCount}/{tagLimit}
             </span>
           </div>
         </div>
@@ -80,6 +84,7 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
         {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
         {isSuperMutant && <span className="block mt-1" style={{ color: '#cc4444' }}>⚠ Super Mutant: All skills capped at rank 4 (Forced Evolution).</span>}
         {traits.extraTagSkills > 0 && <span className="block mt-1" style={{ color: '#22cc22' }}>✦ +{traits.extraTagSkills} extra Tag skill(s) from trait/origin.</span>}
+        {forcedTagSkills.length > 0 && <span className="block mt-1" style={{ color: '#22cc22' }}>✦ Fixed Tag skill(s) from origin: {forcedTagSkills.map((s) => s.replace(/_/g, ' ')).join(', ')}.</span>}
         {(() => { try { return JSON.parse(character.survivor_traits || '[]'); } catch { return []; } })().includes('educated') && (
           <span className="block mt-0.5" style={{ color: '#aaa', fontSize: 11 }}>+1 from Educated trait</span>
         )}
@@ -91,7 +96,8 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
           const value = skills[skill.key] || 0;
           const absMax = getAbsoluteMaxRank(skill.key);
           const isGoodNaturedCapped = hasGoodNatured && !GOOD_NATURED_EXEMPT.includes(skill.key);
-          const isTag = tagSkills.includes(skill.key);
+          const isTag = allTagSkills.includes(skill.key);
+          const isForcedTag = forcedTagSkills.includes(skill.key);
           const attrAttr = SPECIAL_ATTRIBUTES.find(a => a.key === skill.attribute);
           const attrVal = getAttributeValue(skill.attribute);
           const effectiveRank = getEffectiveSkillRank(value, isTag, absMax);
@@ -118,7 +124,8 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted text-muted-foreground hover:text-foreground border border-border"
                   }`}
-                  title={isTag ? "Remove tag" : "Set as tag skill"}
+                  title={isForcedTag ? "Tag granted by origin" : (isTag ? "Remove tag" : "Set as tag skill")}
+                  disabled={isForcedTag}
                 >
                   <Tag className="w-3 h-3" />
                 </button>

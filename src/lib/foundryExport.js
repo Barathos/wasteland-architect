@@ -12,7 +12,7 @@ import {
   CORE_POWER_ARMOR,
   CORE_WEAPONS,
 } from "./sourceTruthData.js";
-import { getEffectiveSkillRank, getSkillRankCapForCharacter, isNightkinCharacter } from "./falloutData.js";
+import { getEffectiveSkillRank, getSkillRankCapForCharacter, getMergedTagSkills, isNightkinCharacter } from "./falloutData.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Embedded template fragments (sourced from Foundry system template.json)
@@ -567,7 +567,7 @@ const SKILL_DESCRIPTIONS = {
 
 function buildSkillItems(character) {
   const rawSkills   = safeParseJson(character.skills, {});
-  const rawTagSkills = safeParseJson(character.tag_skills, []);
+  const rawTagSkills = getMergedTagSkills(character, safeParseJson(character.tag_skills, []));
 
   const skillLookup = {};
   if (Array.isArray(rawSkills)) {

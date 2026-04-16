@@ -39,13 +39,27 @@ export const TAG_SKILL_COUNT = 3;
 export const TAG_SKILL_BONUS = 2;
 const GOOD_NATURED_EXEMPT_SKILLS = ['speech', 'medicine', 'repair', 'science', 'barter'];
 
+function normalizeSkillKey(key = '') {
+  return String(key).trim().toLowerCase().replace(/\s+/g, '_');
+}
+
+export function getOriginForcedTagSkills(character = {}) {
+  const origin = String(character.origin || '');
+  if (origin === 'Ghoul') return ['survival'];
+  return [];
+}
+
+export function getMergedTagSkills(character = {}, tagSkills = []) {
+  const selected = Array.isArray(tagSkills) ? tagSkills : [];
+  const forced = getOriginForcedTagSkills(character);
+  return Array.from(new Set([...selected, ...forced].map(normalizeSkillKey).filter(Boolean)));
+}
+
 export const ORIGINS = [
   {
     key: 'vault_dweller',
     label: 'Vault Dweller',
     description: 'Raised in the safety of a Vault-Tec vault, you emerged into the wasteland with education but little practical experience. You know the old world only from lessons, though your vault\'s experiment shaped you in ways you\'re still discovering.',
-    bonuses: { intelligence: 1 },
-    bonusSkills: ['science', 'repair'],
     traitName: 'Vault Kid',
     source: 'Core',
   },
@@ -53,8 +67,6 @@ export const ORIGINS = [
     key: 'brotherhood_initiate',
     label: 'Brotherhood Initiate',
     description: 'A member of the Brotherhood of Steel, bound by the Chain That Binds. You are trained in advanced technology and disciplined combat, but your loyalty to the order is absolute — or you risk expulsion and the loss of all you carry.',
-    bonuses: { endurance: 1 },
-    bonusSkills: ['energy_weapons', 'big_guns'],
     traitName: 'The Chain That Binds',
     source: 'Core',
   },
@@ -62,8 +74,6 @@ export const ORIGINS = [
     key: 'ghoul',
     label: 'Ghoul',
     description: 'Irradiated and transformed by centuries of radiation exposure, you are a walking relic of the pre-war world. Your body is necrotic but resilient — radiation heals rather than harms you — though many smoothskins fear or despise your kind.',
-    bonuses: { endurance: 1 },
-    bonusSkills: ['survival', 'medicine'],
     traitName: 'Necrotic Post-Human',
     source: 'Core',
   },
@@ -72,8 +82,6 @@ export const ORIGINS = [
     label: 'Super Mutant',
     description: 'Transformed by the Forced Evolutionary Virus, you stand over seven feet tall with incredible strength and resilience. Your intellect is diminished, your charisma limited, and you can only wear armor built for your kind — but few enemies can match your raw power.',
     bonuses: { strength: 2, endurance: 2 },
-    penalties: { intelligence: -1, charisma: -1 },
-    bonusSkills: ['melee_weapons', 'unarmed'],
     traitName: 'Forced Evolution',
     source: 'Core',
   },
@@ -81,8 +89,6 @@ export const ORIGINS = [
     key: 'mister_handy',
     label: 'Mister Handy',
     description: 'A General Atomics domestic robot still running after the bombs fell. Loyal, versatile, and slightly eccentric, your three arms handle everything from combat to cooking — though your precision depends entirely on what attachments you carry.',
-    bonuses: { intelligence: 1 },
-    bonusSkills: ['repair', 'science'],
     traitName: 'Mister Handy Robot',
     source: 'Core',
   },
@@ -90,8 +96,6 @@ export const ORIGINS = [
     key: 'survivor',
     label: 'Survivor',
     description: 'A pre-war human who survived cryogenic freezing or another preservation method. The world is alien and terrifying, but your old-world knowledge and adaptability give you an edge — if you can survive long enough to use it.',
-    bonuses: { charisma: 1 },
-    bonusSkills: ['speech', 'barter'],
     traitName: 'Choose Two Traits',
     source: 'Core',
   },
@@ -605,8 +609,10 @@ export function getActiveTraitEffects(character) {
   const survivorTraits = safeParseJSON(character.survivor_traits, []);
   const origin = character.origin || '';
   const extraTagFromOrigin = ['Vault Dweller', 'Brotherhood Initiate', 'Brotherhood Outcast'].includes(origin) ? 1 : 0;
+  const forcedTagSkills = getOriginForcedTagSkills(character);
   return {
     extraTagSkills: (survivorTraits.includes('educated') ? 1 : 0) + extraTagFromOrigin,
+    forcedTagSkills,
     hasGifted: survivorTraits.includes('gifted'),
     giftedBonuses: safeParseJSON(character.gifted_bonuses, []),
     luckPointPenalty: survivorTraits.includes('gifted') ? 1 : 0,
