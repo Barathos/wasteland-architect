@@ -2,6 +2,7 @@
 import { ORIGIN_PACKS, TAG_SKILL_ITEMS } from './falloutData';
 import { CORE_WEAPONS } from './sourceTruthData';
 import { CORE_APPAREL, CORE_ARMOR, CORE_POWER_ARMOR } from './sourceTruthData';
+import { CORE_ROBOT_MODS } from './sourceTruthData';
 
 function safeJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
@@ -59,7 +60,13 @@ const LEGACY_APPAREL_NAME_MAP = {
   'vault-tec security armor': 'vault tec security armor',
   'vault-tec security helmet': 'vault tec security helmet',
 };
+const LEGACY_ROBOT_MOD_NAME_MAP = {
+  'behavioral analysis module': 'behavioral analysis mod',
+  'recon sensors mod': 'recon sensors',
+  'protectron sensors': 'sensor array',
+};
 const ALL_APPAREL = [...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR];
+const ALL_ROBOT_MODS = [...CORE_ROBOT_MODS];
 
 function parseQuantityPrefix(rawName = '') {
   const text = String(rawName || '').trim();
@@ -159,6 +166,66 @@ function findApparelByName(name) {
   }
 
   return best;
+}
+
+function normalizeRobotModLookupName(rawName = '') {
+  const base = String(rawName || '')
+    .split('+')[0]
+    .split('(')[0]
+    .trim()
+    .toLowerCase()
+    .replace(/[']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+  return LEGACY_ROBOT_MOD_NAME_MAP[base] || base;
+}
+
+function findRobotModByName(name) {
+  const clean = normalizeRobotModLookupName(name);
+  let best = null;
+  let bestScore = -1;
+
+  for (const mod of ALL_ROBOT_MODS) {
+    const label = normalizeRobotModLookupName(mod?.label || mod?.name || '');
+    const aliases = Array.isArray(mod?.aliases)
+      ? mod.aliases.map((a) => normalizeRobotModLookupName(a))
+      : [];
+    let score = -1;
+
+    if (label === clean) score = 100;
+    else if (aliases.includes(clean)) score = 95;
+    else if (label.includes(clean)) score = 80;
+    else if (aliases.some((a) => a.includes(clean))) score = 75;
+    else if (clean.includes(label)) score = 60;
+    else if (aliases.some((a) => clean.includes(a))) score = 55;
+
+    if (score < 0) continue;
+    if (score > bestScore) {
+      best = mod;
+      bestScore = score;
+    }
+  }
+
+  return best;
+}
+
+function buildRobotModEntry(itemName, quantity = 1) {
+  const parsed = parseQuantityPrefix(itemName);
+  const resolvedQuantity = Math.max(1, Number(quantity || 1)) * Math.max(1, parsed.quantity || 1);
+  const found = findRobotModByName(parsed.name);
+  if (!found) return null;
+  return {
+    name: found.label || parsed.name,
+    quantity: resolvedQuantity,
+    source: 'starting_equipment',
+    effect: found.effect || '',
+    note: found.note || '',
+    perks: found.perks || '',
+    rarity: Number(found.rarity || 0),
+    cost: Number(found.cost || 0),
+    weight: Number(found.weight || 0),
+    key: found.key || '',
+  };
 }
 
 function buildWeaponEntry(itemName, quantity = 1) {
@@ -266,10 +333,10 @@ function applyChoiceGrantToInventory(grant, state) {
         state.weapons.push(weaponEntry);
       } else {
         state.misc.push({
-          name: `Unresolved weapon: ${weaponName}`,
+          name: weaponName,
           quantity,
           source: 'starting_equipment',
-          note: grant.note || 'This starting weapon did not match source reference data.',
+          note: grant.note || 'Could not resolve to source truth weapon data.',
         });
       }
       if (ammoName) state.ammo.push({ type: ammoName, quantity: ammoQty, source: 'starting_equipment' });
@@ -286,10 +353,10 @@ function applyChoiceGrantToInventory(grant, state) {
           state.armor.push(apparelEntry);
         } else {
           state.misc.push({
-            name: `Unresolved armor: ${name}`,
+            name,
             quantity,
             source: 'starting_equipment',
-            note: grant.note || 'This starting armor did not match source reference data.',
+            note: grant.note || 'Could not resolve to source truth armor data.',
           });
         }
       }
@@ -304,7 +371,14 @@ function applyChoiceGrantToInventory(grant, state) {
       state.misc.push(base);
       break;
     case 'robot_mod':
-      state.robotMods.push({ name, source: 'starting_equipment' });
+      {
+        const robotModEntry = buildRobotModEntry(name, quantity);
+        if (robotModEntry) {
+          state.robotMods.push(robotModEntry);
+        } else {
+          state.robotMods.push({ name, quantity, source: 'starting_equipment', note: grant.note || '' });
+        }
+      }
       break;
     case 'currency':
       state.caps += quantity;
@@ -353,10 +427,10 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
             weapons.push(weaponEntry);
           } else {
             misc.push({
-              name: `Unresolved weapon: ${item.name}`,
+              name: item.name,
               quantity,
               source: 'starting_equipment',
-              note: item.note || 'This starting weapon did not match source reference data.',
+              note: item.note || 'Could not resolve to source truth weapon data.',
             });
           }
         }
@@ -391,10 +465,10 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
             armor.push(apparelEntry);
           } else {
             misc.push({
-              name: `Unresolved armor: ${item.name}`,
+              name: item.name,
               quantity,
               source: 'starting_equipment',
-              note: item.note || 'This starting armor did not match source reference data.',
+              note: item.note || 'Could not resolve to source truth armor data.',
             });
           }
         }
@@ -406,7 +480,14 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
         food.push({ ...base, label: item.name });
         break;
       case 'robot_mod':
-        robotMods.push({ name: item.name, source: 'starting_equipment' });
+        {
+          const robotModEntry = buildRobotModEntry(item.name, quantity);
+          if (robotModEntry) {
+            robotMods.push(robotModEntry);
+          } else {
+            robotMods.push({ name: item.name, quantity, source: 'starting_equipment', note: item.note || '' });
+          }
+        }
         break;
       case 'miscellany':
         misc.push(base);

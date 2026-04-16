@@ -8969,3 +8969,237 @@ export const SOURCE_ROBOT_MODS = [
   }
 ];
 
+export const SOURCE_MISCELLANY = [
+  {
+    "key": "backpack_large_yalizal7rikso9sc",
+    "label": "Backpack, Large",
+    "effect": "Wearer adds +10xSTR to maximum Carry weight",
+    "note": "Available in a few different sizes, backpacks are invaluable for carrying larger quantities of items around. Most characters are assumed to be carrying items in pockets, belt pouches, and assorted bags and sacks, but a proper backpack helps carry items more easily and more efficiently. At least, if you don't have a pack brahmin or something else to carry your burdens.",
+    "weight": 0,
+    "cost": 60,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.YaLiZAL7RIksO9Sc"
+  },
+  {
+    "key": "backpack_small_2rpjthdyz4yat38a",
+    "label": "Backpack, Small",
+    "effect": "Wearer adds +5xSTR to maximum Carry weight",
+    "note": "Available in a few different sizes, backpacks are invaluable for carrying larger quantities of items around. Most characters are assumed to be carrying items in pockets, belt pouches, and assorted bags and sacks, but a proper backpack helps carry items more easily and more efficiently. At least, if you don't have a pack brahmin or something else to carry your burdens.",
+    "weight": 0,
+    "cost": 30,
+    "rarity": 1,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.2RPjtHdYZ4YAT38a"
+  },
+  {
+    "key": "bobby_pin_17bgbljbgfj3ius4",
+    "label": "Bobby Pin",
+    "effect": "Reduces difficulty of Lockpick tests by 1 (minimum 1), One bobby pin breaks per complication rolled",
+    "note": "A flexible double-pronged hairpin, made of metal or plastic, they were used before the Great War to hold hair in place. They're also useful for picking locks if you know how.",
+    "weight": 0,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.17BGbljBgFJ3IUS4"
+  },
+  {
+    "key": "deluxe_toolkit_tpn8coc5zljmlsgo",
+    "label": "Deluxe Toolkit",
+    "effect": "Reduce the difficulty of Repair tests by 1 (minimum 0), May attempt Repair tests which normally require a workbench or similar at +1 difficulty",
+    "note": "A heavy, but still technically portable, handled metal box containing an assortment of tools of different shapes, sizes, and functions, for opening and repairing a variety of mechanical and electronic devices. Having the right tool at your disposal can make most routine repairs simpler and can even allow you to attempt more ambitious projects away from the comforts of home.",
+    "weight": 20,
+    "cost": 150,
+    "rarity": 3,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.tPN8cOC5ZLjMLSGO"
+  },
+  {
+    "key": "doctor_s_bag_tjzodq60dvemlpf9",
+    "label": "Doctor's Bag",
+    "effect": "Reduce the difficulty of Medicine tests by 1 (minimum 0), When providing long-term care, allows care of up to 2 additional patients",
+    "note": "A well-stocked bag of medical supplies and useful tools for the science of healing. A bit cumbersome to haul around, but the people whose lives you save will thank you for the effort. A doctor's bag may also contain one-use medical supplies like Stimpaks, purified water, and RadAway. These are tracked and used separately.",
+    "weight": 10,
+    "cost": 300,
+    "rarity": 3,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.tJzODq60DVEMlpF9"
+  },
+  {
+    "key": "electronic_lockpicker_wy4ifzby6xuhesiv",
+    "label": "Electronic Lockpicker",
+    "effect": "Reduces difficulty of Lockpick tests by 2 (minimum 0), Ignores first complication rolled, Breaks if two or more complications are rolled at once",
+    "note": "Difficult to find in the wasteland, the Wattz Electronics Micromanipulator electronic lockpick is a potent tool that can pick mechanical and electronic locks more efficiently than a person can alone. However, they're delicate, and can break down if misused.",
+    "weight": 4,
+    "cost": 375,
+    "rarity": 4,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.WY4ifZBy6XUHesiv"
+  },
+  {
+    "key": "first_aid_kit_wyjtxdmxybdgcd6n",
+    "label": "First Aid Kit",
+    "effect": "Heal +2 HP upon succeeding at the First Aid action",
+    "note": "A pack full of bandages, antiseptic spray, and other tools useful in helping clean and bind injuries in the field. First aid kits also often come with Stimpaks and RadAway, but these are used and tracked separately",
+    "weight": 4,
+    "cost": 200,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.WyjtxDmxyBdGcD6n"
+  },
+  {
+    "key": "flashlight_uyulmmopw2wqfowa",
+    "label": "Flashlight",
+    "effect": "Generates bright light in a single zone within Medium range; the user may choose which zone is illuminated",
+    "note": "A sturdy, battery-operated light source that can easily be directed to points of interest. Long-lasting, high-capacity batteries keep the light working for a long time.",
+    "weight": 2,
+    "cost": 100,
+    "rarity": 3,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.UyuLMMopW2wqFOwA"
+  },
+  {
+    "key": "geiger_counter_tchijlrrokhx44rk",
+    "label": "Geiger Counter",
+    "effect": "Allows a PER + Survival test, difficulty 1, to determine if there is radiation present in an area, and how much",
+    "note": "A Geiger counter is a relatively simple tool, used to detect ionizing radiation. This is displayed on a small gauge, and signaled by a characteristic ticking sound, a common feature of counters, generated by the electronics for easy detection and monitoring of radiation.",
+    "weight": 8,
+    "cost": 325,
+    "rarity": 3,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.TchIjLRrOkHx44rk"
+  },
+  {
+    "key": "holotags_h4ft10mkgxognaw3",
+    "label": "Holotags",
+    "effect": "Identifies the fallen",
+    "note": "A small, durable, identifying item used by the Brotherhood of Steel. Holotags contain information to identify their wearer in case of death. They also act as a \"black box\" data recorder for a suit of Power Armor, providing the Brotherhood record of the deeds of their fallen warriors. Though not especially valuable by themselves, the Brotherhood often pays a reward to any who bring in holotags they find.",
+    "weight": 0,
+    "cost": 5,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.h4ft10mkGXOGNaW3"
+  },
+  {
+    "key": "holotape_player_180k1u9dkw1ub7bh",
+    "label": "Holotape Player",
+    "effect": "Allows playback of audio holotapes",
+    "note": "A small device for playing back audio recorded to holotape, producing the sound out of a small speaker or into a connected set of headphones (not included). Video and data holotapes cannot be played back on this device, as it lacks a screen to display them-such tapes need to be played from a desk terminal or similar computer.",
+    "weight": 3,
+    "cost": 250,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.180k1U9dkW1ub7bH"
+  },
+  {
+    "key": "junk_o9ggqje0cfsoyccb",
+    "label": "Junk",
+    "effect": "",
+    "note": "Junk items have little immediate benefit, beyond amusement or nostalgia, but they're still potentially valuable for the materials they're made from. Junk items have no rules effect on their own. Their only effect is to be found and broken down into useful materials, which can be used for crafting and repairing other items. When you find junk while scavenging, roll 2d20. That is the quantity of junk items you scavenge. Junk items have a weight of 2 and are worth 2 caps each in trade. You may spend 1 Luck point to increase the number of junk items scavenged by an amount equal to your LCK score. You can salvage materials from junk items and from other items you wish to dispose of to use them later for repairs and for crafting. Salvage requires that you have appropriate tools or facilities, such as a workbench.",
+    "weight": 2,
+    "cost": 2,
+    "rarity": 0,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.O9gGqJE0CfsOYccB"
+  },
+  {
+    "key": "lantern_kbfbae9bid01j20j",
+    "label": "Lantern",
+    "effect": "Generates bright light within Close range, and dim light within Medium range",
+    "note": "A simple oil or gas lamp, normally containing a flame fueled by an oil or gas reservoir. The flame is shielded by glass, and has a sturdy base allowing it to be placed down without risk of tipping over and breaking. It illuminates the entire surrounding area, and became common again after the War, due to a lack of reliable electrical power. It needs to be refueled periodically, though.",
+    "weight": 3,
+    "cost": 15,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.KBFbae9bid01j20J"
+  },
+  {
+    "key": "lock_pick_set_1iifdsmtblctyk0l",
+    "label": "Lock Pick Set",
+    "effect": "Reduces difficulty of Lockpick tests by 1 (minimum 0), After 3 complications, the set is broken",
+    "note": "A rolled-up leather case containing an assortment of picks and tension wrenches for opening mechanical locks, as an alternative to the cruder \"screwdriver and bobby pins\" method. Sturdier than the improvised method, but a set can become useless if too many of the picks or wrenches break.",
+    "weight": 2,
+    "cost": 150,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.1IIFdsmtblCTYk0L"
+  },
+  {
+    "key": "multi_tool_1wxcxiyvgk4gtyuf",
+    "label": "Multi-Tool",
+    "effect": "Reduce the difficulty of Repair tests by 1 (minimum 0)",
+    "note": "A handy little device, containing a set of pliers, some wire cutters, a variety of small wrenches and screw drivers, and other small tools, all built into a single tool. Different parts fold out of the handles as needed. Ideal for someone who needs basic tools but is still travelling light.",
+    "weight": 1,
+    "cost": 100,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.1wxcXIYvgK4GTYUf"
+  },
+  {
+    "key": "pack_brahmin_m7qqfcld08yukoqe",
+    "label": "Pack Brahmin",
+    "effect": "A mutant cow that carries heavy loads and produces milk and fertilizer",
+    "note": "A large, two-headed mutant female cow used as a pack animal. The brahmin's profile is on p.341, and they can carry up to 500 lbs. of weight. The brahmin can also be milked once a day, requiring an AGI + Survival test with a difficulty of 1. Success means the brahmin produces one brahmin milk (p.161), plus one extra for each AP spent (maximum 5 brahmin milk). A brahmin also produces 2CD units of fertilizer (uncommon material) each day.",
+    "weight": 0,
+    "cost": 200,
+    "rarity": 3,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.M7QQFcLD08YuKOqE"
+  },
+  {
+    "key": "pip_boy_fkgwa1frcdfqpvhl",
+    "label": "Pip-Boy",
+    "effect": "See description",
+    "note": "A Personal Information Processor manufactured by RobCo Industries. Under partnership with Vault-Tec, they were issued to many vault residents, though due to production constraints and ongoing development, different vaults received shipments of different versions of the Pip-Boy. The versions most encountered are variants of the Pip-Boy 2000 and Pip-Boy 3000, which are designed to be secured upon the wearer's wrist. Many models were designed with biometric locks, preventing them from being removed while the wearer still lives. A Pip-Boy is powered by an internal fission battery, providing a working lifespan for the device far greater than the expected life of its wearer (and, indeed, many Pip-Boys have been handed down within communities or families as heirlooms), and the device itself is sturdy enough to withstand basically anything. Not all Pip-Boys contain the same functions, but the common functions are: A personal status indicator allows the wearer to see a report on their current health and wellbeing and any medical problems currently afflicting them. The device maintains an ongoing log of the wearer's activities, journey, and condition, and place for personal recordings to be made in either text or audio forms. An inbuilt holotape reader allows the device to accept compact holotapes, able to read and playback audio, video, data, and even games. It also functions as a compass, a radio, and a Geiger counter, and can generate light from its screen equivalent to a flashlight. In addition, all Pip-Boy units aid their wearer during combat thanks to the Vault-Tec Assisted Targeting System, or V.A.T.S. A character equipped with a Pip-Boy may use V.A.T.S. when they make an attack, ignoring the normal difficulty increase for targeting a specific location on the enemy.",
+    "weight": 0,
+    "cost": 0,
+    "rarity": 0,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.Fkgwa1FrCdfQPvhl"
+  },
+  {
+    "key": "pre_war_money_opho9zlvwqclupck",
+    "label": "Pre-War Money",
+    "effect": "",
+    "note": "",
+    "weight": 0,
+    "cost": 1,
+    "rarity": 0,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.opho9zlvwqcLUPcK"
+  },
+  {
+    "key": "radio_m5xb3upu9spainy2",
+    "label": "Radio",
+    "effect": "Picks up and plays radio transmissions",
+    "note": "A device which receives radio signals and translates them back into intelligible sounds. Used both before and after the War for entertainment purposes and emergency messaging alike, a radio is still only as good as the signal it receives. Most regions of the wastelands have a few radio stations active, playing old music for anyone with a working receiver, and a variety of groups make use of the remaining radio towers to broadcast signals to their members over long distances, but the range of these signals is still fairly limited.",
+    "weight": 2,
+    "cost": 75,
+    "rarity": 2,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.M5XB3Upu9SpAINY2"
+  },
+  {
+    "key": "signal_flare_tym9dmuf2apvjdiw",
+    "label": "Signal Flare",
+    "effect": "Generates bright light within close range until the end of the current scene, One use only",
+    "note": "A small pyrotechnic device which burns brightly, generating a bright light for a short while. They're also extremely hot and can be used to ignite flammable substances and materials if placed close enough. These are larger and bulkier than the flares fired from a flare gun.",
+    "weight": 0.5,
+    "cost": 10,
+    "rarity": 1,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.TyM9dMuF2apvJdIW"
+  },
+  {
+    "key": "torch_voxz7dt1wuczu2al",
+    "label": "Torch",
+    "effect": "Generates bright light within close range until the end of the current scene, Requires an INT + Survival test to light, difficulty 1, +1 for each previous use",
+    "note": "A long branch or length of scrap metal, with a head wrapped in cloth soaked in a flammable liquid such as alcohol or gasoline. A decent enough improvised light source, and reusable to an extent.",
+    "weight": 1,
+    "cost": 10,
+    "rarity": 1,
+    "source": "Core",
+    "foundryUuid": "Compendium.fallout.miscellany.Item.vOXz7dt1WUCZu2Al"
+  }
+];
+

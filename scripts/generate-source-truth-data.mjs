@@ -271,6 +271,21 @@ function mapAmmo(item) {
   };
 }
 
+function mapMiscellany(item) {
+  const system = item.system || {};
+  return {
+    key: slugify(`${item.name}_${item._id}`),
+    label: item.name,
+    effect: stripHtml(system.effect || ''),
+    note: stripHtml(system.description || ''),
+    weight: Number(system.weight || 0),
+    cost: Number(system.cost || 0),
+    rarity: Number(system.rarity || 0),
+    source: sourceLabel(system.source),
+    foundryUuid: compendiumUuid('miscellany', item._id),
+  };
+}
+
 function normalizeDuration(duration) {
   const d = String(duration || '').trim().toLowerCase();
   if (!d) return 'Instant';
@@ -385,7 +400,7 @@ function stableSortByLabel(a, b) {
 }
 
 async function main() {
-  const [weaponsRaw, apparelRaw, ammoRaw, consumablesRaw, perksRaw, addictionsRaw, robotModsRaw] = await Promise.all([
+  const [weaponsRaw, apparelRaw, ammoRaw, consumablesRaw, perksRaw, addictionsRaw, robotModsRaw, miscellanyRaw] = await Promise.all([
     readPackItems('weapons'),
     readPackItems('apparel'),
     readPackItems('ammunition'),
@@ -393,6 +408,7 @@ async function main() {
     readPackItems('perks'),
     readPackItems('addictions'),
     readPackItems('robot_modules'),
+    readPackItems('miscellany'),
   ]);
 
   const addictionLookup = {};
@@ -429,6 +445,7 @@ async function main() {
 
   const sourceCorePerks = perksRaw.map(mapPerk).sort(stableSortByLabel);
   const sourceRobotMods = robotModsRaw.map(mapRobotMod).sort(stableSortByLabel);
+  const sourceMiscellany = miscellanyRaw.map(mapMiscellany).sort(stableSortByLabel);
 
   const header = `// AUTO-GENERATED FILE. DO NOT EDIT BY HAND.\n// Generated from Foundry source-of-truth packs in ./Reference/packs\n\n`;
   const payload = {
@@ -442,6 +459,7 @@ async function main() {
     SOURCE_OTHER_CONSUMABLES: sourceOtherConsumables,
     SOURCE_CORE_PERKS: sourceCorePerks,
     SOURCE_ROBOT_MODS: sourceRobotMods,
+    SOURCE_MISCELLANY: sourceMiscellany,
   };
 
   let content = header;

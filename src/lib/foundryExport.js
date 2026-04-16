@@ -7,6 +7,7 @@ import {
   CORE_ARMOR,
   CORE_CHEMS,
   CORE_FOOD,
+  CORE_MISCELLANY,
   CORE_OTHER_CONSUMABLES,
   CORE_PERKS,
   CORE_POWER_ARMOR,
@@ -387,6 +388,14 @@ function cleanPerkKeyLabel(key) {
   return normalized.replace(/\b\w/g, c => c.toUpperCase());
 }
 
+function robotModLookupCandidates(entry = {}) {
+  const base = [entry.key, entry.name, entry.label].filter(Boolean);
+  const normalizedName = normalizeName(entry.name || entry.label || '');
+  const mappedLabel = ROBOT_MOD_ALIAS_MAP[normalizedName];
+  if (mappedLabel) base.push(mappedLabel);
+  return base;
+}
+
 const WEAPON_LOOKUP = buildLookup(CORE_WEAPONS);
 const AMMO_LOOKUP = buildLookup(CORE_AMMO);
 const APPAREL_LOOKUP = buildLookup([...CORE_APPAREL, ...CORE_ARMOR, ...CORE_POWER_ARMOR]);
@@ -395,6 +404,14 @@ const FOOD_LOOKUP = buildLookup(CORE_FOOD);
 const OTHER_CONSUMABLE_LOOKUP = buildLookup(CORE_OTHER_CONSUMABLES);
 const PERK_LOOKUP = buildLookup(CORE_PERKS);
 const ROBOT_MOD_LOOKUP = buildLookup(CORE_ROBOT_MODS);
+const MISCELLANY_LOOKUP = buildLookup(CORE_MISCELLANY);
+const ROBOT_MOD_ALIAS_MAP = {
+  'behavioral analysis module': 'Behavioral Analysis Mod',
+  'behavioral analysis mod': 'Behavioral Analysis Mod',
+  'recon sensors mod': 'Recon Sensors',
+  'recon sensors': 'Recon Sensors',
+  'protectron sensors': 'Sensor Array',
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Metadata builders
@@ -611,7 +628,7 @@ function buildSkillItems(character) {
 function buildWeaponItem(w) {
   const ref = findInLookup(WEAPON_LOOKUP, [w.key, w.name, w.label]);
   const resolved = {
-    name: pickFirst(w.name, w.label, ref?.label, 'Unknown Weapon'),
+    name: pickFirst(w.name, w.label, ref?.label, 'Weapon'),
     type: pickFirst(w.type, ref?.type, 'Melee'),
     damage: pickFirst(w.damage, ref?.damage, '0'),
     damageType: pickFirst(w.damageType, ref?.damageType, 'Physical'),
@@ -640,7 +657,7 @@ function buildWeaponItem(w) {
   // Build via template, then patch nested objects that need deep mutation
   const system = createSystemFromTemplate('weapon', {
     description:      resolved.notes ? `<p>${resolved.notes}</p>` : '',
-    source:           'custom',
+    source:           ref ? 'core_rulebook' : 'custom',
     cost:             parseInt(resolved.cost, 10) || 0,
     quantity:         resolved.quantity,
     rarity:           parseInt(resolved.rarity, 10) || 0,
@@ -661,6 +678,7 @@ function buildWeaponItem(w) {
   system.damage.weaponQuality = parseWeaponQualities(resolved.qualities || '');
 
   item.system = system;
+  if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
   return item;
 }
 
@@ -690,7 +708,7 @@ function buildApparelItem(a) {
   const item = makeItemBase(null, source.name, itemType, 'systems/fallout/assets/icons/items/apparel.svg');
   const system = createSystemFromTemplate(itemType, {
     description:  source.special ? `<p>${source.special}</p>` : '',
-    source:       'custom',
+    source:       ref ? 'core_rulebook' : 'custom',
     cost:         parseInt(source.cost, 10) || 0,
     quantity:     source.quantity,
     rarity:       parseInt(source.rarity, 10) || 0,
@@ -709,6 +727,7 @@ function buildApparelItem(a) {
   };
 
   item.system = system;
+  if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
   return item;
 }
 
@@ -729,7 +748,7 @@ function buildPerkItem(p) {
   const item = makeItemBase(null, label, 'perk', 'systems/fallout/assets/icons/items/perk.webp');
   item.system = createSystemFromTemplate('perk', {
     description: description ? `<p>${description}</p>` : '',
-    source:      'core_rulebook',
+    source:      ref ? 'core_rulebook' : 'custom',
   });
   // Set rank value to 1 (character has this perk)
   item.system.rank.value = 1;
@@ -740,6 +759,7 @@ function buildPerkItem(p) {
     const req = parseInt(requirements[abbr], 10);
     if (req > 0) item.system.requirementsEx.attributes[field].value = req;
   }
+  if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
   return item;
 }
 
@@ -787,7 +807,7 @@ function buildConsumableItem(c, type = 'chem') {
   const item = makeItemBase(null, name, 'consumable', 'systems/fallout/assets/icons/items/consumable.webp');
   item.system = createSystemFromTemplate('consumable', {
     description:     desc,
-    source:          'core_rulebook',
+    source:          ref?.foundryUuid ? 'core_rulebook' : 'custom',
     cost,
     quantity,
     rarity,
@@ -802,29 +822,33 @@ function buildConsumableItem(c, type = 'chem') {
 
   const addictionRating = parseInt(pickFirst(c.addictionNumber, ref?.addictionNumber, c.addiction, 0), 10);
   if (addictionRating > 0) item.system.addiction = addictionRating;
+  if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
 
   return item;
 }
 
 function buildMiscellanyItem(entry) {
-  const name = pickFirst(entry.name, entry.label, 'Miscellany');
+  const ref = findInLookup(MISCELLANY_LOOKUP, [entry.key, entry.name, entry.label]);
+  const name = pickFirst(entry.name, entry.label, ref?.label, 'Miscellany');
   const qty = safeQty(entry.quantity, 1);
-  const effect = pickFirst(entry.effect, entry.note, entry.notes, '');
+  const effect = pickFirst(entry.effect, ref?.effect, entry.note, entry.notes, '');
+  const description = pickFirst(entry.note, entry.notes, ref?.note, '');
   const item = makeItemBase(null, name, 'miscellany', 'systems/fallout/assets/icons/items/miscellany.svg');
   item.system = createSystemFromTemplate('miscellany', {
-    description: effect ? `<p>${stripHtml(effect)}</p>` : '',
-    source: 'custom',
-    cost: parseInt(entry.cost, 10) || 0,
+    description: description ? `<p>${stripHtml(description)}</p>` : (effect ? `<p>${stripHtml(effect)}</p>` : ''),
+    source: ref?.foundryUuid ? 'core_rulebook' : 'custom',
+    cost: parseInt(pickFirst(entry.cost, ref?.cost, 0), 10) || 0,
     quantity: qty,
-    rarity: parseInt(entry.rarity, 10) || 0,
-    weight: parseFloat(entry.weight) || 0,
+    rarity: parseInt(pickFirst(entry.rarity, ref?.rarity, 0), 10) || 0,
+    weight: parseFloat(pickFirst(entry.weight, ref?.weight, 0)) || 0,
     effect: effect || '',
   });
+  if (ref?.foundryUuid) item._stats.compendiumSource = ref.foundryUuid;
   return item;
 }
 
 function buildRobotModItem(entry) {
-  const ref = findInLookup(ROBOT_MOD_LOOKUP, [entry.key, entry.name, entry.label]);
+  const ref = findInLookup(ROBOT_MOD_LOOKUP, robotModLookupCandidates(entry));
   const name = pickFirst(entry.name, entry.label, ref?.label, 'Robot Mod');
   const qty = safeQty(entry.quantity, 1);
   const effect = pickFirst(entry.effect, ref?.effect, entry.note, entry.notes, '');
