@@ -19,6 +19,21 @@ const ALL_REF_WEAPONS = CORE_WEAPONS;
 
 const TYPE_ORDER = ['Small Guns', 'Energy Weapons', 'Big Guns', 'Bow', 'Melee', 'Unarmed', 'Throwing', 'Explosive'];
 
+function normalizeLookup(value = '') {
+  return String(value || '').trim().toLowerCase();
+}
+
+function findReferenceWeapon(weapon = {}) {
+  const byKey = normalizeLookup(weapon.key);
+  const bySourceName = normalizeLookup(weapon.sourceName);
+  const byName = normalizeLookup(weapon.name);
+  return ALL_REF_WEAPONS.find((ref) => {
+    const refKey = normalizeLookup(ref.key);
+    const refLabel = normalizeLookup(ref.label);
+    return (byKey && refKey === byKey) || (bySourceName && refLabel === bySourceName) || (byName && refLabel === byName);
+  }) || null;
+}
+
 function normalizeWeaponType(type = '') {
   const raw = String(type || '').trim().toLowerCase();
   if (!raw) return '';
@@ -116,6 +131,7 @@ function WeaponReferenceModal({ onSelect, onClose }) {
 
 function WeaponRow({ weapon, index, onChange, onRemove }) {
   const [editingAlias, setEditingAlias] = useState(false);
+  const referenceWeapon = findReferenceWeapon(weapon);
 
   const toggleMode = (mode) => {
     const modes = weapon.fireModes || [];
@@ -134,10 +150,10 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
     />
   );
 
-  const displayName = weapon.name || weapon.sourceName || 'Unnamed Weapon';
-  const description = weapon.note || '';
-  const sourceDisplay = weapon.sourceName || '';
-  const linkedToReference = Boolean(weapon.key || weapon.sourceName);
+  const displayName = weapon.name || weapon.sourceName || referenceWeapon?.label || 'Unnamed Weapon';
+  const description = weapon.note || referenceWeapon?.note || '';
+  const sourceDisplay = weapon.sourceName || referenceWeapon?.label || '';
+  const linkedToReference = Boolean(weapon.key || weapon.sourceName || referenceWeapon);
 
   return (
     <div className="p-3 mb-2" style={{ background: '#0a1a2d', border: '1px solid #1e3a5f' }}>
@@ -149,7 +165,6 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
               type="text"
               value={weapon.name ?? ''}
               onChange={e => onChange({ ...weapon, name: e.target.value })}
-              onBlur={() => setEditingAlias(false)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') setEditingAlias(false);
                 if (e.key === 'Escape') setEditingAlias(false);
@@ -187,7 +202,7 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
           )}
           <button
             type="button"
-            onClick={() => setEditingAlias(v => !v)}
+            onClick={() => setEditingAlias((v) => !v)}
             title={editingAlias ? 'Finish alias edit' : 'Edit weapon alias'}
             className="text-[10px] px-1.5 py-0.5 font-bold"
             style={{ background: 'rgba(106,154,186,0.08)', border: '1px solid rgba(106,154,186,0.35)', color: '#6a9aba', cursor: 'pointer' }}
