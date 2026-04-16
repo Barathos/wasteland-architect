@@ -192,9 +192,25 @@ function WeaponRow({ weapon, index, onChange, onRemove }) {
                 </button>
               </TooltipTrigger>
               {description && (
-                <TooltipContent side="top" align="start" style={{ maxWidth: '420px', background: '#060f1c', border: '1px solid #1e3a5f', color: '#a8c8d8' }}>
-                  {sourceDisplay && <p className="text-[10px] font-bold mb-1" style={{ color: '#f5c518' }}>{sourceDisplay}</p>}
-                  <p className="text-[10px] font-mono whitespace-pre-wrap">{description}</p>
+                <TooltipContent
+                  side="top"
+                  align="start"
+                  style={{
+                    maxWidth: '560px',
+                    background: '#060f1c',
+                    border: '1px solid #1e3a5f',
+                    color: '#a8c8d8',
+                    padding: '10px 12px',
+                  }}
+                >
+                  {sourceDisplay && (
+                    <p className="font-bold mb-2" style={{ color: '#f5c518', fontSize: '12px', lineHeight: 1.3 }}>
+                      {sourceDisplay}
+                    </p>
+                  )}
+                  <p className="font-mono whitespace-pre-wrap" style={{ fontSize: '12px', lineHeight: 1.55 }}>
+                    {description}
+                  </p>
                 </TooltipContent>
               )}
             </Tooltip>
