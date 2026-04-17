@@ -9,6 +9,27 @@ function safeJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
 }
 
+function normalizeDedupText(value = '') {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function dedupeArmorEntries(entries = []) {
+  const map = new Map();
+  for (const entry of entries) {
+    const key = [
+      normalizeDedupText(entry?.name),
+      normalizeDedupText(entry?.locations),
+      normalizeDedupText(entry?.type),
+    ].join('|');
+    if (!key.replace(/\|/g, '').trim()) continue;
+    if (!map.has(key)) map.set(key, entry);
+  }
+  return [...map.values()];
+}
+
 function rollDiceExpression(expr) {
   const text = String(expr || '').trim().toLowerCase();
   const match = text.match(/^(\d+)d(\d+)$/);
@@ -387,6 +408,7 @@ function buildApparelEntry(itemName, explicitType = 'apparel') {
       hp: found.hp || null,
       source: found.source || 'Core',
       type: explicitType === 'robot_armor' ? 'Robot Armor' : (found.type || found.set || ''),
+      grantedBy: 'starting_equipment',
     };
   }
   return null;
@@ -526,7 +548,7 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
 
   const weapons = safeJson(character.equipment, []);
   const ammo    = safeJson(character.ammo_inventory, []);
-  const armor   = safeJson(character.armor_equipped, []);
+  const armor   = dedupeArmorEntries(safeJson(character.armor_equipped, []));
   const chems   = safeJson(character.chems_inventory, []);
   const food    = safeJson(character.food_inventory, []);
   const robotMods = safeJson(character.robot_mods, []);
@@ -618,7 +640,7 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
     updates: {
       equipment: JSON.stringify(weapons),
       ammo_inventory: JSON.stringify(ammo),
-      armor_equipped: JSON.stringify(armor),
+      armor_equipped: JSON.stringify(dedupeArmorEntries(armor)),
       chems_inventory: JSON.stringify(chems),
       food_inventory: JSON.stringify(food),
       robot_mods: JSON.stringify(robotMods),
@@ -642,7 +664,7 @@ export function resolveEquipmentChoice(character, choiceKey, chosenValue) {
 
   const weapons   = safeJson(character.equipment, []);
   const ammo      = safeJson(character.ammo_inventory, []);
-  const armor     = safeJson(character.armor_equipped, []);
+  const armor     = dedupeArmorEntries(safeJson(character.armor_equipped, []));
   const chems     = safeJson(character.chems_inventory, []);
   const food      = safeJson(character.food_inventory, []);
   const misc      = safeJson(character.miscellany, []);
@@ -671,7 +693,7 @@ export function resolveEquipmentChoice(character, choiceKey, chosenValue) {
   return {
     equipment: JSON.stringify(weapons),
     ammo_inventory: JSON.stringify(ammo),
-    armor_equipped: JSON.stringify(armor),
+    armor_equipped: JSON.stringify(dedupeArmorEntries(armor)),
     chems_inventory: JSON.stringify(chems),
     food_inventory: JSON.stringify(food),
     miscellany: JSON.stringify(misc),
