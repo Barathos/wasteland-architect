@@ -19,7 +19,7 @@ const ALL_PERKS = CORE_PERKS.map((p) => ({
 
 function rollD20() { return Math.floor(Math.random() * 20) + 1; }
 
-function InlineRollPanel({ skill, target, apCurrent, onSpendAP, onClose }) {
+function InlineRollPanel({ skill, target, apCurrent, onSpendAP, onClose, isTag = false, skillRank = 0 }) {
   const [rolls, setRolls] = useState([]);
 
   const doRoll = (extraDie) => {
@@ -29,7 +29,16 @@ function InlineRollPanel({ skill, target, apCurrent, onSpendAP, onClose }) {
     if (extraDie) onSpendAP();
   };
 
-  const successes = rolls.filter(r => r <= target).length;
+  const critThreshold = isTag ? Math.max(1, Math.min(20, Number(skillRank || 0))) : 1;
+  const complicationThreshold = 20;
+  const resultBreakdown = rolls.map((r) => {
+    const hitSuccess = r <= target ? 1 : 0;
+    const critBonus = r <= critThreshold ? 1 : 0;
+    const complications = r >= complicationThreshold ? 1 : 0;
+    return { result: r, successes: hitSuccess + critBonus, complications };
+  });
+  const successes = resultBreakdown.reduce((sum, d) => sum + d.successes, 0);
+  const complications = resultBreakdown.reduce((sum, d) => sum + d.complications, 0);
 
   return (
     <div className="mx-2 mb-1 p-3" style={{ background: '#060f1c', border: '1px solid #4a6a8a', borderTop: 'none' }}>
@@ -58,10 +67,17 @@ function InlineRollPanel({ skill, target, apCurrent, onSpendAP, onClose }) {
           <div className="flex gap-2 mb-2 flex-wrap">
             {rolls.map((r, i) => {
               const hit = r <= target;
+              const isCrit = r <= critThreshold;
+              const isComplication = r >= complicationThreshold;
               return (
                 <div key={i} className="w-12 h-12 flex items-center justify-center text-lg font-bold"
                   style={{ background: hit ? '#0a2a0a' : '#2a0a0a', border: `2px solid ${hit ? '#22cc22' : '#cc4444'}`, color: hit ? '#22cc22' : '#cc4444' }}>
                   {r}
+                  {(isCrit || isComplication) && (
+                    <span className="ml-1 text-[9px]">
+                      {isComplication ? "!" : "*"}
+                    </span>
+                  )}
                 </div>
               );
             })}
@@ -70,8 +86,8 @@ function InlineRollPanel({ skill, target, apCurrent, onSpendAP, onClose }) {
             <span className="text-sm font-bold" style={{ color: successes > 0 ? '#22cc22' : '#cc4444' }}>
               {successes > 0 ? `${successes} SUCCESS${successes > 1 ? 'ES' : ''}` : 'FAILURE'}
             </span>
-            {rolls.some(r => r === 1) && <span className="text-[10px]" style={{ color: '#f5c518' }}>&#9889; CRIT!</span>}
-            {rolls.some(r => r === 20) && <span className="text-[10px]" style={{ color: '#cc4444' }}>&#128128; COMPLICATION!</span>}
+            {rolls.some(r => r <= critThreshold) && <span className="text-[10px]" style={{ color: '#f5c518' }}>&#9889; CRIT</span>}
+            {complications > 0 && <span className="text-[10px]" style={{ color: '#cc4444' }}>&#128128; COMPLICATION x{complications}</span>}
           </div>
         </div>
       )}
@@ -214,6 +230,8 @@ export default function AbilitiesTab({ character, updateField }) {
                       apCurrent={apCurrent}
                       onSpendAP={spendAP}
                       onClose={() => setOpenSkill(null)}
+                      isTag={isTag}
+                      skillRank={effectiveRank}
                     />
                   )}
                 </div>
