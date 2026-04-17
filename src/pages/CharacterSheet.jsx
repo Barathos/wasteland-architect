@@ -15,6 +15,7 @@ import DiceRoller from "../components/sheet/DiceRoller";
 import CompanionsTab from "../components/sheet/CompanionsTab";
 import ReputationTab from "../components/sheet/ReputationTab";
 import CombatTracker from "../components/sheet/CombatTracker";
+import LevelUpPanel from "../components/sheet/LevelUpPanel";
 import { ArrowLeft, Trash2, Radiation, Edit2, Swords, Printer, Download } from "lucide-react";
 import { exportToFoundry } from "../lib/foundryExport";
 import {
@@ -39,6 +40,7 @@ export default function CharacterSheet() {
   const [error, setError] = useState(false);
   const [activeTab, setActiveTab] = useState('STATUS');
   const [showCombat, setShowCombat] = useState(false);
+  const [showLevelUp, setShowLevelUp] = useState(false);
   const lastSavedRef = useRef(null);
 
   useEffect(() => { loadCharacter(); }, [id]);
@@ -73,10 +75,12 @@ export default function CharacterSheet() {
         lastSavedRef.current = current;
         return current;
       });
+      return true;
     } catch (e) {
       console.error("Failed to save character update:", e);
       if (lastSavedRef.current) setCharacter(lastSavedRef.current);
       toast.error("Failed to save changes.");
+      return false;
     }
   };
 
@@ -214,7 +218,7 @@ export default function CharacterSheet() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'STATUS'    && <StatusTab character={character} updateField={updateField} onOpenLevelUp={() => navigate(`/builder?edit=${id}&levelup=1`)} />}
+      {activeTab === 'STATUS'    && <StatusTab character={character} updateField={updateField} onOpenLevelUp={() => setShowLevelUp(true)} />}
       {activeTab === 'ABILITIES' && <AbilitiesTab character={character} updateField={updateField} />}
       {activeTab === 'WEAPONS'   && <WeaponsTab character={character} updateField={updateField} />}
       {activeTab === 'APPAREL'   && <ApparelTab character={character} updateField={updateField} />}
@@ -227,6 +231,13 @@ export default function CharacterSheet() {
 
       <DiceRoller character={character} />
       {showCombat && <CombatTracker character={character} onClose={() => setShowCombat(false)} />}
+      {showLevelUp && (
+        <LevelUpPanel
+          character={character}
+          onApply={updateField}
+          onClose={() => setShowLevelUp(false)}
+        />
+      )}
     </div>
   );
 }

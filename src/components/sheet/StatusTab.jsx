@@ -194,7 +194,7 @@ export default function StatusTab({ character, updateField, onOpenLevelUp }) {
               color: canLevelUp ? '#22cc22' : '#4a6a8a',
               cursor: canLevelUp ? 'pointer' : 'not-allowed',
             }}
-            title={canLevelUp ? 'Open level up builder flow' : `Need ${Math.max(0, xpNeeded - xp)} more XP`}
+            title={canLevelUp ? 'Open level up panel' : `Need ${Math.max(0, xpNeeded - xp)} more XP`}
           >
             Level Up
           </button>
