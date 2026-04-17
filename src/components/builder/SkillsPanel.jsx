@@ -48,7 +48,11 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
     } else if (selectableTagCount < tagLimit) {
       const absMax = getAbsoluteMaxRank(key);
       const current = Number(skills[key] || 0);
-      const maxBaseWithTag = Math.max(0, absMax - TAG_SKILL_BONUS);
+      // Enforce both absolute caps and character-creation cap when adding a tag.
+      const creationMaxBaseWithTag = Math.max(0, CREATION_MAX_RANK - TAG_SKILL_BONUS);
+      const maxBaseWithTag = isCreationCapped
+        ? Math.min(Math.max(0, absMax - TAG_SKILL_BONUS), creationMaxBaseWithTag)
+        : Math.max(0, absMax - TAG_SKILL_BONUS);
       if (current > maxBaseWithTag) {
         onSkillsChange({ ...skills, [key]: maxBaseWithTag });
       }
