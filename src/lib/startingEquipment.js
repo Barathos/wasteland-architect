@@ -30,6 +30,18 @@ function dedupeArmorEntries(entries = []) {
   return [...map.values()];
 }
 
+function dedupeByName(entries = [], keyFields = ['name']) {
+  const map = new Map();
+  for (const entry of entries) {
+    const key = keyFields
+      .map((field) => normalizeDedupText(entry?.[field]))
+      .join('|');
+    if (!key.replace(/\|/g, '').trim()) continue;
+    if (!map.has(key)) map.set(key, entry);
+  }
+  return [...map.values()];
+}
+
 function rollDiceExpression(expr) {
   const text = String(expr || '').trim().toLowerCase();
   const match = text.match(/^(\d+)d(\d+)$/);
@@ -546,14 +558,17 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
     .filter(i => i.optional)
     .map(i => ({ ...i, resolved: false, resolvedValue: null }));
 
-  const weapons = safeJson(character.equipment, []);
-  const ammo    = safeJson(character.ammo_inventory, []);
-  const armor   = dedupeArmorEntries(safeJson(character.armor_equipped, []));
-  const chems   = safeJson(character.chems_inventory, []);
-  const food    = safeJson(character.food_inventory, []);
-  const robotMods = safeJson(character.robot_mods, []);
-  const misc    = safeJson(character.miscellany, []);
-  let caps = parseInt(character.caps) || 0;
+  // Deterministic rebuild for builder flow:
+  // always re-generate from a clean baseline to prevent duplicated auto gear
+  // when origin/tag selections trigger multiple rebuild passes.
+  const weapons = [];
+  const ammo    = [];
+  const armor   = [];
+  const chems   = [];
+  const food    = [];
+  const robotMods = [];
+  const misc    = [];
+  let caps = 0;
 
   autoItems.forEach(item => {
     const quantity = resolveItemQuantity(item);
@@ -638,13 +653,13 @@ export function buildStartingEquipment(character, packKey, tagSkillKeys = []) {
 
   return {
     updates: {
-      equipment: JSON.stringify(weapons),
-      ammo_inventory: JSON.stringify(ammo),
+      equipment: JSON.stringify(dedupeByName(weapons, ['name', 'type', 'ammo', 'source'])),
+      ammo_inventory: JSON.stringify(dedupeByName(ammo, ['type', 'source', 'note'])),
       armor_equipped: JSON.stringify(dedupeArmorEntries(armor)),
-      chems_inventory: JSON.stringify(chems),
-      food_inventory: JSON.stringify(food),
-      robot_mods: JSON.stringify(robotMods),
-      miscellany: JSON.stringify(misc),
+      chems_inventory: JSON.stringify(dedupeByName(chems, ['name', 'label', 'source', 'note'])),
+      food_inventory: JSON.stringify(dedupeByName(food, ['name', 'label', 'source', 'note'])),
+      robot_mods: JSON.stringify(dedupeByName(robotMods, ['name', 'source', 'note'])),
+      miscellany: JSON.stringify(dedupeByName(misc, ['name', 'source', 'note'])),
       caps,
       sub_origin: packKey,
       pending_equipment_choices: JSON.stringify(pendingChoices),
