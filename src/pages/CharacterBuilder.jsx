@@ -48,6 +48,7 @@ export default function CharacterBuilder() {
   const [searchParams] = useSearchParams();
   const editId = searchParams.get('edit');
   const isLevelUpFlow = searchParams.get('levelup') === '1';
+  const isInitialCreationFlow = !editId;
   const [activeTab, setActiveTab] = useState("details");
   const [saving, setSaving] = useState(false);
 
@@ -193,8 +194,9 @@ export default function CharacterBuilder() {
     const allTags = getMergedTagSkills(baseCharacter, tagsInput);
     const level = Number(baseCharacter?.level || 1);
     const bypassCreationCap = Boolean(options?.bypassCreationCap);
-    // Project rule: creation cap is Level 1 only.
-    const isCreationCapped = !bypassCreationCap && level < 2;
+    const enforceCreationCap = options?.enforceCreationCap !== false;
+    // Project rule: creation cap is Level 1 only, and only for new character creation flow.
+    const isCreationCapped = enforceCreationCap && !bypassCreationCap && level < 2;
 
     for (const skill of SKILLS) {
       const key = skill.key;
@@ -232,23 +234,32 @@ export default function CharacterBuilder() {
 
   const handleTagSkillsChange = (updatedTags) => {
     setTagSkills(updatedTags);
-    setSkills(prev => sanitizeSkillsForCharacterRules(prev, updatedTags, character, { bypassCreationCap: isLevelUpFlow }));
+    setSkills(prev => sanitizeSkillsForCharacterRules(prev, updatedTags, character, {
+      bypassCreationCap: isLevelUpFlow,
+      enforceCreationCap: isInitialCreationFlow,
+    }));
     setCharacter(prev => rebuildStartingEquipmentWithTags(prev, updatedTags));
   };
 
   const handleSkillsChange = (updatedSkills) => {
-    setSkills(sanitizeSkillsForCharacterRules(updatedSkills, tagSkills, character, { bypassCreationCap: isLevelUpFlow }));
+    setSkills(sanitizeSkillsForCharacterRules(updatedSkills, tagSkills, character, {
+      bypassCreationCap: isLevelUpFlow,
+      enforceCreationCap: isInitialCreationFlow,
+    }));
   };
 
   useEffect(() => {
-    const sanitized = sanitizeSkillsForCharacterRules(skills, tagSkills, character, { bypassCreationCap: isLevelUpFlow });
+    const sanitized = sanitizeSkillsForCharacterRules(skills, tagSkills, character, {
+      bypassCreationCap: isLevelUpFlow,
+      enforceCreationCap: isInitialCreationFlow,
+    });
     const hasChanges = Object.keys({ ...skills, ...sanitized }).some(
       (key) => Number(skills[key] || 0) !== Number(sanitized[key] || 0)
     );
     if (hasChanges) {
       setSkills(sanitized);
     }
-  }, [skills, tagSkills, character.level, character.origin, character.sub_origin]);
+  }, [skills, tagSkills, character.level, character.origin, character.sub_origin, isInitialCreationFlow, isLevelUpFlow]);
 
   const currentStepIndex = STEPS.findIndex(s => s.id === activeTab);
   const goNext = () => { if (currentStepIndex < STEPS.length - 1) setActiveTab(STEPS[currentStepIndex + 1].id); };
@@ -280,7 +291,10 @@ export default function CharacterBuilder() {
 
     setSaving(true);
     try {
-      const sanitizedSkills = sanitizeSkillsForCharacterRules(skills, tagSkills, character, { bypassCreationCap: isLevelUpFlow });
+      const sanitizedSkills = sanitizeSkillsForCharacterRules(skills, tagSkills, character, {
+        bypassCreationCap: isLevelUpFlow,
+        enforceCreationCap: isInitialCreationFlow,
+      });
       setSkills(sanitizedSkills);
       const characterWithTagGear = rebuildStartingEquipmentWithTags(character, tagSkills);
       const fullChar = { ...characterWithTagGear, survivor_traits: JSON.stringify(survivorTraits) };
@@ -426,6 +440,7 @@ export default function CharacterBuilder() {
                 outcastTagSkill={outcastTagSkill}
                 levelUpBaselineSkills={isLevelUpFlow ? levelUpBaseline?.skills || {} : null}
                 levelUpSkillPointBudget={isLevelUpFlow ? 1 : null}
+                enforceCreationCap={isInitialCreationFlow}
               />
               <EquipmentChoices character={character} onResolve={handleResolveChoice} />
             </TabsContent>

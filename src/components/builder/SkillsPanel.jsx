@@ -15,6 +15,7 @@ export default function SkillsPanel({
   outcastTagSkill,
   levelUpBaselineSkills = null,
   levelUpSkillPointBudget = null,
+  enforceCreationCap = true,
 }) {
   const traits = getActiveTraitEffects(character);
   const effectiveSpecial = getEffectiveSpecialStats(character);
@@ -39,8 +40,8 @@ export default function SkillsPanel({
     ? Math.max(0, Number(levelUpSkillPointBudget || 0) - usedPoints)
     : totalSkillPoints - usedPoints;
   const level = Number(character.level || 1);
-  // Project rule: rank-3 creation cap applies only at Level 1.
-  const isCreationCapped = !isLevelUpMode && level < 2;
+  // Project rule: rank-3 creation cap applies only at Level 1 during new character creation.
+  const isCreationCapped = enforceCreationCap && !isLevelUpMode && level < 2;
 
   // Tag limit: base 3 + educated + vault/bos/outcast origin bonuses
   const tagLimit = TAG_SKILL_COUNT + traits.extraTagSkills;
