@@ -194,6 +194,22 @@ function getWeaponCompatibilitySlots(weapon = {}, referenceWeapon = null) {
   return {};
 }
 
+function normalizeWeaponBaseName(weapon = {}) {
+  const candidates = [
+    weapon?.sourceName,
+    weapon?.baseName,
+    stripKnownWeaponPrefixes(weapon?.name || ''),
+    weapon?.name,
+  ].filter(Boolean);
+  for (const candidate of candidates) {
+    const normalized = normalizeLoose(candidate);
+    if (!normalized) continue;
+    const ref = ALL_REF_WEAPONS.find((w) => normalizeLoose(w.label) === normalized);
+    if (ref?.label) return ref.label;
+  }
+  return candidates[0] || '';
+}
+
 function normalizeWeaponType(type = '') {
   const raw = String(type || '').trim().toLowerCase();
   if (!raw) return '';
@@ -626,11 +642,16 @@ export default function WeaponsTab({ character, updateField }) {
   };
 
   const recalculateWeaponFromInstalledMods = (weapon) => {
+    const stableBase = normalizeWeaponBaseName(weapon);
     const installed = weapon?.installedMods && typeof weapon.installedMods === 'object' ? weapon.installedMods : {};
     const refs = Object.values(installed)
       .map((value) => findReferenceWeaponMod({ value }))
       .filter(Boolean);
-    return applyWeaponModsToWeapon(weapon, refs);
+    return applyWeaponModsToWeapon({
+      ...weapon,
+      sourceName: weapon.sourceName || stableBase,
+      baseName: weapon.baseName || stableBase,
+    }, refs);
   };
 
   const assignWeaponMod = (weaponIndex, slotKey, nextValueRaw) => {
