@@ -214,7 +214,7 @@ export default function CharacterSheet() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'STATUS'    && <StatusTab character={character} updateField={updateField} />}
+      {activeTab === 'STATUS'    && <StatusTab character={character} updateField={updateField} onOpenLevelUp={() => navigate(`/builder?edit=${id}&levelup=1`)} />}
       {activeTab === 'ABILITIES' && <AbilitiesTab character={character} updateField={updateField} />}
       {activeTab === 'WEAPONS'   && <WeaponsTab character={character} updateField={updateField} />}
       {activeTab === 'APPAREL'   && <ApparelTab character={character} updateField={updateField} />}

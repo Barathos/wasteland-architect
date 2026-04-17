@@ -8,7 +8,7 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, TAG_SKILL_ITEMS, SKILLS, TAG_SKILL_BONUS, getOriginSpecialAdjustment, getSpecialAttributeBounds, getSkillRankCapForCharacter, getMergedTagSkills } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, TAG_SKILL_ITEMS, SKILLS, TAG_SKILL_BONUS, getOriginSpecialAdjustment, getSpecialAttributeBounds, getSkillRankCapForCharacter, getMergedTagSkills, getNextLevelXP } from "../lib/falloutData";
 import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
 import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
@@ -47,6 +47,7 @@ export default function CharacterBuilder() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const editId = searchParams.get('edit');
+  const isLevelUpFlow = searchParams.get('levelup') === '1';
   const [activeTab, setActiveTab] = useState("details");
   const [saving, setSaving] = useState(false);
 
@@ -67,6 +68,7 @@ export default function CharacterBuilder() {
   const [ghoulVaultDweller, setGhoulVaultDweller] = useState(false);
   const [survivorTraits, setSurvivorTraits] = useState([]);
   const [mrHandyArms, setMrHandyArms] = useState([]);
+  const [levelUpBaseline, setLevelUpBaseline] = useState(null);
 
   const normalizeLegacyOrigin = (input = {}) => {
     if (input.origin === 'Nightkin') {
@@ -86,10 +88,12 @@ export default function CharacterBuilder() {
       base44.entities.Character.filter({ id: editId }).then(chars => {
         if (chars.length > 0) {
           const c = normalizeLegacyOrigin(chars[0]);
+          const loadedSkills = safeJson(c.skills, {});
+          const loadedPerks = safeJson(c.perks, []);
           setCharacter(c);
-          setSkills(safeJson(c.skills, {}));
+          setSkills(loadedSkills);
           setTagSkills(safeJson(c.tag_skills, []));
-          setSelectedPerks(safeJson(c.perks, []));
+          setSelectedPerks(loadedPerks);
           setNcrTraits(safeJson(c.ncr_traits, []));
           setTribalTraits(safeJson(c.tribal_traits, []));
           if (c.outcast_tag_skill) setOutcastTagSkill(c.outcast_tag_skill);
@@ -99,10 +103,21 @@ export default function CharacterBuilder() {
           if (c.ghoul_vault_dweller) setGhoulVaultDweller(c.ghoul_vault_dweller);
           setSurvivorTraits(safeJson(c.survivor_traits, []));
           setMrHandyArms(safeJson(c.mr_handy_arms, []));
+          if (isLevelUpFlow) {
+            setLevelUpBaseline({
+              level: Number(c.level || 1),
+              xp: Number(c.xp || 0),
+              skills: loadedSkills,
+              perks: loadedPerks,
+              hp_max: Number(c.hp_max || calculateDerivedStats(c).hp || 0),
+              hp_current: Number(c.hp_current || calculateDerivedStats(c).hp || 0),
+            });
+            setActiveTab("skills");
+          }
         }
       });
     }
-  }, [editId]);
+  }, [editId, isLevelUpFlow]);
 
   const applyOriginStatDelta = (baseCharacter, previousOriginLabel, nextOriginLabel) => {
     const prevAdjustment = getOriginSpecialAdjustment(previousOriginLabel);
@@ -268,6 +283,40 @@ export default function CharacterBuilder() {
       const characterWithTagGear = rebuildStartingEquipmentWithTags(character, tagSkills);
       const fullChar = { ...characterWithTagGear, survivor_traits: JSON.stringify(survivorTraits) };
       const derived = calculateDerivedStats(fullChar);
+      const isLevelUpSave = Boolean(isLevelUpFlow && editId && levelUpBaseline);
+
+      if (isLevelUpSave) {
+        const baselineSkills = levelUpBaseline.skills || {};
+        const skillIncrease = SKILLS.reduce((sum, skill) => {
+          const key = skill.key;
+          const current = Math.max(0, Number(sanitizedSkills?.[key] || 0));
+          const base = Math.max(0, Number(baselineSkills?.[key] || 0));
+          if (current < base) throw new Error(`Skill ${key} cannot go below its pre-level value.`);
+          return sum + Math.max(0, current - base);
+        }, 0);
+        if (skillIncrease > 1) throw new Error("You can spend only 1 skill point during level up.");
+
+        const baselinePerks = Array.isArray(levelUpBaseline.perks) ? levelUpBaseline.perks : [];
+        const baselinePerkSet = new Set(baselinePerks);
+        for (const perkKey of baselinePerks) {
+          if (!selectedPerks.includes(perkKey)) {
+            throw new Error("Existing perks cannot be removed during level up.");
+          }
+        }
+        const gainedPerks = selectedPerks.filter((perkKey) => !baselinePerkSet.has(perkKey));
+        if (gainedPerks.length > 1) throw new Error("You can select only 1 new perk during level up.");
+      }
+
+      const xpCost = isLevelUpSave ? getNextLevelXP(Number(levelUpBaseline.level || 1)) : 0;
+      const currentXP = Number(characterWithTagGear.xp || character.xp || 0);
+      if (isLevelUpSave && currentXP < xpCost) throw new Error("Not enough XP to level up.");
+
+      const targetLevel = isLevelUpSave ? Number(levelUpBaseline.level || 1) + 1 : Number(characterWithTagGear.level || character.level || 1);
+      const baseHpMax = Number(characterWithTagGear.hp_max || character.hp_max || levelUpBaseline?.hp_max || derived.hp || 0);
+      const baseHpCurrent = Number(characterWithTagGear.hp_current || character.hp_current || levelUpBaseline?.hp_current || baseHpMax);
+      const targetHpMax = isLevelUpSave ? baseHpMax + 1 : derived.hp;
+      const targetHpCurrent = isLevelUpSave ? Math.min(targetHpMax, baseHpCurrent + 1) : derived.hp;
+
       const charData = {
         ...characterWithTagGear,
         skills: JSON.stringify(sanitizedSkills),
@@ -294,7 +343,9 @@ export default function CharacterBuilder() {
         robot_mods: characterWithTagGear.robot_mods || '[]',
         gear_mods: characterWithTagGear.gear_mods || '[]',
         caps: characterWithTagGear.caps || 0,
-        hp_current: derived.hp, hp_max: derived.hp,
+        level: targetLevel,
+        xp: isLevelUpSave ? Math.max(0, currentXP - xpCost) : currentXP,
+        hp_current: targetHpCurrent, hp_max: targetHpMax,
         defense: derived.defense, initiative: derived.initiative,
         melee_bonus: derived.melee_bonus, carry_weight: derived.carry_weight,
         luck_points: derived.luck_points,
@@ -303,15 +354,15 @@ export default function CharacterBuilder() {
 
       if (editId) {
         await base44.entities.Character.update(editId, charData);
-        toast.success("Character updated!");
+        toast.success(isLevelUpSave ? "Level up applied!" : "Character updated!");
         navigate(`/character/${editId}`);
       } else {
         const created = await base44.entities.Character.create(charData);
         toast.success("Character saved to vault records!");
         navigate(`/character/${created.id}`);
       }
-    } catch {
-      toast.error("Failed to save character. Please try again.");
+    } catch (e) {
+      toast.error(e?.message || "Failed to save character. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -322,7 +373,7 @@ export default function CharacterBuilder() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="font-heading font-bold text-xl sm:text-2xl text-foreground">
-            {editId ? 'Edit Character' : 'Create Character'}
+            {isLevelUpFlow ? 'Level Up Character' : (editId ? 'Edit Character' : 'Create Character')}
           </h2>
           <p className="text-xs font-mono text-muted-foreground mt-1">
             Step {currentStepIndex + 1} of {STEPS.length}: {STEPS[currentStepIndex].label}
@@ -363,11 +414,27 @@ export default function CharacterBuilder() {
               <SpecialStats character={character} onChange={updateCharacter} />
             </TabsContent>
             <TabsContent value="skills" className="mt-0">
-              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={handleSkillsChange} onTagSkillsChange={handleTagSkillsChange} ncrTraits={ncrTraits} outcastTagSkill={outcastTagSkill} />
+              <SkillsPanel
+                character={character}
+                skills={skills}
+                tagSkills={tagSkills}
+                onSkillsChange={handleSkillsChange}
+                onTagSkillsChange={handleTagSkillsChange}
+                ncrTraits={ncrTraits}
+                outcastTagSkill={outcastTagSkill}
+                levelUpBaselineSkills={isLevelUpFlow ? levelUpBaseline?.skills || {} : null}
+                levelUpSkillPointBudget={isLevelUpFlow ? 1 : null}
+              />
               <EquipmentChoices character={character} onResolve={handleResolveChoice} />
             </TabsContent>
             <TabsContent value="perks" className="mt-0">
-              <PerksPanel character={character} selectedPerks={selectedPerks} onPerksChange={setSelectedPerks} />
+              <PerksPanel
+                character={character}
+                selectedPerks={selectedPerks}
+                onPerksChange={setSelectedPerks}
+                extraPerkSlots={isLevelUpFlow ? 1 : 0}
+                lockedPerkKeys={isLevelUpFlow ? (levelUpBaseline?.perks || []) : []}
+              />
             </TabsContent>
           </Tabs>
 

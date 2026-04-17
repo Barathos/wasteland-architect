@@ -110,7 +110,13 @@ function formatMissingReason(missing) {
   }
 }
 
-export default function PerksPanel({ character, selectedPerks, onPerksChange }) {
+export default function PerksPanel({
+  character,
+  selectedPerks,
+  onPerksChange,
+  extraPerkSlots = 0,
+  lockedPerkKeys = [],
+}) {
   const level = Number(character.level || 1);
   const effectiveSpecial = getEffectiveSpecialStats(character);
   const [statFilter, setStatFilter] = useState("ALL");
@@ -127,6 +133,7 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
     }).eligible;
 
   const togglePerk = (perkKey) => {
+    if (lockedPerkKeys.includes(perkKey)) return;
     const index = selectedPerks.indexOf(perkKey);
     if (index >= 0) {
       const updated = [...selectedPerks];
@@ -138,7 +145,7 @@ export default function PerksPanel({ character, selectedPerks, onPerksChange }) 
   };
 
   const rareBookPerks = buildRareBookPerks(character);
-  const maxPerks = 1 + Math.floor((level - 1) / 2) + rareBookPerks.length;
+  const maxPerks = 1 + Math.floor((level - 1) / 2) + rareBookPerks.length + Number(extraPerkSlots || 0);
   const canAdd = selectedPerks.length < maxPerks;
 
   const filteredPerks = DEDUPED_PERKS.filter((perk) => {

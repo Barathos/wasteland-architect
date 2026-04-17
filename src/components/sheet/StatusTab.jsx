@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import DerivedPanel from "./DerivedPanel";
 import BodyDiagram from "./BodyDiagram";
 import HealthPanel from "./HealthPanel";
-import { isNightkinCharacter, isRobotCharacter } from "../../lib/falloutData";
+import { getNextLevelXP, isNightkinCharacter, isRobotCharacter } from "../../lib/falloutData";
 
 function parseJson(str, fallback) {
   try { return JSON.parse(str || ''); } catch { return fallback; }
@@ -135,9 +135,72 @@ function BottomSection({ character, updateField }) {
   );
 }
 
-export default function StatusTab({ character, updateField }) {
+export default function StatusTab({ character, updateField, onOpenLevelUp }) {
+  const [xpInput, setXpInput] = useState('');
+  const [showXpInput, setShowXpInput] = useState(false);
+  const level = Number(character.level || 1);
+  const xp = Number(character.xp || 0);
+  const xpNeeded = getNextLevelXP(level);
+  const canLevelUp = xp >= xpNeeded && level < 50;
+
+  const addXP = () => {
+    const amount = parseInt(xpInput, 10) || 0;
+    if (amount <= 0) return;
+    updateField({ xp: xp + amount });
+    setXpInput('');
+    setShowXpInput(false);
+  };
+
   return (
     <div style={{ background: '#0d2137' }}>
+      <div className="flex items-center justify-between px-4 py-3 gap-4 flex-wrap" style={{ borderBottom: '1px solid #1e3a5f', background: '#0a1525' }}>
+        <div className="flex items-center gap-5 flex-wrap">
+          <div>
+            <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>LEVEL</p>
+            <p className="text-lg font-bold" style={{ color: '#22cc22' }}>{level}</p>
+          </div>
+          <div>
+            <p className="text-[10px] font-mono" style={{ color: '#4a6a8a' }}>XP</p>
+            <p className="text-lg font-bold" style={{ color: '#e8e8e8' }}>{xp.toLocaleString()} / {xpNeeded.toLocaleString()}</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 flex-wrap">
+          {showXpInput ? (
+            <>
+              <input
+                type="number"
+                value={xpInput}
+                onChange={(e) => setXpInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && addXP()}
+                placeholder="XP"
+                className="text-xs px-2 py-1 w-20"
+                style={{ background: '#060f1c', border: '1px solid #f5c518', color: '#f5c518', outline: 'none' }}
+              />
+              <button onClick={addXP} className="px-2 py-1 text-xs font-bold" style={{ background: '#1a1500', border: '1px solid #f5c518', color: '#f5c518' }}>ADD</button>
+              <button onClick={() => setShowXpInput(false)} className="px-2 py-1 text-xs" style={{ color: '#6a8a9a', border: '1px solid #1e3a5f', background: '#060f1c' }}>Cancel</button>
+            </>
+          ) : (
+            <button onClick={() => setShowXpInput(true)} className="px-2.5 py-1 text-xs font-bold" style={{ background: '#1a1500', border: '1px solid #f5c518', color: '#f5c518' }}>+ XP</button>
+          )}
+
+          <button
+            onClick={() => onOpenLevelUp?.()}
+            disabled={!canLevelUp}
+            className="px-3 py-1 text-xs font-bold"
+            style={{
+              background: canLevelUp ? '#0a2a0a' : '#0a1525',
+              border: `1px solid ${canLevelUp ? '#22cc22' : '#1e3a5f'}`,
+              color: canLevelUp ? '#22cc22' : '#4a6a8a',
+              cursor: canLevelUp ? 'pointer' : 'not-allowed',
+            }}
+            title={canLevelUp ? 'Open level up builder flow' : `Need ${Math.max(0, xpNeeded - xp)} more XP`}
+          >
+            Level Up
+          </button>
+        </div>
+      </div>
+
       <div className="flex" style={{ borderBottom: '1px solid #1e3a5f', minHeight: '460px' }}>
         <div style={{ width: '220px', flexShrink: 0, borderRight: '1px solid #1e3a5f' }}>
           <DerivedPanel character={character} updateField={updateField} />

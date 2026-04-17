@@ -5,7 +5,17 @@ import { Button } from "@/components/ui/button";
 const GOOD_NATURED_EXEMPT = ['speech', 'medicine', 'repair', 'science', 'barter'];
 const CREATION_MAX_RANK = 3;
 
-export default function SkillsPanel({ character, skills, tagSkills, onSkillsChange, onTagSkillsChange, ncrTraits, outcastTagSkill }) {
+export default function SkillsPanel({
+  character,
+  skills,
+  tagSkills,
+  onSkillsChange,
+  onTagSkillsChange,
+  ncrTraits,
+  outcastTagSkill,
+  levelUpBaselineSkills = null,
+  levelUpSkillPointBudget = null,
+}) {
   const traits = getActiveTraitEffects(character);
   const effectiveSpecial = getEffectiveSpecialStats(character);
   const hasGoodNatured = traits.hasGoodNatured || (ncrTraits || []).includes('good_natured');
@@ -15,9 +25,19 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
   const allTagSkills = getMergedTagSkills(character, tagSkills);
   const selectableTagCount = tagSkills.filter((key) => !forcedTagSkills.includes(key)).length;
 
+  const isLevelUpMode = levelUpBaselineSkills && Number.isFinite(Number(levelUpSkillPointBudget));
   const totalSkillPoints = 9 + (effectiveSpecial.intelligence || 5);
-  const usedPoints = Object.values(skills).reduce((sum, v) => sum + v, 0);
-  const remaining = totalSkillPoints - usedPoints;
+  const usedPoints = isLevelUpMode
+    ? SKILLS.reduce((sum, skill) => {
+        const key = skill.key;
+        const base = Math.max(0, Number(levelUpBaselineSkills?.[key] || 0));
+        const current = Math.max(0, Number(skills?.[key] || 0));
+        return sum + Math.max(0, current - base);
+      }, 0)
+    : Object.values(skills).reduce((sum, v) => sum + v, 0);
+  const remaining = isLevelUpMode
+    ? Math.max(0, Number(levelUpSkillPointBudget || 0) - usedPoints)
+    : totalSkillPoints - usedPoints;
   const level = Number(character.level || 1);
   const isCreationCapped = level < 3;
 
@@ -35,7 +55,10 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
     // Core rules: during character creation, cannot increase any skill above rank 3 (unless starting level 3+).
     if (delta > 0 && isCreationCapped && nextEffective > CREATION_MAX_RANK) return;
     if (delta > 0 && nextEffective > absMax) return;
-    if (newVal < 0) return;
+    if (isLevelUpMode) {
+      const base = Math.max(0, Number(levelUpBaselineSkills?.[key] || 0));
+      if (newVal < base) return;
+    } else if (newVal < 0) return;
     if (delta > 0 && remaining <= 0) return;
     onSkillsChange({ ...skills, [key]: newVal });
   };
@@ -68,7 +91,9 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
       <div className="flex items-center justify-between p-3 rounded-lg bg-muted border border-border">
         <div className="flex items-center gap-4">
           <div>
-            <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block">Skill Points</span>
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block">
+              {isLevelUpMode ? "Level-Up Skill Points" : "Skill Points"}
+            </span>
             <span className={`font-heading font-bold text-lg ${remaining > 0 ? 'text-primary' : 'text-secondary'}`}>
               {remaining}
             </span>
@@ -84,7 +109,9 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
       </div>
 
       <p className="text-xs text-muted-foreground font-mono">
-        Tag {tagLimit} skills for bonus expertise. During character creation (Level 1-2), no skill can exceed <strong>rank 3</strong>; starting at Level 3+, skills can increase normally up to their caps.
+        {isLevelUpMode
+          ? `Spend up to ${Number(levelUpSkillPointBudget || 0)} skill point during level up.`
+          : <>Tag {tagLimit} skills for bonus expertise. During character creation (Level 1-2), no skill can exceed <strong>rank 3</strong>; starting at Level 3+, skills can increase normally up to their caps.</>}
         {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
         {isSuperMutant && <span className="block mt-1" style={{ color: '#cc4444' }}>⚠ Super Mutant: All skills capped at rank 4 (Forced Evolution).</span>}
         {traits.extraTagSkills > 0 && <span className="block mt-1" style={{ color: '#22cc22' }}>✦ +{traits.extraTagSkills} extra Tag skill(s) from trait/origin.</span>}
@@ -111,7 +138,8 @@ export default function SkillsPanel({ character, skills, tagSkills, onSkillsChan
           const canIncrease = remaining > 0
             && getEffectiveSkillRank(value + 1, isTag, absMax) <= absMax
             && (!isCreationCapped || getEffectiveSkillRank(value + 1, isTag, absMax) <= CREATION_MAX_RANK);
-          const canDecrease = value > 0;
+          const baseValue = Math.max(0, Number(levelUpBaselineSkills?.[skill.key] || 0));
+          const canDecrease = isLevelUpMode ? value > baseValue : value > 0;
 
           return (
             <div
