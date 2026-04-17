@@ -16,7 +16,11 @@ import {
 } from "../../lib/perkEligibility";
 
 function parseJson(str, fallback) {
-  try { return JSON.parse(str || ""); } catch { return fallback; }
+  try {
+    return JSON.parse(str || "");
+  } catch {
+    return fallback;
+  }
 }
 
 function normalizePerk(perk) {
@@ -32,6 +36,53 @@ function normalizePerk(perk) {
 }
 
 const ALL_PERKS = CORE_PERKS.map(normalizePerk);
+const SPECIAL_KEYS = [
+  "strength",
+  "perception",
+  "endurance",
+  "charisma",
+  "intelligence",
+  "agility",
+  "luck",
+];
+const STAT_FILTER_OPTIONS = [
+  { value: "all", label: "All Stats" },
+  { value: "strength", label: "STR" },
+  { value: "perception", label: "PER" },
+  { value: "endurance", label: "END" },
+  { value: "charisma", label: "CHA" },
+  { value: "intelligence", label: "INT" },
+  { value: "agility", label: "AGI" },
+  { value: "luck", label: "LCK" },
+  { value: "none", label: "No Stat Req" },
+];
+const AVAILABILITY_FILTER_OPTIONS = [
+  { value: "all", label: "All Perks" },
+  { value: "available", label: "Available" },
+  { value: "unavailable", label: "Unavailable" },
+];
+
+function getPerkStatKeys(perk) {
+  const req = perk?.requirements || {};
+  return Object.keys(req).filter((key) => SPECIAL_KEYS.includes(key));
+}
+
+function formatMissingRequirement(missing = {}) {
+  if (missing.type === "level") return `Requires level ${missing.value}+`;
+  if (missing.type === "special") {
+    const short = String(missing.key || "").slice(0, 3).toUpperCase();
+    return `Requires ${short} ${missing.value}+`;
+  }
+  if (missing.type === "magazine") return "Magazine prerequisite not met";
+  if (missing.type === "notRobot") return "Not available to robots";
+  if (missing.type === "notGhoul") return "Not available to ghouls";
+  if (missing.type === "notSupermutant") return "Not available to super mutants";
+  if (missing.type === "notHuman") return "Not available to humans";
+  if (missing.type === "notRadiationImmune") return "Not available to radiation-immune origins";
+  if (missing.type === "isCompanion") return "Companion only";
+  if (missing.type === "maxRanks") return "Max rank reached";
+  return "Requirement not met";
+}
 
 export default function LevelUpPanel({ character, onApply, onClose }) {
   const level = Number(character.level || 1);
@@ -39,9 +90,13 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
   const xp = Number(character.xp || 0);
   const xpCost = getNextLevelXP(level);
   const canLevelUp = xp >= xpCost && level < 50;
+
   const baselineSkills = useMemo(() => parseJson(character.skills, {}), [character.skills]);
   const [skills, setSkills] = useState({ ...baselineSkills });
   const [chosenPerk, setChosenPerk] = useState("");
+  const [expandedPerk, setExpandedPerk] = useState("");
+  const [statFilter, setStatFilter] = useState("all");
+  const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const [saving, setSaving] = useState(false);
 
   const tagSkills = parseJson(character.tag_skills, []);
@@ -90,6 +145,7 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
       const maxed = currentRank >= perk.maxRanks;
       return {
         ...perk,
+        statKeys: getPerkStatKeys(perk),
         currentRank,
         maxed,
         available: eligibility.eligible && !maxed,
@@ -98,6 +154,18 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
       };
     });
   }, [baselinePerks, character, nextLevel, readMagazines]);
+
+  const filteredPerks = useMemo(() => {
+    return perkRows.filter((perk) => {
+      const matchesStat =
+        statFilter === "all" ||
+        (statFilter === "none" ? perk.statKeys.length === 0 : perk.statKeys.includes(statFilter));
+      const matchesAvailability =
+        availabilityFilter === "all" ||
+        (availabilityFilter === "available" ? perk.available : !perk.available);
+      return matchesStat && matchesAvailability;
+    });
+  }, [perkRows, statFilter, availabilityFilter]);
 
   const applyLevelUp = async () => {
     if (!canLevelUp) {
@@ -143,7 +211,7 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
           <div>
             <h3 className="font-heading font-bold text-lg" style={{ color: "#f5c518" }}>Level Up</h3>
             <p className="text-[11px] font-mono" style={{ color: "#6a8a9a" }}>
-              Level {level} → {nextLevel} | Spend XP: {xpCost.toLocaleString()} | Gain: +1 HP, +1 skill point, +1 perk rank
+              Level {level} -&gt; {nextLevel} | Spend XP: {xpCost.toLocaleString()} | Gain: +1 HP, +1 skill point, +1 perk rank
             </p>
           </div>
           <button onClick={onClose} className="p-1.5" style={{ color: "#6a8a9a", border: "1px solid #1e3a5f", background: "#0a1525" }}>
@@ -172,7 +240,7 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
                     <div>
                       <p className="text-sm font-heading" style={{ color: "#e8e8e8" }}>{skill.label}</p>
                       <p className="text-[10px] font-mono" style={{ color: "#6a8a9a" }}>
-                        {base} → {current}{isTagged ? ` (+${TAG_SKILL_BONUS} tag)` : ""} | max base {maxBase}
+                        {base} -&gt; {current}{isTagged ? ` (+${TAG_SKILL_BONUS} tag)` : ""} | max base {maxBase}
                       </p>
                     </div>
                     <div className="flex items-center gap-1.5">
@@ -203,38 +271,93 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
                 {chosenPerk ? "Selected" : "Choose 1"}
               </p>
             </div>
+            <div className="mb-3 grid grid-cols-2 gap-2">
+              <select
+                value={statFilter}
+                onChange={(e) => setStatFilter(e.target.value)}
+                className="text-xs px-2 py-1.5"
+                style={{ background: "#060f1c", border: "1px solid #1e3a5f", color: "#a8c8d8", outline: "none" }}
+              >
+                {STAT_FILTER_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+              <select
+                value={availabilityFilter}
+                onChange={(e) => setAvailabilityFilter(e.target.value)}
+                className="text-xs px-2 py-1.5"
+                style={{ background: "#060f1c", border: "1px solid #1e3a5f", color: "#a8c8d8", outline: "none" }}
+              >
+                {AVAILABILITY_FILTER_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
             <div className="max-h-[56vh] overflow-y-auto space-y-1.5 pr-1">
-              {perkRows.map((perk) => {
+              {filteredPerks.map((perk) => {
                 const selected = chosenPerk === perk.key;
+                const expanded = expandedPerk === perk.key;
+                const togglePerk = () => {
+                  if (expanded) {
+                    setExpandedPerk("");
+                    if (selected) setChosenPerk("");
+                    return;
+                  }
+                  setExpandedPerk(perk.key);
+                  if (perk.available) {
+                    setChosenPerk(perk.key);
+                  } else if (selected) {
+                    setChosenPerk("");
+                  }
+                };
+
                 return (
                   <button
                     key={perk.key}
-                    disabled={!perk.available && !selected}
-                    onClick={() => setChosenPerk(selected ? "" : perk.key)}
+                    onClick={togglePerk}
                     className="w-full text-left p-2.5 rounded"
                     style={{
-                      background: selected ? "rgba(34,204,34,0.1)" : "#0a1525",
-                      border: `1px solid ${selected ? "rgba(34,204,34,0.4)" : "#1e3a5f"}`,
-                      opacity: (!perk.available && !selected) ? 0.5 : 1,
+                      background: selected ? "rgba(34,204,34,0.1)" : expanded ? "rgba(245,197,24,0.08)" : "#0a1525",
+                      border: `1px solid ${selected ? "rgba(34,204,34,0.4)" : expanded ? "rgba(245,197,24,0.35)" : "#1e3a5f"}`,
+                      opacity: perk.available ? 1 : 0.85,
                     }}
                   >
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-sm font-heading" style={{ color: selected ? "#22cc22" : "#e8e8e8" }}>{perk.label}</p>
-                      <span className="text-[10px] font-mono px-1.5 py-0.5" style={{ color: "#f5c518", border: "1px solid rgba(245,197,24,0.3)", background: "rgba(245,197,24,0.08)" }}>
-                        {perk.currentRank}/{perk.maxRanks}
-                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5" style={{ color: "#f5c518", border: "1px solid rgba(245,197,24,0.3)", background: "rgba(245,197,24,0.08)" }}>
+                          {perk.currentRank}/{perk.maxRanks}
+                        </span>
+                        {!perk.available && (
+                          <span className="text-[10px] font-mono px-1.5 py-0.5" style={{ color: "#cc4444", border: "1px solid rgba(204,68,68,0.3)", background: "rgba(204,68,68,0.08)" }}>
+                            Locked
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <p className="text-[10px] font-mono mt-1" style={{ color: "#6a8a9a" }}>
-                      {perk.source} • Next rank req level {perk.levelRequired}+
+                      {perk.source} | Next rank req level {perk.levelRequired}+
                     </p>
-                    {!perk.available && perk.missing.length > 0 && (
-                      <p className="text-[10px] font-mono mt-1" style={{ color: "#cc4444" }}>
-                        Locked: {perk.missing.map((m) => m.type).join(", ")}
-                      </p>
+                    {expanded && (
+                      <div className="mt-2 pt-2" style={{ borderTop: "1px solid #1e3a5f" }}>
+                        <p className="text-xs font-mono leading-relaxed" style={{ color: "#d6e3ec" }}>
+                          {perk.description || "No description available yet."}
+                        </p>
+                        {!perk.available && perk.missing.length > 0 && (
+                          <p className="text-[10px] font-mono mt-2" style={{ color: "#cc4444" }}>
+                            Locked: {perk.missing.map(formatMissingRequirement).join(" | ")}
+                          </p>
+                        )}
+                      </div>
                     )}
                   </button>
                 );
               })}
+              {filteredPerks.length === 0 && (
+                <div className="px-3 py-2 text-xs font-mono" style={{ color: "#6a8a9a", border: "1px solid #1e3a5f", background: "#0a1525" }}>
+                  No perks match the selected filters.
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -265,4 +388,3 @@ export default function LevelUpPanel({ character, onApply, onClose }) {
     </div>
   );
 }
-
