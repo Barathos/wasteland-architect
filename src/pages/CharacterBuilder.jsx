@@ -8,7 +8,7 @@ import SpecialStats from "../components/builder/SpecialStats";
 import SkillsPanel from "../components/builder/SkillsPanel";
 import PerksPanel from "../components/builder/PerksPanel";
 import DerivedStats from "../components/builder/DerivedStats";
-import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, TAG_SKILL_ITEMS, getOriginSpecialAdjustment, getSpecialAttributeBounds } from "../lib/falloutData";
+import { calculateDerivedStats, SPECIAL_ATTRIBUTES, SPECIAL_TOTAL_POINTS, ORIGIN_PACKS, TAG_SKILL_ITEMS, SKILLS, TAG_SKILL_BONUS, getOriginSpecialAdjustment, getSpecialAttributeBounds, getSkillRankCapForCharacter, getMergedTagSkills } from "../lib/falloutData";
 import { buildStartingEquipment, resolveEquipmentChoice } from "../lib/startingEquipment";
 import EquipmentChoices from "../components/builder/EquipmentChoices";
 import { Save, ChevronLeft, ChevronRight, User, Dumbbell, BookOpen, Star } from "lucide-react";
@@ -173,6 +173,28 @@ export default function CharacterBuilder() {
     if (updates) setCharacter(prev => ({ ...prev, ...updates }));
   };
 
+  const sanitizeSkillsForCharacterRules = (skillsInput = {}, tagsInput = [], baseCharacter = character) => {
+    const nextSkills = { ...skillsInput };
+    const allTags = getMergedTagSkills(baseCharacter, tagsInput);
+    const level = Number(baseCharacter?.level || 1);
+    const isCreationCapped = level < 3;
+
+    for (const skill of SKILLS) {
+      const key = skill.key;
+      const current = Math.max(0, Number(nextSkills[key] || 0));
+      const absMax = Math.max(0, Number(getSkillRankCapForCharacter(baseCharacter, key) || 0));
+      const isTagged = allTags.includes(key);
+      const maxBaseFromAbsCap = Math.max(0, absMax - (isTagged ? TAG_SKILL_BONUS : 0));
+      const maxBaseFromCreationCap = isCreationCapped
+        ? Math.max(0, 3 - (isTagged ? TAG_SKILL_BONUS : 0))
+        : Number.POSITIVE_INFINITY;
+
+      nextSkills[key] = Math.min(current, maxBaseFromAbsCap, maxBaseFromCreationCap);
+    }
+
+    return nextSkills;
+  };
+
   const rebuildStartingEquipmentWithTags = (baseCharacter, updatedTags) => {
     if (!baseCharacter?.sub_origin) return baseCharacter;
     const built = buildStartingEquipment(baseCharacter, baseCharacter.sub_origin, updatedTags);
@@ -193,6 +215,7 @@ export default function CharacterBuilder() {
 
   const handleTagSkillsChange = (updatedTags) => {
     setTagSkills(updatedTags);
+    setSkills(prev => sanitizeSkillsForCharacterRules(prev, updatedTags, character));
     setCharacter(prev => rebuildStartingEquipmentWithTags(prev, updatedTags));
   };
 
@@ -226,12 +249,14 @@ export default function CharacterBuilder() {
 
     setSaving(true);
     try {
+      const sanitizedSkills = sanitizeSkillsForCharacterRules(skills, tagSkills, character);
+      setSkills(sanitizedSkills);
       const characterWithTagGear = rebuildStartingEquipmentWithTags(character, tagSkills);
       const fullChar = { ...characterWithTagGear, survivor_traits: JSON.stringify(survivorTraits) };
       const derived = calculateDerivedStats(fullChar);
       const charData = {
         ...characterWithTagGear,
-        skills: JSON.stringify(skills),
+        skills: JSON.stringify(sanitizedSkills),
         tag_skills: JSON.stringify(tagSkills),
         perks: JSON.stringify(selectedPerks),
         ncr_traits: JSON.stringify(ncrTraits),
