@@ -39,7 +39,8 @@ export default function SkillsPanel({
     ? Math.max(0, Number(levelUpSkillPointBudget || 0) - usedPoints)
     : totalSkillPoints - usedPoints;
   const level = Number(character.level || 1);
-  const isCreationCapped = level < 3;
+  // Project rule: rank-3 creation cap applies only at Level 1.
+  const isCreationCapped = !isLevelUpMode && level < 2;
 
   // Tag limit: base 3 + educated + vault/bos/outcast origin bonuses
   const tagLimit = TAG_SKILL_COUNT + traits.extraTagSkills;
@@ -111,7 +112,7 @@ export default function SkillsPanel({
       <p className="text-xs text-muted-foreground font-mono">
         {isLevelUpMode
           ? `Spend up to ${Number(levelUpSkillPointBudget || 0)} skill point during level up.`
-          : <>Tag {tagLimit} skills for bonus expertise. During character creation (Level 1-2), no skill can exceed <strong>rank 3</strong>; starting at Level 3+, skills can increase normally up to their caps.</>}
+          : <>Tag {tagLimit} skills for bonus expertise. During character creation (Level 1), no skill can exceed <strong>rank 3</strong>; at Level 2+, skills can increase normally up to their caps.</>}
         {isNightkin && <span className="block mt-1" style={{ color: '#aa44dd' }}>⚠ Nightkin: All skills capped at rank 4.</span>}
         {isSuperMutant && <span className="block mt-1" style={{ color: '#cc4444' }}>⚠ Super Mutant: All skills capped at rank 4 (Forced Evolution).</span>}
         {traits.extraTagSkills > 0 && <span className="block mt-1" style={{ color: '#22cc22' }}>✦ +{traits.extraTagSkills} extra Tag skill(s) from trait/origin.</span>}

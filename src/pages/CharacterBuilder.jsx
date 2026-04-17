@@ -188,11 +188,13 @@ export default function CharacterBuilder() {
     if (updates) setCharacter(prev => ({ ...prev, ...updates }));
   };
 
-  const sanitizeSkillsForCharacterRules = (skillsInput = {}, tagsInput = [], baseCharacter = character) => {
+  const sanitizeSkillsForCharacterRules = (skillsInput = {}, tagsInput = [], baseCharacter = character, options = {}) => {
     const nextSkills = { ...skillsInput };
     const allTags = getMergedTagSkills(baseCharacter, tagsInput);
     const level = Number(baseCharacter?.level || 1);
-    const isCreationCapped = level < 3;
+    const bypassCreationCap = Boolean(options?.bypassCreationCap);
+    // Project rule: creation cap is Level 1 only.
+    const isCreationCapped = !bypassCreationCap && level < 2;
 
     for (const skill of SKILLS) {
       const key = skill.key;
@@ -230,16 +232,16 @@ export default function CharacterBuilder() {
 
   const handleTagSkillsChange = (updatedTags) => {
     setTagSkills(updatedTags);
-    setSkills(prev => sanitizeSkillsForCharacterRules(prev, updatedTags, character));
+    setSkills(prev => sanitizeSkillsForCharacterRules(prev, updatedTags, character, { bypassCreationCap: isLevelUpFlow }));
     setCharacter(prev => rebuildStartingEquipmentWithTags(prev, updatedTags));
   };
 
   const handleSkillsChange = (updatedSkills) => {
-    setSkills(sanitizeSkillsForCharacterRules(updatedSkills, tagSkills, character));
+    setSkills(sanitizeSkillsForCharacterRules(updatedSkills, tagSkills, character, { bypassCreationCap: isLevelUpFlow }));
   };
 
   useEffect(() => {
-    const sanitized = sanitizeSkillsForCharacterRules(skills, tagSkills, character);
+    const sanitized = sanitizeSkillsForCharacterRules(skills, tagSkills, character, { bypassCreationCap: isLevelUpFlow });
     const hasChanges = Object.keys({ ...skills, ...sanitized }).some(
       (key) => Number(skills[key] || 0) !== Number(sanitized[key] || 0)
     );
@@ -278,7 +280,7 @@ export default function CharacterBuilder() {
 
     setSaving(true);
     try {
-      const sanitizedSkills = sanitizeSkillsForCharacterRules(skills, tagSkills, character);
+      const sanitizedSkills = sanitizeSkillsForCharacterRules(skills, tagSkills, character, { bypassCreationCap: isLevelUpFlow });
       setSkills(sanitizedSkills);
       const characterWithTagGear = rebuildStartingEquipmentWithTags(character, tagSkills);
       const fullChar = { ...characterWithTagGear, survivor_traits: JSON.stringify(survivorTraits) };
