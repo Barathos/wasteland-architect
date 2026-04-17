@@ -219,6 +219,20 @@ export default function CharacterBuilder() {
     setCharacter(prev => rebuildStartingEquipmentWithTags(prev, updatedTags));
   };
 
+  const handleSkillsChange = (updatedSkills) => {
+    setSkills(sanitizeSkillsForCharacterRules(updatedSkills, tagSkills, character));
+  };
+
+  useEffect(() => {
+    const sanitized = sanitizeSkillsForCharacterRules(skills, tagSkills, character);
+    const hasChanges = Object.keys({ ...skills, ...sanitized }).some(
+      (key) => Number(skills[key] || 0) !== Number(sanitized[key] || 0)
+    );
+    if (hasChanges) {
+      setSkills(sanitized);
+    }
+  }, [skills, tagSkills, character.level, character.origin, character.sub_origin]);
+
   const currentStepIndex = STEPS.findIndex(s => s.id === activeTab);
   const goNext = () => { if (currentStepIndex < STEPS.length - 1) setActiveTab(STEPS[currentStepIndex + 1].id); };
   const goPrev = () => { if (currentStepIndex > 0) setActiveTab(STEPS[currentStepIndex - 1].id); };
@@ -349,7 +363,7 @@ export default function CharacterBuilder() {
               <SpecialStats character={character} onChange={updateCharacter} />
             </TabsContent>
             <TabsContent value="skills" className="mt-0">
-              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={setSkills} onTagSkillsChange={handleTagSkillsChange} ncrTraits={ncrTraits} outcastTagSkill={outcastTagSkill} />
+              <SkillsPanel character={character} skills={skills} tagSkills={tagSkills} onSkillsChange={handleSkillsChange} onTagSkillsChange={handleTagSkillsChange} ncrTraits={ncrTraits} outcastTagSkill={outcastTagSkill} />
               <EquipmentChoices character={character} onResolve={handleResolveChoice} />
             </TabsContent>
             <TabsContent value="perks" className="mt-0">
