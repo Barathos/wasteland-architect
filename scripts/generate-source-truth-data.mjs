@@ -4,7 +4,9 @@ import os from 'node:os';
 import { Level } from 'level';
 
 const ROOT = process.cwd();
-const REF_PACKS = path.join(ROOT, 'Reference', 'packs');
+const UPSTREAM_REF_PACKS = path.join(ROOT, 'Reference', 'foundryvtt-fallout-upstream', 'data', 'packs');
+const LOCAL_REF_PACKS = path.join(ROOT, 'Reference', 'packs');
+const REF_PACKS = fs.existsSync(UPSTREAM_REF_PACKS) ? UPSTREAM_REF_PACKS : LOCAL_REF_PACKS;
 const OUT_FILE = path.join(ROOT, 'src', 'lib', 'sourceTruthData.generated.js');
 
 function compendiumUuid(packName, itemId) {
@@ -65,7 +67,31 @@ function sourceLabel(raw) {
 }
 
 async function readPackItems(packName) {
-  const packPath = path.join(REF_PACKS, packName);
+  const packPathCandidates = [
+    path.join(REF_PACKS, packName),
+    path.join(REF_PACKS, `${packName}.db`),
+  ];
+  const packPath = packPathCandidates.find((candidate) => fs.existsSync(candidate));
+  if (!packPath) {
+    throw new Error(`Pack not found for "${packName}" in ${REF_PACKS}`);
+  }
+  const jsonEntries = fs.readdirSync(packPath, { withFileTypes: true }).filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.json'));
+  if (jsonEntries.length > 0) {
+    const out = [];
+    for (const entry of jsonEntries) {
+      const filePath = path.join(packPath, entry.name);
+      try {
+        const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const rawKey = String(parsed?._key || '');
+        if (rawKey && !rawKey.startsWith('!items!')) continue;
+        parsed.__key = String(rawKey || parsed?._id || entry.name);
+        out.push(parsed);
+      } catch {
+      }
+    }
+    return out;
+  }
+
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `fallout-pack-${packName}-`));
   const tempPackPath = path.join(tempRoot, packName);
   fs.cpSync(packPath, tempPackPath, { recursive: true });
@@ -588,7 +614,9 @@ function extractCompatibilityMap(rows) {
 }
 
 function stableSortByLabel(a, b) {
-  return String(a.label).localeCompare(String(b.label));
+  const labelCompare = String(a.label).localeCompare(String(b.label));
+  if (labelCompare !== 0) return labelCompare;
+  return String(a.foundryUuid || a.key || '').localeCompare(String(b.foundryUuid || b.key || ''));
 }
 
 async function main() {
@@ -645,7 +673,8 @@ async function main() {
   const sourceWeaponModCompatibility = extractCompatibilityMap(weaponsRaw);
   const sourceApparelModCompatibility = extractCompatibilityMap(apparelRaw);
 
-  const header = `// AUTO-GENERATED FILE. DO NOT EDIT BY HAND.\n// Generated from Foundry source-of-truth packs in ./Reference/packs\n\n`;
+  const relativePackPath = path.relative(ROOT, REF_PACKS).replace(/\\/g, '/');
+  const header = `// AUTO-GENERATED FILE. DO NOT EDIT BY HAND.\n// Generated from Foundry source-of-truth packs in ./${relativePackPath}\n\n`;
   const payload = {
     SOURCE_WEAPONS: sourceWeapons,
     SOURCE_AMMO: sourceAmmo,
@@ -672,6 +701,7 @@ async function main() {
   fs.writeFileSync(OUT_FILE, content, 'utf8');
 
   console.log('Generated source truth data:');
+  console.log(`- Source packs path: ${REF_PACKS}`);
   Object.entries(payload).forEach(([k, v]) => {
     const count = Array.isArray(v) ? v.length : Object.keys(v || {}).length;
     console.log(`- ${k}: ${count}`);

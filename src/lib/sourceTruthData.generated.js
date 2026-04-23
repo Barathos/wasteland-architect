@@ -25869,22 +25869,23 @@ export const SOURCE_APPAREL_MOD_COMPATIBILITY = {
     ]
   },
   "Raider Right Arm": {
-    "Plating": [
-      "Explosive Shielding",
-      "Lead Plating",
-      "Photovoltaic Plating",
-      "Prism Shielding",
-      "Titanium Plating",
-      "Winterized Coating"
-    ],
-    "System": [
-      "Hydraulic Bracers",
-      "Optimized Bracers",
-      "Rusty Knuckles",
-      "Tesla Bracers"
+    "Material": [
+      "Buttressed",
+      "Hardened",
+      "Tempered",
+      "Welded"
     ],
     "Upgrade": [
-      "Raider II Arm"
+      "Aerodynamic",
+      "Braced",
+      "Brawling",
+      "Deep Pocketed",
+      "Lead Lined",
+      "Lighter Build",
+      "Pocketed",
+      "Stabilized",
+      "Ultra Light Build",
+      "Weighted"
     ]
   },
   "Heavy Synth Left Arm": {
@@ -27369,4 +27370,3 @@ export const SOURCE_APPAREL_MOD_COMPATIBILITY = {
     ]
   }
 };
-
