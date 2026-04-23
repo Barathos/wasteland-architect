@@ -1,0 +1,3 @@
+[submodule "Reference/foundryvtt-fallout-upstream"]
+	path = Reference/foundryvtt-fallout-upstream
+	url = https://github.com/Muttley/foundryvtt-fallout

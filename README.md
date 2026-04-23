@@ -37,3 +37,10 @@ Open [Base44.com](http://Base44.com) and click on Publish.
 Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
 
 Support: [https://app.base44.com/support](https://app.base44.com/support)
+
+## Fallout 2d20 Source References
+
+- Primary system snapshot used by the app: `Reference/`
+- Upstream Foundry Fallout 2d20 system source (tracked as submodule):
+  - `Reference/foundryvtt-fallout-upstream`
+  - [https://github.com/Muttley/foundryvtt-fallout](https://github.com/Muttley/foundryvtt-fallout)
